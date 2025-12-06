@@ -6,7 +6,7 @@ Mapbox-gl Electronic Navigational Chart Runtime
 
 ```
 +---------------------+
-|       MapboxGL      |     ← Camera、Interaction、Projection
+|       MapboxGL      |     ← Camera、Interaction
 +---------+-----------+
           |
      Custom Layer
