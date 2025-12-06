@@ -1,6 +1,6 @@
 # mapbox-gl-enc-runtime
 
-Mapbox-gl Electronic Navigational Chart Runtime，在 mapbox-gl 之上实现的兼容矢量瓦片标准的涉海用图符号渲染引擎。
+Mapbox-gl Electronic Navigational Chart Runtime
 
 ## Framework
 
