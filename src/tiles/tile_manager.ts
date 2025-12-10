@@ -6,7 +6,6 @@ import TileSource from './tile_source'
 import type { TileSourceType } from './tile_source'
 import Dispatcher from '../data/message/dispatcher'
 import { OverscaledTileID } from './tile_id'
-import ezstore from '../utils/store'
 import { getMatrices } from '../utils/map_transform'
 
 export type { TileSourceType }
@@ -26,7 +25,7 @@ export default class TileManager {
 	private _picker: TilePicker
 	dispatcher: Dispatcher | null = null
 
-	tileSouces = new window.Map<string, TileSource>()
+	tileSourceMap = new window.Map<string, TileSource>()
 	coveringTileMap = new window.Map<string, OverscaledTileID[]>()
 
 	sharingVPMatrix!: mat4
@@ -57,11 +56,10 @@ export default class TileManager {
 	private constructor(map: Map) {
 		this._map = map
 		this._picker = new TilePicker(map)
-		ezstore.set('map', this._map)
-		ezstore.set('gl', this._map.painter.context.gl)
 
 		this.onMapMove = this._onMapMove.bind(this)
-		this._map.on('move', this.onMapMove as any)
+		// this._map.on('move', this.onMapMove as any)
+		this._map.on('moveend', this.onMapMove as any)
 		Promise.resolve().then(this.onMapMove) // trigger immediately
 	}
 
@@ -86,7 +84,7 @@ export default class TileManager {
 		// );
 
 		// const extendTiles = this._picker.extendTileCover(this.coveringTiles);
-		for (const tileSource of this.tileSouces.values()) {
+		for (const tileSource of this.tileSourceMap.values()) {
 
 			const coveringTiles = this._picker.coveringTile({
 				minzoom: 0,
@@ -95,6 +93,8 @@ export default class TileManager {
 				isDEMTile: false,
 				roundZoom: false,
 			})
+
+			// console.log(coveringTiles.map(item => item.canonical.toString()))
 
 			this.coveringTileMap.set(tileSource.id, coveringTiles)
 
@@ -110,35 +110,34 @@ export default class TileManager {
 	addSource(sourceDesc: TileSourceType) {
 		const tileSource = new TileSource(sourceDesc)
 		tileSource._tileManager = this
-		this.tileSouces.set(tileSource.id, tileSource)
+		this.tileSourceMap.set(tileSource.id, tileSource)
 	}
 
 	removeSource(sourceId: string) {
-		const tileSource = this.tileSouces.get(sourceId)
+		const tileSource = this.tileSourceMap.get(sourceId)
 		if (!tileSource) return
 
 		tileSource.remove()
-		this.tileSouces.delete(sourceId)
+		this.tileSourceMap.delete(sourceId)
 	}
 
 	getSource(sourceId: string): TileSource | undefined {
-		return this.tileSouces.get(sourceId)
+		return this.tileSourceMap.get(sourceId)
 	}
 
 	remove(): void {
-		for (const source of this.tileSouces.values()) {
-			source.remove()
-		}
-		this._map.off('move', this.onMapMove as any)
-		this.tileSouces.clear()
-		if (this.dispatcher) {
-			this.dispatcher.remove()
-		}
+		// Clean tile sources
+		this.tileSourceMap.forEach(source => source.remove())
+		this.tileSourceMap.clear()
+		// Clean dispatcher
+		this.dispatcher && this.dispatcher.remove()
+
+		// Clean map event handler
+		// this._map.off('move', this.onMapMove as any)
+		this._map.off('moveend', this.onMapMove as any)
 	}
 
 	cleanCache() {
-		for (const tileSource of this.tileSouces.values()) {
-			tileSource.cleanCache()
-		}
+		this.tileSourceMap.forEach(source => source.cleanCache())
 	}
 }

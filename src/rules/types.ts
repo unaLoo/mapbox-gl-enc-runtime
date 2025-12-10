@@ -1,135 +1,46 @@
-/**
- * Rule engine types
- */
+import { Color, ColorNames, Theme } from "./tables/ColorTable"
 
-/**
- * Condition operator
- */
-export type ConditionOperator =
-	| 'eq' // equals
-	| 'ne' // not equals
-	| 'gt' // greater than
-	| 'gte' // greater than or equal
-	| 'lt' // less than
-	| 'lte' // less than or equal
-	| 'in' // in array
-	| 'notIn' // not in array
-	| 'exists' // property exists
-	| 'notExists' // property does not exist
+//////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////
 
-/**
- * Condition
- * Evaluates a property against a value using an operator
- */
-export interface Condition {
-	/**
-	 * Property path to evaluate (e.g., 'properties.DRVAL1' or 'context.safetyDepth.depth')
-	 */
-	property: string
-	/**
-	 * Operator to use
-	 */
-	operator: ConditionOperator
-	/**
-	 * Value to compare against
-	 */
-	value?: any
+export type GeomType = 'point' | 'line' | 'area' | 'lable'
+export interface AreaSimpleFillDescription {
+	"type": "area.simplefill",
+	"style": {
+		"themeColor": ColorNames,
+		"color": Color
+	}
 }
 
-/**
- * Logical operator for combining conditions
- */
-export type LogicalOperator = 'and' | 'or' | 'not'
+// export interface PointSymbolDescription {
+// 	'icon-anchor': 'top' | 'bottom' | 'left' | 'right' | 'center'
+// 	'icon-rotate': number
+// 	'icon-image'?: string
+// 	'icon-sprite'?: [number, number, number, number] // [x, y, width, height]
+// }
+// export interface LineSymbolDescription {
+// 	'line-color': string
+// 	'line-width': number
+// 	'line-type': 'solid' | 'dashed' | 'dotted' | 'marker'
+// 	'line-dasharray': number[]
+// }
 
-/**
- * Rule
- * Defines a condition and its resulting rendering behavior
- */
-export interface Rule {
-	/**
-	 * Rule identifier
-	 */
-	id: string
-	/**
-	 * Rule name/description
-	 */
-	name?: string
-	/**
-	 * Conditions to evaluate
-	 * Can be a single condition, array of conditions, or nested logical structure
-	 */
-	condition: Condition | Condition[] | LogicalRule
-	/**
-	 * Result when condition is true
-	 */
-	result: RuleResult
-	/**
-	 * Priority (higher priority rules are evaluated first)
-	 */
-	priority?: number
-}
+// export interface LableSymbolDescription {
+// 	'text-color'?: string
+// 	'text-size'?: number
+// 	'text-offset'?: [number, number]
+// 	'text-source'?: string
+// }
 
-/**
- * Logical rule structure
- */
-export interface LogicalRule {
-	operator: LogicalOperator
-	conditions: (Condition | LogicalRule)[]
-}
+export type StyleDescription = AreaSimpleFillDescription
 
-/**
- * Rule result
- * Defines how a feature should be rendered when the rule matches
- */
-export interface RuleResult {
-	/**
-	 * Color to use (RGB array or hex string)
-	 */
-	color?: [number, number, number] | string
-	/**
-	 * Symbol identifier
-	 */
-	symbol?: string
-	/**
-	 * Pattern identifier
-	 */
-	pattern?: string
-	/**
-	 * Line width
-	 */
-	lineWidth?: number
-	/**
-	 * Line style
-	 */
-	lineStyle?: 'solid' | 'dashed' | 'dotted'
-	/**
-	 * Opacity (0-1)
-	 */
-	opacity?: number
-	/**
-	 * Visibility
-	 */
-	visible?: boolean
-	/**
-	 * Additional rendering properties
-	 */
-	[key: string]: any
-}
 
-/**
- * Evaluation context
- */
-export interface EvaluationContext {
-	/**
-	 * Feature being evaluated
-	 */
+export interface StyledFeature {
 	feature: any
-	/**
-	 * Rendering context
-	 */
-	context: any
-	/**
-	 * Additional data
-	 */
+	style: StyleDescription
+}
+
+export interface FeatureStylingContext {
+	theme: Theme
 	[key: string]: any
 }

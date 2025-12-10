@@ -2,6 +2,7 @@
  * Core type definitions for mapbox-gl-enc-runtime
  */
 
+import { OBJLCode } from '@/rules/tables/OBJLTable'
 import type { Map, CustomLayerInterface } from 'mapbox-gl'
 
 /**
@@ -23,12 +24,19 @@ export interface ENCFeatureGeometry {
 export interface ENCFeatureProperties {
 	[key: string]: any
 	// Common S-52 attributes
-	OBJL?: string // Object class
+	OBJL?: OBJLCode // Object class
+	OBJNAM?: string;    // 5 TEXT
+	NOBJNM?: string;    // 6 TEXT
+	RCID?: number;      // 3 INTEGER
+	PK_UID?: number;    // 1 INTEGER
+	CHARTID?: number;   // 2 INTEGER
+
 	DRVAL1?: number // Depth value 1
 	DRVAL2?: number // Depth value 2
 	CATSPM?: string // Category of special mark
 	COLOUR?: string // Color
 	COLPAT?: string // Color pattern
+
 	// ... more S-52 attributes
 }
 

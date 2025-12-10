@@ -1,7 +1,12 @@
 import { Callback, WorkerSelf } from '../types'
 import { http } from '../request/http'
 import { parseMVT } from '../../tiles/mvt_parser'
-import type { ENCFeature } from '../../types'
+import { prepare } from '../../rules/Interpreter'
+import { Theme } from '../../rules/tables/ColorTable'
+import { ENCFeature } from '@/types'
+
+// import { interpretFeatures } from './helpers'
+// import type { StyledFeature } from '@/rules/types'
 
 type TileRequestParams = {
 	uid: number
@@ -48,6 +53,12 @@ export function loadTile(this: WorkerSelf, params: TileRequestParams, callback: 
 					try {
 						// Parse MVT to ENCFeature[]
 						const features = parseMVT(res.data, tileZ, tileX, tileY, { layers })
+
+						// const styledFeatures = interpretFeatures({ theme: 'DAY_BRIGHT' }, features)
+						// console.log('whatt ', styledFeatures)
+						// 这里以后应该还要用 bucket 装载成 transferable ，这里就先传给主线程了。
+
+
 						callback(null, features)
 					} catch (parseError) {
 						callback(parseError as Error, null)
@@ -84,4 +95,10 @@ export function loadTile(this: WorkerSelf, params: TileRequestParams, callback: 
 	} catch (e: unknown) {
 		callback(e instanceof Error ? e : new Error(String(e)), null)
 	}
+}
+
+
+export function updateTheme(this: WorkerSelf, theme: Theme, callback: Callback<void>) {
+	prepare({ theme })
+	callback(null)
 }

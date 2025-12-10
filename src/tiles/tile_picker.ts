@@ -2,7 +2,7 @@ import { vec3 } from 'gl-matrix'
 import { Map } from 'mapbox-gl'
 
 import { getMatrices } from '../utils/map_transform'
-import { Frustum, Aabb } from '../geometry'
+import { Frustum, Aabb } from '@/utils/geometry'
 import MercatorCoordinate from '@/utils/mercator_coordinate'
 import { tileAABB } from '@/utils/tile_util'
 
@@ -136,11 +136,11 @@ export default class TilePicker {
 			if (z === maxTileZoom || !shouldNodeSplit(node)) {
 				const tileZoom = z === maxTileZoom ? overscaledZ : z
 				/*
-                    Calculate dx, dy in WD_Space
-                    node.wrap << z is node.wrap * numTiles in node.z
-                    if maxTileZoom is 3, node.z is 2, and node.x is 1,
-                    then the size of this tile is equivalent to 2^(maxTileZoom - z) times larger than a maxTileZoom tile.
-                */
+					Calculate dx, dy in WD_Space
+					node.wrap << z is node.wrap * numTiles in node.z
+					if maxTileZoom is 3, node.z is 2, and node.x is 1,
+					then the size of this tile is equivalent to 2^(maxTileZoom - z) times larger than a maxTileZoom tile.
+				*/
 				const dx = mapCenter_wd[0] - (0.5 + x + (node.wrap << z)) * (1 << (maxTileZoom - z))
 				const dy = mapCenter_wd[1] - (y + 0.5)
 
@@ -159,10 +159,10 @@ export default class TilePicker {
 			// Step 3: Quadrant
 			for (let i = 0; i < 4; i++) {
 				/*   ————————————
-                    |  0  |  1  |
-                    ————————————
-                    |  2  |  3  |
-                    ————————————  */
+					|  0  |  1  |
+					————————————
+					|  2  |  3  |
+					————————————  */
 				const childX = (x << 1) + (i % 2)
 				const childY = (y << 1) + (i >> 1)
 

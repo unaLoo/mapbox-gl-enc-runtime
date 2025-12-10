@@ -12,9 +12,9 @@ Mapbox-gl Electronic Navigational Chart Runtime
      Custom Layer
           |
 +---------v-------------+
-|     S-52 Runtime      |   ← Core
+|      ENC Runtime      |   ← Core
 |  - Map Tile Manager   |
-|  - Conditional Rules  |
+|  - CSP & LUP          |
 |  - Feature Interpreter|
 |  - Symbol Renderer    |
 |  - Context Manager    |

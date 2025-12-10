@@ -1,4 +1,4 @@
-import { Aabb } from '../geometry/aabb'
+import { Aabb } from './geometry/aabb'
 import MercatorCoordinate from './mercator_coordinate'
 
 const MAX_ZOOM = 28

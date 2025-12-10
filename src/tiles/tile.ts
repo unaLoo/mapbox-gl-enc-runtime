@@ -119,6 +119,7 @@ export class Tile {
 						this.status = 'error'
 						return
 					}
+					console.log("111", features)
 					this.features = features || []
 					this.status = 'loaded'
 

@@ -4,7 +4,7 @@ import Dispatcher from '../data/message/dispatcher'
 import { OverscaledTileID } from './tile_id'
 import ezStore from '../utils/store'
 import { RenderBucketManager } from '../buckets/RenderBucketManager'
-import EventBus from '@/utils/Evented'
+import { getEventBus } from '@/utils/eventBus'
 
 export type TileSourceType = {
 	id: string
@@ -130,12 +130,13 @@ export default class TileSource {
 		}
 
 		data_tile.load(this.url, this.type, this.layers, () => {
-			const eventBus = ezStore.get<EventBus>('eventBus')
-			if (!eventBus) {
-				console.error('eventBus is not set')
-				return
-			}
-			eventBus.trigger('tileLoad')
+			// const eventBus = ezStore.get<EventBus>('eventBus')
+			// if (!eventBus) {
+			// 	console.error('eventBus is not set')
+			// 	return
+			// }
+			const eventBus = getEventBus()
+			eventBus && eventBus.trigger('tileLoad')
 		})
 	}
 
@@ -162,7 +163,6 @@ export default class TileSource {
 		for (const tile of _coveringTiles) {
 			const { tile: closestTile } = this.findClosestAvailableTile(tile.overscaledTileID)
 			if (!closestTile) {
-				console.warn('!@# closestTile not found')
 				continue
 			}
 			fallbackTiles.add(closestTile)
@@ -314,55 +314,3 @@ function shouldAbort(tile: Tile | null, nearestOZID: OverscaledTileID): boolean 
 
 	return dist > tolerance
 }
-
-/*
-_getRenderableCoordinates(symbolLayer?: boolean, includeShadowCasters?: boolean): Array<OverscaledTileID> {
-	const coords = this.getRenderableIds(symbolLayer, includeShadowCasters).map((id) => this._tiles[id].tileID);
-	const isGlobe = this.transform.projection.name === 'globe';
-	for (const coord of coords) {
-		coord.projMatrix = this.transform.calculateProjMatrix(coord.toUnwrapped());
-		if (isGlobe) {
-			coord.expandedProjMatrix = this.transform.calculateProjMatrix(coord.toUnwrapped(), false, true);
-		} else {
-			coord.expandedProjMatrix = coord.projMatrix;
-		}
-	}
-	return coords;
-}
-
-
-
-getRenderableIds(symbolLayer?: boolean, includeShadowCasters?: boolean): Array<number> {
-	const renderables: Array<Tile> = [];
-	for (const id in this._tiles) {
-		if (this._isIdRenderable(+id, symbolLayer, includeShadowCasters)) renderables.push(this._tiles[id]);
-	}
-	if (symbolLayer) {
-		return renderables.sort((a_: Tile, b_: Tile) => {
-			const a = a_.tileID;
-			const b = b_.tileID;
-			const rotatedA = (new Point(a.canonical.x, a.canonical.y))._rotate(this.transform.angle);
-			const rotatedB = (new Point(b.canonical.x, b.canonical.y))._rotate(this.transform.angle);
-			return a.overscaledZ - b.overscaledZ || rotatedB.y - rotatedA.y || rotatedB.x - rotatedA.x;
-		}).map(tile => tile.tileID.key);
-	}
-	return renderables.map(tile => tile.tileID).sort(compareTileId).map(id => id.key);
-}
-
-_isIdRenderable(id: number, symbolLayer?: boolean, includeShadowCasters?: boolean): boolean {
-	return this._tiles[id] && this._tiles[id].hasData() &&
-		!this._coveredTiles[id] && (symbolLayer || !this._tiles[id].holdingForFade()) &&
-		(includeShadowCasters || !this._shadowCasterTiles[id]);
-} 
-
-
-hasRenderableParent(tileID: OverscaledTileID): boolean {
-	const parentTile = this.findLoadedParent(tileID, 0);
-	if (parentTile) {
-		return this._isIdRenderable(parentTile.tileID.key);
-	}
-	return false;
-}
-
-
-*/

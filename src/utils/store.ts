@@ -16,6 +16,9 @@ class EazyStore {
 	get<T>(key: string): T | null {
 		return this.store.get(key)
 	}
+	destroy() {
+		this.store.clear()
+	}
 }
 
 export default EazyStore.instance()

@@ -33,7 +33,6 @@ export function parseMVT(
 
 	try {
 		// Create Pbf instance from buffer and parse vector tile
-		// Note: Pbf constructor accepts ArrayBuffer | Uint8Array
 		const pbf = new Pbf(buffer)
 		const tile = new VectorTile(pbf)
 
@@ -43,7 +42,7 @@ export function parseMVT(
 		for (const layerName of layerNames) {
 			const layer = tile.layers[layerName]
 			if (!layer) {
-				console.warn(`MVT layer "${layerName}" not found in tile ${tileZ}/${tileX}/${tileY}`)
+				console.warn(`layer "${layerName}" not found in tile ${tileZ}/${tileX}/${tileY}`)
 				continue
 			}
 			for (let i = 0; i < layer.length; i++) {
@@ -69,6 +68,8 @@ export function parseMVT(
 						coordinates: convertTileLocalCoordinates(normalizedGeometry, geoJSONFeature.geometry.type),
 						extent: EXTENT, // Always 8192 after normalization
 					}
+
+					// const featureBbox = feature.bbox()
 
 					// Convert to ENCFeature format
 					features.push({
