@@ -1,0 +1,488 @@
+{
+	"instructionTypes": [
+		{
+			"code": "TX",
+			"fullName": "RUL_TXT_TX - Plain Text",
+			"category": "Text",
+			"description": "显示简单的文字标签，从对象属性字段获取文本内容",
+			"parameterCount": 9,
+			"parameters": [
+				{
+					"index": 1,
+					"name": "fieldName",
+					"type": "string",
+					"description": "源字段名称（如 OBJNAM, TORHGT 等）",
+					"examples": ["OBJNAM", "TORHGT", "CATLND"]
+				},
+				{
+					"index": 2,
+					"name": "horizontalAlign",
+					"type": "integer",
+					"description": "水平对齐方式",
+					"values": {
+						"1": "left",
+						"2": "center",
+						"3": "right"
+					}
+				},
+				{
+					"index": 3,
+					"name": "verticalAlign",
+					"type": "integer",
+					"description": "垂直对齐方式",
+					"values": {
+						"1": "top",
+						"2": "center",
+						"3": "bottom"
+					}
+				},
+				{
+					"index": 4,
+					"name": "direction",
+					"type": "integer",
+					"description": "文字显示方向",
+					"values": {
+						"2": "horizontal",
+						"3": "vertical"
+					}
+				},
+				{
+					"index": 5,
+					"name": "fontID",
+					"type": "string",
+					"description": "字体编号（带引号）",
+					"examples": ["'15110'", "'16120'", "'18110'"]
+				},
+				{
+					"index": 6,
+					"name": "bold",
+					"type": "integer",
+					"description": "是否加粗",
+					"values": {
+						"0": "normal",
+						"1": "bold"
+					}
+				},
+				{
+					"index": 7,
+					"name": "effect",
+					"type": "integer",
+					"description": "文字效果",
+					"values": {
+						"0": "no effect",
+						"1": "with background box"
+					}
+				},
+				{
+					"index": 8,
+					"name": "color",
+					"type": "colorCode",
+					"description": "文字颜色代码",
+					"examples": ["CHBLK", "CHGRD", "CHMGD"]
+				},
+				{
+					"index": 9,
+					"name": "fontSize",
+					"type": "integer",
+					"description": "字体大小（像素）",
+					"range": "11-29"
+				}
+			],
+			"examples": [
+				"TX(OBJNAM,3,1,2,'15110',1,0,CHBLK,29)",
+				"TX(TORHGT,1,2,2,'15110',0,0,CHBLK,11)",
+				"TX(CATLND,2,2,2,'15110',0,0,CHBLK,20)"
+			],
+			"usedFor": ["Building names", "Tower heights", "Land categories"],
+			"relatedLookupTables": ["field properties in objects"]
+		},
+		{
+			"code": "TE",
+			"fullName": "RUL_TXT_TE - Numeric Text",
+			"category": "Text",
+			"description": "显示格式化的数值，通常用于深度、高度等量值标签",
+			"parameterCount": 10,
+			"parameters": [
+				{
+					"index": 1,
+					"name": "formatString",
+					"type": "string",
+					"description": "C语言风格的格式字符串",
+					"values": {
+						"%s": "string",
+						"%d": "integer",
+						"%.1f": "1 decimal float",
+						"%4.1lf": "width 4, 1 decimal long float",
+						"'prefix %4.1lf'": "string with prefix and format"
+					},
+					"examples": ["%s", "%.1f", "%4.1lf", "'clr %4.1lf'", "'clr cl %4.1lf'"]
+				},
+				{
+					"index": 2,
+					"name": "fieldName",
+					"type": "string",
+					"description": "源字段名称",
+					"examples": ["OBJNAM", "VERCCL", "VERCOP", "DRVAL1"]
+				},
+				{
+					"index": 3,
+					"name": "horizontalAlign",
+					"type": "integer",
+					"description": "水平对齐方式",
+					"values": { "1": "left", "2": "center", "3": "right" }
+				},
+				{
+					"index": 4,
+					"name": "verticalAlign",
+					"type": "integer",
+					"description": "垂直对齐方式",
+					"values": { "1": "top", "2": "center", "3": "bottom" }
+				},
+				{
+					"index": 5,
+					"name": "direction",
+					"type": "integer",
+					"description": "文字方向",
+					"values": { "2": "horizontal", "3": "vertical" }
+				},
+				{
+					"index": 6,
+					"name": "fontID",
+					"type": "string",
+					"description": "字体编号",
+					"examples": ["'15110'", "'16120'"]
+				},
+				{
+					"index": 7,
+					"name": "bold",
+					"type": "integer",
+					"description": "加粗标记",
+					"values": { "0": "normal", "1": "bold" }
+				},
+				{
+					"index": 8,
+					"name": "effect",
+					"type": "integer",
+					"description": "文字效果",
+					"values": { "0": "none", "1": "background box" }
+				},
+				{
+					"index": 9,
+					"name": "color",
+					"type": "colorCode",
+					"description": "颜色代码",
+					"examples": ["CHBLK", "CHMGD"]
+				},
+				{
+					"index": 10,
+					"name": "fontSize",
+					"type": "integer",
+					"description": "字体大小",
+					"range": "11-29"
+				}
+			],
+			"examples": [
+				"TE('%s','OBJNAM',3,1,2,'15110',1,0,CHBLK,29)",
+				"TE('%4.1lf','VERCCL',3,1,2,'15110',1,0,CHBLK,11)",
+				"TE('clr cl %4.1lf','VERCCL',3,1,2,'15110',1,0,CHBLK,11)",
+				"TE('clr op %4.1lf','VERCOP',3,1,2,'15110',1,1,CHBLK,11)"
+			],
+			"usedFor": ["Water depth values", "Bridge clearance heights", "Tower heights", "Sounding values"],
+			"relatedLookupTables": ["numeric field properties"]
+		},
+		{
+			"code": "SY",
+			"fullName": "RUL_SYM_PT - Symbol",
+			"category": "Symbol",
+			"description": "在对象位置显示一个点状符号，可支持旋转",
+			"parameterCount": "1-2",
+			"parameters": [
+				{
+					"index": 1,
+					"name": "symbolName",
+					"type": "string",
+					"description": "符号名称，对应到 symbols 表中的符号",
+					"examples": ["ACHARE02", "BRIDGE01", "DWRTPT51", "FAIRWY51", "TSSLPT51"]
+				},
+				{
+					"index": 2,
+					"name": "rotationField",
+					"type": "string",
+					"description": "（可选）旋转字段名称，符号将根据该字段值旋转",
+					"examples": ["ORIENT"],
+					"note": "When present, symbol rotates based on field value"
+				}
+			],
+			"examples": ["SY(ACHARE02)", "SY(FAIRWY51,ORIENT)", "SY(DWRTPT51)", "SY(BRIDGE01)", "SY(TSSLPT51,ORIENT)"],
+			"usedFor": ["Anchorages", "Bridges", "Lights", "Buoys", "Waypoints"],
+			"commonSymbols": {
+				"ACHARE02": "Anchorage area symbol",
+				"ACHBRT07": "Anchoring berth symbol",
+				"BRIDGE01": "Bridge symbol",
+				"DWRTPT51": "Deep water route point symbol",
+				"FAIRWY51": "Fairway direction symbol (rotatable)",
+				"TSSLPT51": "Traffic separation scheme point symbol (rotatable)"
+			},
+			"relatedLookupTables": ["symbols table (chartsymbols.xml)"]
+		},
+		{
+			"code": "LS",
+			"fullName": "RUL_SIM_LN - Simple Line",
+			"category": "Line",
+			"description": "绘制地物边界或路线的简单线条",
+			"parameterCount": 3,
+			"parameters": [
+				{
+					"index": 1,
+					"name": "lineStyle",
+					"type": "enum",
+					"description": "线条风格",
+					"values": {
+						"SOLD": "solid line ─────────",
+						"DASH": "dashed line - - - - -",
+						"DOT": "dotted line · · · · ·",
+						"DASHDOT": "dash-dot line - · - · -"
+					}
+				},
+				{
+					"index": 2,
+					"name": "lineWidth",
+					"type": "integer",
+					"description": "线条宽度（像素）",
+					"values": {
+						"1": "thin",
+						"2": "normal",
+						"3": "thick",
+						"4": "very thick"
+					}
+				},
+				{
+					"index": 3,
+					"name": "color",
+					"type": "colorCode",
+					"description": "线条颜色",
+					"examples": ["CHBLK", "CHGRD", "CHGRF", "CHMGD", "CHMGF", "TRFCD", "TRFCF", "CSTLN"]
+				}
+			],
+			"examples": ["LS(SOLID,1,CHBLK)", "LS(DASH,2,CHMGF)", "LS(DASH,2,TRFCD)", "LS(SOLID,4,CHGRD)"],
+			"usedFor": ["Area boundaries", "Navigation routes", "Restricted zones", "Traffic lanes"],
+			"lineStyles": {
+				"SOLD": "实线 (solid continuous line)",
+				"DASH": "虚线 (dashed line)",
+				"DOT": "点线 (dotted line)",
+				"DASHDOT": "点划线 (alternating dash and dot)"
+			},
+			"relatedLookupTables": ["color tables"]
+		},
+		{
+			"code": "LC",
+			"fullName": "RUL_COM_LN - Complex Line",
+			"category": "Line",
+			"description": "绘制具有特殊效果的复杂线条（可含符号、图案等）",
+			"parameterCount": 1,
+			"parameters": [
+				{
+					"index": 1,
+					"name": "complexLineDefinition",
+					"type": "string",
+					"description": "复杂线定义名称，指向预定义的线条配置",
+					"examples": ["ARCSLN01", "PIPELN01"]
+				}
+			],
+			"examples": ["LC(ARCSLN01)", "LC(PIPELN01)"],
+			"usedFor": ["Cables", "Pipelines", "Special navigation lines", "Marked boundaries"],
+			"capabilities": ["Line style with embedded symbols", "Patterned lines", "Lines with special marking"],
+			"relatedLookupTables": ["symbols table (for complex line definitions)"]
+		},
+		{
+			"code": "AC",
+			"fullName": "RUL_ARE_CO - Area Color",
+			"category": "Fill",
+			"description": "用纯色填充一个面积对象的内部",
+			"parameterCount": 1,
+			"parameters": [
+				{
+					"index": 1,
+					"name": "colorName",
+					"type": "colorCode",
+					"description": "填充颜色名称",
+					"examples": ["LANDA", "DEPIT", "DEPVS", "DEPMS", "NODTA", "CHBRN"]
+				}
+			],
+			"examples": ["AC(LANDA)", "AC(CHBRN)", "AC(DEPVS)", "AC(NODTA)"],
+			"usedFor": ["Land fill", "Water areas", "Buildings", "Unmapped areas"],
+			"commonColors": {
+				"LANDA": "Land color (tan/brown)",
+				"DEPIT": "Island/land (green)",
+				"DEPVS": "Very shallow water (light blue)",
+				"DEPMS": "Medium shallow water (medium blue)",
+				"DEPDW": "Deep water (dark blue)",
+				"NODTA": "No data (gray)",
+				"CHBRN": "Building (brown)",
+				"DEPMD": "Medium depth water"
+			},
+			"relatedLookupTables": ["color tables"]
+		},
+		{
+			"code": "AP",
+			"fullName": "RUL_ARE_PA - Area Pattern",
+			"category": "Fill",
+			"description": "用图案或纹理填充一个面积对象",
+			"parameterCount": 1,
+			"parameters": [
+				{
+					"index": 1,
+					"name": "patternName",
+					"type": "string",
+					"description": "图案名称，对应到 patterns 表中的图案定义",
+					"examples": ["AIRARE02", "PRTSUR01", "FSHFAC03"]
+				}
+			],
+			"examples": ["AP(AIRARE02)", "AP(PRTSUR01)", "AP(FSHFAC03)"],
+			"usedFor": ["Airport areas", "Unmeasured areas", "Fishing facilities", "Special zones"],
+			"commonPatterns": {
+				"AIRARE02": "Airport area pattern (diagonal lines/grid)",
+				"PRTSUR01": "Partly surveyed/unsurveyed area pattern",
+				"FSHFAC03": "Fishing facility pattern"
+			},
+			"relatedLookupTables": ["patterns table"]
+		},
+		{
+			"code": "CS",
+			"fullName": "RUL_CND_SY - Conditional Symbolization",
+			"category": "Advanced",
+			"description": "根据对象属性值动态选择绘制样式的条件规则集",
+			"parameterCount": 1,
+			"complexity": "HIGH",
+			"parameters": [
+				{
+					"index": 1,
+					"name": "ruleSetName",
+					"type": "string",
+					"description": "规则集名称，包含多个条件分支和对应的绘制规则",
+					"examples": ["DEPARE01", "RESTRN01", "RESARE02", "LNDARE01"]
+				}
+			],
+			"examples": ["CS(DEPARE01)", "CS(RESTRN01)", "CS(RESARE02)"],
+			"usedFor": ["Water depth areas", "Restricted areas", "Resource areas", "Land areas"],
+			"commonRuleSets": {
+				"DEPARE01": {
+					"description": "Water depth conditional rules",
+					"conditions": ["DRVAL1 values (depth)"],
+					"output": "Different colors for different depth ranges"
+				},
+				"RESTRN01": {
+					"description": "Restriction/constraint conditional rules",
+					"conditions": ["CATRE, STATUS fields"],
+					"output": "Different symbols/colors for different restriction types"
+				},
+				"RESARE02": {
+					"description": "Resource area conditional rules",
+					"conditions": ["STATUS field"],
+					"output": "Different styles based on area status"
+				},
+				"LNDARE01": {
+					"description": "Land area conditional rules",
+					"conditions": ["CATLND field"],
+					"output": "Different colors for different land categories"
+				}
+			},
+			"complexity_note": "CS rules can be very complex with many branches. In OpenCPN, many CS rules are dynamically generated in code rather than statically defined.",
+			"relatedLookupTables": ["conditional rule definitions (complex)"]
+		}
+	],
+	"colorTable": {
+		"land_and_water": {
+			"LANDA": { "description": "Land color", "typical_rgb": "#DAA520" },
+			"DEPIT": { "description": "Island/Land green", "typical_rgb": "#00AA00" },
+			"DEPVS": { "description": "Very shallow water", "typical_rgb": "#73B6EF" },
+			"DEPMS": { "description": "Medium shallow water", "typical_rgb": "#4A90E2" },
+			"DEPMD": { "description": "Medium depth water", "typical_rgb": "#2E5C8A" },
+			"DEPDW": { "description": "Deep water", "typical_rgb": "#1A3A52" },
+			"NODTA": { "description": "No data area", "typical_rgb": "#CCCCCC" }
+		},
+		"black_white_gray": {
+			"CHBLK": { "description": "Black", "typical_rgb": "#000000" },
+			"CHGRD": { "description": "Dark gray", "typical_rgb": "#333333" },
+			"CHGRF": { "description": "Light gray", "typical_rgb": "#CCCCCC" },
+			"CHGRI": { "description": "Medium gray", "typical_rgb": "#777777" }
+		},
+		"special_purpose": {
+			"CHBRN": { "description": "Building color", "typical_rgb": "#8B6914" },
+			"CSTLN": { "description": "Coastline color", "typical_rgb": "#333333" },
+			"CHMGD": { "description": "Management area dark", "typical_rgb": "#8B5A8B" },
+			"CHMGF": { "description": "Management area light", "typical_rgb": "#DDA0DD" },
+			"TRFCD": { "description": "Traffic line dark", "typical_rgb": "#FF0000" },
+			"TRFCF": { "description": "Traffic line light", "typical_rgb": "#FF6666" }
+		}
+	},
+	"lineStyles": {
+		"SOLID": "Continuous solid line ─────────────",
+		"DASH": "Dashed line - - - - - -",
+		"DOT": "Dotted line · · · · · ·",
+		"DASHDOT": "Alternating dash and dot - · - · - ·"
+	},
+	"instructionCombinationRules": {
+		"executionOrder": [
+			"1. AC/AP - Fill commands (background)",
+			"2. LS/LC - Line commands (boundary)",
+			"3. SY - Symbol commands (foreground)",
+			"4. TX/TE - Text commands (topmost layer)",
+			"5. CS - Conditional rules (can override others)"
+		],
+		"examples": [
+			{
+				"instruction": "AC(CHBRN);TX(OBJNAM,1,2,3,'16120',0,0,CHBLK,26);LS(SOLID,1,LANDF)",
+				"description": "Building with name label",
+				"steps": [
+					"1. Fill with building color",
+					"2. Draw boundary in tan color",
+					"3. Display object name as label"
+				]
+			},
+			{
+				"instruction": "AC(LANDA);AP(AIRARE02);LS(SOLID,1,CHBLK)",
+				"description": "Airport area",
+				"steps": ["1. Fill with land color", "2. Add airport pattern overlay", "3. Draw black boundary"]
+			},
+			{
+				"instruction": "SY(ACHARE02);LS(DASH,2,CHMGF);CS(RESTRN01)",
+				"description": "Anchorage with conditions",
+				"steps": ["1. Display anchor symbol", "2. Draw dashed boundary", "3. Apply restriction rules"]
+			}
+		]
+	},
+	"commonFieldNames": {
+		"descriptive": {
+			"OBJNAM": "Object name (general)",
+			"CATLND": "Land category",
+			"CATRE": "Area category",
+			"STATUS": "Status/condition field"
+		},
+		"numeric": {
+			"DRVAL1": "Primary depth value",
+			"DRVAL2": "Secondary depth value",
+			"VERCCL": "Clearance (vertical height)",
+			"VERCOP": "Operating height",
+			"TORHGT": "Tower height"
+		},
+		"orientation": {
+			"ORIENT": "Orientation/direction (for rotating symbols)"
+		}
+	},
+	"summary": {
+		"totalInstructionTypes": 8,
+		"categories": {
+			"Text": 2,
+			"Symbol": 1,
+			"Line": 2,
+			"Fill": 2,
+			"Advanced": 1
+		},
+		"complexity": {
+			"simple": ["TX", "TE", "SY", "LS", "AC", "AP"],
+			"moderate": ["LC"],
+			"complex": ["CS"]
+		}
+	}
+}

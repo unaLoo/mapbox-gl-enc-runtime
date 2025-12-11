@@ -1,14 +1,15 @@
-import { Color, ColorNames, Theme } from "./tables/ColorTable"
+import { Color, ColorNames, Theme } from './tables/ColorTable'
+import { ENCFeature } from '@/types'
 
 //////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////
 
 export type GeomType = 'point' | 'line' | 'area' | 'lable'
 export interface AreaSimpleFillDescription {
-	"type": "area.simplefill",
-	"style": {
-		"themeColor": ColorNames,
-		"color": Color
+	type: 'area.simplefill'
+	style: {
+		themeColor: ColorNames
+		color: Color
 	}
 }
 
@@ -34,9 +35,8 @@ export interface AreaSimpleFillDescription {
 
 export type StyleDescription = AreaSimpleFillDescription
 
-
 export interface StyledFeature {
-	feature: any
+	feature: ENCFeature
 	style: StyleDescription
 }
 

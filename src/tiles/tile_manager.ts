@@ -1,12 +1,11 @@
 import { Map } from 'mapbox-gl'
-import { mat4 } from 'gl-matrix'
 
 import TilePicker from './tile_picker'
 import TileSource from './tile_source'
 import type { TileSourceType } from './tile_source'
 import Dispatcher from '../data/message/dispatcher'
 import { OverscaledTileID } from './tile_id'
-import { getMatrices } from '../utils/map_transform'
+// import { getMatrices } from '../utils/map_transform'
 
 export type { TileSourceType }
 
@@ -28,9 +27,10 @@ export default class TileManager {
 	tileSourceMap = new window.Map<string, TileSource>()
 	coveringTileMap = new window.Map<string, OverscaledTileID[]>()
 
-	sharingVPMatrix!: mat4
+	// sharingVPMatrix!: mat4
 
-	onMapMove: any = () => { }
+	onMapRenderStart: any = () => {}
+	onMapMove: any = () => {}
 
 	/**
 	 * Get or create TileManager instance
@@ -58,13 +58,22 @@ export default class TileManager {
 		this._picker = new TilePicker(map)
 
 		this.onMapMove = this._onMapMove.bind(this)
-		// this._map.on('move', this.onMapMove as any)
-		this._map.on('moveend', this.onMapMove as any)
+		this.onMapRenderStart = this._onMapRenderStart.bind(this)
+
+		this._map.on('move', this.onMapMove as any)
+		// this._map.on('move', this.onMapRenderStart as any)
+
+		// this.sharingVPMatrix = getMatrices(this._map.transform).projMatrix
 		Promise.resolve().then(this.onMapMove) // trigger immediately
 	}
 
-	_onMapMove(_: WebGL2RenderingContext, __: Array<number>) {
-		this.sharingVPMatrix = getMatrices(this._map.transform).projMatrix
+	_onMapRenderStart() {
+		// console.log("render")
+		// this.sharingVPMatrix = getMatrices(this._map.transform).projMatrix
+	}
+
+	_onMapMove() {
+		// this.sharingVPMatrix = getMatrices(this._map.transform).projMatrix
 
 		// this.coveringTiles = this._picker.coveringTile({
 		// 	minzoom: 0,
@@ -85,7 +94,6 @@ export default class TileManager {
 
 		// const extendTiles = this._picker.extendTileCover(this.coveringTiles);
 		for (const tileSource of this.tileSourceMap.values()) {
-
 			const coveringTiles = this._picker.coveringTile({
 				minzoom: 0,
 				maxzoom: tileSource.maxzoom || 22,
@@ -93,6 +101,7 @@ export default class TileManager {
 				isDEMTile: false,
 				roundZoom: false,
 			})
+			console.log(coveringTiles)
 
 			// console.log(coveringTiles.map(item => item.canonical.toString()))
 
@@ -127,7 +136,7 @@ export default class TileManager {
 
 	remove(): void {
 		// Clean tile sources
-		this.tileSourceMap.forEach(source => source.remove())
+		this.tileSourceMap.forEach((source) => source.remove())
 		this.tileSourceMap.clear()
 		// Clean dispatcher
 		this.dispatcher && this.dispatcher.remove()
@@ -138,6 +147,6 @@ export default class TileManager {
 	}
 
 	cleanCache() {
-		this.tileSourceMap.forEach(source => source.cleanCache())
+		this.tileSourceMap.forEach((source) => source.cleanCache())
 	}
 }

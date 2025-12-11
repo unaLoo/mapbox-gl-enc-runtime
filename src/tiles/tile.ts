@@ -90,7 +90,7 @@ export class Tile {
 		this._cancel = cancel
 	}
 
-	load(tileUrl: string, type: 'raster' | 'vector' = 'raster', layers?: string[], cb?: () => void) {
+	load(tileUrl: string, type: 'raster' | 'vector' = 'raster', layers?: string[], cb?: (...args: any[]) => void) {
 		this.type = type
 		if (this.status === 'loaded') return
 		if (this.status === 'loading') return
@@ -119,7 +119,7 @@ export class Tile {
 						this.status = 'error'
 						return
 					}
-					console.log("111", features)
+					// console.log("111", features)
 					this.features = features || []
 					this.status = 'loaded'
 

@@ -1,32 +1,61 @@
-// Input : context , feature 
+// Input : context , feature
 // Output: styledFeatures
 
-import { ENCFeature } from "@/types";
+import { ENCFeature } from '@/types'
 
-import { getAcronymByCode } from "./tables/OBJLTable";
-import { StyledFeature, FeatureStylingContext } from "./types";
-import { getStyleList, updateStyleTable } from "./tables/StyleTable";
+import { getAcronymByCode } from './tables/OBJLTable'
+import { StyledFeature, FeatureStylingContext } from './types'
+import { getStyleList, updateStyleTable } from './tables/StyleTable'
+import { getEventBus } from '@/utils/eventBus'
+import { Tile } from '@/tiles/tile'
 
+function interpret(context: FeatureStylingContext, feature: ENCFeature): StyledFeature[] {
+	const objl = feature.properties.OBJL
+	if (objl === undefined) {
+		throw new Error(`OBJL ${objl} is undefined`)
+	}
+	const acronym = getAcronymByCode(objl)
+	const styleList = getStyleList(acronym)
 
-export function prepare(context: FeatureStylingContext) {
-    updateStyleTable(context.theme)
+	const res = styleList.map((style) => {
+		return {
+			feature: feature,
+			style: style,
+		}
+	})
+	return res
 }
 
-export function interpret(context: FeatureStylingContext, feature: ENCFeature): StyledFeature[] {
+export class Interpreter {
+	tileLoadHandler: (data: { tile: Tile; parsedFeatures: ENCFeature[] }) => void = () => {}
 
-    const objl = feature.properties.OBJL
-    if (objl === undefined) {
-        throw new Error(`OBJL ${objl} is undefined`)
-    }
-    const acronym = getAcronymByCode(objl)
-    const styleList = getStyleList(acronym)
+	constructor() {
+		this.tileLoadHandler = this._tileLoadHandler.bind(this)
+		updateStyleTable('DAY_BRIGHT')
+		this.initFeatureWorkflow()
+	}
 
-    const res = styleList.map(style => {
-        return {
-            feature: feature,
-            style: style
-        }
-    })
+	initFeatureWorkflow() {
+		const eventBus = getEventBus()
+		eventBus?.on('tileLoad', this.tileLoadHandler)
+	}
 
-    return res
+	_tileLoadHandler(data: { tile: Tile; parsedFeatures: ENCFeature[] }) {
+		console.log('tileLoad', data)
+		const { tile, parsedFeatures } = data
+		const styledFeatures = parsedFeatures
+			.map((feature) => Interpreter.interpret({ theme: 'DAY_BRIGHT', tile: tile }, feature))
+			.flat()
+
+		const eventBus = getEventBus()
+		eventBus?.trigger('featuresStyled', {
+			tile: tile,
+			styledFeatures: styledFeatures,
+		})
+		console.log(styledFeatures)
+	}
+
+	static interpret(context: FeatureStylingContext, feature: ENCFeature): StyledFeature[] {
+		return interpret(context, feature)
+	}
 }

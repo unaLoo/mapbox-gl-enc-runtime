@@ -12,5 +12,5 @@ export default defineConfig({
 			'@': resolve(__dirname, './src'),
 		},
 	},
-	publicDir: 'static'
+	publicDir: 'static',
 })

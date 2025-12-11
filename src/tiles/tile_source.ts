@@ -1,9 +1,7 @@
 import { Tile } from './tile'
 import type TileManager from './tile_manager'
 import Dispatcher from '../data/message/dispatcher'
-import { OverscaledTileID } from './tile_id'
-import ezStore from '../utils/store'
-import { RenderBucketManager } from '../buckets/RenderBucketManager'
+import { CanonicalTileID, OverscaledTileID } from './tile_id'
 import { getEventBus } from '@/utils/eventBus'
 
 export type TileSourceType = {
@@ -74,10 +72,6 @@ export default class TileSource {
 	dispatcher: Dispatcher
 	lruCache: LRUCache = new LRUCache(50)
 
-	// Bucket managers for each tile (key: tile key string, value: RenderBucketManager)
-	// Each tile has its own bucket manager
-	bucketManagers: Map<string, RenderBucketManager> = new Map()
-
 	_tileManager!: TileManager
 
 	constructor(desc: TileSourceType) {
@@ -91,6 +85,7 @@ export default class TileSource {
 	}
 
 	loadTile(tile: OverscaledTileID) {
+		console.log('load tile')
 		// cache hit
 		if (this.lruCache!.has(tile.key.toString())) {
 			// console.log('cache hit', tile.canonical.toString())
@@ -122,34 +117,25 @@ export default class TileSource {
 
 		this.lruCache.put(data_tile.id, data_tile)
 
-		// Create bucket manager for this tile (only for vector tiles)
-		if (this.type === 'vector') {
-			const gl = ezStore.get<WebGLRenderingContext | WebGL2RenderingContext>('gl')
-			const bucketManager = new RenderBucketManager(gl)
-			this.bucketManagers.set(tile.key.toString(), bucketManager)
-		}
-
 		data_tile.load(this.url, this.type, this.layers, () => {
-			// const eventBus = ezStore.get<EventBus>('eventBus')
-			// if (!eventBus) {
-			// 	console.error('eventBus is not set')
-			// 	return
-			// }
+			// 触发 tileload 事件
 			const eventBus = getEventBus()
-			eventBus && eventBus.trigger('tileLoad')
+			eventBus &&
+				eventBus.trigger('tileLoad', {
+					tile: data_tile,
+					parsedFeatures: data_tile.features,
+				})
+
+			console.log('tileLoadedd')
+			// 规则引擎工作
+			// 给到 bucket ， bucket 专门负责聚合和几何处理，生成 GPU 友好的顶点、索引资源
+			// bucket 处理完再给到 renderer
 		})
 	}
 
 	abortTile(tile: Tile) {
 		tile.unload()
 		this.lruCache.abort(tile.id)
-
-		// Dispose bucket manager for this tile
-		const bucketManager = this.bucketManagers.get(tile.id)
-		if (bucketManager) {
-			bucketManager.dispose()
-			this.bucketManagers.delete(tile.id)
-		}
 	}
 
 	/**
@@ -170,6 +156,23 @@ export default class TileSource {
 
 		// overlay fallback
 		const resultTiles: Tile[] = [...fallbackTiles]
+		return resultTiles
+	}
+
+	readyCoords(): OverscaledTileID[] {
+		const _coveringTiles = this.coveringTiles()
+
+		const fallbackCoords: Set<OverscaledTileID> = new Set()
+		for (const tile of _coveringTiles) {
+			const { tile: closestTile } = this.findClosestAvailableTile(tile.overscaledTileID)
+			if (!closestTile) {
+				continue
+			}
+			fallbackCoords.add(closestTile.overscaledTileID)
+		}
+
+		// overlay fallback
+		const resultTiles: OverscaledTileID[] = [...fallbackCoords]
 		return resultTiles
 	}
 
@@ -207,7 +210,6 @@ export default class TileSource {
 		tl: [number, number]
 		scale: number
 	} {
-
 		const cacheLength = this.lruCache.keys.length
 		let closestTile: Tile | null = null
 		const tl = [0, 0] as [number, number]
@@ -219,7 +221,10 @@ export default class TileSource {
 			const cachedTile = this.lruCache.cache[key] as Tile
 
 			// 检查是否是父级瓦片，并且有数据（对应 Mapbox 的 hasData() 检查）
-			if ((cachedTile.id === ozID.key.toString() || ozID.isChildOf(cachedTile.overscaledTileID)) && cachedTile.hasData()) {
+			if (
+				(cachedTile.id === ozID.key.toString() || ozID.isChildOf(cachedTile.overscaledTileID)) &&
+				cachedTile.hasData()
+			) {
 				closestTile = cachedTile
 				const closestFatherCanonical = closestTile.overscaledTileID.canonical
 				const sonCanonical = ozID.canonical
@@ -240,35 +245,7 @@ export default class TileSource {
 		}
 	}
 
-	/**
-	 * Get bucket manager for a specific tile
-	 */
-	getBucketManager(tile: Tile | OverscaledTileID): RenderBucketManager | undefined {
-		const tileKey = tile instanceof Tile ? tile.id : tile.key.toString()
-		return this.bucketManagers.get(tileKey)
-	}
-
-	/**
-	 * Get or create bucket manager for a specific tile
-	 */
-	getOrCreateBucketManager(tile: Tile | OverscaledTileID): RenderBucketManager {
-		const tileKey = tile instanceof Tile ? tile.id : tile.key.toString()
-		let bucketManager = this.bucketManagers.get(tileKey)
-		if (!bucketManager) {
-			const gl = ezStore.get<WebGLRenderingContext | WebGL2RenderingContext>('gl')
-			bucketManager = new RenderBucketManager(gl)
-			this.bucketManagers.set(tileKey, bucketManager)
-		}
-		return bucketManager
-	}
-
 	remove() {
-		// Dispose all bucket managers
-		for (const bucketManager of this.bucketManagers.values()) {
-			bucketManager.dispose()
-		}
-		this.bucketManagers.clear()
-
 		this.lruCache.release()
 		this.dispatcher.remove()
 	}

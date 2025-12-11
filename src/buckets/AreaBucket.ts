@@ -3,49 +3,38 @@
  * Manages area (polygon) renderable elements
  */
 import earcut from 'earcut'
-import { BaseRenderBucket } from './RenderBucket'
-import type { BucketRenderOptions } from './types'
-import { ShaderManager } from '../renderer/shader_manager'
 import type { TileLocalGeometry } from '../types'
-import type { RenderStyle } from '../interpreter/types'
 import classifyRings from './classifyRing'
+import { BaseBucket } from './BaseBucket'
+import { StyledFeature } from '@/rules/types'
+import { getEventBus } from '@/utils/eventBus'
+import type { Tile } from '@/tiles/tile'
+import { Color } from '@/rules/tables/ColorTable'
 
 /**
  * Area Bucket
  * Collects and manages area renderable elements
  * Uses ear clipping triangulation for polygons
  */
-export class AreaBucket extends BaseRenderBucket {
-	readonly type = 'area' as const
+export class AreaBucket extends BaseBucket {
+	constructor() {
+		super()
+	}
 
-	/**
-	 * Build GPU buffers from area elements
-	 * Vertex format: [x, y, r, g, b, a]
-	 * Uses triangulation for polygons
-	 */
-	buildBuffers(gl: WebGL2RenderingContext): void {
-		if (this.buffersBuilt && this.elements.length === 0) {
-			return
-		}
+	override processFeatures(tile: Tile, styledFeatures: StyledFeature[]): void {
 		const vertices: number[] = []
 		const indices: number[] = []
 
-		// 获取颜色，默认为白色
-		const getColor = (style: RenderStyle): [number, number, number, number] => {
-			if (style.color) {
-				return style.color
-			}
-			const opacity = style.opacity ?? 1.0
-			return [1.0, 1.0, 1.0, opacity]
-		}
+		for (const element of styledFeatures) {
+			const { feature, style } = element
 
-		for (const element of this.elements) {
-			const { geometry, style } = element
-			const color = getColor(style)
-			const rawPolygons = this.extractPolygons(geometry)
+			// Assume style is AreaSimpleFillDescription
+			const fillStyle = style.style || { color: [1.0, 1.0, 1.0, 1.0] }
+			const fillColor = fillStyle.color ? this.parseColor(fillStyle.color) : [1.0, 1.0, 1.0, 1.0]
+			const rawPolygons = this.extractPolygons(feature.tileLocalGeometry!)
 
 			// 记录当前顶点起始索引
-			let vertexOffset = vertices.length / 6
+			let vertexOffset = vertices.length / 6 // Now 6 floats: x,y,r,g,b,a
 
 			for (const rawPolygon of rawPolygons) {
 				if (rawPolygon.length === 0) continue
@@ -88,10 +77,10 @@ export class AreaBucket extends BaseRenderBucket {
 						vertices.push(
 							flatCoords[i], // x
 							flatCoords[i + 1], // y
-							color[0], // r
-							color[1], // g
-							color[2], // b
-							color[3], // a
+							fillColor[0], // r
+							fillColor[1], // g
+							fillColor[2], // b
+							fillColor[3], // a
 						)
 					}
 
@@ -106,74 +95,19 @@ export class AreaBucket extends BaseRenderBucket {
 			}
 		}
 
-		this.vertexCount = vertices.length / 6 // 6 components per vertex
-		this.indexCount = indices.length
-
-		// Create or update vertex buffer
-		if (!this.vertexBuffer) {
-			this.vertexBuffer = gl.createBuffer()
-		}
-		gl.bindBuffer(gl.ARRAY_BUFFER, this.vertexBuffer)
-		gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(vertices), gl.STATIC_DRAW)
-
-		// Create or update index buffer
-		if (!this.indexBuffer) {
-			this.indexBuffer = gl.createBuffer()
-		}
-		gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, this.indexBuffer)
-		gl.bufferData(gl.ELEMENT_ARRAY_BUFFER, new Uint16Array(indices), gl.STATIC_DRAW)
-
-		this.buffersBuilt = true
-	}
-
-	/**
-	 * Render areas
-	 */
-	render(options: BucketRenderOptions): void {
-		const { gl, matrix, viewport } = options
-
-		if (!this.buffersBuilt || this.vertexCount === 0) {
-			this.buildBuffers(gl)
+		const renderInfo = {
+			vertices: vertices,
+			vertexCount: vertices.length / 6,
+			indices: indices,
+			indexCount: indices.length,
 		}
 
-		if (this.vertexCount === 0) {
-			return
-		}
-
-		const shaderManager = ShaderManager.getInstance()
-		const program = shaderManager.getAreaProgram()
-		if (!program) {
-			console.warn('Area shader program not initialized')
-			return
-		}
-
-		// Use shader program
-		gl.useProgram(program)
-
-		// Set up attributes
-		const positionLoc = gl.getAttribLocation(program, 'a_position')
-		const colorLoc = gl.getAttribLocation(program, 'a_color')
-
-		// Bind vertex buffer
-		gl.bindBuffer(gl.ARRAY_BUFFER, this.vertexBuffer)
-		gl.enableVertexAttribArray(positionLoc)
-		gl.vertexAttribPointer(positionLoc, 2, gl.FLOAT, false, 6 * 4, 0)
-		gl.enableVertexAttribArray(colorLoc)
-		gl.vertexAttribPointer(colorLoc, 4, gl.FLOAT, false, 6 * 4, 2 * 4)
-
-		// Set uniforms
-		const matrixLoc = gl.getUniformLocation(program, 'u_matrix')
-		gl.uniformMatrix4fv(matrixLoc, false, matrix)
-		const viewportLoc = gl.getUniformLocation(program, 'u_viewport')
-		gl.uniform2f(viewportLoc, viewport.width, viewport.height)
-
-		// Enable blending for transparency
-		gl.enable(gl.BLEND)
-		gl.blendFunc(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA)
-
-		// Draw triangles
-		gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, this.indexBuffer)
-		gl.drawElements(gl.TRIANGLES, this.indexCount, gl.UNSIGNED_SHORT, 0)
+		const eventBus = getEventBus()
+		eventBus?.trigger('bucketsReady', {
+			tile: tile,
+			type: 'area',
+			renderInfo: renderInfo,
+		})
 	}
 
 	/**
@@ -186,5 +120,12 @@ export class AreaBucket extends BaseRenderBucket {
 		polygons.push(coords)
 
 		return polygons
+	}
+
+	private parseColor(color: Color): [number, number, number, number] {
+		// Assume it's already [r,g,b,a]
+		// return typeof color === 'string' ? [1, 1, 1, 1] : color // Simple parse, expand as needed
+
+		return [color[0] / 255, color[1] / 255, color[2] / 255, 1.0]
 	}
 }

@@ -10,7 +10,7 @@ const TILE_SOURCES = [
 		type: 'vector' as const,
 		url: 'https://localhost:3000/mbtiles/LNDARE.mbtiles/{z}/{x}/{y}.pbf',
 		layers: ['LNDARE'],
-		maxzoom: 14
+		maxzoom: 14,
 	},
 	// {
 	// 	id: 'enc-line-test',

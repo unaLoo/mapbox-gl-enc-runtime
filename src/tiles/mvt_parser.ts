@@ -120,7 +120,14 @@ function normalizeGeometryCoordinates(
 
 function convertTileLocalCoordinates(
 	geometry: Array<Array<{ x: number; y: number }>>,
-	mvtType: "Point" | "LineString" | "Polygon" | "MultiPoint" | "MultiLineString" | "MultiPolygon" | "GeometryCollection",
+	mvtType:
+		| 'Point'
+		| 'LineString'
+		| 'Polygon'
+		| 'MultiPoint'
+		| 'MultiLineString'
+		| 'MultiPolygon'
+		| 'GeometryCollection',
 ): TileLocalGeometry['coordinates'] {
 	switch (mvtType) {
 		case 'Point': // Point

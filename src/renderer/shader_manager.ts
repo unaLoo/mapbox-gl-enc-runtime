@@ -3,7 +3,13 @@
  * Manages WebGL shader programs for rendering
  */
 
-import { createProgram, vertexShaderSource, fragmentShaderSource, pointFragmentShaderSource, pointVertexShaderSource } from './shaders'
+import {
+	createProgram,
+	vertexShaderSource,
+	fragmentShaderSource,
+	pointFragmentShaderSource,
+	pointVertexShaderSource,
+} from './shaders'
 
 /**
  * Shader Manager
@@ -32,7 +38,6 @@ export class ShaderManager {
 		this.gl = gl
 
 		// Create point shader program (with circular point fragment shader)
-		// this.pointProgram = createProgram(gl, vertexShaderSource, pointFragmentShaderSource)
 		this.pointProgram = createProgram(gl, pointVertexShaderSource, pointFragmentShaderSource)
 
 		// Create line shader program
