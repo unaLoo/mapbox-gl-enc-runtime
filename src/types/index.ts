@@ -59,10 +59,10 @@ type featureType =
 export interface TileLocalGeometry {
 	type: featureType
 	coordinates:
-		| { x: number; y: number }
-		| Array<{ x: number; y: number }>
-		| Array<Array<{ x: number; y: number }>>
-		| Array<Array<Array<{ x: number; y: number }>>>
+	| { x: number; y: number }
+	| Array<{ x: number; y: number }>
+	| Array<Array<{ x: number; y: number }>>
+	| Array<Array<Array<{ x: number; y: number }>>>
 	extent: number // Original extent of the tile (usually 4096 or 8192)
 }
 
@@ -104,12 +104,12 @@ export interface ENCCustomLayer extends CustomLayerInterface {
 }
 
 export type WorkflowEvent = 'tileLoad' | 'featuresStyled' | 'bucketsReady' | 'renderFrame'
-export type TileLoadHanler = (data: { tile: Tile; parsedFeatures: ENCFeature[] }) => void
+export type TileLoadHandler = (data: { tile: Tile; decodedFeatures: ENCFeature[] }) => void
 export type FeaturesStyledHandler = (data: { tile: Tile; styledFeatures: StyledFeature[] }) => void
 export type BucketsReadyHandler = (data: { tile: Tile; type: string; renderInfo: AreaRenderInfo }) => void
 export type RenderFrameHandler = () => void
 export interface WorkflowHandler {
-	tileLoad: TileLoadHanler
+	tileLoad: TileLoadHandler
 	featuresStyled: FeaturesStyledHandler
 	bucketsReady: BucketsReadyHandler
 	renderFrame: RenderFrameHandler

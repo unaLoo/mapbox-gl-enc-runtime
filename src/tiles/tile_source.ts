@@ -123,7 +123,7 @@ export default class TileSource {
 			eventBus &&
 				eventBus.trigger('tileLoad', {
 					tile: data_tile,
-					parsedFeatures: data_tile.features,
+					decodedFeatures: data_tile.features,
 				})
 
 			console.log('tileLoadedd')

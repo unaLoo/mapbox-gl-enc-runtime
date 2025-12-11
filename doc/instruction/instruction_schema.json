@@ -391,67 +391,6 @@
 			"relatedLookupTables": ["conditional rule definitions (complex)"]
 		}
 	],
-	"colorTable": {
-		"land_and_water": {
-			"LANDA": { "description": "Land color", "typical_rgb": "#DAA520" },
-			"DEPIT": { "description": "Island/Land green", "typical_rgb": "#00AA00" },
-			"DEPVS": { "description": "Very shallow water", "typical_rgb": "#73B6EF" },
-			"DEPMS": { "description": "Medium shallow water", "typical_rgb": "#4A90E2" },
-			"DEPMD": { "description": "Medium depth water", "typical_rgb": "#2E5C8A" },
-			"DEPDW": { "description": "Deep water", "typical_rgb": "#1A3A52" },
-			"NODTA": { "description": "No data area", "typical_rgb": "#CCCCCC" }
-		},
-		"black_white_gray": {
-			"CHBLK": { "description": "Black", "typical_rgb": "#000000" },
-			"CHGRD": { "description": "Dark gray", "typical_rgb": "#333333" },
-			"CHGRF": { "description": "Light gray", "typical_rgb": "#CCCCCC" },
-			"CHGRI": { "description": "Medium gray", "typical_rgb": "#777777" }
-		},
-		"special_purpose": {
-			"CHBRN": { "description": "Building color", "typical_rgb": "#8B6914" },
-			"CSTLN": { "description": "Coastline color", "typical_rgb": "#333333" },
-			"CHMGD": { "description": "Management area dark", "typical_rgb": "#8B5A8B" },
-			"CHMGF": { "description": "Management area light", "typical_rgb": "#DDA0DD" },
-			"TRFCD": { "description": "Traffic line dark", "typical_rgb": "#FF0000" },
-			"TRFCF": { "description": "Traffic line light", "typical_rgb": "#FF6666" }
-		}
-	},
-	"lineStyles": {
-		"SOLID": "Continuous solid line ─────────────",
-		"DASH": "Dashed line - - - - - -",
-		"DOT": "Dotted line · · · · · ·",
-		"DASHDOT": "Alternating dash and dot - · - · - ·"
-	},
-	"instructionCombinationRules": {
-		"executionOrder": [
-			"1. AC/AP - Fill commands (background)",
-			"2. LS/LC - Line commands (boundary)",
-			"3. SY - Symbol commands (foreground)",
-			"4. TX/TE - Text commands (topmost layer)",
-			"5. CS - Conditional rules (can override others)"
-		],
-		"examples": [
-			{
-				"instruction": "AC(CHBRN);TX(OBJNAM,1,2,3,'16120',0,0,CHBLK,26);LS(SOLID,1,LANDF)",
-				"description": "Building with name label",
-				"steps": [
-					"1. Fill with building color",
-					"2. Draw boundary in tan color",
-					"3. Display object name as label"
-				]
-			},
-			{
-				"instruction": "AC(LANDA);AP(AIRARE02);LS(SOLID,1,CHBLK)",
-				"description": "Airport area",
-				"steps": ["1. Fill with land color", "2. Add airport pattern overlay", "3. Draw black boundary"]
-			},
-			{
-				"instruction": "SY(ACHARE02);LS(DASH,2,CHMGF);CS(RESTRN01)",
-				"description": "Anchorage with conditions",
-				"steps": ["1. Display anchor symbol", "2. Draw dashed boundary", "3. Apply restriction rules"]
-			}
-		]
-	},
 	"commonFieldNames": {
 		"descriptive": {
 			"OBJNAM": "Object name (general)",
