@@ -5,7 +5,7 @@
 import { OBJLCode } from '@/rules/tables/OBJLTable'
 import type { Map, CustomLayerInterface } from 'mapbox-gl'
 import { Tile } from '@/tiles/tile'
-import { StyledFeature } from '@/rules/types'
+import { StyledFeature, ParsedStyleDescription, ParsedStyledFeature, InstructonType } from '@/rules/types'
 import { AreaRenderInfo } from '@/renderer/types'
 
 /**
@@ -105,7 +105,7 @@ export interface ENCCustomLayer extends CustomLayerInterface {
 
 export type WorkflowEvent = 'tileLoad' | 'featuresStyled' | 'bucketsReady' | 'renderFrame'
 export type TileLoadHandler = (data: { tile: Tile; decodedFeatures: ENCFeature[] }) => void
-export type FeaturesStyledHandler = (data: { tile: Tile; styledFeatures: StyledFeature[] }) => void
+export type FeaturesStyledHandler = (data: { tile: Tile; styledFeatures: ParsedStyledFeature[]; groupedFeatures: globalThis.Map<InstructonType, ParsedStyledFeature[]> }) => void
 export type BucketsReadyHandler = (data: { tile: Tile; type: string; renderInfo: AreaRenderInfo }) => void
 export type RenderFrameHandler = () => void
 export interface WorkflowHandler {

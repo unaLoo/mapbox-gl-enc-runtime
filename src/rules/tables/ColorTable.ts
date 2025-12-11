@@ -337,7 +337,9 @@ type ColorNames = keyof ColorTable[Theme]
 type Color = [number, number, number]
 
 function getColor(theme: Theme, key: ColorNames): Color {
-	return colorTable[theme][key] as Color
+	// return colorTable[theme][key] as Color
+	const color255 = colorTable[theme][key] as Color
+	return color255.map(c => c / 255) as Color
 }
 
 export { type ColorTable, type Theme, type ColorNames, type Color, getColor }

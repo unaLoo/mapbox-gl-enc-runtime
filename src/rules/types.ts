@@ -76,7 +76,7 @@ export interface TextPlainStyle {
 	verticalAlign: 1 | 2 | 3// 'TOP' | 'CENTER' | 'BOTTOM'
 	direction: 2 | 3 // 'HORIZONTAL' | 'VERTICAL'
 	bold: 0 | 1
-	// color: ColorNames | Color
+	color: ColorNames
 	fontSize: number
 }
 export interface TextPlainParsedStyle {
@@ -85,6 +85,7 @@ export interface TextPlainParsedStyle {
 	verticalAlign: 1 | 2 | 3// 'TOP' | 'CENTER' | 'BOTTOM'
 	direction: 2 | 3 // 'HORIZONTAL' | 'VERTICAL'
 	bold: 0 | 1
+	color: Color
 	fontSize: number
 }
 
@@ -125,12 +126,12 @@ export type ParsedStyleDescription =
 
 export interface StyledFeature {
 	feature: ENCFeature
-	style: StyleDescription
+	styleDesc: StyleDescription
 }
 
 export interface ParsedStyledFeature {
 	feature: ENCFeature
-	style: ParsedStyleDescription
+	styleDesc: ParsedStyleDescription
 }
 
 export interface FeatureStylingContext {

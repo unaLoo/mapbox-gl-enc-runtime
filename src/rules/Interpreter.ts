@@ -4,7 +4,7 @@
 import { ENCFeature, TileLoadHandler } from '@/types'
 
 import { getAcronymByCode } from './tables/OBJLTable'
-import { FeatureStylingContext, StyleDescription, ParsedStyledFeature, ParsedStyleDescription } from './types'
+import { FeatureStylingContext, StyleDescription, ParsedStyledFeature, ParsedStyleDescription, InstructonType } from './types'
 import { getStyleDescList } from './tables/StyleTable'
 import { getEventBus } from '@/utils/eventBus'
 import { getColor, Theme } from './tables/ColorTable'
@@ -24,7 +24,7 @@ function interpret(context: FeatureStylingContext, feature: ENCFeature): ParsedS
 
 		return {
 			feature: feature,
-			style: parsedStyle,
+			styleDesc: parsedStyle,
 		}
 	})
 	return res
@@ -40,6 +40,14 @@ function parseColor(styleDesc: StyleDescription, theme: Theme = 'DAY_BRIGHT'): P
 					color: getColor(theme, styleDesc.style.color)
 				}
 			}
+		case 'TX':
+			return {
+				type: 'TX',
+				style: {
+					...styleDesc.style,
+					color: getColor(theme, styleDesc.style.color)
+				}
+			}
 		case 'LS':
 			return {
 				type: 'LS',
@@ -48,6 +56,7 @@ function parseColor(styleDesc: StyleDescription, theme: Theme = 'DAY_BRIGHT'): P
 					color: getColor(theme, styleDesc.style.color)
 				}
 			}
+
 		default:
 			console.error('parseColor: unknown style type', styleDesc.type)
 			return styleDesc as unknown as ParsedStyleDescription
@@ -69,18 +78,34 @@ export class Interpreter {
 	}
 
 	_tileLoadHandler(data: { tile: Tile; decodedFeatures: ENCFeature[] }) {
-		console.log('tileLoad', data)
 		const { tile, decodedFeatures } = data
 		const styledFeatures = decodedFeatures
 			.map((feature) => Interpreter.interpret({ theme: 'DAY_BRIGHT', tile: tile }, feature))
 			.flat()
 
+		const groupedFeatures = this.groupFeaturesByType(styledFeatures)
+
 		const eventBus = getEventBus()
 		eventBus?.trigger('featuresStyled', {
 			tile: tile,
 			styledFeatures: styledFeatures,
+			groupedFeatures: groupedFeatures,
 		})
-		console.log(styledFeatures)
+		// console.log('styledFeatures', styledFeatures)
+	}
+
+	private groupFeaturesByType(features: ParsedStyledFeature[]): Map<InstructonType, ParsedStyledFeature[]> {
+		const groups = new Map<InstructonType, ParsedStyledFeature[]>()
+
+		for (const feature of features) {
+			const type = feature.styleDesc.type
+			if (!groups.has(type)) {
+				groups.set(type, [])
+			}
+			groups.get(type)!.push(feature)
+		}
+
+		return groups
 	}
 
 	static interpret(context: FeatureStylingContext, feature: ENCFeature): ParsedStyledFeature[] {

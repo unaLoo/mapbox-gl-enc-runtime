@@ -85,7 +85,6 @@ export default class TileSource {
 	}
 
 	loadTile(tile: OverscaledTileID) {
-		console.log('load tile')
 		// cache hit
 		if (this.lruCache!.has(tile.key.toString())) {
 			// console.log('cache hit', tile.canonical.toString())

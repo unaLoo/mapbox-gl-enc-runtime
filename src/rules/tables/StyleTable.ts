@@ -15,8 +15,20 @@ const StyleDescTable = {
 			style: {
 				color: 'LANDA'
 			},
-		}
-	],
+		} as StyleDescription,
+		{
+			type: 'TX',
+			style: {
+				fieldName: 'OBJNAM',
+				horizontalAlign: 1, //'LEFT' 
+				verticalAlign: 2,// 'TOP' | 'CENTER' | 'BOTTOM'
+				direction: 3, // 'HORIZONTAL' | 'VERTICAL'
+				bold: 1,
+				color: 'CHBLK',
+				fontSize: 29,
+			}
+		} as StyleDescription
+	] as StyleDescription[],
 }
 
 function getStyleDescList(acronym: OBJLAcronym) {

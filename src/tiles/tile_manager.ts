@@ -29,8 +29,8 @@ export default class TileManager {
 
 	// sharingVPMatrix!: mat4
 
-	onMapRenderStart: any = () => {}
-	onMapMove: any = () => {}
+	onMapRenderStart: any = () => { }
+	onMapMove: any = () => { }
 
 	/**
 	 * Get or create TileManager instance
@@ -101,7 +101,7 @@ export default class TileManager {
 				isDEMTile: false,
 				roundZoom: false,
 			})
-			console.log(coveringTiles)
+			console.log(coveringTiles.map(item => item.canonical.toString()))
 
 			// console.log(coveringTiles.map(item => item.canonical.toString()))
 

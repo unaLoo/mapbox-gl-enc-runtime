@@ -6,31 +6,30 @@ import earcut from 'earcut'
 import type { TileLocalGeometry } from '../types'
 import classifyRings from './classifyRing'
 import { BaseBucket } from './BaseBucket'
-import { StyledFeature } from '@/rules/types'
+import { AreaColorParsedStyle, ParsedStyledFeature } from '@/rules/types'
 import { getEventBus } from '@/utils/eventBus'
 import type { Tile } from '@/tiles/tile'
-import { Color } from '@/rules/tables/ColorTable'
 
 /**
- * Area Bucket
+ * AC Bucket
  * Collects and manages area renderable elements
  * Uses ear clipping triangulation for polygons
  */
-export class AreaBucket extends BaseBucket {
+export class ACBucket extends BaseBucket {
 	constructor() {
-		super()
+		super('AC')
 	}
 
-	override processFeatures(tile: Tile, styledFeatures: StyledFeature[]): void {
+	override processFeatures(tile: Tile, styledFeatures: ParsedStyledFeature[]): void {
 		const vertices: number[] = []
 		const indices: number[] = []
 
 		for (const element of styledFeatures) {
-			const { feature, style } = element
+			const { feature, styleDesc } = element
 
 			// Assume style is AreaSimpleFillDescription
-			const fillStyle = style.style || { color: [1.0, 1.0, 1.0, 1.0] }
-			const fillColor = fillStyle.color ? this.parseColor(fillStyle.color) : [1.0, 1.0, 1.0, 1.0]
+			const fillStyle = styleDesc.style as AreaColorParsedStyle
+			const fillColor = [...fillStyle.color, 1.0]
 			const rawPolygons = this.extractPolygons(feature.tileLocalGeometry!)
 
 			// 记录当前顶点起始索引
@@ -49,13 +48,13 @@ export class AreaBucket extends BaseBucket {
 					const exteriorRing = polygon[0]
 					if (exteriorRing.length < 3) continue // 至少需要3个点才能形成三角形
 
-					// 准备 earcut 输入：扁平化的坐标数组 [x0, y0, x1, y1, ...]
+					// 准备 earcut 输入
 					const flatCoords: number[] = []
 					for (const point of exteriorRing) {
 						flatCoords.push(point.x, point.y)
 					}
 
-					// 洞的索引数组（内环，从第二个环开始）
+					// 洞的索引数组
 					const holes: number[] = []
 					let holeIndex = exteriorRing.length
 					for (let i = 1; i < polygon.length; i++) {
@@ -105,7 +104,7 @@ export class AreaBucket extends BaseBucket {
 		const eventBus = getEventBus()
 		eventBus?.trigger('bucketsReady', {
 			tile: tile,
-			type: 'area',
+			type: 'AC',
 			renderInfo: renderInfo,
 		})
 	}
@@ -122,10 +121,4 @@ export class AreaBucket extends BaseBucket {
 		return polygons
 	}
 
-	private parseColor(color: Color): [number, number, number, number] {
-		// Assume it's already [r,g,b,a]
-		// return typeof color === 'string' ? [1, 1, 1, 1] : color // Simple parse, expand as needed
-
-		return [color[0] / 255, color[1] / 255, color[2] / 255, 1.0]
-	}
 }
