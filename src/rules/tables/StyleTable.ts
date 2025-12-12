@@ -1,7 +1,5 @@
 import { StyleDescription } from '../types'
-import { Theme } from './ColorTable'
 import { OBJLAcronym } from './OBJLTable'
-import { ColorNames } from './ColorTable'
 
 // import { getColor } from './ColorTable'
 
@@ -13,22 +11,36 @@ const StyleDescTable = {
 		{
 			type: 'AC',
 			style: {
-				color: 'LANDA'
+				color: 'LANDA',
 			},
 		} as StyleDescription,
-		{
-			type: 'TX',
-			style: {
-				fieldName: 'OBJNAM',
-				horizontalAlign: 1, //'LEFT' 
-				verticalAlign: 2,// 'TOP' | 'CENTER' | 'BOTTOM'
-				direction: 3, // 'HORIZONTAL' | 'VERTICAL'
-				bold: 1,
-				color: 'CHBLK',
-				fontSize: 29,
-			}
-		} as StyleDescription
+		// {
+		// 	type: 'TX', // Not Implemen
+		// 	style: {
+		// 		fieldName: 'OBJNAM',
+		// 		horizontalAlign: 1, //'LEFT'
+		// 		verticalAlign: 2,// 'TOP' | 'CENTER' | 'BOTTOM'
+		// 		direction: 3, // 'HORIZONTAL' | 'VERTICAL'
+		// 		bold: 1,
+		// 		color: 'CHBLK',
+		// 		fontSize: 29, 
+		// 	}
+		// } as StyleDescription
 	] as StyleDescription[],
+	DEPARE: [
+		// {
+		// 	type: 'AC',
+		// 	style: {
+		// 		color: 'LITYW',
+		// 	},
+		// } as StyleDescription,
+		{
+			type: 'CS',
+			style: {
+				condition: 'DEPARE01'
+			},
+		} as StyleDescription,
+	],
 }
 
 function getStyleDescList(acronym: OBJLAcronym) {
@@ -36,24 +48,5 @@ function getStyleDescList(acronym: OBJLAcronym) {
 	return baseStyleDescList
 }
 
-// function updateStyleTable(theme: Theme) {
-// 	// 保留原始 themeColor 作为索引，在颜色更新时更新 color 字段
-
-// 	for (const acronym in StyleTable) {
-// 		const styleList = StyleTable[acronym as keyof typeof StyleTable] as StyleDescription[]
-// 		styleList.forEach((styleItem) => {
-// 			switch (styleItem.type) {
-// 				case 'AC':
-// 					styleItem.style.color = styleItem.style.color as ColorNames
-// 					break
-// 				default:
-// 					break
-// 			}
-// 		})
-// 	}
-// }
-
-// updateStyleTable('DAY_BRIGHT')
-// console.log('init color theme as Day_Bright')
 
 export { getStyleDescList }

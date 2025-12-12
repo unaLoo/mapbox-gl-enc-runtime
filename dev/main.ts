@@ -12,6 +12,13 @@ const TILE_SOURCES = [
 		layers: ['LNDARE'],
 		maxzoom: 14,
 	},
+	{
+		id: 'DEPARE',
+		type: 'vector' as const,
+		url: 'https://localhost:3000/mbtiles/DEPARE.mbtiles/{z}/{x}/{y}.pbf',
+		layers: ['DEPARE'],
+		maxzoom: 14,
+	},
 	// {
 	// 	id: 'enc-line-test',
 	// 	type: 'vector' as const,
@@ -27,13 +34,6 @@ const TILE_SOURCES = [
 	// 	layers: ['area_common_point'],
 	// 	maxzoom: 7 // 数据源的最大zoom
 	// },
-	// {
-	// 	id: 'enc-depare',
-	// 	type: 'vector' as const,
-	// 	url: 'https://localhost:3000/mbtiles/DEPARE.mbtiles/{z}/{x}/{y}.pbf',
-	// 	layers: ['DEPARE'],
-	// 	maxzoom: 14
-	// }
 ]
 
 const map = new mapboxgl.Map({

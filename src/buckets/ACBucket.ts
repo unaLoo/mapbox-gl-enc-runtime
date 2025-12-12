@@ -7,8 +7,10 @@ import type { TileLocalGeometry } from '../types'
 import classifyRings from './classifyRing'
 import { BaseBucket } from './BaseBucket'
 import { AreaColorParsedStyle, ParsedStyledFeature } from '@/rules/types'
+import { LayeredParsedStyledFeature, LayeredGroupKey } from '@/types'
 import { getEventBus } from '@/utils/eventBus'
 import type { Tile } from '@/tiles/tile'
+import { AreaRenderInfo } from '@/renderer/types'
 
 /**
  * AC Bucket
@@ -16,15 +18,15 @@ import type { Tile } from '@/tiles/tile'
  * Uses ear clipping triangulation for polygons
  */
 export class ACBucket extends BaseBucket {
-	constructor() {
-		super('AC')
+	constructor(layeredGroupKey: LayeredGroupKey) {
+		super(layeredGroupKey)
 	}
 
-	override processFeatures(tile: Tile, styledFeatures: ParsedStyledFeature[]): void {
+	override processFeatures(tile: Tile, layeredStyledFeatures: LayeredParsedStyledFeature[]): void {
 		const vertices: number[] = []
 		const indices: number[] = []
 
-		for (const element of styledFeatures) {
+		for (const element of layeredStyledFeatures) {
 			const { feature, styleDesc } = element
 
 			// Assume style is AreaSimpleFillDescription
@@ -101,10 +103,15 @@ export class ACBucket extends BaseBucket {
 			indexCount: indices.length,
 		}
 
+		// 触发 bucketsReady 事件
+		this.triggerBucketsReady(tile, renderInfo)
+	}
+
+	private triggerBucketsReady(tile: Tile, renderInfo: any) {
 		const eventBus = getEventBus()
 		eventBus?.trigger('bucketsReady', {
 			tile: tile,
-			type: 'AC',
+			layeredGroupKey: this.layeredGroupKey,
 			renderInfo: renderInfo,
 		})
 	}
@@ -120,5 +127,4 @@ export class ACBucket extends BaseBucket {
 
 		return polygons
 	}
-
 }

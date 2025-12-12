@@ -81,7 +81,7 @@ export function parseMVT(
 							_tileZ: tileZ,
 							_tileX: tileX,
 							_tileY: tileY,
-							_layer: layerName,
+							_objNam: layerName,
 						},
 						// Store tile-local geometry for efficient rendering
 						tileLocalGeometry: tileLocalGeo,

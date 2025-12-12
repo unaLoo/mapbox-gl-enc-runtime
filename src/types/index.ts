@@ -8,6 +8,17 @@ import { Tile } from '@/tiles/tile'
 import { StyledFeature, ParsedStyleDescription, ParsedStyledFeature, InstructonType } from '@/rules/types'
 import { AreaRenderInfo } from '@/renderer/types'
 
+// 图层化样式化特征
+export interface LayeredParsedStyledFeature {
+	layerId: string // 图层ID (tileSourceId)
+	tile: Tile // 所属瓦片
+	feature: ENCFeature // 原始要素
+	styleDesc: ParsedStyleDescription // 样式描述
+}
+
+// 图层化分组键，格式: "layerId-type" 如 "LNDARE-AC"
+export type LayeredGroupKey = string
+
 /**
  * ENC Feature types
  */
@@ -26,6 +37,11 @@ export interface ENCFeatureGeometry {
  */
 export interface ENCFeatureProperties {
 	[key: string]: any
+	_tileZ: number
+	_tileX: number
+	_tileY: number
+	_objNam: string
+
 	// Common S-52 attributes
 	OBJL?: OBJLCode // Object class
 	OBJNAM?: string // 5 TEXT
@@ -59,10 +75,10 @@ type featureType =
 export interface TileLocalGeometry {
 	type: featureType
 	coordinates:
-	| { x: number; y: number }
-	| Array<{ x: number; y: number }>
-	| Array<Array<{ x: number; y: number }>>
-	| Array<Array<Array<{ x: number; y: number }>>>
+		| { x: number; y: number }
+		| Array<{ x: number; y: number }>
+		| Array<Array<{ x: number; y: number }>>
+		| Array<Array<Array<{ x: number; y: number }>>>
 	extent: number // Original extent of the tile (usually 4096 or 8192)
 }
 
@@ -104,9 +120,18 @@ export interface ENCCustomLayer extends CustomLayerInterface {
 }
 
 export type WorkflowEvent = 'tileLoad' | 'featuresStyled' | 'bucketsReady' | 'renderFrame'
-export type TileLoadHandler = (data: { tile: Tile; decodedFeatures: ENCFeature[] }) => void
-export type FeaturesStyledHandler = (data: { tile: Tile; styledFeatures: ParsedStyledFeature[]; groupedFeatures: globalThis.Map<InstructonType, ParsedStyledFeature[]> }) => void
-export type BucketsReadyHandler = (data: { tile: Tile; type: string; renderInfo: AreaRenderInfo }) => void
+export type TileLoadHandler = (data: { tile: Tile; tileSourceId: string; decodedFeatures: ENCFeature[] }) => void
+export type FeaturesStyledHandler = (data: {
+	tile: Tile
+	tileSourceId: string
+	layeredStyledFeatures: LayeredParsedStyledFeature[]
+	groupedFeatures: globalThis.Map<LayeredGroupKey, LayeredParsedStyledFeature[]>
+}) => void
+export type BucketsReadyHandler = (data: {
+	tile: Tile
+	layeredGroupKey: LayeredGroupKey
+	renderInfo: AreaRenderInfo
+}) => void
 export type RenderFrameHandler = () => void
 export interface WorkflowHandler {
 	tileLoad: TileLoadHandler

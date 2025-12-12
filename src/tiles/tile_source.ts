@@ -1,7 +1,7 @@
 import { Tile } from './tile'
 import type TileManager from './tile_manager'
 import Dispatcher from '../data/message/dispatcher'
-import { CanonicalTileID, OverscaledTileID } from './tile_id'
+import { OverscaledTileID } from './tile_id'
 import { getEventBus } from '@/utils/eventBus'
 
 export type TileSourceType = {
@@ -122,6 +122,7 @@ export default class TileSource {
 			eventBus &&
 				eventBus.trigger('tileLoad', {
 					tile: data_tile,
+					tileSourceId: this.id,
 					decodedFeatures: data_tile.features,
 				})
 

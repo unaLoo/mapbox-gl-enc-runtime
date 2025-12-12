@@ -1,14 +1,109 @@
 // Input : context , feature
 // Output: styledFeatures
 
-import { ENCFeature, TileLoadHandler } from '@/types'
+import { ENCFeature, TileLoadHandler, LayeredParsedStyledFeature, LayeredGroupKey } from '@/types'
 
 import { getAcronymByCode } from './tables/OBJLTable'
-import { FeatureStylingContext, StyleDescription, ParsedStyledFeature, ParsedStyleDescription, InstructonType } from './types'
+import {
+	FeatureStylingContext,
+	StyleDescription,
+	ParsedStyledFeature,
+	ParsedStyleDescription,
+	ConditionalStyle,
+} from './types'
 import { getStyleDescList } from './tables/StyleTable'
 import { getEventBus } from '@/utils/eventBus'
-import { getColor, Theme } from './tables/ColorTable'
+import { ColorNames, getColor, Theme } from './tables/ColorTable'
 import { Tile } from '@/tiles/tile'
+
+const contextHere: FeatureStylingContext = {
+	theme: 'DAY_BRIGHT',
+	SAFETY_CONTOUR: 2,
+	SHALLOW_CONTOUR: 3,
+	DEEP_CONTOUR: 6,
+}
+
+const ConditionProcedureMap = {
+	DEPARE01: (context: FeatureStylingContext, feature: ENCFeature): ParsedStyleDescription[] => {
+		let finalColor: ColorNames
+
+		if (feature.properties.DRVAL1! < 0.0) {
+			finalColor = 'DEPIT'
+		}
+		else if (feature.properties.DRVAL1! < 2.0) {
+			finalColor = 'DEPIT'
+		}
+		else if (feature.properties.DRVAL1! < 3.0) {
+			finalColor = 'DEPMS'
+		}
+		else if (feature.properties.DRVAL1! < 6.0) {
+			finalColor = 'DEPMD'
+		}
+		else {
+			finalColor = 'DEPDW'
+		}
+
+		// if (feature.properties.DRVAL1! >= context.DEEP_CONTOUR &&
+		// 	true
+		// 	// feature.properties.DRVAL2! > context.DEEP_CONTOUR 
+		// )
+		// 	finalColor = 'DEPDW'
+
+		// else if (feature.properties.DRVAL1! >= context.SAFETY_CONTOUR &&
+		// 	true
+		// 	// feature.properties.DRVAL2! > context.SAFETY_CONTOUR
+		// )
+		// 	finalColor = 'DEPMD'
+
+		// else if (feature.properties.DRVAL1! >= context.SHALLOW_CONTOUR &&
+		// 	true
+		// 	//feature.properties.DRVAL2! > context.SHALLOW_CONTOUR
+		// )
+		// 	finalColor = 'DEPMS'
+
+		// else if (feature.properties.DRVAL1! >= 0 &&
+		// 	true
+		// 	//feature.properties.DRVAL2! > 0
+		// )
+
+		// 	finalColor = 'DEPIT'
+
+		// else
+		// 	// default
+		// 	finalColor = 'DEPIT'
+
+		console.log(feature.properties, finalColor)
+		return [
+			{
+				type: 'AC',
+				style: {
+					color: getColor(context.theme, finalColor),
+				},
+			}
+		]
+	},
+	// ...
+}
+
+function parseCondition(
+	context: FeatureStylingContext,
+	feature: ENCFeature,
+	condtion: ConditionalStyle['condition'],
+): ParsedStyledFeature[] {
+	switch (condtion) {
+		case 'DEPARE01':
+			const procedure = ConditionProcedureMap[condtion]
+			const parsedStyledDescList = procedure(context, feature)
+			const parsedStyledFeature = parsedStyledDescList.map(item => ({
+				feature: feature,
+				styleDesc: item,
+			}))
+
+			return parsedStyledFeature
+		default:
+			throw new Error(`parseCondition: unknown condition ${condtion}`)
+	}
+}
 
 function interpret(context: FeatureStylingContext, feature: ENCFeature): ParsedStyledFeature[] {
 	const objl = feature.properties.OBJL
@@ -16,18 +111,26 @@ function interpret(context: FeatureStylingContext, feature: ENCFeature): ParsedS
 		throw new Error(`OBJL ${objl} is undefined`)
 	}
 	const acronym = getAcronymByCode(objl)
-	const styleList = getStyleDescList(acronym)
+	const styleDescList = getStyleDescList(acronym)
 
-	const res = styleList.map((style: StyleDescription) => {
-		// map color
-		const parsedStyle = parseColor(style, context.theme)
+	const parsedStyleDescList: ParsedStyledFeature[] = []
 
-		return {
-			feature: feature,
-			styleDesc: parsedStyle,
+	for (const styleDesc of styleDescList) {
+		if (styleDesc.type === 'CS') {
+			const res = parseCondition(context, feature, styleDesc.style.condition)
+			res.forEach(item => {
+				parsedStyleDescList.push(item)
+			})
+		} else {
+			const parsedStyle = parseColor(styleDesc, context.theme)
+			parsedStyleDescList.push({
+				feature: feature,
+				styleDesc: parsedStyle,
+			})
 		}
-	})
-	return res
+	}
+
+	return parsedStyleDescList
 }
 
 function parseColor(styleDesc: StyleDescription, theme: Theme = 'DAY_BRIGHT'): ParsedStyleDescription {
@@ -37,24 +140,24 @@ function parseColor(styleDesc: StyleDescription, theme: Theme = 'DAY_BRIGHT'): P
 				type: 'AC',
 				style: {
 					...styleDesc.style,
-					color: getColor(theme, styleDesc.style.color)
-				}
+					color: getColor(theme, styleDesc.style.color),
+				},
 			}
 		case 'TX':
 			return {
 				type: 'TX',
 				style: {
 					...styleDesc.style,
-					color: getColor(theme, styleDesc.style.color)
-				}
+					color: getColor(theme, styleDesc.style.color),
+				},
 			}
 		case 'LS':
 			return {
 				type: 'LS',
 				style: {
 					...styleDesc.style,
-					color: getColor(theme, styleDesc.style.color)
-				}
+					color: getColor(theme, styleDesc.style.color),
+				},
 			}
 
 		default:
@@ -62,7 +165,6 @@ function parseColor(styleDesc: StyleDescription, theme: Theme = 'DAY_BRIGHT'): P
 			return styleDesc as unknown as ParsedStyleDescription
 	}
 }
-
 
 export class Interpreter {
 	tileLoadHandler: TileLoadHandler = () => { }
@@ -77,32 +179,43 @@ export class Interpreter {
 		eventBus?.on('tileLoad', this.tileLoadHandler)
 	}
 
-	_tileLoadHandler(data: { tile: Tile; decodedFeatures: ENCFeature[] }) {
-		const { tile, decodedFeatures } = data
-		const styledFeatures = decodedFeatures
-			.map((feature) => Interpreter.interpret({ theme: 'DAY_BRIGHT', tile: tile }, feature))
-			.flat()
+	_tileLoadHandler(data: { tile: Tile; tileSourceId: string; decodedFeatures: ENCFeature[] }) {
+		const { tile, tileSourceId, decodedFeatures } = data
 
-		const groupedFeatures = this.groupFeaturesByType(styledFeatures)
+		// 生成带图层信息的样式化特征
+		const layeredStyledFeatures: LayeredParsedStyledFeature[] = decodedFeatures
+			.map((feature) => Interpreter.interpret(contextHere, feature))
+			.flat()
+			.map((styledFeature) => ({
+				layerId: styledFeature.feature.properties._objNam,
+				tile: tile,
+				feature: styledFeature.feature,
+				styleDesc: styledFeature.styleDesc,
+			}))
+
+		// 按 "图层ID + 样式类型" 分组
+		const groupedFeatures = this.groupFeaturesByLayerAndType(layeredStyledFeatures)
 
 		const eventBus = getEventBus()
 		eventBus?.trigger('featuresStyled', {
 			tile: tile,
-			styledFeatures: styledFeatures,
+			tileSourceId: tileSourceId,
+			layeredStyledFeatures: layeredStyledFeatures,
 			groupedFeatures: groupedFeatures,
 		})
-		// console.log('styledFeatures', styledFeatures)
 	}
 
-	private groupFeaturesByType(features: ParsedStyledFeature[]): Map<InstructonType, ParsedStyledFeature[]> {
-		const groups = new Map<InstructonType, ParsedStyledFeature[]>()
+	private groupFeaturesByLayerAndType(
+		features: LayeredParsedStyledFeature[],
+	): Map<LayeredGroupKey, LayeredParsedStyledFeature[]> {
+		const groups = new Map<LayeredGroupKey, LayeredParsedStyledFeature[]>()
 
 		for (const feature of features) {
-			const type = feature.styleDesc.type
-			if (!groups.has(type)) {
-				groups.set(type, [])
+			const key: LayeredGroupKey = `${feature.layerId}-${feature.styleDesc.type}` // "LNDARE-AC"
+			if (!groups.has(key)) {
+				groups.set(key, [])
 			}
-			groups.get(type)!.push(feature)
+			groups.get(key)!.push(feature)
 		}
 
 		return groups

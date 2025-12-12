@@ -5,74 +5,69 @@ import { mat4 } from 'gl-matrix'
 import { getEventBus } from '@/utils/eventBus'
 
 interface TextInstance {
-    position: [number, number] // x, y
-    text: string
-    style: {
-        fontSize: number
-        color: [number, number, number]
-        horizontalAlign: number
-        verticalAlign: number
-        direction: number
-        bold: number
-    }
+	position: [number, number] // x, y
+	text: string
+	style: {
+		fontSize: number
+		color: [number, number, number]
+		horizontalAlign: number
+		verticalAlign: number
+		direction: number
+		bold: number
+	}
 }
 
 export class TXRenderer extends BaseRenderer {
-    private shaderManager: ShaderManager
+	private shaderManager: ShaderManager
 
-    constructor(gl: WebGL2RenderingContext) {
-        super('TX', gl)
-        this.shaderManager = ShaderManager.getInstance()
-        this.shaderManager.initialize(this.gl)
-    }
+	constructor(gl: WebGL2RenderingContext) {
+		super('TX', gl)
+		this.shaderManager = ShaderManager.getInstance()
+		this.shaderManager.initialize(this.gl)
+	}
 
-    protected handleBucketsReady(tile: Tile, renderInfo: { textInstances: TextInstance[]; instanceCount: number }) {
-        const tileId = tile.overscaledTileID.toString()
+	handleBucketsReady(tile: Tile, renderInfo: { textInstances: TextInstance[]; instanceCount: number }) {
+		const tileId = tile.overscaledTileID.toString()
 
-        // Store text instances for this tile
-        this.tileRenderInfo.set(tileId, {
-            textInstances: renderInfo.textInstances,
-            instanceCount: renderInfo.instanceCount,
-            tilePosMatrix: tile.tilePosMatrix(),
-        })
+		// Store text instances for this tile
+		this.tileRenderInfo.set(tileId, {
+			textInstances: renderInfo.textInstances,
+			instanceCount: renderInfo.instanceCount,
+			tilePosMatrix: tile.tilePosMatrix(),
+		})
 
-        // TODO: Create text geometry and buffers here
-        // For now, just trigger render frame
-        const eventBus = getEventBus()
-        eventBus?.trigger('renderFrame')
-    }
+		// TODO: Create text geometry and buffers here
+		// For now, just trigger render frame
+		const eventBus = getEventBus()
+		eventBus?.trigger('renderFrame')
+	}
 
-    renderTile(tile: Tile, options: {
-        sharingVPMatrix: mat4
-        viewport: { width: number; height: number }
-        tilePosMatrix: mat4
-    }): void {
-        const tileId = tile.overscaledTileID.toString()
-        const renderInfo = this.tileRenderInfo.get(tileId)
-        if (!renderInfo) return
+	renderTile(
+		tile: Tile,
+		options: {
+			sharingVPMatrix: mat4
+			viewport: { width: number; height: number }
+			tilePosMatrix: mat4
+		},
+	): void {
+		const tileId = tile.overscaledTileID.toString()
+		const renderInfo = this.tileRenderInfo.get(tileId)
+		if (!renderInfo) return
 
-        console.log('render tile TX')
-        // TODO: Implement text rendering
-        // this.renderText(renderInfo, options)
-    }
+		// TODO: Implement text rendering
+		// this.renderText(renderInfo, options)
+	}
 
-    // private renderText(
-    //     renderInfo: any,
-    //     options: { sharingVPMatrix: mat4; viewport: { width: number; height: number }; tilePosMatrix: mat4 },
-    // ) {
-    //     // TODO: Implement text rendering logic
-    //     // This would involve:
-    //     // 1. Text atlas management
-    //     // 2. Glyph rendering
-    //     // 3. Positioning and styling
+	private renderText(
+		renderInfo: any,
+		options: { sharingVPMatrix: mat4; viewport: { width: number; height: number }; tilePosMatrix: mat4 },
+	) {
+		console.log('render tile TX')
 
-    //     // For now, just a placeholder
-    //     const program = this.shaderManager.getTextProgram?.()
-    //     if (!program) {
-    //         console.warn('Text shader not available yet')
-    //         return
-    //     }
-
-    //     // TODO: Implement actual text rendering
-    // }
+		// TODO: Implement text rendering logic
+		// This would involve:
+		// 1. Text atlas management
+		// 2. Glyph rendering
+		// 3. Positioning and styling
+	}
 }
