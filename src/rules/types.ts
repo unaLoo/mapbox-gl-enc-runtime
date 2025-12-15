@@ -20,10 +20,14 @@ export interface AreaColorParsedStyle {
  * AP
  */
 export interface AreaPatternStyle {
-	pattern: string
+	pattern: string // source url
+	scale: [number, number] // x, y scale
+	opacity: number
 }
 export interface AreaPatternParsedStyle {
 	pattern: string
+	scale: [number, number] // x, y scale
+	opacity: number
 }
 
 /**
@@ -67,6 +71,7 @@ export interface SymbolParsedStyle {
  */
 export interface TextPlainStyle {
 	fieldName: string
+	formatString: string // default as %s
 	horizontalAlign: 1 | 2 | 3 //'LEFT' | 'CENTER' | 'RIGHT'
 	verticalAlign: 1 | 2 | 3 // 'TOP' | 'CENTER' | 'BOTTOM'
 	direction: 2 | 3 // 'HORIZONTAL' | 'VERTICAL'
@@ -75,23 +80,14 @@ export interface TextPlainStyle {
 	fontSize: number
 }
 export interface TextPlainParsedStyle {
-	fieldName: string
+	fieldName: string // Field name to extract text from feature properties
+	formatString: string // Format string (default as %s)
 	horizontalAlign: 1 | 2 | 3 //'LEFT' | 'CENTER' | 'RIGHT'
 	verticalAlign: 1 | 2 | 3 // 'TOP' | 'CENTER' | 'BOTTOM'
 	direction: 2 | 3 // 'HORIZONTAL' | 'VERTICAL'
 	bold: 0 | 1
 	color: Color
 	fontSize: number
-}
-
-/**
- * TE('%4.1lf','VERCCL',3,1,2,'15110',1,0,CHBLK,11)      // 高度数值，1位小数
- */
-export interface TextNumericStyle extends TextPlainStyle {
-	formatString: string
-}
-export interface TextNumericParsedStyle extends TextNumericStyle {
-	formatString: string
 }
 
 export interface ConditionalStyle {
@@ -111,7 +107,6 @@ export type StyleDescription =
 	| { type: 'LC'; style: LineComplexStyle }
 	| { type: 'SY'; style: SymbolStyle }
 	| { type: 'TX'; style: TextPlainStyle }
-	| { type: 'TE'; style: TextNumericStyle }
 	| { type: 'CS'; style: ConditionalStyle }
 
 export type ParsedStyleDescription =
@@ -121,7 +116,6 @@ export type ParsedStyleDescription =
 	| { type: 'LC'; style: LineComplexParsedStyle }
 	| { type: 'SY'; style: SymbolParsedStyle }
 	| { type: 'TX'; style: TextPlainParsedStyle }
-	| { type: 'TE'; style: TextNumericParsedStyle }
 	| { type: 'CS'; style: ConditionalParsedStyle }
 
 export interface StyledFeature {

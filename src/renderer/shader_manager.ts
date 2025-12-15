@@ -9,6 +9,10 @@ import {
 	fragmentShaderSource,
 	pointFragmentShaderSource,
 	pointVertexShaderSource,
+	patternVertexShaderSource,
+	patternFragmentShaderSource,
+	sdfVertexShaderSource,
+	sdfFragmentShaderSource,
 } from './shaders'
 
 /**
@@ -21,6 +25,8 @@ export class ShaderManager {
 	private pointProgram: WebGLProgram | null = null
 	private lineProgram: WebGLProgram | null = null
 	private areaProgram: WebGLProgram | null = null
+	private patternProgram: WebGLProgram | null = null
+	private sdfProgram: WebGLProgram | null = null
 
 	private gl: WebGL2RenderingContext | null = null
 
@@ -45,6 +51,12 @@ export class ShaderManager {
 
 		// Create area shader program
 		this.areaProgram = createProgram(gl, vertexShaderSource, fragmentShaderSource)
+
+		// Create pattern shader program for AP (Area Pattern) rendering
+		this.patternProgram = createProgram(gl, patternVertexShaderSource, patternFragmentShaderSource)
+
+		// Create SDF shader program for TX (Text) rendering
+		this.sdfProgram = createProgram(gl, sdfVertexShaderSource, sdfFragmentShaderSource)
 	}
 
 	/**
@@ -69,6 +81,20 @@ export class ShaderManager {
 	}
 
 	/**
+	 * Get pattern shader program for AP (Area Pattern) rendering
+	 */
+	getPatternProgram(): WebGLProgram | null {
+		return this.patternProgram
+	}
+
+	/**
+	 * Get SDF shader program for TX (Text) rendering
+	 */
+	getSdfProgram(): WebGLProgram | null {
+		return this.sdfProgram
+	}
+
+	/**
 	 * Dispose all shader programs
 	 */
 	dispose(): void {
@@ -85,6 +111,14 @@ export class ShaderManager {
 		if (this.areaProgram) {
 			this.gl.deleteProgram(this.areaProgram)
 			this.areaProgram = null
+		}
+		if (this.patternProgram) {
+			this.gl.deleteProgram(this.patternProgram)
+			this.patternProgram = null
+		}
+		if (this.sdfProgram) {
+			this.gl.deleteProgram(this.sdfProgram)
+			this.sdfProgram = null
 		}
 
 		this.gl = null

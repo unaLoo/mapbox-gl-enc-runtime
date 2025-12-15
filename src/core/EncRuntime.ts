@@ -70,6 +70,17 @@ export default class EncRuntime implements CustomLayerInterface {
 		})
 
 		eventBus?.on('renderFrame', () => this.map?.triggerRepaint())
+
+		// Wire viewport changes to trigger collision recalculation
+		// Requirements 7.4: Recalculate collisions on viewport changes (pan/zoom)
+		this.map?.on('move', () => {
+			const canvas = this.map?.getCanvas()
+			if (canvas) {
+				eventBus?.trigger('viewportChange', {
+					viewport: { width: canvas.width, height: canvas.height }
+				})
+			}
+		})
 	}
 
 	render(gl: WebGL2RenderingContext, matrix: number[]): void {

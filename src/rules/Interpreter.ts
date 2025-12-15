@@ -107,6 +107,7 @@ function parseCondition(
 
 function interpret(context: FeatureStylingContext, feature: ENCFeature): ParsedStyledFeature[] {
 	const objl = feature.properties.OBJL
+	// console.log('interpret !!')
 	if (objl === undefined) {
 		throw new Error(`OBJL ${objl} is undefined`)
 	}
@@ -114,7 +115,6 @@ function interpret(context: FeatureStylingContext, feature: ENCFeature): ParsedS
 	const styleDescList = getStyleDescList(acronym)
 
 	const parsedStyleDescList: ParsedStyledFeature[] = []
-
 	for (const styleDesc of styleDescList) {
 		if (styleDesc.type === 'CS') {
 			const res = parseCondition(context, feature, styleDesc.style.condition)
@@ -129,7 +129,6 @@ function interpret(context: FeatureStylingContext, feature: ENCFeature): ParsedS
 			})
 		}
 	}
-
 	return parsedStyleDescList
 }
 
@@ -141,6 +140,14 @@ function parseColor(styleDesc: StyleDescription, theme: Theme = 'DAY_BRIGHT'): P
 				style: {
 					...styleDesc.style,
 					color: getColor(theme, styleDesc.style.color),
+				},
+			}
+		case 'AP':
+			// AP style doesn't have color, pass through as-is
+			return {
+				type: 'AP',
+				style: {
+					...styleDesc.style,
 				},
 			}
 		case 'TX':

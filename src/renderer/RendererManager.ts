@@ -1,5 +1,6 @@
 import { BaseRenderer } from './BaseRenderer'
 import { ACRenderer } from './ACRenderer'
+import { APRenderer } from './APRenderer'
 import { TXRenderer } from './TXRenderer'
 import { Tile } from '@/tiles/tile'
 import { mat4 } from 'gl-matrix'
@@ -31,6 +32,9 @@ export class RendererManager {
 			switch (type) {
 				case 'AC':
 					this.renderers.set(layeredGroupKey, new ACRenderer(this.gl))
+					break
+				case 'AP':
+					this.renderers.set(layeredGroupKey, new APRenderer(this.gl))
 					break
 				case 'TX':
 					this.renderers.set(layeredGroupKey, new TXRenderer(this.gl))

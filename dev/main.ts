@@ -12,12 +12,19 @@ const TILE_SOURCES = [
 		layers: ['LNDARE'],
 		maxzoom: 14,
 	},
+	// {
+	// 	id: 'DEPARE',
+	// 	type: 'vector' as const,
+	// 	url: 'https://localhost:3000/mbtiles/DEPARE.mbtiles/{z}/{x}/{y}.pbf',
+	// 	layers: ['DEPARE'],
+	// 	maxzoom: 14,
+	// },
 	{
-		id: 'DEPARE',
+		id: 'SOUNDG',
 		type: 'vector' as const,
-		url: 'https://localhost:3000/mbtiles/DEPARE.mbtiles/{z}/{x}/{y}.pbf',
-		layers: ['DEPARE'],
-		maxzoom: 14,
+		url: 'https://localhost:3000/mbtiles/SOUNDG.mbtiles/{z}/{x}/{y}.pbf',
+		layers: ['soundg3d'],
+		maxzoom: 9,
 	},
 	// {
 	// 	id: 'enc-line-test',

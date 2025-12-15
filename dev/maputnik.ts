@@ -15,7 +15,7 @@ export default function addMaputnikLayer(map: mapboxgl.Map) {
 	}
 
 	for (const [key, value] of Object.entries(sources)) {
-		map.addSource(key, value as unknown as mapboxgl.SourceSpecification)
+		map.addSource(key, value as unknown as mapboxgl.AnySourceData)
 	}
 
 	const layers = [
@@ -59,6 +59,6 @@ export default function addMaputnikLayer(map: mapboxgl.Map) {
 	]
 
 	for (const layer of layers) {
-		map.addLayer(layer as mapboxgl.LayerSpecification)
+		map.addLayer(layer as mapboxgl.AnyLayer)
 	}
 }

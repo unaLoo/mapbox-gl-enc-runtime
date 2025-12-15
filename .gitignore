@@ -43,3 +43,7 @@ yarn-error.log*
 # IDE
 .cursor/
 .vscode/
+.kiro/
+
+# Referense file
+ref/

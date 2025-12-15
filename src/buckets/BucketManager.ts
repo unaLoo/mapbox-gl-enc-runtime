@@ -1,9 +1,9 @@
 import { Tile } from '@/tiles/tile'
-import { ParsedStyledFeature } from '@/rules/types'
 import { InstructonType } from '@/rules/types'
 import { LayeredParsedStyledFeature, LayeredGroupKey } from '@/types'
 import { BaseBucket } from './BaseBucket'
 import { ACBucket } from './ACBucket'
+import { APBucket } from './APBucket'
 import { TXBucket } from './TXBucket'
 
 export class BucketManager {
@@ -40,6 +40,9 @@ export class BucketManager {
 			switch (type) {
 				case 'AC':
 					this.buckets.set(layeredGroupKey, new ACBucket(layeredGroupKey))
+					break
+				case 'AP':
+					this.buckets.set(layeredGroupKey, new APBucket(layeredGroupKey))
 					break
 				case 'TX':
 					this.buckets.set(layeredGroupKey, new TXBucket(layeredGroupKey))

@@ -1,5 +1,4 @@
 import { getEventBus } from '@/utils/eventBus'
-import { ParsedStyledFeature, InstructonType } from '@/rules/types'
 import type { Tile } from '@/tiles/tile'
 import { FeaturesStyledHandler, LayeredParsedStyledFeature, LayeredGroupKey } from '@/types'
 
@@ -29,7 +28,7 @@ export class BaseBucket {
 		}
 	}
 
-	processFeatures(tile: Tile, layeredStyledFeatures: LayeredParsedStyledFeature[]): void {
+	processFeatures(_: Tile, __: LayeredParsedStyledFeature[]): void {
 		throw new Error('implemented in subclass')
 	}
 }

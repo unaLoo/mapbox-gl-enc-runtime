@@ -6,11 +6,10 @@ import earcut from 'earcut'
 import type { TileLocalGeometry } from '../types'
 import classifyRings from './classifyRing'
 import { BaseBucket } from './BaseBucket'
-import { AreaColorParsedStyle, ParsedStyledFeature } from '@/rules/types'
+import { AreaColorParsedStyle } from '@/rules/types'
 import { LayeredParsedStyledFeature, LayeredGroupKey } from '@/types'
 import { getEventBus } from '@/utils/eventBus'
 import type { Tile } from '@/tiles/tile'
-import { AreaRenderInfo } from '@/renderer/types'
 
 /**
  * AC Bucket

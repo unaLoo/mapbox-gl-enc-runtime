@@ -126,7 +126,7 @@ export default class TileSource {
 					decodedFeatures: data_tile.features,
 				})
 
-			console.log('tileLoadedd')
+
 			// 规则引擎工作
 			// 给到 bucket ， bucket 专门负责聚合和几何处理，生成 GPU 友好的顶点、索引资源
 			// bucket 处理完再给到 renderer
