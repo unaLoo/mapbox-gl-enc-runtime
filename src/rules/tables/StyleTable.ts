@@ -6,42 +6,42 @@ import { OBJLAcronym } from './OBJLTable'
  */
 const StyleDescTable = {
 	LNDARE: [
-		// {
-		// 	type: 'AC',
-		// 	style: {
-		// 		color: 'LANDA',
-		// 	},
-		// } as StyleDescription,
 		{
-			type: 'TX', // Not Implemen
+			type: 'AC',
 			style: {
-				fieldName: 'OBJNAM',
-				formatString: '%s',
-				horizontalAlign: 1, //'LEFT'
-				verticalAlign: 2,// 'TOP' | 'CENTER' | 'BOTTOM'
-				direction: 3, // 'HORIZONTAL' | 'VERTICAL'
-				bold: 1,
-				color: 'CHBLK',
-				fontSize: 12,
-			}
-		} as StyleDescription
+				color: 'LANDA',
+			},
+		} as StyleDescription,
+		// {
+		// 	type: 'TX', // Not Implemen
+		// 	style: {
+		// 		fieldName: 'OBJNAM',
+		// 		formatString: '%s',
+		// 		horizontalAlign: 1, //'LEFT'
+		// 		verticalAlign: 2,// 'TOP' | 'CENTER' | 'BOTTOM'
+		// 		direction: 3, // 'HORIZONTAL' | 'VERTICAL'
+		// 		bold: 1,
+		// 		color: 'CHBLK',
+		// 		fontSize: 12,
+		// 	}
+		// } as StyleDescription
 	] as StyleDescription[],
-	// DEPARE: [
-	// 	{
-	// 		type: 'CS',
-	// 		style: {
-	// 			condition: 'DEPARE01'
-	// 		},
-	// 	} as StyleDescription,
-	// 	// {
-	// 	// 	type: 'AP',
-	// 	// 	style: {
-	// 	// 		pattern: 'http://127.0.0.1:8080/VEGATN03.png',
-	// 	// 		scale: [2.5, 2.5],
-	// 	// 		opacity: 1.0,
-	// 	// 	}
-	// 	// } as StyleDescription
-	// ],
+	DEPARE: [
+		{
+			type: 'CS',
+			style: {
+				condition: 'DEPARE01'
+			},
+		} as StyleDescription,
+		// {
+		// 	type: 'AP',
+		// 	style: {
+		// 		pattern: 'http://127.0.0.1:8080/VEGATN03.png',
+		// 		scale: [2.5, 2.5],
+		// 		opacity: 1.0,
+		// 	}
+		// } as StyleDescription
+	],
 	SOUNDG: [
 		// {
 		// 	type: 'CS',
@@ -59,7 +59,7 @@ const StyleDescTable = {
 				direction: 3, // 'HORIZONTAL' | 'VERTICAL'
 				bold: 1,
 				color: 'CHBLK',
-				fontSize: 12,
+				fontSize: 18,
 			}
 		} as StyleDescription
 	]

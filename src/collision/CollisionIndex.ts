@@ -110,10 +110,11 @@ export class CollisionIndex {
         this.transform = transform
 
         // Create grid with padding on all sides for labels that extend past viewport
+        // Cell size of 25 provides good balance between memory and query efficiency
         this.grid = grid ?? new GridIndex(
             transform.width + 2 * viewportPadding,
             transform.height + 2 * viewportPadding,
-            1, // Cell size for efficient queries
+            25, // Cell size for efficient queries (25px cells)
         )
 
         // Calculate boundaries

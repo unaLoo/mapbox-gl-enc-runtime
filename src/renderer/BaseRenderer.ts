@@ -27,7 +27,7 @@ export abstract class BaseRenderer {
 		}
 	}
 
-	abstract handleBucketsReady(tile: Tile, renderInfo: any): void
+	abstract handleBucketsReady(tile: Tile, renderInfo: unknown): void
 
 	abstract renderTile(
 		tile: Tile,
@@ -35,6 +35,13 @@ export abstract class BaseRenderer {
 			sharingVPMatrix: mat4
 			viewport: { width: number; height: number }
 			tilePosMatrix: mat4
+			transform?: {
+				width: number
+				height: number
+				angle: number
+				cameraToCenterDistance: number
+				zoom: number
+			}
 		},
 	): void
 

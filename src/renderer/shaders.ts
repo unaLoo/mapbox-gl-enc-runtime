@@ -138,61 +138,58 @@ void main() {
 /**
  * Vertex shader for SDF text rendering
  * Uses instanced rendering with one quad per glyph
- * Transforms tile-local coordinates to screen coordinates and applies glyph positioning
- *
- * Supports Mapbox-compatible matrix transformations:
- * - u_matrix: Combined transformation matrix (tilePosMatrix * vpMatrix)
- * - u_label_matrix: Label plane matrix for tile-to-label-space transformation
- * - u_gl_matrix: GL coordinate matrix for label-to-clip-space transformation
- * - u_extrude_scale: Pixel-to-tile-unit conversion scale
- * - u_gamma_scale: Pitch-based gamma adjustment for anti-aliasing
- *
- * @requirements 7.5 - Use extrude scale for proper pixel-to-tile-unit conversion
+ * 
+ * Text is rendered with FIXED SIZE in screen pixels (viewport-independent):
+ * 1. Anchor point (a_position) is transformed to clip space via u_matrix
+ * 2. Glyph offset (a_size, a_offset) is applied in NDC space (screen pixels)
+ * 
+ * This ensures text size remains constant regardless of zoom level.
  */
 export const sdfVertexShaderSource = `#version 300 es
 // Per-vertex attributes (quad corners)
 in vec2 a_quadVertex; // Quad corner: (0,0), (1,0), (0,1), (1,1)
 
 // Per-instance attributes
-in vec2 a_position;   // Glyph position in tile-local coordinates
-in vec2 a_size;       // Glyph quad size in pixels
+in vec2 a_position;   // Anchor position in tile-local coordinates (0-8192)
+in vec2 a_size;       // Glyph quad size in SCREEN PIXELS
 in vec4 a_uvBounds;   // UV bounds: (u0, v0, u1, v1)
 in vec3 a_color;      // Text color (RGB, 0-1)
-in vec2 a_offset;     // Alignment offset in pixels
+in vec2 a_offset;     // Alignment offset in SCREEN PIXELS
 
 // Transformation matrices
-uniform mat4 u_matrix;        // Combined transformation matrix (tilePosMatrix * vpMatrix)
-uniform mat4 u_label_matrix;  // Label plane matrix for tile-to-label-space transformation
-uniform mat4 u_gl_matrix;     // GL coordinate matrix for label-to-clip-space transformation
+uniform mat4 u_matrix;        // Combined transformation matrix (MVP)
 
 // Viewport and scaling uniforms
-uniform vec2 u_viewport;      // Viewport size for pixel-based sizing
-uniform float u_extrude_scale; // Pixel-to-tile-unit conversion scale
+uniform vec2 u_viewport;      // Viewport size in pixels
 uniform float u_gamma_scale;  // Pitch-based gamma adjustment (typically 1.0 for no pitch)
 
 out vec2 v_texcoord;
 out vec3 v_color;
-out float v_gamma_scale; // Pass gamma scale to fragment shader for pitch-aware anti-aliasing
+out float v_gamma_scale;
 
 void main() {
-    // Transform anchor position to label space using label plane matrix
-    vec4 projected_pos = u_label_matrix * vec4(a_position, 0.0, 1.0);
+    // Step 1: Transform anchor position to clip space
+    vec4 anchorClip = u_matrix * vec4(a_position, 0.0, 1.0);
     
-    // Calculate quad corner offset in label space
+    // Step 2: Convert to NDC (Normalized Device Coordinates)
+    vec2 anchorNDC = anchorClip.xy / anchorClip.w;
+    
+    // Step 3: Calculate glyph corner offset in SCREEN PIXELS
     // a_quadVertex is (0,0), (1,0), (0,1), or (1,1)
-    vec2 cornerOffset = a_quadVertex * a_size + a_offset;
+    vec2 cornerOffsetPixels = a_quadVertex * a_size + a_offset;
     
-    // Apply extrude scale for proper pixel-to-tile-unit conversion
-    vec2 scaledOffset = cornerOffset * u_extrude_scale;
+    // Step 4: Convert pixel offset to NDC offset
+    // NDC range is [-1, 1], so 2.0 / viewport converts pixels to NDC
+    vec2 cornerOffsetNDC = cornerOffsetPixels * 2.0 / u_viewport;
     
-    // Transform to clip space using GL coordinate matrix
-    // Add offset to projected position before final transformation
-    vec4 label_pos = vec4(projected_pos.xy / projected_pos.w + scaledOffset, 0.0, 1.0);
-    gl_Position = u_gl_matrix * label_pos;
+    // Step 5: Apply offset in NDC space (Y is flipped in NDC)
+    vec2 finalNDC = anchorNDC + vec2(cornerOffsetNDC.x, -cornerOffsetNDC.y);
     
-    // Calculate gamma scale based on perspective (w component)
-    // This ensures consistent anti-aliasing at different distances
-    v_gamma_scale = gl_Position.w * u_gamma_scale;
+    // Output final position (keep original w for depth)
+    gl_Position = vec4(finalNDC * anchorClip.w, anchorClip.z, anchorClip.w);
+    
+    // Pass gamma scale for anti-aliasing
+    v_gamma_scale = u_gamma_scale;
     
     // Interpolate UV coordinates
     v_texcoord = mix(a_uvBounds.xy, a_uvBounds.zw, a_quadVertex);

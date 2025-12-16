@@ -21,8 +21,7 @@ import { getEventBus } from '@/utils/eventBus'
 import { GlyphAtlas, StyleGlyph } from '@/sdf/GlyphAtlas'
 import { AlphaImage } from '@/sdf/AlphaImage'
 import { shapeText, getGlyphQuads, SymbolAnchor, TextJustify } from '@/sdf/shapeText'
-import { CollisionIndex, SingleCollisionBox, CollisionTransform } from '@/collision/CollisionIndex'
-import { pixelsToTileUnits, getLabelPlaneMatrix, getGlCoordMatrix } from '@/utils/symbol_projection'
+import { CollisionIndex, SingleCollisionBox } from '@/collision/CollisionIndex'
 import TinySDF from '@mapbox/tiny-sdf'
 
 /**
@@ -54,12 +53,20 @@ interface TXRenderInfo {
 /**
  * Map transform interface for collision detection and projection
  */
-interface MapTransform {
+export interface MapTransform {
 	width: number
 	height: number
 	angle: number
 	cameraToCenterDistance: number
 	zoom: number
+}
+
+/**
+ * Visible text instance after collision detection
+ */
+export interface VisibleTextInstance {
+	instance: TextInstance
+	collisionBox: number[]
 }
 
 /**
@@ -160,8 +167,9 @@ export class TXRenderer extends BaseRenderer {
 	private glyphAtlasTexture: WebGLTexture | null = null
 	private fontStack: string = DEFAULT_FONT_STACK
 
-	// Collision detection (Requirements 6.1)
-	private collisionIndex: CollisionIndex | null = null
+	// Collision detection moved to frame-level in RendererManager
+	// Visible instances after collision detection (per tile)
+	private visibleInstances: Map<string, VisibleTextInstance[]> = new Map()
 
 	// WebGL buffers for rendering
 	private quadVBO: WebGLBuffer | null = null
@@ -323,19 +331,101 @@ export class TXRenderer extends BaseRenderer {
 	}
 
 	/**
-	 * Update collision index for current frame
+	 * Place labels for a tile using shared collision index
+	 * Called by RendererManager during placement phase
 	 *
-	 * @requirements 6.1 - Reset collision index for current frame
+	 * @param tile - The tile to place labels for
+	 * @param collisionIndex - Shared collision index for the frame
+	 * @param posMatrix - MVP matrix for projection
+	 * @returns Array of visible text instances that passed collision detection
 	 */
-	private updateCollisionIndex(transform: MapTransform): void {
-		const collisionTransform: CollisionTransform = {
-			width: transform.width,
-			height: transform.height,
-			cameraToCenterDistance: transform.cameraToCenterDistance,
+	placeLabels(
+		tile: Tile,
+		collisionIndex: CollisionIndex,
+		posMatrix: mat4,
+	): VisibleTextInstance[] {
+		const tileId = tile.overscaledTileID.toString()
+		const renderInfo = this.tileRenderInfo.get(tileId) as TXRenderInfo | undefined
+		if (!renderInfo || renderInfo.textInstances.length === 0) {
+			return []
 		}
 
-		// Create new collision index for this frame
-		this.collisionIndex = new CollisionIndex(collisionTransform)
+		const visibleInstances: VisibleTextInstance[] = []
+
+		if (!this.glyphAtlas) {
+			return visibleInstances
+		}
+
+		for (const textInstance of renderInfo.textInstances) {
+			const { position, text, style } = textInstance
+
+			// Shape text using shapeText function
+			const anchor = getSymbolAnchor(style.horizontalAlign, style.verticalAlign)
+			const justify = getTextJustify(style.horizontalAlign)
+
+			// Use SDF font size for shaping (consistent with glyph metrics)
+			const sdfLineHeight = SDF_CONFIG.fontSize * 1.2
+			const shaping = shapeText(
+				text,
+				this.glyphMap,
+				this.fontStack,
+				0, // maxWidth (no line breaking)
+				sdfLineHeight, // lineHeight based on SDF font size
+				anchor,
+				justify,
+				0, // spacing
+				[0, 0], // translate
+				1, // writingMode (horizontal)
+			)
+
+			if (!shaping) continue
+
+			// Calculate collision box from shaping bounds
+			// shaping bounds are in pixels (based on SDF_CONFIG.fontSize = 34)
+			// Scale to actual display size: style.fontSize / SDF_CONFIG.fontSize
+			// The collision box offsets are in viewport pixels
+			const fontScale = style.fontSize / SDF_CONFIG.fontSize
+
+			// Add padding to collision box for better spacing
+			const padding = 10 // pixels of padding around text
+			const collisionBox: SingleCollisionBox = {
+				x1: shaping.left * fontScale - padding,
+				y1: shaping.top * fontScale - padding,
+				x2: shaping.right * fontScale + padding,
+				y2: shaping.bottom * fontScale + padding,
+				anchorPointX: position[0],
+				anchorPointY: position[1],
+			}
+
+			// Check collision using shared collision index
+			const result = collisionIndex.placeCollisionBox(
+				collisionBox,
+				false, // allowOverlap
+				1, // textPixelRatio
+				posMatrix,
+			)
+
+			// Skip if collision detected (empty box array)
+			if (result.box.length === 0) continue
+
+			// Insert collision box for future checks (cross-tile collision)
+			collisionIndex.insertCollisionBox(
+				result.box,
+				0, // bucketInstanceId
+				0, // featureIndex
+				0, // collisionGroupID
+			)
+
+			visibleInstances.push({
+				instance: textInstance,
+				collisionBox: result.box,
+			})
+		}
+
+		// Cache visible instances for rendering
+		this.visibleInstances.set(tileId, visibleInstances)
+
+		return visibleInstances
 	}
 
 	/**
@@ -363,17 +453,13 @@ export class TXRenderer extends BaseRenderer {
 	}
 
 	/**
-	 * Build text buffers with collision detection
+	 * Build text buffers from pre-computed visible instances
+	 * No collision detection here - already done in placeLabels
 	 *
-	 * @requirements 6.2 - Shape each text instance and check for collisions
 	 * @requirements 6.3 - Generate glyph quads for non-colliding text
-	 * @requirements 6.4 - Skip text instances that fail collision
 	 */
 	private buildTextBuffers(
-		textInstances: TextInstance[],
-		posMatrix: mat4,
-		_overscaledZ: number,
-		_viewport: { width: number; height: number },
+		visibleInstances: VisibleTextInstance[],
 	): {
 		positions: number[]
 		sizes: number[]
@@ -388,25 +474,27 @@ export class TXRenderer extends BaseRenderer {
 		const colors: number[] = []
 		const offsets: number[] = []
 
-		if (!this.glyphAtlas || !this.collisionIndex) {
+		if (!this.glyphAtlas) {
 			return { positions, sizes, uvBounds, colors, offsets, count: 0 }
 		}
 
 		const glyphPositions = this.glyphAtlas.positions
 
-		for (const textInstance of textInstances) {
-			const { position, text, style } = textInstance
+		for (const { instance } of visibleInstances) {
+			const { position, text, style } = instance
 
 			// Shape text using shapeText function
 			const anchor = getSymbolAnchor(style.horizontalAlign, style.verticalAlign)
 			const justify = getTextJustify(style.horizontalAlign)
 
+			// Use SDF font size for shaping (consistent with glyph metrics)
+			const sdfLineHeight = SDF_CONFIG.fontSize * 1.2
 			const shaping = shapeText(
 				text,
 				this.glyphMap,
 				this.fontStack,
 				0, // maxWidth (no line breaking)
-				style.fontSize * 1.2, // lineHeight
+				sdfLineHeight, // lineHeight based on SDF font size
 				anchor,
 				justify,
 				0, // spacing
@@ -416,36 +504,9 @@ export class TXRenderer extends BaseRenderer {
 
 			if (!shaping) continue
 
-			// Calculate collision box from shaping bounds
-			// const scale = style.fontSize / SDF_CONFIG.fontSize
-			const scale = 0.03
-			const collisionBox: SingleCollisionBox = {
-				x1: shaping.left * scale,
-				y1: shaping.top * scale,
-				x2: shaping.right * scale,
-				y2: shaping.bottom * scale,
-				anchorPointX: position[0],
-				anchorPointY: position[1],
-			}
-
-			// Check collision
-			const result = this.collisionIndex.placeCollisionBox(
-				collisionBox,
-				false, // allowOverlap
-				1, // textPixelRatio
-				posMatrix,
-			)
-
-			// Skip if collision detected (empty box array)
-			if (result.box.length === 0) continue
-
-			// Insert collision box for future checks
-			this.collisionIndex.insertCollisionBox(
-				result.box,
-				0, // bucketInstanceId
-				0, // featureIndex
-				0, // collisionGroupID
-			)
+			// Scale from SDF font size (34px) to target display size
+			// This converts SDF pixels to SCREEN PIXELS
+			const fontScale = style.fontSize / SDF_CONFIG.fontSize
 
 			// Generate glyph quads
 			const quads = getGlyphQuads(
@@ -457,12 +518,12 @@ export class TXRenderer extends BaseRenderer {
 
 			// Add quads to buffers
 			for (const quad of quads) {
-				// Position (tile-local anchor)
+				// Position (tile-local anchor) - unchanged
 				positions.push(position[0], position[1])
 
-				// Size (quad dimensions in pixels)
-				const quadWidth = (quad.br.x - quad.tl.x) * scale
-				const quadHeight = (quad.br.y - quad.tl.y) * scale
+				// Size in SCREEN PIXELS (not tile units!)
+				const quadWidth = (quad.br.x - quad.tl.x) * fontScale
+				const quadHeight = (quad.br.y - quad.tl.y) * fontScale
 				sizes.push(quadWidth, quadHeight)
 
 				// UV bounds from atlas
@@ -478,8 +539,8 @@ export class TXRenderer extends BaseRenderer {
 				// Color
 				colors.push(style.color[0], style.color[1], style.color[2])
 
-				// Offset (glyph position relative to anchor)
-				offsets.push(quad.tl.x * scale, quad.tl.y * scale)
+				// Offset in SCREEN PIXELS (glyph position relative to anchor)
+				offsets.push(quad.tl.x * fontScale, quad.tl.y * fontScale)
 			}
 		}
 
@@ -495,7 +556,8 @@ export class TXRenderer extends BaseRenderer {
 
 
 	/**
-	 * Render text for a tile
+	 * Render text for a tile using pre-computed visible instances
+	 * Collision detection is done in placeLabels() called by RendererManager
 	 *
 	 * @requirements 4.1 - Calculate label plane matrix
 	 * @requirements 4.2 - Calculate GL coordinate matrix
@@ -516,67 +578,37 @@ export class TXRenderer extends BaseRenderer {
 		if (this.contextLost) return
 
 		const tileId = tile.overscaledTileID.toString()
-		const renderInfo = this.tileRenderInfo.get(tileId) as TXRenderInfo | undefined
-		if (!renderInfo || renderInfo.textInstances.length === 0) return
 
-		// Get or create transform
-		const transform: MapTransform = options.transform || {
-			width: options.viewport.width,
-			height: options.viewport.height,
-			angle: 0,
-			cameraToCenterDistance: options.viewport.height / 2,
-			zoom: tile.overscaledTileID.overscaledZ,
-		}
+		// Get pre-computed visible instances from placeLabels()
+		const visibleInstances = this.visibleInstances.get(tileId)
+		if (!visibleInstances || visibleInstances.length === 0) return
 
-		// Reset collision index for this frame (Requirements 6.1)
-		this.updateCollisionIndex(transform)
-
-		// Calculate MVP matrix
+		// Calculate MVP matrix (for anchor point projection only)
 		const mvpMatrix = mat4.create()
 		mat4.mul(mvpMatrix, options.sharingVPMatrix, options.tilePosMatrix)
 
-		// Calculate pixelsToTileUnits scale (Requirements 4.3)
-		const overscaledZ = tile.overscaledTileID.overscaledZ
-		const canonicalZ = tile.overscaledTileID.canonical.z
-		const pixelsToTileUnitsScale = pixelsToTileUnits(overscaledZ, 1, canonicalZ)
-
-		// Calculate label plane matrix (Requirements 4.1)
-		const labelPlaneMatrix = getLabelPlaneMatrix(
-			mvpMatrix,
-			false, // pitchWithMap
-			false, // rotateWithMap
-			transform,
-			pixelsToTileUnitsScale,
-		)
-
-		// Calculate GL coordinate matrix (Requirements 4.2)
-		const glCoordMatrix = getGlCoordMatrix(
-			mvpMatrix,
-			false, // pitchWithMap
-			false, // rotateWithMap
-			transform,
-			pixelsToTileUnitsScale,
-		)
-
-		// Build text buffers with collision detection (Requirements 6.2, 6.3, 6.4)
-		const buffers = this.buildTextBuffers(
-			renderInfo.textInstances,
-			mvpMatrix,
-			overscaledZ,
-			options.viewport,
-		)
+		// Build text buffers from visible instances (no collision check here)
+		const buffers = this.buildTextBuffers(visibleInstances)
 
 		if (buffers.count === 0) return
 
-		// Render the glyphs (Requirements 6.5, 7.1, 7.2, 7.3, 7.4, 7.5)
-		this.renderGlyphs(
-			buffers,
-			mvpMatrix,
-			options.viewport,
-			labelPlaneMatrix,
-			glCoordMatrix,
-			pixelsToTileUnitsScale,
-		)
+		// Render the glyphs with fixed screen-pixel sizes
+		this.renderGlyphs(buffers, mvpMatrix, options.viewport)
+	}
+
+	/**
+	 * Check if this renderer has render info for a tile
+	 */
+	hasRenderInfo(tileId: string): boolean {
+		const renderInfo = this.tileRenderInfo.get(tileId) as TXRenderInfo | undefined
+		return !!renderInfo && renderInfo.textInstances.length > 0
+	}
+
+	/**
+	 * Clear visible instances cache (called at start of each frame)
+	 */
+	clearVisibleInstances(): void {
+		this.visibleInstances.clear()
 	}
 
 	/**
@@ -596,9 +628,6 @@ export class TXRenderer extends BaseRenderer {
 		},
 		mvpMatrix: mat4,
 		viewport: { width: number; height: number },
-		labelPlaneMatrix: mat4,
-		glCoordMatrix: mat4,
-		extrudeScale: number,
 	): void {
 		const program = this.shaderManager.getSdfProgram()
 		if (!program || !this.vao || !this.quadVBO || !this.instanceVBO || !this.glyphAtlasTexture) return
@@ -621,25 +650,17 @@ export class TXRenderer extends BaseRenderer {
 		const colorLoc = this.gl.getAttribLocation(program, 'a_color')
 		const offsetLoc = this.gl.getAttribLocation(program, 'a_offset')
 
-		// Set transformation matrix uniforms
+		// Set transformation matrix uniform (MVP matrix for anchor projection)
 		const matrixLoc = this.gl.getUniformLocation(program, 'u_matrix')
 		this.gl.uniformMatrix4fv(matrixLoc, false, mvpMatrix)
 
-		const labelMatrixLoc = this.gl.getUniformLocation(program, 'u_label_matrix')
-		this.gl.uniformMatrix4fv(labelMatrixLoc, false, labelPlaneMatrix)
-
-		const glMatrixLoc = this.gl.getUniformLocation(program, 'u_gl_matrix')
-		this.gl.uniformMatrix4fv(glMatrixLoc, false, glCoordMatrix)
-
-		// Set viewport and scaling uniforms
+		// Set viewport for pixel-to-NDC conversion
 		const viewportLoc = this.gl.getUniformLocation(program, 'u_viewport')
 		this.gl.uniform2f(viewportLoc, viewport.width, viewport.height)
 
-		const extrudeScaleLoc = this.gl.getUniformLocation(program, 'u_extrude_scale')
-		this.gl.uniform1f(extrudeScaleLoc, extrudeScale)
-
+		// Gamma scale for anti-aliasing (1.0 = no pitch adjustment)
 		const gammaScaleLoc = this.gl.getUniformLocation(program, 'u_gamma_scale')
-		this.gl.uniform1f(gammaScaleLoc, 1.0) // Default gamma scale (no pitch adjustment)
+		this.gl.uniform1f(gammaScaleLoc, 1.0)
 
 		// Set atlas texture uniform
 		const atlasLoc = this.gl.getUniformLocation(program, 'u_atlas')
@@ -846,6 +867,6 @@ export class TXRenderer extends BaseRenderer {
 		this.glyphMap = {}
 		this.glyphAtlas = null
 		this.tinySdf = null
-		this.collisionIndex = null
+		this.visibleInstances.clear()
 	}
 }
