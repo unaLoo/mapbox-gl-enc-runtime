@@ -214,15 +214,15 @@ export function calculateKey(wrap: number, overscaledZ: number, z: number, x: nu
 	return key
 }
 
-function getQuadkey(z: number, x: number, y: number) {
-	let quadkey = '',
-		mask
-	for (let i = z; i > 0; i--) {
-		mask = 1 << (i - 1)
-		quadkey += (x & mask ? 1 : 0) + (y & mask ? 2 : 0)
-	}
-	return quadkey
-}
+// function getQuadkey(z: number, x: number, y: number) {
+// 	let quadkey = '',
+// 		mask
+// 	for (let i = z; i > 0; i--) {
+// 		mask = 1 << (i - 1)
+// 		quadkey += (x & mask ? 1 : 0) + (y & mask ? 2 : 0)
+// 	}
+// 	return quadkey
+// }
 
 // For all four borders: 0 - left, 1, right, 2 - top, 3 - bottom
 export const neighborCoord = [
@@ -264,36 +264,36 @@ export const neighborCoord = [
 
 // Helpers //////////////////////////////////////////////////
 
-/**
- * getTileBBox
- *
- * @param    {Number}  x  Tile coordinate x
- * @param    {Number}  y  Tile coordinate y
- * @param    {Number}  z  Tile zoom
- * @returns  {String}  String of the bounding box
- */
-function getTileBBox(x: number, y: number, z: number): string {
-	// for Google/OSM tile scheme we need to alter the y
-	y = Math.pow(2, z) - y - 1
+// /**
+//  * getTileBBox
+//  *
+//  * @param    {Number}  x  Tile coordinate x
+//  * @param    {Number}  y  Tile coordinate y
+//  * @param    {Number}  z  Tile zoom
+//  * @returns  {String}  String of the bounding box
+//  */
+// function getTileBBox(x: number, y: number, z: number): string {
+// 	// for Google/OSM tile scheme we need to alter the y
+// 	y = Math.pow(2, z) - y - 1
 
-	const min = getMercCoords(x * 256, y * 256, z),
-		max = getMercCoords((x + 1) * 256, (y + 1) * 256, z)
+// 	const min = getMercCoords(x * 256, y * 256, z),
+// 		max = getMercCoords((x + 1) * 256, (y + 1) * 256, z)
 
-	return `${min[0]},${min[1]},${max[0]},${max[1]}`
-}
+// 	return `${min[0]},${min[1]},${max[0]},${max[1]}`
+// }
 
-/**
- * getMercCoords
- *
- * @param    {Number}  x  Pixel coordinate x
- * @param    {Number}  y  Pixel coordinate y
- * @param    {Number}  z  Tile zoom
- * @returns  {Array}   [x, y]
- */
-function getMercCoords(x: number, y: number, z: number): Array<number> {
-	const resolution = (2 * Math.PI * 6378137) / 256 / Math.pow(2, z)
-	const merc_x = x * resolution - (2 * Math.PI * 6378137) / 2.0
-	const merc_y = y * resolution - (2 * Math.PI * 6378137) / 2.0
+// /**
+//  * getMercCoords
+//  *
+//  * @param    {Number}  x  Pixel coordinate x
+//  * @param    {Number}  y  Pixel coordinate y
+//  * @param    {Number}  z  Tile zoom
+//  * @returns  {Array}   [x, y]
+//  */
+// function getMercCoords(x: number, y: number, z: number): Array<number> {
+// 	const resolution = (2 * Math.PI * 6378137) / 256 / Math.pow(2, z)
+// 	const merc_x = x * resolution - (2 * Math.PI * 6378137) / 2.0
+// 	const merc_y = y * resolution - (2 * Math.PI * 6378137) / 2.0
 
-	return [merc_x, merc_y]
-}
+// 	return [merc_x, merc_y]
+// }

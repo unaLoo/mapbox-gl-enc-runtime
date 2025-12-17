@@ -1,7 +1,6 @@
 import { Callback, WorkerSelf } from '../types'
 import { http } from '../request/http'
 import { parseMVT } from '../../tiles/mvt_parser'
-import { Theme } from '../../rules/tables/ColorTable'
 import { ENCFeature } from '@/types'
 
 // import { interpretFeatures } from './helpers'
@@ -34,13 +33,6 @@ export function loadTile(this: WorkerSelf, params: TileRequestParams, callback: 
 				callback(new Error('tileZ, tileX, tileY are required for vector tiles'), null)
 				return
 			}
-
-			// temp
-			// new Promise((resolve) => {
-			// 	setTimeout(() => {
-			// 		resolve(null)
-			// 	}, 1000);
-			// }).then(() => {
 
 			http.get<ArrayBuffer>(url, { timeout: 5000, responseType: 'arrayBuffer' })
 				.then((res) => {
@@ -94,6 +86,6 @@ export function loadTile(this: WorkerSelf, params: TileRequestParams, callback: 
 	}
 }
 
-export function updateTheme(this: WorkerSelf, theme: Theme, callback: Callback<void>) {
-	callback(null)
-}
+// export function updateTheme(this: WorkerSelf, theme: Theme, callback: Callback<void>) {
+// 	callback(null)
+// }

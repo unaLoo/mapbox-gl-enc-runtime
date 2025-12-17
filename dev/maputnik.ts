@@ -12,6 +12,10 @@ export default function addMaputnikLayer(map: mapboxgl.Map) {
 			type: 'vector',
 			url: 'https://localhost:3000/mbtiles/area_common_line.mbtiles/tilejson.json',
 		},
+		SOUNDG: {
+			"type": "vector",
+			"url": "https://localhost:3000/mbtiles/r15.mbtiles/tilejson.json"
+		}
 	}
 
 	for (const [key, value] of Object.entries(sources)) {
@@ -56,6 +60,23 @@ export default function addMaputnikLayer(map: mapboxgl.Map) {
 				'fill-opacity': 1,
 			},
 		},
+		{
+			"id": "SOUNDG_TEXT",
+			"type": "symbol",
+			"source": "SOUNDG",
+			"source-layer": "soundg3d",
+			"layout": {
+				"text-field": ["get", "VAL"],
+				"text-font": [
+					"Roboto Regular"
+				],
+				"icon-rotation-alignment": "map"
+			},
+			"paint": {
+				"text-color": "rgba(139, 139, 139, 1)",
+				"text-halo-color": "rgba(0, 0, 0, 1)"
+			}
+		}
 	]
 
 	for (const layer of layers) {

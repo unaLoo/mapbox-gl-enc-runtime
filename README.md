@@ -6,19 +6,18 @@ Mapbox-gl Electronic Navigational Chart Runtime
 
 ```
 +---------------------+
-|       MapboxGL      |     ← Camera、Interaction
+|       MapboxGL      |      ← Camera、Interaction、gl
 +---------+-----------+
           |
      Custom Layer
           |
-+---------v-------------+
-|      ENC Runtime      |   ← Core
-|  - Map Tile Manager   |
-|  - CSP & LUP          |
-|  - Feature Interpreter|
-|  - Symbol Renderer    |
-|  - Context Manager    |
-+---------+-------------+
++---------v--------------+
+|      ENC Runtime       |   ← Core
+|  - Tile Manager        |
+|  - S52 LUP & CSP       |
+|  - Feature Interpreter |
+|  - Context Manager     |
++---------+--------------+
           |
      MBTiles Source
 ```

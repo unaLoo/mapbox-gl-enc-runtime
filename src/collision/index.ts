@@ -3,7 +3,6 @@
  */
 
 export { GridIndex, type HitResult, type LabelBBox as GridLabelBBox } from './GridIndex'
-export { CollisionDetector, type LabelBBox } from './CollisionDetector'
 export {
     CollisionIndex,
     type SingleCollisionBox,

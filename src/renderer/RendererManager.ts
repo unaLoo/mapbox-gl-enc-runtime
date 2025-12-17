@@ -89,6 +89,7 @@ export class RendererManager {
 			angle: 0,
 			cameraToCenterDistance: options.viewport.height / 2,
 			zoom: currentZoom,
+
 		}
 
 		// 检查是否需要重新计算碰撞

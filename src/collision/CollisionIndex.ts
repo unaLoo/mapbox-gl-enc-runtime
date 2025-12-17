@@ -114,7 +114,7 @@ export class CollisionIndex {
         this.grid = grid ?? new GridIndex(
             transform.width + 2 * viewportPadding,
             transform.height + 2 * viewportPadding,
-            25, // Cell size for efficient queries (25px cells)
+            60, // Cell size for efficient queries (25px cells)
         )
 
         // Calculate boundaries

@@ -1,13 +1,13 @@
-import { mat4, vec3 } from 'gl-matrix'
+import { mat4 } from 'gl-matrix'
 
-function encodeFloatToDouble(value: number) {
-	const result = new Float32Array(2)
-	result[0] = value
+// function encodeFloatToDouble(value: number) {
+// 	const result = new Float32Array(2)
+// 	result[0] = value
 
-	const delta = value - result[0]
-	result[1] = delta
-	return result
-}
+// 	const delta = value - result[0]
+// 	result[1] = delta
+// 	return result
+// }
 
 function getMatrices(t: any, minElevation: number = -100.0) {
 	// if (!t.height) return
@@ -75,14 +75,14 @@ function getMatrices(t: any, minElevation: number = -100.0) {
 	}
 }
 
-function clamp(x: number, min: number, max: number): number {
-	return Math.min(Math.max(x, min), max)
-}
+// function clamp(x: number, min: number, max: number): number {
+// 	return Math.min(Math.max(x, min), max)
+// }
 
-function smoothstep(e0: number, e1: number, x: number) {
-	x = clamp((x - e0) / (e1 - e0), 0, 1)
-	return x * x * (3 - 2 * x)
-}
+// function smoothstep(e0: number, e1: number, x: number) {
+// 	x = clamp((x - e0) / (e1 - e0), 0, 1)
+// 	return x * x * (3 - 2 * x)
+// }
 
 function farthestPixelDistanceOnPlane(tr: any, minElevation: number, pixelsPerMeter: number) {
 	// Find the distance from the center point [width/2 + offset.x, height/2 + offset.y] to the
@@ -108,95 +108,95 @@ function farthestPixelDistanceOnPlane(tr: any, minElevation: number, pixelsPerMe
 	return Math.min(furthestDistance * 1.01, horizonDistance)
 }
 
-function getProjectionInterpolationT(projection: any, zoom: number, width: number, height: number, maxSize = Infinity) {
-	const range = projection.range
-	if (!range) return 0
+// function getProjectionInterpolationT(projection: any, zoom: number, width: number, height: number, maxSize = Infinity) {
+// 	const range = projection.range
+// 	if (!range) return 0
 
-	const size = Math.min(maxSize, Math.max(width, height))
-	// The interpolation ranges are manually defined based on what makes
-	// sense in a 1024px wide map. Adjust the ranges to the current size
-	// of the map. The smaller the map, the earlier you can start unskewing.
-	const rangeAdjustment = Math.log(size / 1024) / Math.LN2
-	const zoomA = range[0] + rangeAdjustment
-	const zoomB = range[1] + rangeAdjustment
-	const t = smoothstep(zoomA, zoomB, zoom)
-	return t
-}
+// 	const size = Math.min(maxSize, Math.max(width, height))
+// 	// The interpolation ranges are manually defined based on what makes
+// 	// sense in a 1024px wide map. Adjust the ranges to the current size
+// 	// of the map. The smaller the map, the earlier you can start unskewing.
+// 	const rangeAdjustment = Math.log(size / 1024) / Math.LN2
+// 	const zoomA = range[0] + rangeAdjustment
+// 	const zoomB = range[1] + rangeAdjustment
+// 	const t = smoothstep(zoomA, zoomB, zoom)
+// 	return t
+// }
 
-function makePerspectiveMatrix(fovy: number, aspect: number, near: number, far: number) {
-	const f = 1.0 / Math.tan(fovy / 2)
-	const nf = 1 / (near - far)
+// function makePerspectiveMatrix(fovy: number, aspect: number, near: number, far: number) {
+// 	const f = 1.0 / Math.tan(fovy / 2)
+// 	const nf = 1 / (near - far)
 
-	return [f / aspect, 0, 0, 0, 0, f, 0, 0, 0, 0, (far + near) * nf, -1, 0, 0, 2 * far * near * nf, 0]
-}
+// 	return [f / aspect, 0, 0, 0, 0, f, 0, 0, 0, 0, (far + near) * nf, -1, 0, 0, 2 * far * near * nf, 0]
+// }
 
-function updateWorldCamera(transform: any, mercatorWorldSize: number, minElevation = -30.0) {
-	const fov = transform._fov
-	const halfFov = transform._fov / 2
+// function updateWorldCamera(transform: any, mercatorWorldSize: number, minElevation = -30.0) {
+// 	const fov = transform._fov
+// 	const halfFov = transform._fov / 2
 
-	const angle = transform.angle
-	const pitch = transform._pitch
+// 	const angle = transform.angle
+// 	const pitch = transform._pitch
 
-	const aspect = transform.width / transform.height
+// 	const aspect = transform.width / transform.height
 
-	const cameraToCenterDistance =
-		((((0.5 / Math.tan(halfFov)) * mercatorWorldSize) / transform.scale) * transform.height) / 512.0
-	const cameraToSeaLevelDistance =
-		(transform._camera.position[2] * mercatorWorldSize - minElevation) / Math.cos(pitch)
-	const topHalfSurfaceDistance =
-		(Math.sin(halfFov) * cameraToSeaLevelDistance) / Math.sin(Math.max(Math.PI / 2.0 - pitch - halfFov, 0.01))
-	const furthestDistance = Math.sin(pitch) * topHalfSurfaceDistance + cameraToSeaLevelDistance
-	const horizonDistance = cameraToSeaLevelDistance / transform._horizonShift
-	const farZ = Math.min(furthestDistance * 1.01, horizonDistance)
-	// const farZ = farthestPixelDistanceOnPlane(transform, -80.06899999999999 * 30.0, transform.pixelsPerMeter)
-	const nearZ = transform.height / 50.0
+// 	const cameraToCenterDistance =
+// 		((((0.5 / Math.tan(halfFov)) * mercatorWorldSize) / transform.scale) * transform.height) / 512.0
+// 	const cameraToSeaLevelDistance =
+// 		(transform._camera.position[2] * mercatorWorldSize - minElevation) / Math.cos(pitch)
+// 	const topHalfSurfaceDistance =
+// 		(Math.sin(halfFov) * cameraToSeaLevelDistance) / Math.sin(Math.max(Math.PI / 2.0 - pitch - halfFov, 0.01))
+// 	const furthestDistance = Math.sin(pitch) * topHalfSurfaceDistance + cameraToSeaLevelDistance
+// 	const horizonDistance = cameraToSeaLevelDistance / transform._horizonShift
+// 	const farZ = Math.min(furthestDistance * 1.01, horizonDistance)
+// 	// const farZ = farthestPixelDistanceOnPlane(transform, -80.06899999999999 * 30.0, transform.pixelsPerMeter)
+// 	const nearZ = transform.height / 50.0
 
-	const pitchMatrix = mat4.rotateX([] as any, mat4.create(), pitch)
-	const angleMatrix = mat4.rotateZ([] as any, mat4.create(), angle)
-	const worldToCamera = mat4.multiply([] as any, angleMatrix, pitchMatrix)
+// 	const pitchMatrix = mat4.rotateX([] as any, mat4.create(), pitch)
+// 	const angleMatrix = mat4.rotateZ([] as any, mat4.create(), angle)
+// 	const worldToCamera = mat4.multiply([] as any, angleMatrix, pitchMatrix)
 
-	const x = transform.pointMerc.x
-	const y = transform.pointMerc.y
-	const centerX = (x - 0.5) * mercatorWorldSize
-	const centerY = (0.5 - y) * mercatorWorldSize
-	const center: vec3 = [centerX, centerY, 0]
+// 	const x = transform.pointMerc.x
+// 	const y = transform.pointMerc.y
+// 	const centerX = (x - 0.5) * mercatorWorldSize
+// 	const centerY = (0.5 - y) * mercatorWorldSize
+// 	const center: vec3 = [centerX, centerY, 0]
 
-	const up = vec3.transformMat4([] as any, [0, 1, 0], angleMatrix)
-	const position = vec3.add(
-		[] as any,
-		vec3.scale([] as any, vec3.transformMat4([] as any, [0, 0, 1], worldToCamera), cameraToCenterDistance),
-		center,
-	)
+// 	const up = vec3.transformMat4([] as any, [0, 1, 0], angleMatrix)
+// 	const position = vec3.add(
+// 		[] as any,
+// 		vec3.scale([] as any, vec3.transformMat4([] as any, [0, 0, 1], worldToCamera), cameraToCenterDistance),
+// 		center,
+// 	)
 
-	const view = mat4.invert(
-		[] as any,
-		mat4.multiply([] as any, mat4.translate([] as any, mat4.create(), position), worldToCamera),
-	)
+// 	const view = mat4.invert(
+// 		[] as any,
+// 		mat4.multiply([] as any, mat4.translate([] as any, mat4.create(), position), worldToCamera),
+// 	)
 
-	return {
-		position,
-		center,
-		up,
-		fov,
-		aspect,
-		view,
-		farZ,
-		nearZ,
-		// nearZ: cameraToCenterDistance / 200,
-	}
-}
+// 	return {
+// 		position,
+// 		center,
+// 		up,
+// 		fov,
+// 		aspect,
+// 		view,
+// 		farZ,
+// 		nearZ,
+// 		// nearZ: cameraToCenterDistance / 200,
+// 	}
+// }
 
-function scaleZoom(scale: number): number {
-	return Math.log(scale) / Math.LN2
-}
+// function scaleZoom(scale: number): number {
+// 	return Math.log(scale) / Math.LN2
+// }
 
-const earthRadius = 6371008.8
-const earthCircumference = 2 * Math.PI * earthRadius
-function circumferenceAtLatitude(latitude: number): number {
-	return earthCircumference * Math.cos((latitude * Math.PI) / 180)
-}
-function mercatorZfromAltitude(altitude: number, lat: number): number {
-	return altitude / circumferenceAtLatitude(lat)
-}
+// const earthRadius = 6371008.8
+// const earthCircumference = 2 * Math.PI * earthRadius
+// function circumferenceAtLatitude(latitude: number): number {
+// 	return earthCircumference * Math.cos((latitude * Math.PI) / 180)
+// }
+// function mercatorZfromAltitude(altitude: number, lat: number): number {
+// 	return altitude / circumferenceAtLatitude(lat)
+// }
 
 export { getMatrices }

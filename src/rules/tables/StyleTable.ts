@@ -59,7 +59,7 @@ const StyleDescTable = {
 				direction: 3, // 'HORIZONTAL' | 'VERTICAL'
 				bold: 1,
 				color: 'CHBLK',
-				fontSize: 18,
+				fontSize: 14,
 			}
 		} as StyleDescription
 	]

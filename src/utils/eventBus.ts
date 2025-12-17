@@ -1,4 +1,4 @@
-import type { WorkflowEvent, WorkflowHandler } from '@/types'
+import type { WorkflowEvent } from '@/types'
 type EventCallback = (...args: any[]) => void
 
 class EventBus {

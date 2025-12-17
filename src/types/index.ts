@@ -5,7 +5,7 @@
 import { OBJLCode } from '@/rules/tables/OBJLTable'
 import type { Map, CustomLayerInterface } from 'mapbox-gl'
 import { Tile } from '@/tiles/tile'
-import { StyledFeature, ParsedStyleDescription, ParsedStyledFeature, InstructonType } from '@/rules/types'
+import { ParsedStyleDescription } from '@/rules/types'
 import { AreaRenderInfo } from '@/renderer/types'
 
 // 图层化样式化特征

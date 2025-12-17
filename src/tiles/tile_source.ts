@@ -32,17 +32,19 @@ class LRUCache {
 		return null
 	}
 
-	put(key: string, value: any, cb?: (shiftKey: string) => void) {
+	put(key: string, value: unknown, cb?: (shiftKey: string) => void) {
 		if (key in this.cache) {
 			this.keys.splice(this.keys.indexOf(key), 1)
 		} else if (Object.keys(this.cache).length >= this.capacity) {
 			const oldestKey = this.keys.shift()
+			oldestKey && cb && cb(oldestKey)
 			if (oldestKey) {
 				delete this.cache[oldestKey]
 			}
 		}
 		this.cache[key] = value
 		this.keys.push(key)
+
 	}
 
 	abort(key: string) {
@@ -139,41 +141,75 @@ export default class TileSource {
 	}
 
 	/**
-	 * 获取可渲染的瓦片列表（实现瓦片回退机制）
-	 * 对应 Mapbox 的 getRenderableIds 逻辑
+	 * 获取可渲染的瓦片列表（实现双向瓦片回退机制）
+	 * 放大时向上找父级瓦片，缩小时向下找子瓦片
 	 */
 	readyTiles(): Tile[] {
-		const _coveringTiles = this.coveringTiles()
+		const coveringOZIDs = this._tileManager.coveringTileMap.get(this.id) || []
 
 		const fallbackTiles: Set<Tile> = new Set()
-		for (const tile of _coveringTiles) {
-			const { tile: closestTile } = this.findClosestAvailableTile(tile.overscaledTileID)
-			if (!closestTile) {
+
+		for (const ozID of coveringOZIDs) {
+			const cachedTile = this.lruCache.get<Tile>(ozID.key.toString())
+
+			// 1. 优先使用自身（已加载且有数据）
+			if (cachedTile?.hasData()) {
+				fallbackTiles.add(cachedTile)
 				continue
 			}
-			fallbackTiles.add(closestTile)
+
+			// 2. 向上找父级瓦片（放大场景 fallback）
+			const { tile: parentTile } = this.findClosestAvailableTile(ozID)
+			if (parentTile) {
+				fallbackTiles.add(parentTile)
+			}
+
+			// 3. 向下找子瓦片（缩小场景 fallback）
+			const childTiles = this.findAvailableChildTiles(ozID)
+			for (const childTile of childTiles) {
+				fallbackTiles.add(childTile)
+			}
 		}
 
-		// overlay fallback
-		const resultTiles: Tile[] = [...fallbackTiles]
+		// 按 z 值排序：低 z 先渲染，高 z 后渲染覆盖
+		const resultTiles = [...fallbackTiles].sort(
+			(a, b) => a.overscaledTileID.canonical.z - b.overscaledTileID.canonical.z,
+		)
 		return resultTiles
 	}
 
-	readyCoords(): OverscaledTileID[] {
-		const _coveringTiles = this.coveringTiles()
+	/**
+	 * 查找已加载的子瓦片（用于缩小时的 fallback）
+	 * @param ozID 目标瓦片 ID
+	 * @param maxDepth 最大搜索深度，默认 2 层
+	 */
+	private findAvailableChildTiles(ozID: OverscaledTileID, maxDepth: number = 2): Tile[] {
+		const result: Tile[] = []
+		const queue: { id: OverscaledTileID; depth: number }[] = [{ id: ozID, depth: 0 }]
 
-		const fallbackCoords: Set<OverscaledTileID> = new Set()
-		for (const tile of _coveringTiles) {
-			const { tile: closestTile } = this.findClosestAvailableTile(tile.overscaledTileID)
-			if (!closestTile) {
-				continue
+		while (queue.length > 0) {
+			const { id, depth } = queue.shift()!
+			if (depth >= maxDepth) continue
+
+			// 获取 4 个子瓦片
+			const children = id.children(this.maxzoom)
+			for (const childID of children) {
+				const cached = this.lruCache.get<Tile>(childID.key.toString())
+				if (cached?.hasData()) {
+					result.push(cached)
+				} else if (depth + 1 < maxDepth) {
+					// 继续向下搜索
+					queue.push({ id: childID, depth: depth + 1 })
+				}
 			}
-			fallbackCoords.add(closestTile.overscaledTileID)
 		}
 
-		// overlay fallback
-		const resultTiles: OverscaledTileID[] = [...fallbackCoords]
-		return resultTiles
+		return result
+	}
+
+	readyCoords(): OverscaledTileID[] {
+		const tiles = this.readyTiles()
+		return tiles.map((tile) => tile.overscaledTileID)
 	}
 
 	coveringTiles(): Tile[] {
@@ -256,6 +292,7 @@ export default class TileSource {
 	}
 }
 
+/*
 function shouldAbort(tile: Tile | null, nearestOZID: OverscaledTileID): boolean {
 	// 当前最近瓦片是 (z=10, x=512, y=512)。
 	// 某个瓦片是 (z=8, x=128, y=128)，其缩放到 z=10 后是 (x=512, y=512)，说明和 nearest 完全重合，不应抛弃。
@@ -291,3 +328,4 @@ function shouldAbort(tile: Tile | null, nearestOZID: OverscaledTileID): boolean 
 
 	return dist > tolerance
 }
+*/

@@ -33,6 +33,7 @@
 				box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
 				z-index: 1000;
 				min-width: 250px;
+				display: none;
 			}
 
 			.control-panel h3 {
@@ -105,7 +106,7 @@
 			position: absolute;
 			top: 30px;
 			left: 250px;
-			background: rgb(218, 218, 218);
+			background: rgb(255, 255, 255);
 			color: #333;
 			padding: 10px 15px;
 			border-radius: 4px;
@@ -114,6 +115,9 @@
 			display: flex;
 			flex-direction: column;
 			gap: 10px;
+		}
+		#cleanBtn {
+			cursor: pointer;
 		}
 		</style>
 	</head>
@@ -125,7 +129,7 @@
 			<h3>Center <span id="center">[-122.5122, 47.522]</span></h3>
 		</div>
 		<div class="debug-panel">
-			<button id="cleanBtn">Clean Cache</button>
+			<div id="cleanBtn">Clean Cache</div>
 		</div>
 
 

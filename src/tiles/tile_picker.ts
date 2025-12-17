@@ -250,7 +250,7 @@ export default class TilePicker {
 		/**
 		 * Get dem tile`s min & max
 		 */
-		function getTileElevationMinMax(x: number, y: number, z: number): { min: number; max: number } {
+		function getTileElevationMinMax(_: number, __: number, ___: number): { min: number; max: number } {
 			return {
 				min: minElevation,
 				max: maxElevation,

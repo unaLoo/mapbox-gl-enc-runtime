@@ -245,6 +245,7 @@ type TileCoord = {
 	y: number
 	z: number
 }
+// @ts-expect-error 'tileAABB' is defined but never used.
 function tileAABB({
 	tileXYZ,
 	minh,

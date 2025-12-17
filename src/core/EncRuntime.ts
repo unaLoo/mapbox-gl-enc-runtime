@@ -11,7 +11,7 @@ import { getMatrices } from '../utils/map_transform'
 
 export interface ENCLayerOptions {
 	tileSources?: TileSourceType[]
-	[key: string]: any // other options maybe
+	[key: string]: unknown // other options maybe
 }
 
 export default class EncRuntime implements CustomLayerInterface {
@@ -26,6 +26,7 @@ export default class EncRuntime implements CustomLayerInterface {
 	private map: MapboxMap | null = null
 	private gl: WebGL2RenderingContext | null = null
 	private renderer: ENCRenderer | null = null
+	// @ts-expect-error 'interpreter' is declared but its value is never read.ts(6133)
 	private interpreter: Interpreter | null = null
 	private bucketManager: BucketManager | null = null
 
@@ -83,7 +84,7 @@ export default class EncRuntime implements CustomLayerInterface {
 		})
 	}
 
-	render(gl: WebGL2RenderingContext, matrix: number[]): void {
+	render(_: WebGL2RenderingContext, __: number[]): void {
 		if (!this.tileManager || !this.renderer || !this.map) return
 		const sharingVPMatrix = getMatrices(this.map.transform).projMatrix
 		const viewport = { width: this.map.getCanvas().width, height: this.map.getCanvas().height }
@@ -96,7 +97,7 @@ export default class EncRuntime implements CustomLayerInterface {
 		// this.renderer.renderENC(renderENC, { sharingVPMatrix, viewport })
 	}
 
-	onRemove(map: MapboxMap, gl: WebGL2RenderingContext): void {
+	onRemove(_: MapboxMap, __: WebGL2RenderingContext): void {
 		this.tileManager?.remove()
 		this.tileManager = null
 		this.map = null

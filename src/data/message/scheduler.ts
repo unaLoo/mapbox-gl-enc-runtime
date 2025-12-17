@@ -1,4 +1,4 @@
-import { bindAll, isWorker } from '../../utils/common'
+import { bindAll } from '../../utils/common'
 import ThrottledInvoker from './throttledInvoker'
 import type { Cancelable, TaskType } from '../types'
 

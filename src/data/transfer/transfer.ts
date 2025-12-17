@@ -85,7 +85,7 @@ export function serialize(input: unknown, transferables?: Set<Transferable>): Se
 	throw new Error(`Cannot serialize object of type ${typeof input}`)
 }
 
-export function deserialize(input: Serialized): unknown {
+export function deserialize(input: Serialized): any {
 	if (
 		input === null ||
 		input === undefined ||
