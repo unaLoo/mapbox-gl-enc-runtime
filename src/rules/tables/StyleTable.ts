@@ -30,7 +30,7 @@ const StyleDescTable = {
 		{
 			type: 'CS',
 			style: {
-				condition: 'DEPARE01'
+				condition: 'DEPARE01',
 			},
 		} as StyleDescription,
 		// {
@@ -55,20 +55,19 @@ const StyleDescTable = {
 				fieldName: 'VAL',
 				formatString: '%.1f',
 				horizontalAlign: 2, //'LEFT' | 'CENTER'
-				verticalAlign: 2,// 'TOP' | 'CENTER' | 'BOTTOM'
+				verticalAlign: 2, // 'TOP' | 'CENTER' | 'BOTTOM'
 				direction: 3, // 'HORIZONTAL' | 'VERTICAL'
 				bold: 1,
 				color: 'CHBLK',
 				fontSize: 14,
-			}
-		} as StyleDescription
-	]
+			},
+		} as StyleDescription,
+	],
 }
 
 function getStyleDescList(acronym: OBJLAcronym) {
 	const baseStyleDescList = StyleDescTable[acronym as keyof typeof StyleDescTable] as StyleDescription[]
 	return baseStyleDescList
 }
-
 
 export { getStyleDescList }

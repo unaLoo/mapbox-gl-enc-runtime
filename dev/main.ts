@@ -1,5 +1,6 @@
 import mapboxgl from 'mapbox-gl'
 import EncRuntime from '../src/core/EncRuntime'
+import WaterLayer from './waterLayer'
 // import type { ENCLayerOptions } from '../src/core/ENCLayer'
 import addMaputnikLayer from './maputnik'
 import addTestLayer from './testStyle'
@@ -47,78 +48,68 @@ const TILE_SOURCES = [
 const map = new mapboxgl.Map({
 	container: 'map',
 	center: [-122.5122, 47.522],
-	zoom: 8.9,
+	zoom: 9,
 	style: {
-		'version': 8,
-		'sources': {},
-		'layers': [],
-		'glyphs': "http://localhost:8081/fonts/{fontstack}/{range}.pbf",
-		'sprite': 'http://localhost:8081/sprite/rastersymbols-day'
+		version: 8,
+		sources: {},
+		layers: [],
+		glyphs: 'http://localhost:8081/fonts/{fontstack}/{range}.pbf',
+		sprite: 'http://localhost:8081/sprite/rastersymbols-day',
 	},
+	// style: "mapbox://styles/mapbox/satellite-v9",
 	accessToken: 'pk.eyJ1IjoieWNzb2t1IiwiYSI6ImNrenozdWdodDAza3EzY3BtdHh4cm5pangifQ.ZigfygDi2bK4HXY1pWh-wg',
 })
 
 let encLayer: EncRuntime | null = null
 
 map.on('load', () => {
-	map.showTileBoundaries = true
+	// map.showTileBoundaries = true
 	// addMaputnikLayer(map)
-	addTestLayer(map).then(() => {
+	// addTestLayer(map).then(() => {
+	const layerOptions = {
+		tileSources: TILE_SOURCES,
+		// id: 'enc-chart',
+		// context: {
+		// 	displayMode: 'standard',
+		// 	environment: 'day',
+		// 	safetyDepth: {
+		// 		depth: 20,
+		// 		shallowContour: 10,
+		// 		deepContour: 30,
+		// 	},
+		// },
+		// rules: [],
+		// debug: true,
+	}
+	encLayer = new EncRuntime(layerOptions)
+	map.addLayer(encLayer)
 
-		const layerOptions = {
-			tileSources: TILE_SOURCES,
-			// id: 'enc-chart',
-			// context: {
-			// 	displayMode: 'standard',
-			// 	environment: 'day',
-			// 	safetyDepth: {
-			// 		depth: 20,
-			// 		shallowContour: 10,
-			// 		deepContour: 30,
-			// 	},
-			// },
-			// rules: [],
-			// debug: true,
-		}
-		encLayer = new EncRuntime(layerOptions)
-		// map.addLayer(encLayer)
+	// Event
+	addClickListener(map)
 
-		// Event 
-		addClickListener(map)
+	// 挂载 DOM 事件
+	setupControls()
 
-		// 挂载 DOM 事件
-		setupControls()
-	})
+	// map.addLayer(new WaterLayer("http://127.0.0.1:8081/temp.geojson", "http://localhost:8081/texture/WaterNormal1.png"))
 
+	// })
+
+	// map.addSource('water-geojson', {
+	// 	type: 'geojson',
+	// 	data: "http://127.0.0.1:8081/test.geojson"
+	// })
 	// map.addLayer({
-	// 	id: 'test',
-	// 	type: 'symbol',
-	// 	source: {
-	// 		type: 'geojson',
-	// 		data: {
-	// 			type: 'Feature',
-	// 			geometry: {
-	// 				type: 'Point',
-	// 				coordinates: [-122.5122, 47.522]
-	// 			},
-	// 			properties: {
-	// 				name: 'TESTING'
-	// 			}
-	// 		}
-	// 	},
-	// 	layout: {
-	// 		'icon-image': 'FSHHAV02',
-	// 		'icon-size': 10, // 图标大小
-	// 		'icon-allow-overlap': true, // 允许图标重叠（避免被遮挡）
-	// 	},
+	// 	id: 'water-polygons',
+	// 	type: 'fill',
+	// 	source: 'water-geojson',
 	// 	paint: {
+	// 		'fill-color': '#ff0000',
+	// 		'fill-opacity': 0.3,
 	// 	}
 	// });
 
+
 })
-
-
-
 
 function addClickListener(map: mapboxgl.Map) {
 	const layers = Object.keys(map.style._layers)
@@ -130,26 +121,26 @@ function addClickListener(map: mapboxgl.Map) {
 		// }))
 		const bbox = [
 			[e.point.x - 5, e.point.y - 5],
-			[e.point.x + 5, e.point.y + 5]
-		] as any;
+			[e.point.x + 5, e.point.y + 5],
+		] as any
 		// Find features intersecting the bounding box.
 		const selectedFeatures = map.queryRenderedFeatures(bbox, {
-			layers: layers
-		});
-		console.log(selectedFeatures.map(item => ({
-			layer: item.layer,
-			properties: item.properties
-		})))
+			layers: layers,
+		})
+		console.log(
+			selectedFeatures.map((item) => ({
+				layer: item.layer,
+				properties: item.properties,
+			})),
+		)
 	})
 }
-
-
-
 
 const zoom = document.getElementById('zoom') as HTMLSpanElement
 const center = document.getElementById('center') as HTMLSpanElement
 const cleanBtn = document.getElementById('cleanBtn') as HTMLButtonElement
 cleanBtn.addEventListener('click', () => {
+	// @ts-ignore
 	encLayer?.tileManager?.cleanCache()
 })
 map.on('move', (_) => {

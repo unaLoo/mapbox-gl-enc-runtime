@@ -23,9 +23,9 @@ export const tileSize = 512
  * Contains viewport dimensions and camera angle.
  */
 export interface SymbolTransform {
-    width: number
-    height: number
-    angle: number
+	width: number
+	height: number
+	angle: number
 }
 
 /**
@@ -37,7 +37,7 @@ export interface SymbolTransform {
  * @returns The value in tile units
  */
 export function pixelsToTileUnits(overscaledZ: number, pixelValue: number, z: number): number {
-    return pixelValue * (EXTENT / (tileSize * Math.pow(2, z - overscaledZ)))
+	return pixelValue * (EXTENT / (tileSize * Math.pow(2, z - overscaledZ)))
 }
 
 /**
@@ -54,27 +54,27 @@ export function pixelsToTileUnits(overscaledZ: number, pixelValue: number, z: nu
  * @returns The label plane matrix
  */
 export function getLabelPlaneMatrix(
-    posMatrix: mat4,
-    pitchWithMap: boolean,
-    rotateWithMap: boolean,
-    transform: SymbolTransform,
-    pixelsToTileUnitsScale: number,
+	posMatrix: mat4,
+	pitchWithMap: boolean,
+	rotateWithMap: boolean,
+	transform: SymbolTransform,
+	pixelsToTileUnitsScale: number,
 ): mat4 {
-    const m = mat4.identity(new Float32Array(16) as unknown as mat4)
+	const m = mat4.identity(new Float32Array(16) as unknown as mat4)
 
-    if (pitchWithMap) {
-        mat4.identity(m)
-        mat4.scale(m, m, [1 / pixelsToTileUnitsScale, 1 / pixelsToTileUnitsScale, 1])
-        if (!rotateWithMap) {
-            mat4.rotateZ(m, m, transform.angle)
-        }
-    } else {
-        mat4.scale(m, m, [transform.width / 2, -transform.height / 2, 1])
-        mat4.translate(m, m, [1, -1, 0])
-        mat4.multiply(m, m, posMatrix)
-    }
+	if (pitchWithMap) {
+		mat4.identity(m)
+		mat4.scale(m, m, [1 / pixelsToTileUnitsScale, 1 / pixelsToTileUnitsScale, 1])
+		if (!rotateWithMap) {
+			mat4.rotateZ(m, m, transform.angle)
+		}
+	} else {
+		mat4.scale(m, m, [transform.width / 2, -transform.height / 2, 1])
+		mat4.translate(m, m, [1, -1, 0])
+		mat4.multiply(m, m, posMatrix)
+	}
 
-    return m
+	return m
 }
 
 /**
@@ -91,27 +91,27 @@ export function getLabelPlaneMatrix(
  * @returns The GL coordinate matrix
  */
 export function getGlCoordMatrix(
-    posMatrix: mat4,
-    pitchWithMap: boolean,
-    rotateWithMap: boolean,
-    transform: SymbolTransform,
-    pixelsToTileUnitsScale: number,
+	posMatrix: mat4,
+	pitchWithMap: boolean,
+	rotateWithMap: boolean,
+	transform: SymbolTransform,
+	pixelsToTileUnitsScale: number,
 ): mat4 {
-    const m = mat4.identity(new Float32Array(16) as unknown as mat4)
+	const m = mat4.identity(new Float32Array(16) as unknown as mat4)
 
-    if (pitchWithMap) {
-        mat4.multiply(m, m, posMatrix)
-        mat4.scale(m, m, [pixelsToTileUnitsScale, pixelsToTileUnitsScale, 1])
-        if (!rotateWithMap) {
-            mat4.rotateZ(m, m, -transform.angle)
-        }
-    } else {
-        mat4.scale(m, m, [1, -1, 1])
-        mat4.translate(m, m, [-1, -1, 0])
-        mat4.scale(m, m, [2 / transform.width, 2 / transform.height, 1])
-    }
+	if (pitchWithMap) {
+		mat4.multiply(m, m, posMatrix)
+		mat4.scale(m, m, [pixelsToTileUnitsScale, pixelsToTileUnitsScale, 1])
+		if (!rotateWithMap) {
+			mat4.rotateZ(m, m, -transform.angle)
+		}
+	} else {
+		mat4.scale(m, m, [1, -1, 1])
+		mat4.translate(m, m, [-1, -1, 0])
+		mat4.scale(m, m, [2 / transform.width, 2 / transform.height, 1])
+	}
 
-    return m
+	return m
 }
 
 /**
@@ -126,10 +126,10 @@ export function getGlCoordMatrix(
  * @returns The transformed output vector
  */
 export function xyTransformMat4(out: vec4, a: vec4, m: mat4): vec4 {
-    const x = a[0]
-    const y = a[1]
-    out[0] = m[0] * x + m[4] * y + m[12]
-    out[1] = m[1] * x + m[5] * y + m[13]
-    out[3] = m[3] * x + m[7] * y + m[15]
-    return out
+	const x = a[0]
+	const y = a[1]
+	out[0] = m[0] * x + m[4] * y + m[12]
+	out[1] = m[1] * x + m[5] * y + m[13]
+	out[3] = m[3] * x + m[7] * y + m[15]
+	return out
 }

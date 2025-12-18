@@ -78,7 +78,7 @@ export default class EncRuntime implements CustomLayerInterface {
 			const canvas = this.map?.getCanvas()
 			if (canvas) {
 				eventBus?.trigger('viewportChange', {
-					viewport: { width: canvas.width, height: canvas.height }
+					viewport: { width: canvas.width, height: canvas.height },
 				})
 			}
 		})

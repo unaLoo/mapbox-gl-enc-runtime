@@ -4,10 +4,10 @@
 
 export { GridIndex, type HitResult, type LabelBBox as GridLabelBBox } from './GridIndex'
 export {
-    CollisionIndex,
-    type SingleCollisionBox,
-    type PlaceCollisionBoxResult,
-    type CollisionBoxKey,
-    type CollisionTransform,
-    type Point,
+	CollisionIndex,
+	type SingleCollisionBox,
+	type PlaceCollisionBoxResult,
+	type CollisionBoxKey,
+	type CollisionTransform,
+	type Point,
 } from './CollisionIndex'

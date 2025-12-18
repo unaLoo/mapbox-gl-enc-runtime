@@ -44,7 +44,6 @@ class LRUCache {
 		}
 		this.cache[key] = value
 		this.keys.push(key)
-
 	}
 
 	abort(key: string) {
@@ -127,7 +126,6 @@ export default class TileSource {
 					tileSourceId: this.id,
 					decodedFeatures: data_tile.features,
 				})
-
 
 			// 规则引擎工作
 			// 给到 bucket ， bucket 专门负责聚合和几何处理，生成 GPU 友好的顶点、索引资源

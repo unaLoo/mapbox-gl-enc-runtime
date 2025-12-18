@@ -29,23 +29,19 @@ const ConditionProcedureMap = {
 
 		if (feature.properties.DRVAL1! < 0.0) {
 			finalColor = 'DEPIT'
-		}
-		else if (feature.properties.DRVAL1! < 2.0) {
+		} else if (feature.properties.DRVAL1! < 2.0) {
 			finalColor = 'DEPIT'
-		}
-		else if (feature.properties.DRVAL1! < 3.0) {
+		} else if (feature.properties.DRVAL1! < 3.0) {
 			finalColor = 'DEPMS'
-		}
-		else if (feature.properties.DRVAL1! < 6.0) {
+		} else if (feature.properties.DRVAL1! < 6.0) {
 			finalColor = 'DEPMD'
-		}
-		else {
+		} else {
 			finalColor = 'DEPDW'
 		}
 
 		// if (feature.properties.DRVAL1! >= context.DEEP_CONTOUR &&
 		// 	true
-		// 	// feature.properties.DRVAL2! > context.DEEP_CONTOUR 
+		// 	// feature.properties.DRVAL2! > context.DEEP_CONTOUR
 		// )
 		// 	finalColor = 'DEPDW'
 
@@ -79,7 +75,7 @@ const ConditionProcedureMap = {
 				style: {
 					color: getColor(context.theme, finalColor),
 				},
-			}
+			},
 		]
 	},
 	// ...
@@ -94,7 +90,7 @@ function parseCondition(
 		case 'DEPARE01':
 			const procedure = ConditionProcedureMap[condtion]
 			const parsedStyledDescList = procedure(context, feature)
-			const parsedStyledFeature = parsedStyledDescList.map(item => ({
+			const parsedStyledFeature = parsedStyledDescList.map((item) => ({
 				feature: feature,
 				styleDesc: item,
 			}))
@@ -118,7 +114,7 @@ function interpret(context: FeatureStylingContext, feature: ENCFeature): ParsedS
 	for (const styleDesc of styleDescList) {
 		if (styleDesc.type === 'CS') {
 			const res = parseCondition(context, feature, styleDesc.style.condition)
-			res.forEach(item => {
+			res.forEach((item) => {
 				parsedStyleDescList.push(item)
 			})
 		} else {
@@ -174,7 +170,7 @@ function parseColor(styleDesc: StyleDescription, theme: Theme = 'DAY_BRIGHT'): P
 }
 
 export class Interpreter {
-	tileLoadHandler: TileLoadHandler = () => { }
+	tileLoadHandler: TileLoadHandler = () => {}
 
 	constructor() {
 		this.tileLoadHandler = this._tileLoadHandler.bind(this)

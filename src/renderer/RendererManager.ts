@@ -89,12 +89,14 @@ export class RendererManager {
 			angle: 0,
 			cameraToCenterDistance: options.viewport.height / 2,
 			zoom: currentZoom,
-
 		}
 
 		// 检查是否需要重新计算碰撞
 		// 条件：1) 标记为脏 2) zoom 级别变化超过阈值 3) 瓦片集合变化
-		const currentTileKeys = tiles.map((t) => t.id).sort().join(',')
+		const currentTileKeys = tiles
+			.map((t) => t.id)
+			.sort()
+			.join(',')
 		// 使用更大的 zoom 阈值（0.5）来减少重新计算频率
 		const zoomDelta = Math.abs(currentZoom - this.lastPlacementZoom)
 		const zoomChanged = zoomDelta > 0.5

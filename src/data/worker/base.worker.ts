@@ -15,7 +15,7 @@ for (const [key, val] of Object.entries(module)) {
 	self[key] = val.bind(self)
 }
 
-//@ts-expect-error  TS6133: 'registerModule' is declared but its value is never read. 
+//@ts-expect-error  TS6133: 'registerModule' is declared but its value is never read.
 function registerModule(this: WorkerSelf, modulePath: string, callback: Callback<any>) {
 	import(/* @vite-ignore */ modulePath)
 		.then((module: FuncModule) => {

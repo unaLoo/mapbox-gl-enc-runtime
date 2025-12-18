@@ -138,11 +138,11 @@ void main() {
 /**
  * Vertex shader for SDF text rendering
  * Uses instanced rendering with one quad per glyph
- * 
+ *
  * Text is rendered with FIXED SIZE in screen pixels (viewport-independent):
  * 1. Anchor point (a_position) is transformed to clip space via u_matrix
  * 2. Glyph offset (a_size, a_offset) is applied in NDC space (screen pixels)
- * 
+ *
  * This ensures text size remains constant regardless of zoom level.
  */
 export const sdfVertexShaderSource = `#version 300 es
@@ -283,50 +283,50 @@ void main() {
  * Create and compile a shader
  */
 export function createShader(gl: WebGL2RenderingContext, type: number, source: string): WebGLShader | null {
-    const shader = gl.createShader(type)
-    if (!shader) return null
+	const shader = gl.createShader(type)
+	if (!shader) return null
 
-    gl.shaderSource(shader, source)
-    gl.compileShader(shader)
+	gl.shaderSource(shader, source)
+	gl.compileShader(shader)
 
-    if (!gl.getShaderParameter(shader, gl.COMPILE_STATUS)) {
-        const info = gl.getShaderInfoLog(shader)
-        console.error('Shader compilation error:', info)
-        gl.deleteShader(shader)
-        return null
-    }
+	if (!gl.getShaderParameter(shader, gl.COMPILE_STATUS)) {
+		const info = gl.getShaderInfoLog(shader)
+		console.error('Shader compilation error:', info)
+		gl.deleteShader(shader)
+		return null
+	}
 
-    return shader
+	return shader
 }
 
 /**
  * Create a shader program from vertex and fragment shaders
  */
 export function createProgram(
-    gl: WebGL2RenderingContext,
-    vertexSource: string,
-    fragmentSource: string,
+	gl: WebGL2RenderingContext,
+	vertexSource: string,
+	fragmentSource: string,
 ): WebGLProgram | null {
-    const vertexShader = createShader(gl, gl.VERTEX_SHADER, vertexSource)
-    const fragmentShader = createShader(gl, gl.FRAGMENT_SHADER, fragmentSource)
+	const vertexShader = createShader(gl, gl.VERTEX_SHADER, vertexSource)
+	const fragmentShader = createShader(gl, gl.FRAGMENT_SHADER, fragmentSource)
 
-    if (!vertexShader || !fragmentShader) {
-        return null
-    }
+	if (!vertexShader || !fragmentShader) {
+		return null
+	}
 
-    const program = gl.createProgram()
-    if (!program) return null
+	const program = gl.createProgram()
+	if (!program) return null
 
-    gl.attachShader(program, vertexShader)
-    gl.attachShader(program, fragmentShader)
-    gl.linkProgram(program)
+	gl.attachShader(program, vertexShader)
+	gl.attachShader(program, fragmentShader)
+	gl.linkProgram(program)
 
-    if (!gl.getProgramParameter(program, gl.LINK_STATUS)) {
-        const info = gl.getProgramInfoLog(program)
-        console.error('Program linking error:', info)
-        gl.deleteProgram(program)
-        return null
-    }
+	if (!gl.getProgramParameter(program, gl.LINK_STATUS)) {
+		const info = gl.getProgramInfoLog(program)
+		console.error('Program linking error:', info)
+		gl.deleteProgram(program)
+		return null
+	}
 
-    return program
+	return program
 }

@@ -75,10 +75,10 @@ type featureType =
 export interface TileLocalGeometry {
 	type: featureType
 	coordinates:
-	| { x: number; y: number }
-	| Array<{ x: number; y: number }>
-	| Array<Array<{ x: number; y: number }>>
-	| Array<Array<Array<{ x: number; y: number }>>>
+		| { x: number; y: number }
+		| Array<{ x: number; y: number }>
+		| Array<Array<{ x: number; y: number }>>
+		| Array<Array<Array<{ x: number; y: number }>>>
 	extent: number // Original extent of the tile (usually 4096 or 8192)
 }
 

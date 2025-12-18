@@ -1,8 +1,5 @@
 {
 	"extends": "./tsconfig.json",
 	"include": ["src/**/*", "tests/**/*", "examples/**/*", "dev/**/*", "*.config.*"],
-	"exclude": ["node_modules", "dist"],
-	"rule": {
-		"@typescript-eslint/ban-ts-comment": "off"
-	}
+	"exclude": ["node_modules", "dist"]
 }

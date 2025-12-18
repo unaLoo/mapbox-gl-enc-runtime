@@ -49,7 +49,6 @@ interface TXRenderInfo {
 	instanceCount: number
 }
 
-
 /**
  * Map transform interface for collision detection and projection
  */
@@ -94,7 +93,7 @@ const DEFAULT_FONT_STACK = 'default'
  */
 const SDF_CONFIG = {
 	fontSize: 34,
-	fontFamily: "sans-serif",
+	fontFamily: 'sans-serif',
 	buffer: 5,
 	radius: 8,
 	cutoff: 0.25,
@@ -113,10 +112,7 @@ export function generateSDF(tinySdf: TinySDF, char: string): StyleGlyph {
 	const result = tinySdf.draw(char)
 
 	// Create AlphaImage from TinySDF result
-	const bitmap = new AlphaImage(
-		{ width: result.width, height: result.height },
-		result.data,
-	)
+	const bitmap = new AlphaImage({ width: result.width, height: result.height }, result.data)
 
 	return {
 		id: char.charCodeAt(0),
@@ -136,10 +132,14 @@ export function generateSDF(tinySdf: TinySDF, char: string): StyleGlyph {
  */
 function getTextJustify(horizontalAlign: 1 | 2 | 3): TextJustify {
 	switch (horizontalAlign) {
-		case 1: return 'left'
-		case 2: return 'center'
-		case 3: return 'right'
-		default: return 'center'
+		case 1:
+			return 'left'
+		case 2:
+			return 'center'
+		case 3:
+			return 'right'
+		default:
+			return 'center'
 	}
 }
 
@@ -155,7 +155,6 @@ function getSymbolAnchor(horizontalAlign: 1 | 2 | 3, verticalAlign: 1 | 2 | 3): 
 	if (v) return v as SymbolAnchor
 	return 'center'
 }
-
 
 export class TXRenderer extends BaseRenderer {
 	private shaderManager: ShaderManager
@@ -306,7 +305,6 @@ export class TXRenderer extends BaseRenderer {
 		this.createAtlasTexture()
 	}
 
-
 	/**
 	 * Initialize WebGL resources for instanced rendering
 	 */
@@ -319,10 +317,14 @@ export class TXRenderer extends BaseRenderer {
 		this.gl.bindBuffer(this.gl.ARRAY_BUFFER, this.quadVBO)
 		// Quad vertices: (0,0), (1,0), (0,1), (1,1) for triangle strip
 		const quadVertices = new Float32Array([
-			0, 0, // bottom-left
-			1, 0, // bottom-right
-			0, 1, // top-left
-			1, 1, // top-right
+			0,
+			0, // bottom-left
+			1,
+			0, // bottom-right
+			0,
+			1, // top-left
+			1,
+			1, // top-right
 		])
 		this.gl.bufferData(this.gl.ARRAY_BUFFER, quadVertices, this.gl.STATIC_DRAW)
 
@@ -339,11 +341,7 @@ export class TXRenderer extends BaseRenderer {
 	 * @param posMatrix - MVP matrix for projection
 	 * @returns Array of visible text instances that passed collision detection
 	 */
-	placeLabels(
-		tile: Tile,
-		collisionIndex: CollisionIndex,
-		posMatrix: mat4,
-	): VisibleTextInstance[] {
+	placeLabels(tile: Tile, collisionIndex: CollisionIndex, posMatrix: mat4): VisibleTextInstance[] {
 		const tileId = tile.overscaledTileID.toString()
 		const renderInfo = this.tileRenderInfo.get(tileId) as TXRenderInfo | undefined
 		if (!renderInfo || renderInfo.textInstances.length === 0) {
@@ -458,9 +456,7 @@ export class TXRenderer extends BaseRenderer {
 	 *
 	 * @requirements 6.3 - Generate glyph quads for non-colliding text
 	 */
-	private buildTextBuffers(
-		visibleInstances: VisibleTextInstance[],
-	): {
+	private buildTextBuffers(visibleInstances: VisibleTextInstance[]): {
 		positions: number[]
 		sizes: number[]
 		uvBounds: number[]
@@ -553,7 +549,6 @@ export class TXRenderer extends BaseRenderer {
 			count: positions.length / 2,
 		}
 	}
-
 
 	/**
 	 * Render text for a tile using pre-computed visible instances
@@ -771,7 +766,6 @@ export class TXRenderer extends BaseRenderer {
 		// Unbind VAO
 		this.gl.bindVertexArray(null)
 	}
-
 
 	/**
 	 * Clean up resources for a tile
