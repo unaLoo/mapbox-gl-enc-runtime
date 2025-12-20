@@ -2,7 +2,6 @@ import mapboxgl from 'mapbox-gl';
 import * as THREE from 'three';
 import Stats from 'three/addons/libs/stats.module.js';
 
-
 interface AnimatedObject {
     tick?: (delta: number) => void; // 增加 tick 方法支持
     material?: any;
@@ -14,18 +13,19 @@ export class ThreeMapLayer {
     renderingMode: '3d';
 
     stats: Stats
-
     map: mapboxgl.Map | null;
+
     scene: THREE.Scene;
     camera: THREE.Camera;
     renderer: THREE.WebGLRenderer | null;
     clock: THREE.Clock;
+
     animatedObjects: AnimatedObject[] = [];
     objects: Map<string, THREE.Object3D>;
 
-    // ！！！ 作为局部世界坐标的中心
+    // ！！！ 作为局部坐标的中心
     sceneAnchor: mapboxgl.MercatorCoordinate | null = null;
-    sceneScale: number = 1; // meter per mercatorUnit
+    sceneScale: number = 1; // mercatorUnit per meter
 
     constructor(id = 'three-scene-layer') {
         this.id = id;
@@ -56,18 +56,15 @@ export class ThreeMapLayer {
             preserveDrawingBuffer: true
         });
         this.renderer.autoClear = false;
-        this.renderer.toneMapping = THREE.ACESFilmicToneMapping
-        this.renderer.toneMappingExposure = 0.5
     }
 
     setAnchor(lngLat: [number, number]) {
         this.sceneAnchor = mapboxgl.MercatorCoordinate.fromLngLat(lngLat, 0);
-        // 计算该纬度下的米与Mercator单位的换算比例
-        this.sceneScale = this.sceneAnchor.meterInMercatorCoordinateUnits();
+        this.sceneScale = this.sceneAnchor.meterInMercatorCoordinateUnits(); // ！！
     }
 
     /**
-     * Core：将经纬度转换为相对于 Anchor 的 Three.js 坐标（单位：米）
+     * Core：将经纬度转换为相对于 Anchor 的局部坐标（单位：米, 右手系）
      */
     projectToScene(lngLat: [number, number], altitude: number = 0): THREE.Vector3 {
         if (!this.sceneAnchor) {
@@ -81,54 +78,38 @@ export class ThreeMapLayer {
         const dy = target.y - this.sceneAnchor.y;
         const dz = target.z - this.sceneAnchor.z;
 
-        // 转换为米（除以 scale）
-        // 注意：这里 Y 轴取负，因为 Mercator Y 轴向下，而我们希望 Three.js 里 Y 朝上或者 Z 朝上
-        // 为了配合下面的旋转矩阵，我们保持 Three.js 标准：
-        // 这里的转换策略取决于 render 中使用的旋转矩阵。
-        // 如果使用了官方示例的旋转矩阵（X轴转90度），那么：
-        // Mapbox X -> Three X
-        // Mapbox Y -> Three -Z (或者 Y，取决于旋转方向)
-        // Mapbox Z -> Three Y
-
-        // 简单起见，我们直接算出米，然后让外部去 setPosition，
-        // 但为了让官方矩阵生效，我们需要按照 (x, -y, z) 的逻辑（假设旋转了）或者直接用 Mercator 差值。
-
-        // 修正逻辑：
-        // 我们在 render 里会把世界缩放为“米”。
-        // 所以这里返回的值应该是“米”。
-        const xMeter = dx / this.sceneScale;
+        const xMeter = dx / this.sceneScale; // sceneScale: unit per meter
         const yMeter = dy / this.sceneScale;
         const zMeter = dz / this.sceneScale;
 
-        // 返回 Vector3 (X, Y, Z)。 
-        // 把 mapbox 的左手坐标系转换到 Three 的右手坐标系
-        return new THREE.Vector3(xMeter, zMeter, yMeter); // 注意顺序：MapboxZ -> ThreeY, MapboxY -> ThreeZ
+        // mapbox 的 WebMercator 体系中，x向右，y向下，z向上 --> 左手坐标系
+        // three/webgl 坐标系，x 向右，y向上，z射出屏幕
+        return new THREE.Vector3(xMeter, zMeter, yMeter); // 交换 y,z 实现坐标系的转换
     }
 
     render(gl: WebGLRenderingContext, matrix: number[]) {
         if (!this.sceneAnchor || !this.renderer || !this.map) return;
-        this.stats.update();
 
         /////////// Matrix //////////////////////////////////
 
-        // 1. 旋转矩阵：将 Z-up (Mapbox) 转为 Y-up (Three.js 标准)
         const rotateX = new THREE.Matrix4().makeRotationAxis(new THREE.Vector3(1, 0, 0), Math.PI / 2);
-        // 2. 平移矩阵：将世界移动到 Anchor 的位置
-        // 3. 缩放矩阵：将单位从 Mercator 变为 米
         const transform = new THREE.Matrix4()
-            .makeTranslation(this.sceneAnchor.x, this.sceneAnchor.y, this.sceneAnchor.z)
-            .scale(new THREE.Vector3(this.sceneScale, -this.sceneScale, this.sceneScale)) // Y 翻转适配
-            .multiply(rotateX);
-        // 4. 组合 Mapbox 视图矩阵
+            .makeTranslation(this.sceneAnchor.x, this.sceneAnchor.y, this.sceneAnchor.z) // T
+            .scale(new THREE.Vector3(this.sceneScale, -this.sceneScale, this.sceneScale)) // S
+            .multiply(rotateX); // R
+        // 数学表达： transform = T * S * R
+        // 当一个物体右乘 transform 矩阵，相当于先自旋，再缩放，再平移
+
         const m = new THREE.Matrix4().fromArray(matrix);
 
-        // Final Matrix = MapboxView * AnchorTransform, (0,0,0) --> Anchor 点
+        // Final camera.projectionMatrix = MapboxVPMatrix * AnchorTransform, (0,0,0) --> Anchor 点
         this.camera.projectionMatrix = m.multiply(transform);
 
 
         /////////// Tick Logic //////////////////////////////////
+        this.stats.update(); // frame counter
+
         const delta = this.clock.getDelta();
-        // const time = this.clock.getElapsedTime();
         this.animatedObjects.forEach(obj => {
             if (obj.tick) {
                 obj.tick(delta);
@@ -145,7 +126,7 @@ export class ThreeMapLayer {
     }
 
     addToScene(id: string, object: THREE.Object3D) {
-        // ... 保持不变
+        this.objects.set(id, object)
         this.scene.add(object);
     }
 }
