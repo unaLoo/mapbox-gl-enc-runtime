@@ -1,9 +1,15 @@
 import mapboxgl from 'mapbox-gl'
+import 'mapbox-gl/dist/mapbox-gl.css'
 import EncRuntime from '../src/core/EncRuntime'
-import WaterLayer from './waterLayer'
+import WaterLayer from './3dLayers/waterLayer'
+import modelLayer from './3dLayers/modelLayer'
+import cubeLayer from './3dLayers/cubeLayer'
+import { ThreeMapLayer } from './3dLayers/ThreeMapLayer'
+import * as THREE from 'three'
 // import type { ENCLayerOptions } from '../src/core/ENCLayer'
 import addMaputnikLayer from './maputnik'
 import addTestLayer from './testStyle'
+import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 
 const TILE_SOURCES = [
 	{
@@ -49,14 +55,14 @@ const map = new mapboxgl.Map({
 	container: 'map',
 	center: [-122.5122, 47.522],
 	zoom: 9,
-	style: {
-		version: 8,
-		sources: {},
-		layers: [],
-		glyphs: 'http://localhost:8081/fonts/{fontstack}/{range}.pbf',
-		sprite: 'http://localhost:8081/sprite/rastersymbols-day',
-	},
-	// style: "mapbox://styles/mapbox/satellite-v9",
+	// style: {
+	// 	version: 8,
+	// 	sources: {},
+	// 	layers: [],
+	// 	glyphs: 'http://localhost:8081/fonts/{fontstack}/{range}.pbf',
+	// 	sprite: 'http://localhost:8081/sprite/rastersymbols-day',
+	// },
+	style: "mapbox://styles/mapbox/satellite-v9",
 	accessToken: 'pk.eyJ1IjoieWNzb2t1IiwiYSI6ImNrenozdWdodDAza3EzY3BtdHh4cm5pangifQ.ZigfygDi2bK4HXY1pWh-wg',
 })
 
@@ -66,31 +72,31 @@ map.on('load', () => {
 	// map.showTileBoundaries = true
 	// addMaputnikLayer(map)
 	// addTestLayer(map).then(() => {
-	const layerOptions = {
-		tileSources: TILE_SOURCES,
-		// id: 'enc-chart',
-		// context: {
-		// 	displayMode: 'standard',
-		// 	environment: 'day',
-		// 	safetyDepth: {
-		// 		depth: 20,
-		// 		shallowContour: 10,
-		// 		deepContour: 30,
-		// 	},
-		// },
-		// rules: [],
-		// debug: true,
-	}
-	encLayer = new EncRuntime(layerOptions)
-	map.addLayer(encLayer)
+	// 	const layerOptions = {
+	// 		tileSources: TILE_SOURCES,
+	// 		// id: 'enc-chart',
+	// 		// context: {
+	// 		// 	displayMode: 'standard',
+	// 		// 	environment: 'day',
+	// 		// 	safetyDepth: {
+	// 		// 		depth: 20,
+	// 		// 		shallowContour: 10,
+	// 		// 		deepContour: 30,
+	// 		// 	},
+	// 		// },
+	// 		// rules: [],
+	// 		// debug: true,
+	// 	}
+	// 	encLayer = new EncRuntime(layerOptions)
+	// 	// map.addLayer(encLayer)
 
-	// Event
-	addClickListener(map)
+	// 	// Event
+	// 	addClickListener(map)
 
-	// 挂载 DOM 事件
-	setupControls()
+	// 	// 挂载 DOM 事件
+	// 	setupControls()
 
-	// map.addLayer(new WaterLayer("http://127.0.0.1:8081/temp.geojson", "http://localhost:8081/texture/WaterNormal1.png"))
+	// 	// map.addLayer(new WaterLayer("http://127.0.0.1:8081/temp.geojson", "http://localhost:8081/texture/WaterNormal1.png"))
 
 	// })
 
@@ -108,6 +114,48 @@ map.on('load', () => {
 	// 	}
 	// });
 
+	// model layer with water
+	// map.addLayer(modelLayer as mapboxgl.AnyLayer)
+	// map.addLayer(cubeLayer as mapboxgl.AnyLayer)
+	new mapboxgl.Marker().setLngLat([-122.5122, 47.522]).addTo(map)
+
+
+	// // three map layer
+	const threeLayer = new ThreeMapLayer()
+	map.addLayer(threeLayer)
+
+	const anchor = [-122.5122, 47.522] as [number, number];
+	threeLayer.setAnchor(anchor);
+
+	// test: add a cube 
+	const addOneCube = () => {
+		// 在 addLayer 之后立即测试
+		const debugCenter = [-122.5, 47.5] as [number, number];
+
+		// 创建一个 100米 x 100米 x 100米 的红色盒子
+		const geometry = new THREE.BoxGeometry(100, 100, 100);
+		const material = new THREE.MeshBasicMaterial({ color: 0xff0000 });
+		const cube = new THREE.Mesh(geometry, material);
+
+		const posRelativeToAnchor = threeLayer.projectToScene(debugCenter, 50);
+		cube.position.copy(posRelativeToAnchor)
+
+		threeLayer.addToScene('debug-box', cube);
+	}
+
+	// test: add a glb
+	const addOneGlb = () => {
+		const loader = new GLTFLoader()
+		loader.load('http://localhost:8081/models/test.glb', (gltf) => {
+			const model = gltf.scene
+			model.position.set(0, 0, 0) // 就在 anchor 上
+			model.scale.set(1, 1, 1)
+			threeLayer.addToScene('center-floating', model)
+		})
+	}
+
+	addOneGlb()
+	addOneCube()
 
 })
 
