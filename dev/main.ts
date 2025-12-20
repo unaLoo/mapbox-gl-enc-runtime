@@ -1,4 +1,4 @@
-import mapboxgl from 'mapbox-gl'
+import mapboxgl, { Popup } from 'mapbox-gl'
 import 'mapbox-gl/dist/mapbox-gl.css'
 import EncRuntime from '../src/core/EncRuntime'
 import WaterLayer from './3dLayers/waterLayer'
@@ -9,7 +9,9 @@ import * as THREE from 'three'
 // import type { ENCLayerOptions } from '../src/core/ENCLayer'
 import addMaputnikLayer from './maputnik'
 import addTestLayer from './testStyle'
+import { addCustomWater } from './3dLayers/customWaterLayer'
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
+import { Water } from 'three/addons/objects/Water.js'
 
 const TILE_SOURCES = [
 	{
@@ -50,17 +52,19 @@ const TILE_SOURCES = [
 	// 	maxzoom: 7 // 数据源的最大zoom
 	// },
 ]
+const staticServer = 'http://localhost:8081'
 
 const map = new mapboxgl.Map({
 	container: 'map',
 	center: [-122.5122, 47.522],
-	zoom: 9,
+	pitch: 49,
+	zoom: 15,
 	// style: {
 	// 	version: 8,
 	// 	sources: {},
 	// 	layers: [],
-	// 	glyphs: 'http://localhost:8081/fonts/{fontstack}/{range}.pbf',
-	// 	sprite: 'http://localhost:8081/sprite/rastersymbols-day',
+	// 	glyphs: staticServer + '/fonts/{fontstack}/{range}.pbf',
+	// 	sprite: staticServer + '/sprite/rastersymbols-day',
 	// },
 	style: "mapbox://styles/mapbox/satellite-v9",
 	accessToken: 'pk.eyJ1IjoieWNzb2t1IiwiYSI6ImNrenozdWdodDAza3EzY3BtdHh4cm5pangifQ.ZigfygDi2bK4HXY1pWh-wg',
@@ -96,7 +100,7 @@ map.on('load', () => {
 	// 	// 挂载 DOM 事件
 	// 	setupControls()
 
-	// 	// map.addLayer(new WaterLayer("http://127.0.0.1:8081/temp.geojson", "http://localhost:8081/texture/WaterNormal1.png"))
+	// 	// map.addLayer(new WaterLayer("http://127.0.0.1:8081/temp.geojson", staticServer + "/texture/WaterNormal1.png"))
 
 	// })
 
@@ -117,7 +121,7 @@ map.on('load', () => {
 	// model layer with water
 	// map.addLayer(modelLayer as mapboxgl.AnyLayer)
 	// map.addLayer(cubeLayer as mapboxgl.AnyLayer)
-	new mapboxgl.Marker().setLngLat([-122.5122, 47.522]).addTo(map)
+
 
 
 	// // three map layer
@@ -126,37 +130,95 @@ map.on('load', () => {
 
 	const anchor = [-122.5122, 47.522] as [number, number];
 	threeLayer.setAnchor(anchor);
+	// new mapboxgl.Popup().setText('scene-anchor').setLngLat(anchor).addTo(map)
 
 	// test: add a cube 
-	const addOneCube = () => {
+	const addOneCube = (lnglat: [number, number]) => {
 		// 在 addLayer 之后立即测试
-		const debugCenter = [-122.5, 47.5] as [number, number];
+		const debugCenter = lnglat;
 
 		// 创建一个 100米 x 100米 x 100米 的红色盒子
-		const geometry = new THREE.BoxGeometry(100, 100, 100);
-		const material = new THREE.MeshBasicMaterial({ color: 0xff0000 });
+		const geometry = new THREE.BoxGeometry(50, 50, 50);
+		const material = new THREE.MeshBasicMaterial({ color: 0xf00000 });
 		const cube = new THREE.Mesh(geometry, material);
 
-		const posRelativeToAnchor = threeLayer.projectToScene(debugCenter, 50);
+		const posRelativeToAnchor = threeLayer.projectToScene(debugCenter, 15);
 		cube.position.copy(posRelativeToAnchor)
-
 		threeLayer.addToScene('debug-box', cube);
 	}
 
 	// test: add a glb
 	const addOneGlb = () => {
 		const loader = new GLTFLoader()
-		loader.load('http://localhost:8081/models/test.glb', (gltf) => {
+		loader.load(staticServer + '/models/test.glb', (gltf) => {
 			const model = gltf.scene
 			model.position.set(0, 0, 0) // 就在 anchor 上
-			model.scale.set(1, 1, 1)
+			model.scale.set(100, 100, 100)
 			threeLayer.addToScene('center-floating', model)
 		})
 	}
 
-	addOneGlb()
-	addOneCube()
+	// test: add water 
+	const addOneWater = (lnglat: [number, number]) => {
+		const layer = threeLayer
+		const scene = layer.scene;
+		// const renderer = layer.renderer!;
 
+		const waterAnchor = lnglat as [number, number];
+		const waterGeometry = new THREE.PlaneGeometry(10000, 10000);
+
+		// new mapboxgl.Popup().setText('waterAnchor').setLngLat(waterAnchor).addTo(map)
+
+		const water = new Water(
+			waterGeometry,
+			{
+				textureWidth: 1024,
+				textureHeight: 1024,
+				waterNormals: new THREE.TextureLoader().load(
+					'http://localhost:8081/texture/WaterNormal1.png', // 确保你有这张图
+					function (texture) {
+						texture.wrapS = texture.wrapT = THREE.RepeatWrapping;
+					}
+				),
+				distortionScale: 3.7,
+				fog: scene.fog !== undefined,
+				// sunDirection: new THREE.Vector3(0, 2, 3).normalize(),
+				// sunColor: 0xffffff,
+				// waterColor: 0xffffff,
+				// alpha: 0.8,
+				side: THREE.DoubleSide
+			}
+		);
+
+		const waterPos = layer.projectToScene(waterAnchor, 0);
+		water.position.copy(waterPos);
+		water.rotation.x = -Math.PI / 2;
+		water.material.transparent = true;
+		water.renderOrder = 1;
+
+		layer.addToScene('ocean-water', water);
+
+		layer.animatedObjects.push(water);
+
+		// const cubeGeo = new THREE.BoxGeometry(50, 50, 50);
+		// const cubeMat = new THREE.MeshStandardMaterial({
+		// 	roughness: 0, // 0 粗糙度 = 镜面反射
+		// 	metalness: 1
+		// });
+		// const cube = new THREE.Mesh(cubeGeo, cubeMat);
+
+		// const cubePos = waterPos.clone();
+		// cubePos.y += 0;
+		// cube.position.copy(cubePos);
+
+		// layer.addToScene('reflection-test-cube', cube);
+	};
+
+
+	addCustomWater(threeLayer, anchor)
+	addOneGlb()
+	// addOneWater(anchor)
+	// addOneCube([anchor[0], anchor[1] + 0.01])
 })
 
 function addClickListener(map: mapboxgl.Map) {
@@ -194,6 +256,10 @@ cleanBtn.addEventListener('click', () => {
 map.on('move', (_) => {
 	zoom.textContent = map.getZoom().toFixed(4)
 	center.textContent = `[${map.getCenter().lng.toFixed(2)}, ${map.getCenter().lat.toFixed(2)}]`
+})
+map.on('click', (e) => {
+	// console.log(e.lngLat.toString())
+	window.alert(e.lngLat.toString())
 })
 
 // ==================== 设置控制面板 ====================
