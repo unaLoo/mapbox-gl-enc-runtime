@@ -6,6 +6,7 @@ import addTestLayer from './testStyle'
 import { ThreeMapLayer } from './3d/ThreeMapLayer'
 import { addGLTF } from './3d/addGLTF'
 import { addWater } from './3d/addWater'
+import SunCalc from 'suncalc'
 
 
 const TILE_SOURCES = [
@@ -69,6 +70,27 @@ const map = new mapboxgl.Map({
 let encLayer: EncRuntime | null = null
 
 map.on('load', () => {
+
+	map.addLayer({
+		'id': 'sky-layer',
+		'type': 'sky',
+		'paint': {
+			'sky-opacity': [
+				'interpolate',
+				['linear'],
+				['zoom'],
+				0,
+				0,
+				5,
+				0.3,
+				8,
+				1
+			],
+			'sky-type': 'atmosphere',
+			'sky-atmosphere-sun': [90, 90],
+			'sky-atmosphere-sun-intensity': 20
+		}
+	});
 
 	// // three map layer
 	const threeLayer = new ThreeMapLayer()
@@ -157,7 +179,6 @@ map.on('load', () => {
 
 function addClickListener(map: mapboxgl.Map) {
 	const layers = Object.keys(map.style._layers)
-	console.log(layers)
 	map.on('click', (e) => {
 		// console.log(e.features?.map(item => {
 		// 	const { layer, properties } = item
@@ -206,4 +227,56 @@ function setupControls() {
 		// 触发地图重绘
 		map.triggerRepaint()
 	})
+}
+
+let curDate = new Date()
+const ipt = document.querySelector('#ipt') as HTMLInputElement
+ipt.oninput = (e) => {
+	const hours = Number(ipt.value)
+	const date = new Date(curDate.getTime() + hours * 60 * 60 * 1000)
+	const anchor = [-122.5122, 47.522] as [number, number]
+
+	const res = updateSunPosition(map, date, anchor, 'sky-layer')
+	console.log(res)
+}
+function updateSunPosition(
+	map: mapboxgl.Map,
+	time: Date,
+	[latitude, longitude]: [number, number],
+	skyLayerId = "dynamic-sky") {
+
+	// 1. 计算 SunCalc (弧度)
+	const sunPosition = SunCalc.getPosition(time, latitude, longitude);
+
+	// 2. 转换方位角 (Azimuth)
+	// SunCalc: 0=南, 顺时针
+	// Mapbox: 0=北, 顺时针
+	// 转换: +180度
+	const azimuth = (sunPosition.azimuth * 180 / Math.PI) + 180;
+
+	// 3. 转换高度角 (Altitude) 为 Mapbox 极角 (Polar Angle)
+	// SunCalc: 90=头顶, 0=地平线, -90=脚底
+	// Mapbox: 0=头顶, 90=地平线, 180=脚底 (范围必须是 0-180)
+	const altitudeDegrees = sunPosition.altitude * 180 / Math.PI;
+	const mapboxPolarAngle = 90 - altitudeDegrees;
+
+	// 4. 更新属性
+	// 这里传入的是 [方位角, 极角]
+	map.setPaintProperty(skyLayerId, 'sky-atmosphere-sun', [azimuth, mapboxPolarAngle]);
+
+	// 5. 强度计算 (继续使用原始的高度角来计算强度，逻辑更直观)
+	// 简单的平滑逻辑：高度角 < 0 则暗，> 0 则亮
+	const sunIntensity = Math.max(
+		0.1, // 最小强度 (夜晚)
+		Math.max(0, Math.sin(sunPosition.altitude)) * 15.0 // 最大强度 (白天)
+	);
+
+	map.setPaintProperty(skyLayerId, 'sky-atmosphere-sun-intensity', sunIntensity);
+	return {
+		time: time.toISOString(),
+		azimuth: azimuth,
+		altitude: altitudeDegrees, // 调试时还是看高度角比较符合直觉
+		mapboxPolar: mapboxPolarAngle, // 实际传给 Mapbox 的值
+		intensity: sunIntensity
+	};
 }
