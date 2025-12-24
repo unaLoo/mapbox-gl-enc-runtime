@@ -1,25 +1,17 @@
 import { LineLayerSpecification } from 'mapbox-gl'
-import ColorTable from '../ColorTable'
+import ColorTable, { ColorTableType } from '../ColorTable'
 
-const LCMLIN_CBLSUB_LINE: LineLayerSpecification = {
-	id: 'LCMLIN_CBLSUB_LINE',
-	type: 'line',
-	source: 'LINE_COMMON_LINE',
-	'source-layer': 'line_common',
-	filter: ['==', ['get', 'OBJL'], 22],
-	layout: {
-		'line-cap': 'round',
-		'line-join': 'round',
-	},
-	paint: {
-		'line-color': ColorTable.CHMGD,
-		'line-width': 1.2,
-		'line-dasharray': [4, 4],
-	},
+export function createCBLSUBLines(colors: ColorTableType) {
+	const LCMLIN_CBLSUB_LINE: LineLayerSpecification = {
+		id: 'LCMLIN_CBLSUB_LINE',
+		type: 'line',
+		source: 'LINE_COMMON_LINE',
+		'source-layer': 'line_common',
+		filter: ['==', ['get', 'OBJL'], 22],
+		layout: { 'line-cap': 'round', 'line-join': 'round' },
+		paint: { 'line-color': colors.CHMGD, 'line-width': 1.2, 'line-dasharray': [4, 4] },
+	}
+	return { lines: [LCMLIN_CBLSUB_LINE] as LineLayerSpecification[] }
 }
 
-const lines = [LCMLIN_CBLSUB_LINE]
-
-export default {
-	lines,
-}
+export default createCBLSUBLines(ColorTable)

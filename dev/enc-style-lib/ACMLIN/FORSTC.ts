@@ -1,31 +1,31 @@
 import { LineLayerSpecification } from 'mapbox-gl'
-import ColorTable from '../ColorTable'
+import ColorTable, { ColorTableType } from '../ColorTable'
 
-const ACMLIN_FORSTC_LINE: LineLayerSpecification = {
-	id: 'ACMLIN_FORSTC_LINE',
-	type: 'line',
-	source: 'AREA_COMMON_AREA',
-	'source-layer': 'area_common_polygon',
-	filter: ['==', ['get', 'OBJL'], 59],
-	layout: {
-		'line-cap': 'round',
-		'line-join': 'round',
-	},
-	paint: {
-		'line-color': [
-			'case',
-			['==', ['get', 'LineType'], 1],
-			ColorTable.CHBLK,
-			['==', ['get', 'LineType'], 2],
-			ColorTable.LANDF,
-			ColorTable.LANDF, // fallback（默认值）
-		],
-		'line-width': 1.2,
-	},
+export function createFORSTCLines(colors: ColorTableType) {
+	const ACMLIN_FORSTC_LINE: LineLayerSpecification = {
+		id: 'ACMLIN_FORSTC_LINE',
+		type: 'line',
+		source: 'AREA_COMMON_AREA',
+		'source-layer': 'area_common_polygon',
+		filter: ['==', ['get', 'OBJL'], 59],
+		layout: {
+			'line-cap': 'round',
+			'line-join': 'round',
+		},
+		paint: {
+			'line-color': [
+				'case',
+				['==', ['get', 'LineType'], 1],
+				colors.CHBLK,
+				['==', ['get', 'LineType'], 2],
+				colors.LANDF,
+				colors.LANDF,
+			],
+			'line-width': 1.2,
+		},
+	}
+
+	return { lines: [ACMLIN_FORSTC_LINE] as LineLayerSpecification[] }
 }
 
-const lines = [ACMLIN_FORSTC_LINE]
-
-export default {
-	lines,
-}
+export default createFORSTCLines(ColorTable)

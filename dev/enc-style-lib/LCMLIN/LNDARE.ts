@@ -1,24 +1,17 @@
 import { LineLayerSpecification } from 'mapbox-gl'
-import ColorTable from '../ColorTable'
+import ColorTable, { ColorTableType } from '../ColorTable'
 
-const LCMLIN_LNDARE_LINE: LineLayerSpecification = {
-	id: 'LCMLIN_LNDARE_LINE',
-	type: 'line',
-	source: 'LINE_COMMON_LINE',
-	'source-layer': 'line_common',
-	filter: ['==', ['get', 'OBJL'], 71],
-	layout: {
-		'line-cap': 'round',
-		'line-join': 'round',
-	},
-	paint: {
-		'line-color': ColorTable.CSTLN,
-		'line-width': 1.2,
-	},
+export function createLNDARELines(colors: ColorTableType) {
+	const LCMLIN_LNDARE_LINE: LineLayerSpecification = {
+		id: 'LCMLIN_LNDARE_LINE',
+		type: 'line',
+		source: 'LINE_COMMON_LINE',
+		'source-layer': 'line_common',
+		filter: ['==', ['get', 'OBJL'], 71],
+		layout: { 'line-cap': 'round', 'line-join': 'round' },
+		paint: { 'line-color': colors.CSTLN, 'line-width': 1.2 },
+	}
+	return { lines: [LCMLIN_LNDARE_LINE] as LineLayerSpecification[] }
 }
 
-const lines = [LCMLIN_LNDARE_LINE]
-
-export default {
-	lines,
-}
+export default createLNDARELines(ColorTable)

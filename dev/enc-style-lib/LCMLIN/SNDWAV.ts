@@ -1,25 +1,17 @@
 import { LineLayerSpecification } from 'mapbox-gl'
-import ColorTable from '../ColorTable'
+import ColorTable, { ColorTableType } from '../ColorTable'
 
-const LCMLIN_SNDWAV_LINE: LineLayerSpecification = {
-	id: 'LCMLIN_SNDWAV_LINE',
-	type: 'line',
-	source: 'LINE_COMMON_LINE',
-	'source-layer': 'line_common',
-	filter: ['==', ['get', 'OBJL'], 118],
-	layout: {
-		'line-cap': 'round',
-		'line-join': 'round',
-	},
-	paint: {
-		'line-color': ColorTable.CHGRD,
-		'line-width': 2,
-		'line-dasharray': [4, 4],
-	},
+export function createSNDWAVLines(colors: ColorTableType) {
+	const LCMLIN_SNDWAV_LINE: LineLayerSpecification = {
+		id: 'LCMLIN_SNDWAV_LINE',
+		type: 'line',
+		source: 'LINE_COMMON_LINE',
+		'source-layer': 'line_common',
+		filter: ['==', ['get', 'OBJL'], 118],
+		layout: { 'line-cap': 'round', 'line-join': 'round' },
+		paint: { 'line-color': colors.CHGRD, 'line-width': 2, 'line-dasharray': [4, 4] },
+	}
+	return { lines: [LCMLIN_SNDWAV_LINE] as LineLayerSpecification[] }
 }
 
-const lines = [LCMLIN_SNDWAV_LINE]
-
-export default {
-	lines,
-}
+export default createSNDWAVLines(ColorTable)

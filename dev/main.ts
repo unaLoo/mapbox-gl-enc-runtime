@@ -1,12 +1,15 @@
-import mapboxgl, { Popup } from 'mapbox-gl'
+import mapboxgl from 'mapbox-gl'
 import 'mapbox-gl/dist/mapbox-gl.css'
 import EncRuntime from '../src/core/EncRuntime'
 import addTestLayer from './archive/testStyle'
 
-import myStyle from './enc-style-lib/index'
+import myStyle, { generateStyle, updateMapWithStyle } from './enc-style-lib/index'
+import { StyleConfig, defaultStyleConfig, getAvailableThemes } from './enc-style-lib/StyleConfig'
 import Stats from 'three/addons/libs/stats.module.js'
 
 import LIGHTSLAYER from './enc-style-lib/LIGHTS'
+import defaultColorTable from './enc-style-lib/ColorTable'
+import style from './enc-style-lib/index'
 
 const staticServer = 'http://localhost:8081'
 const renderStats = new Stats()
@@ -58,12 +61,10 @@ map.on('load', () => {
 
     map.getCanvas().parentElement?.appendChild(renderStats.dom)
 
-    addTestLayer(map, myStyle).then(() => {
+    updateMapWithStyle(map, style, currentConfig).then(() => {
         addClickListener(map)
-
-        const testLayer = new LIGHTSLAYER()
-        map.addLayer(testLayer, 'PCMMRK_LNDMRK_SYMBOL')
     })
+
 
 })
 
@@ -103,6 +104,35 @@ cleanBtn.addEventListener('click', () => {
     // @ts-ignore
     encLayer?.tileManager?.cleanCache()
 })
+
+// 样式配置状态
+let currentConfig: StyleConfig = { ...defaultStyleConfig }
+
+// 主题切换
+const themeSelect = document.getElementById('themeSelect') as HTMLSelectElement
+if (themeSelect) {
+
+    getAvailableThemes().forEach(theme => {
+        const option = document.createElement('option')
+        option.value = theme
+        option.textContent = theme.replace(/_/g, ' ')
+        option.selected = theme === currentConfig.theme
+        themeSelect.appendChild(option)
+    })
+    themeSelect.addEventListener('change', () => {
+        console.log('1')
+        currentConfig.theme = themeSelect.value as any
+        applyStyleConfig()
+    })
+}
+
+// 应用样式配置
+function applyStyleConfig() {
+    const newStyle = generateStyle(currentConfig)
+    updateMapWithStyle(map, newStyle, currentConfig).then(() => {
+        addClickListener(map)
+    })
+}
 map.on('move', (_) => {
     zoom.textContent = map.getZoom().toFixed(4)
     center.textContent = `[${map.getCenter().lng.toFixed(2)}, ${map.getCenter().lat.toFixed(2)}]`

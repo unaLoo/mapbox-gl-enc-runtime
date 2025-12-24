@@ -1,72 +1,72 @@
 import { LineLayerSpecification } from 'mapbox-gl'
-import ColorTable from '../ColorTable'
+import ColorTable, { ColorTableType } from '../ColorTable'
 
-const ACMLIN_OBSTRN_LINE_0: LineLayerSpecification = {
-	id: 'ACMLIN_OBSTRN_LINE_0',
-	type: 'line',
-	source: 'AREA_COMMON_AREA',
-	'source-layer': 'area_common_polygon',
-	filter: ['all', ['==', ['get', 'OBJL'], 86], ['match', ['get', 'LineType'], [1, 2, 4, 6], true, false]], // dash ...
-	layout: {
-		'line-cap': 'round',
-		'line-join': 'round',
-	},
-	paint: {
-		'line-color': [
-			'case',
-			['==', ['get', 'LineType'], 1],
-			ColorTable.CSTLN,
-			['==', ['get', 'LineType'], 2],
-			ColorTable.CHMGD,
-			['==', ['get', 'LineType'], 4],
-			ColorTable.CHBLK,
-			ColorTable.CSTLN, // LineType == 6
-		],
-		'line-width': [
-			'case',
-			['==', ['get', 'LineType'], 4],
-			2,
-			['==', ['get', 'LineType'], 6],
-			2,
-			1.2, // LineType == 1 or 2
-		],
-		'line-dasharray': [4, 4],
-	},
-}
-const ACMLIN_OBSTRN_LINE_1: LineLayerSpecification = {
-	id: 'ACMLIN_OBSTRN_LINE_1',
-	type: 'line',
-	source: 'AREA_COMMON_AREA',
-	'source-layer': 'area_common_polygon',
-	filter: ['all', ['==', ['get', 'OBJL'], 86], ['match', ['get', 'LineType'], [5], true, false]], // solid ...
-	layout: {
-		'line-cap': 'round',
-		'line-join': 'round',
-	},
-	paint: {
-		'line-width': 16,
-		'line-color': ColorTable.CSTLN,
-	},
-}
-const ACMLIN_OBSTRN_LINE_2: LineLayerSpecification = {
-	id: 'ACMLIN_OBSTRN_LINE_2',
-	type: 'line',
-	source: 'AREA_COMMON_AREA',
-	'source-layer': 'area_common_polygon',
-	filter: ['all', ['==', ['get', 'OBJL'], 86], ['match', ['get', 'LineType'], [3], true, false]], // dot...
-	layout: {
-		'line-cap': 'round',
-		'line-join': 'round',
-	},
-	paint: {
-		'line-width': 4,
-		'line-color': ColorTable.CHBLK,
-		'line-dasharray': [0, 2, 2, 2], // like:   --    --   --
-	},
+export function createOBSTRNLines(colors: ColorTableType) {
+	const ACMLIN_OBSTRN_LINE_0: LineLayerSpecification = {
+		id: 'ACMLIN_OBSTRN_LINE_0',
+		type: 'line',
+		source: 'AREA_COMMON_AREA',
+		'source-layer': 'area_common_polygon',
+		filter: ['all', ['==', ['get', 'OBJL'], 86], ['match', ['get', 'LineType'], [1, 2, 4, 6], true, false]],
+		layout: {
+			'line-cap': 'round',
+			'line-join': 'round',
+		},
+		paint: {
+			'line-color': [
+				'case',
+				['==', ['get', 'LineType'], 1],
+				colors.CSTLN,
+				['==', ['get', 'LineType'], 2],
+				colors.CHMGD,
+				['==', ['get', 'LineType'], 4],
+				colors.CHBLK,
+				colors.CSTLN,
+			],
+			'line-width': [
+				'case',
+				['==', ['get', 'LineType'], 4],
+				2,
+				['==', ['get', 'LineType'], 6],
+				2,
+				1.2,
+			],
+			'line-dasharray': [4, 4],
+		},
+	}
+	const ACMLIN_OBSTRN_LINE_1: LineLayerSpecification = {
+		id: 'ACMLIN_OBSTRN_LINE_1',
+		type: 'line',
+		source: 'AREA_COMMON_AREA',
+		'source-layer': 'area_common_polygon',
+		filter: ['all', ['==', ['get', 'OBJL'], 86], ['match', ['get', 'LineType'], [5], true, false]],
+		layout: {
+			'line-cap': 'round',
+			'line-join': 'round',
+		},
+		paint: {
+			'line-width': 16,
+			'line-color': colors.CSTLN,
+		},
+	}
+	const ACMLIN_OBSTRN_LINE_2: LineLayerSpecification = {
+		id: 'ACMLIN_OBSTRN_LINE_2',
+		type: 'line',
+		source: 'AREA_COMMON_AREA',
+		'source-layer': 'area_common_polygon',
+		filter: ['all', ['==', ['get', 'OBJL'], 86], ['match', ['get', 'LineType'], [3], true, false]],
+		layout: {
+			'line-cap': 'round',
+			'line-join': 'round',
+		},
+		paint: {
+			'line-width': 4,
+			'line-color': colors.CHBLK,
+			'line-dasharray': [0, 2, 2, 2],
+		},
+	}
+
+	return { lines: [ACMLIN_OBSTRN_LINE_0, ACMLIN_OBSTRN_LINE_1, ACMLIN_OBSTRN_LINE_2] as LineLayerSpecification[] }
 }
 
-const lines = [ACMLIN_OBSTRN_LINE_0, ACMLIN_OBSTRN_LINE_1, ACMLIN_OBSTRN_LINE_2]
-
-export default {
-	lines,
-}
+export default createOBSTRNLines(ColorTable)

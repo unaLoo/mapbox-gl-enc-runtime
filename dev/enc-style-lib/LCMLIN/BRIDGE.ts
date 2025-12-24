@@ -1,24 +1,17 @@
 import { LineLayerSpecification } from 'mapbox-gl'
-import ColorTable from '../ColorTable'
+import ColorTable, { ColorTableType } from '../ColorTable'
 
-const LCMLIN_BRIDGE_LINE: LineLayerSpecification = {
-	id: 'LCMLIN_BRIDGE_LINE',
-	type: 'line',
-	source: 'LINE_COMMON_LINE',
-	'source-layer': 'line_common',
-	filter: ['==', ['get', 'OBJL'], 11],
-	layout: {
-		'line-cap': 'round',
-		'line-join': 'round',
-	},
-	paint: {
-		'line-color': ColorTable.CHGRD,
-		'line-width': 4,
-	},
+export function createBRIDGELines(colors: ColorTableType) {
+	const LCMLIN_BRIDGE_LINE: LineLayerSpecification = {
+		id: 'LCMLIN_BRIDGE_LINE',
+		type: 'line',
+		source: 'LINE_COMMON_LINE',
+		'source-layer': 'line_common',
+		filter: ['==', ['get', 'OBJL'], 11],
+		layout: { 'line-cap': 'round', 'line-join': 'round' },
+		paint: { 'line-color': colors.CHGRD, 'line-width': 4 },
+	}
+	return { lines: [LCMLIN_BRIDGE_LINE] as LineLayerSpecification[] }
 }
 
-const lines = [LCMLIN_BRIDGE_LINE]
-
-export default {
-	lines,
-}
+export default createBRIDGELines(ColorTable)

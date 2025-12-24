@@ -1,5 +1,6 @@
 import { CustomLayerInterface, Map, MercatorCoordinate } from "mapbox-gl";
-import ColorTable from './ColorTable'
+import { type ColorTableType } from './ColorTable'
+// import COLOR
 
 interface LightProp {
     "CHARTID": number;
@@ -24,6 +25,7 @@ export default class LIGHTSLAYER implements CustomLayerInterface {
     renderingMode: '2d' | '3d';
     map!: Map
     gl!: WebGL2RenderingContext
+    colorTable: ColorTableType
 
     ringProgram!: WebGLProgram;
     ringBuffer: WebGLBuffer | null = null;
@@ -41,12 +43,13 @@ export default class LIGHTSLAYER implements CustomLayerInterface {
     debug: Function
     mapUpdateHandler: Function
 
-    constructor() {
+    constructor(colors: ColorTableType) {
         this.id = 'test-custom-layer';
         this.type = 'custom';
         this.renderingMode = '2d';
         // this.debug = throttle(this._debug, 300, true).bind(this)
         this.mapUpdateHandler = this.update.bind(this)
+        this.colorTable = colors
     }
 
     _debug(): void {
@@ -131,56 +134,56 @@ export default class LIGHTSLAYER implements CustomLayerInterface {
 
         const dict = {
             101: {
-                color: hexToRgb(ColorTable.LITRD),
+                color: hexToRgb(this.colorTable.LITRD),
                 sec1: 0,
                 sec2: 360,
                 ri: feat.properties.VAL1 * 8, // field value of VAL1
                 ro: feat.properties.VAL1 * 8 + 14, // field value of VAL1 + 3
             },
             102: {
-                color: hexToRgb(ColorTable.LITGN),
+                color: hexToRgb(this.colorTable.LITGN),
                 sec1: 0,
                 sec2: 360,
                 ri: feat.properties.VAL1 * 8, // field value of VAL1
                 ro: feat.properties.VAL1 * 8 + 14, // field value of VAL1 + 3
             },
             103: {
-                color: hexToRgb(ColorTable.LITYW),
+                color: hexToRgb(this.colorTable.LITYW),
                 sec1: 0,
                 sec2: 360,
                 ri: feat.properties.VAL1 * 8, // field value of VAL1
                 ro: feat.properties.VAL1 * 8 + 14, // field value of VAL1 + 3
             },
             104: {
-                color: hexToRgb(ColorTable.CHMGD),
+                color: hexToRgb(this.colorTable.CHMGD),
                 sec1: 0,
                 sec2: 360,
                 ri: feat.properties.VAL1 * 8, // field value of VAL1
                 ro: feat.properties.VAL1 * 8 + 14, // field value of VAL1 + 3
             },
             201: {
-                color: hexToRgb(ColorTable.LITRD),
+                color: hexToRgb(this.colorTable.LITRD),
                 sec1: (feat.properties.VAL1 + 180) % 360,
                 sec2: (feat.properties.VAL2 + 180) % 360,
                 ri: 12 * 8,
                 ro: 12 * 8 + 14,
             },
             202: {
-                color: hexToRgb(ColorTable.LITGN),
+                color: hexToRgb(this.colorTable.LITGN),
                 sec1: (feat.properties.VAL1 + 180) % 360,
                 sec2: (feat.properties.VAL2 + 180) % 360,
                 ri: 12 * 8, // field value of VAL1
                 ro: 12 * 8 + 14, // field value of VAL1 + 3
             },
             203: {
-                color: hexToRgb(ColorTable.LITYW),
+                color: hexToRgb(this.colorTable.LITYW),
                 sec1: (feat.properties.VAL1 + 180) % 360,
                 sec2: (feat.properties.VAL2 + 180) % 360,
                 ri: 12 * 8,
                 ro: 12 * 8 + 14,
             },
             204: {
-                color: hexToRgb(ColorTable.CHMGD),
+                color: hexToRgb(this.colorTable.CHMGD),
                 sec1: (feat.properties.VAL1 + 180) % 360,
                 sec2: (feat.properties.VAL2 + 180) % 360,
                 ri: 12 * 8,

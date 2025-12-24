@@ -1,14 +1,15 @@
 import { FillLayerSpecification, SymbolLayerSpecification, LineLayerSpecification } from 'mapbox-gl'
-import BUISGL from './BUISGL'
+import ColorTable, { ColorTableType } from '../ColorTable'
+import { createBUISGLLayers } from './BUISGL'
 
-const fills: FillLayerSpecification[] = [...BUISGL.fills]
-const lines: LineLayerSpecification[] = [...BUISGL.lines]
-const symbols: SymbolLayerSpecification[] = [...BUISGL.symbols]
+export function createCOMARELayers(colors: ColorTableType) {
+	const buisgl = createBUISGLLayers(colors)
 
-const COMARE = {
-	fills,
-	lines,
-	symbols,
+	return {
+		fills: [...buisgl.fills] as FillLayerSpecification[],
+		lines: [...buisgl.lines] as LineLayerSpecification[],
+		symbols: [...buisgl.symbols] as SymbolLayerSpecification[],
+	}
 }
 
-export default COMARE
+export default createCOMARELayers(ColorTable)

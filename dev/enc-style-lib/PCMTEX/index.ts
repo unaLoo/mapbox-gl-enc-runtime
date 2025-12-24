@@ -1,30 +1,35 @@
 import { SymbolLayerSpecification } from 'mapbox-gl'
-import BCNLAT from './BCNLAT'
-import BERTHS from './BERTHS'
-import BOYSPP from './BOYSPP'
-import LNDELV from './LNDELV'
-import LNDRGN from './LNDRGN'
-import OBSTRN from './OBSTRN'
-import SBDARE from './SBDARE'
-import UWTROC from './UWTROC'
-import WRECKS from './WRECKS'
-import TS_FEB from './TS_FEB'
-import ANNOTA from './ANNOTA'
+import ColorTable, { ColorTableType } from '../ColorTable'
+import { createBCNLATTexts } from './BCNLAT'
+import { createBERTHSTexts } from './BERTHS'
+import { createBOYSPPTexts } from './BOYSPP'
+import { createLNDELVTexts } from './LNDELV'
+import { createLNDRGNTexts } from './LNDRGN'
+import { createOBSTRNTexts } from './OBSTRN'
+import { createSBDARETexts } from './SBDARE'
+import { createUWTROCTexts } from './UWTROC'
+import { createWRECKSTexts } from './WRECKS'
+import { createTS_FEBTexts } from './TS_FEB'
+import { createANNOTATexts } from './ANNOTA'
+import { createBOYLATTexts } from './BOYLAT'
 
-const texts: SymbolLayerSpecification[] = [
-	...BCNLAT.texts,
-	...BERTHS.texts,
-	...BOYSPP.texts,
-	...LNDELV.texts,
-	...LNDRGN.texts,
-	...OBSTRN.texts,
-	...SBDARE.texts,
-	...UWTROC.texts,
-	...WRECKS.texts,
-	...TS_FEB.texts,
-	...ANNOTA.texts,
-]
+export function createPCMTEXLayers(colors: ColorTableType) {
+	const texts: SymbolLayerSpecification[] = [
+		...createBCNLATTexts(colors).texts,
+		...createBERTHSTexts(colors).texts,
+		...createBOYLATTexts(colors).texts,
+		...createBOYSPPTexts(colors).texts,
+		...createLNDELVTexts(colors).texts,
+		...createLNDRGNTexts(colors).texts,
+		...createOBSTRNTexts(colors).texts,
+		...createSBDARETexts(colors).texts,
+		...createUWTROCTexts(colors).texts,
+		...createWRECKSTexts(colors).texts,
+		...createTS_FEBTexts(colors).texts,
+		...createANNOTATexts(colors).texts,
+	]
 
-export default {
-	texts,
+	return { texts }
 }
+
+export default createPCMTEXLayers(ColorTable)

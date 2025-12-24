@@ -1,31 +1,31 @@
 import { LineLayerSpecification } from 'mapbox-gl'
-import ColorTable from '../ColorTable'
+import ColorTable, { ColorTableType } from '../ColorTable'
 
-const ACMLIN_CRANES_LINE: LineLayerSpecification = {
-	id: 'ACMLIN_CRANES_LINE',
-	type: 'line',
-	source: 'AREA_COMMON_AREA',
-	'source-layer': 'area_common_polygon',
-	filter: ['match', ['get', 'OBJL'], [35, 74, 125], true, false], // LNDMRK, SILTNK
-	layout: {
-		'line-cap': 'round',
-		'line-join': 'round',
-	},
-	paint: {
-		'line-color': [
-			'case',
-			['==', ['get', 'LineType'], 1],
-			ColorTable.CHBLK,
-			['==', ['get', 'LineType'], 2],
-			ColorTable.LANDF,
-			ColorTable.LANDF,
-		],
-		'line-width': 1.2,
-	},
+export function createCRANESLines(colors: ColorTableType) {
+	const ACMLIN_CRANES_LINE: LineLayerSpecification = {
+		id: 'ACMLIN_CRANES_LINE',
+		type: 'line',
+		source: 'AREA_COMMON_AREA',
+		'source-layer': 'area_common_polygon',
+		filter: ['match', ['get', 'OBJL'], [35, 74, 125], true, false],
+		layout: {
+			'line-cap': 'round',
+			'line-join': 'round',
+		},
+		paint: {
+			'line-color': [
+				'case',
+				['==', ['get', 'LineType'], 1],
+				colors.CHBLK,
+				['==', ['get', 'LineType'], 2],
+				colors.LANDF,
+				colors.LANDF,
+			],
+			'line-width': 1.2,
+		},
+	}
+
+	return { lines: [ACMLIN_CRANES_LINE] as LineLayerSpecification[] }
 }
 
-const lines = [ACMLIN_CRANES_LINE]
-
-export default {
-	lines,
-}
+export default createCRANESLines(ColorTable)

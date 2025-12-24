@@ -1,4 +1,4 @@
-const ColorTables = {
+export const ColorTables = {
 	DAY_BRIGHT: {
 		NODTA: '#a3b4b7',
 		CURSR: '#eb7d36',
@@ -326,7 +326,10 @@ const ColorTables = {
 	},
 } as const
 
-const Theme: keyof typeof ColorTables = 'DAY_BRIGHT'
+export type ThemeName = keyof typeof ColorTables
+export type ColorTableType = typeof ColorTables[ThemeName]
+
+const Theme: ThemeName = 'DAY_BRIGHT'
 
 const ColorTable = ColorTables[Theme]
 

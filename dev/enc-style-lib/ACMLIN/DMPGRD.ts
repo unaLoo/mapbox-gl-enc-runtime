@@ -1,39 +1,39 @@
 import { LineLayerSpecification } from 'mapbox-gl'
-import ColorTable from '../ColorTable'
+import ColorTable, { ColorTableType } from '../ColorTable'
 
-const ACMLIN_DMPGRD_LINE_0: LineLayerSpecification = {
-	id: 'ACMLIN_DMPGRD_LINE_0',
-	type: 'line',
-	source: 'AREA_COMMON_AREA',
-	'source-layer': 'area_common_polygon',
-	filter: ['all', ['==', ['get', 'OBJL'], 48], ['==', ['get', 'LineType'], 1]],
-	layout: {
-		'line-cap': 'round',
-		'line-join': 'round',
-	},
-	paint: {
-		'line-pattern': 'NAVARE51',
-		'line-width': 16,
-	},
-}
-const ACMLIN_DMPGRD_LINE_1: LineLayerSpecification = {
-	id: 'ACMLIN_DMPGRD_LINE_0',
-	type: 'line',
-	source: 'AREA_COMMON_AREA',
-	'source-layer': 'area_common_polygon',
-	filter: ['all', ['==', ['get', 'OBJL'], 48], ['==', ['get', 'LineType'], 2]],
-	layout: {
-		'line-cap': 'round',
-		'line-join': 'round',
-	},
-	paint: {
-		'line-pattern': 'CTYARE51',
-		'line-width': 16,
-	},
+export function createDMPGRDLines(colors: ColorTableType) {
+	const ACMLIN_DMPGRD_LINE_0: LineLayerSpecification = {
+		id: 'ACMLIN_DMPGRD_LINE_0',
+		type: 'line',
+		source: 'AREA_COMMON_AREA',
+		'source-layer': 'area_common_polygon',
+		filter: ['all', ['==', ['get', 'OBJL'], 48], ['==', ['get', 'LineType'], 1]],
+		layout: {
+			'line-cap': 'round',
+			'line-join': 'round',
+		},
+		paint: {
+			'line-pattern': 'NAVARE51',
+			'line-width': 16,
+		},
+	}
+	const ACMLIN_DMPGRD_LINE_1: LineLayerSpecification = {
+		id: 'ACMLIN_DMPGRD_LINE_1',
+		type: 'line',
+		source: 'AREA_COMMON_AREA',
+		'source-layer': 'area_common_polygon',
+		filter: ['all', ['==', ['get', 'OBJL'], 48], ['==', ['get', 'LineType'], 2]],
+		layout: {
+			'line-cap': 'round',
+			'line-join': 'round',
+		},
+		paint: {
+			'line-pattern': 'CTYARE51',
+			'line-width': 16,
+		},
+	}
+
+	return { lines: [ACMLIN_DMPGRD_LINE_0, ACMLIN_DMPGRD_LINE_1] as LineLayerSpecification[] }
 }
 
-const lines = [ACMLIN_DMPGRD_LINE_0, ACMLIN_DMPGRD_LINE_1]
-
-export default {
-	lines,
-}
+export default createDMPGRDLines(ColorTable)

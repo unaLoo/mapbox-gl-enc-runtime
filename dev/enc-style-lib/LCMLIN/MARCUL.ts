@@ -1,25 +1,17 @@
 import { LineLayerSpecification } from 'mapbox-gl'
-import ColorTable from '../ColorTable'
+import ColorTable, { ColorTableType } from '../ColorTable'
 
-const LCMLIN_MARCUL_LINE: LineLayerSpecification = {
-	id: 'LCMLIN_MARCUL_LINE',
-	type: 'line',
-	source: 'LINE_COMMON_LINE',
-	'source-layer': 'line_common',
-	filter: ['==', ['get', 'OBJL'], 82],
-	layout: {
-		'line-cap': 'round',
-		'line-join': 'round',
-	},
-	paint: {
-		'line-color': ColorTable.CHGRF,
-		'line-width': 2,
-		'line-dasharray': [4, 4],
-	},
+export function createMARCULLines(colors: ColorTableType) {
+	const LCMLIN_MARCUL_LINE: LineLayerSpecification = {
+		id: 'LCMLIN_MARCUL_LINE',
+		type: 'line',
+		source: 'LINE_COMMON_LINE',
+		'source-layer': 'line_common',
+		filter: ['==', ['get', 'OBJL'], 82],
+		layout: { 'line-cap': 'round', 'line-join': 'round' },
+		paint: { 'line-color': colors.CHGRF, 'line-width': 2, 'line-dasharray': [4, 4] },
+	}
+	return { lines: [LCMLIN_MARCUL_LINE] as LineLayerSpecification[] }
 }
 
-const lines = [LCMLIN_MARCUL_LINE]
-
-export default {
-	lines,
-}
+export default createMARCULLines(ColorTable)
