@@ -1,0 +1,478 @@
+<layer name="A_COMMON_MARK" cache="vtdb#AREA_COMMON_MARK_%" type="case.int" field="1" minLevel='10' maxLevel='20'>
+    <!-- ACHARE Anchorage area-->
+    <style type="multi" style="key:4">
+        <style type="case.string" field="3">
+            <style type="pointx.icon" style="key:ACHARE02;check_coll:0;img:(./fill_images/rastersymbols-day.png);rect:ACHARE02" />
+            <style type="pointx.icon" style="key:ACHARE51;check_coll:0;img:(./fill_images/rastersymbols-day.png);rect:ACHARE51" />
+        </style>
+        <style type="case.string" field="4">
+            <style type="pointx.icon" style="key:ENTRES61;check_coll:0;img:(./fill_images/rastersymbols-day.png);rect:ENTRES61;offset_x:-35;offset_y:30;" />
+            <style type="pointx.icon" style="key:ENTRES71;check_coll:0;img:(./fill_images/rastersymbols-day.png);rect:ENTRES71;offset_x:-36;offset_y:29;" />
+            <style type="pointx.icon" style="key:ENTRES51;check_coll:0;img:(./fill_images/rastersymbols-day.png);rect:ENTRES51;offset_x:-29;offset_y:29;" />
+            <style type="pointx.icon" style="key:ACHRES61;check_coll:0;img:(./fill_images/rastersymbols-day.png);rect:ACHRES61;offset_x:-42;offset_y:38;" />
+            <style type="pointx.icon" style="key:ACHRES71;check_coll:0;img:(./fill_images/rastersymbols-day.png);rect:ACHRES71;offset_x:-43;offset_y:38;" />
+            <style type="pointx.icon" style="key:ACHRES51;check_coll:0;img:(./fill_images/rastersymbols-day.png);rect:ACHRES51;offset_x:-36;offset_y:38;" />
+            <style type="pointx.icon" style="key:FSHRES71;check_coll:0;img:(./fill_images/rastersymbols-day.png);rect:FSHRES71;offset_x:-38;offset_y:19;" />
+            <style type="pointx.icon" style="key:FSHRES51;check_coll:0;img:(./fill_images/rastersymbols-day.png);rect:FSHRES51;offset_x:-30;offset_y:19;" />
+            <style type="pointx.icon" style="key:INFARE51;check_coll:0;img:(./fill_images/rastersymbols-day.png);rect:INFARE51;offset_x:-24;offset_y:24;" />
+            <style type="pointx.icon" style="key:RSRDEF51;check_coll:0;img:(./fill_images/rastersymbols-day.png);rect:RSRDEF51;offset_x:-29;offset_y:29;" />
+        </style>
+    </style>
+    
+    <!-- BERTHS Berth-->
+    <style type="pointx.icon" style="key:10;check_coll:0;img:(./fill_images/rastersymbols-day.png);rect:BRTHNO01" />
+    
+    <!-- BRIDGE Bridge-->
+    <style type="multi" style="key:11">
+        <style type="case.string" field="3">
+            <style type="pointx.icon" style="key:BRIDGE01;check_coll:0;img:(./fill_images/rastersymbols-day.png);rect:BRIDGE01" />
+        </style>
+        <style type="latex.point" style="text:2;hide_dupl:0;type:-1;unicode:false;-1:rank(5),color(0xFF000000),size(30),position(0),rect(-13, -13, 13, 13)"/>
+    </style>
+    
+    <!-- CBLARE Cable area-->
+    <style type="multi" style="key:20">
+        <style type="pointx.icon" style="check_coll:0;img:(./fill_images/rastersymbols-day.png);rect:CBLARE51;offset_x:-100;offset_y:-10;" />
+        <style type="case.string" field="4">
+            <style type="pointx.icon" style="key:ENTRES61;check_coll:0;img:(./fill_images/rastersymbols-day.png);rect:ENTRES61;offset_x:-35;offset_y:30;" />
+            <style type="pointx.icon" style="key:ENTRES71;check_coll:0;img:(./fill_images/rastersymbols-day.png);rect:ENTRES71;offset_x:-36;offset_y:29;" />
+            <style type="pointx.icon" style="key:ENTRES51;check_coll:0;img:(./fill_images/rastersymbols-day.png);rect:ENTRES51;offset_x:-29;offset_y:29;" />
+            <style type="pointx.icon" style="key:ACHRES61;check_coll:0;img:(./fill_images/rastersymbols-day.png);rect:ACHRES61;offset_x:-42;offset_y:38;" />
+            <style type="pointx.icon" style="key:ACHRES71;check_coll:0;img:(./fill_images/rastersymbols-day.png);rect:ACHRES71;offset_x:-43;offset_y:38;" />
+            <style type="pointx.icon" style="key:ACHRES51;check_coll:0;img:(./fill_images/rastersymbols-day.png);rect:ACHRES51;offset_x:-36;offset_y:38;" />
+            <style type="pointx.icon" style="key:FSHRES71;check_coll:0;img:(./fill_images/rastersymbols-day.png);rect:FSHRES71;offset_x:-38;offset_y:19;" />
+            <style type="pointx.icon" style="key:FSHRES51;check_coll:0;img:(./fill_images/rastersymbols-day.png);rect:FSHRES51;offset_x:-30;offset_y:19;" />
+            <style type="pointx.icon" style="key:INFARE51;check_coll:0;img:(./fill_images/rastersymbols-day.png);rect:INFARE51;offset_x:-24;offset_y:24;" />
+            <style type="pointx.icon" style="key:RSRDEF51;check_coll:0;img:(./fill_images/rastersymbols-day.png);rect:RSRDEF51;offset_x:-29;offset_y:29;" />
+        </style>
+    </style>
+    
+    <!-- CTSARE Cargo transshipment area-->
+    <style type="pointx.icon" style="key:25;check_coll:0;img:(./fill_images/rastersymbols-day.png);rect:INFARE51" />
+    
+    <!-- CTNARE Caution area-->
+    <style type="pointx.icon" style="key:27;check_coll:0;img:(./fill_images/rastersymbols-day.png);rect:CTNARE51" />
+    
+    <!-- CHKPNT Checkpoint-->
+    <style type="pointx.icon" style="key:28;check_coll:0;img:(./fill_images/rastersymbols-day.png);rect:POSGEN04" />
+    
+    <!-- CONVYR Conveyor-->
+    <style type="case.string" field="3" style="key:34">
+        <style type="pointx.icon" style="key:RACNSP01;check_coll:0;img:(./fill_images/rastersymbols-day.png);rect:RACNSP01" />
+    </style>
+    
+    <!-- DWRTPT Deep water route part-->
+    <style type="multi" style="key:41;">  
+        <style type="pointx.icon" style="check_coll:0;img:(./fill_images/rastersymbols-day.png);rect:DWRTPT51;rotate:[5]" />
+        <style type="case.string" field="3">
+            <style type="pointx.icon" style="key:TSSLPT51;check_coll:0;img:(./fill_images/rastersymbols-day.png);rect:TSSLPT51;offset_x:19;offset_y:-40;" />
+            <style type="pointx.icon" style="key:DWRUTE51;check_coll:0;img:(./fill_images/rastersymbols-day.png);rect:DWRUTE51;offset_x:19;offset_y:-44;" />
+            <style type="pointx.icon" style="key:TWRTPT52;check_coll:0;img:(./fill_images/rastersymbols-day.png);rect:TWRTPT52;offset_x:19;offset_y:-41;" />
+        </style>
+        <style type="case.string" field="4">
+            <style type="pointx.icon" style="key:ENTRES61;check_coll:0;img:(./fill_images/rastersymbols-day.png);rect:ENTRES61;offset_x:-35;offset_y:30;" />
+            <style type="pointx.icon" style="key:ENTRES71;check_coll:0;img:(./fill_images/rastersymbols-day.png);rect:ENTRES71;offset_x:-36;offset_y:29;" />
+            <style type="pointx.icon" style="key:ENTRES51;check_coll:0;img:(./fill_images/rastersymbols-day.png);rect:ENTRES51;offset_x:-29;offset_y:29;" />
+            <style type="pointx.icon" style="key:ACHRES61;check_coll:0;img:(./fill_images/rastersymbols-day.png);rect:ACHRES61;offset_x:-42;offset_y:38;" />
+            <style type="pointx.icon" style="key:ACHRES71;check_coll:0;img:(./fill_images/rastersymbols-day.png);rect:ACHRES71;offset_x:-43;offset_y:38;" />
+            <style type="pointx.icon" style="key:ACHRES51;check_coll:0;img:(./fill_images/rastersymbols-day.png);rect:ACHRES51;offset_x:-36;offset_y:38;" />
+            <style type="pointx.icon" style="key:FSHRES71;check_coll:0;img:(./fill_images/rastersymbols-day.png);rect:FSHRES71;offset_x:-38;offset_y:19;" />
+            <style type="pointx.icon" style="key:FSHRES51;check_coll:0;img:(./fill_images/rastersymbols-day.png);rect:FSHRES51;offset_x:-30;offset_y:19;" />
+            <style type="pointx.icon" style="key:INFARE51;check_coll:0;img:(./fill_images/rastersymbols-day.png);rect:INFARE51;offset_x:-24;offset_y:24;" />
+            <style type="pointx.icon" style="key:RSRDEF51;check_coll:0;img:(./fill_images/rastersymbols-day.png);rect:RSRDEF51;offset_x:-29;offset_y:29;" />
+        </style>
+    </style>
+    
+    <!-- DMPGRD Dumping ground-->
+    <style type="multi" style="key:48">
+        <!-- <style type="pointx.icon" style="key:INFARE51;check_coll:0;img:(./fill_images/rastersymbols-day.png);rect:INFARE51" /> -->
+        <style type="case.string" field="4">
+            <style type="pointx.icon" style="key:ENTRES61;check_coll:0;img:(./fill_images/rastersymbols-day.png);rect:ENTRES61;offset_x:-35;offset_y:30;" />
+            <style type="pointx.icon" style="key:ENTRES71;check_coll:0;img:(./fill_images/rastersymbols-day.png);rect:ENTRES71;offset_x:-36;offset_y:29;" />
+            <style type="pointx.icon" style="key:ENTRES51;check_coll:0;img:(./fill_images/rastersymbols-day.png);rect:ENTRES51;offset_x:-29;offset_y:29;" />
+            <style type="pointx.icon" style="key:ACHRES61;check_coll:0;img:(./fill_images/rastersymbols-day.png);rect:ACHRES61;offset_x:-42;offset_y:38;" />
+            <style type="pointx.icon" style="key:ACHRES71;check_coll:0;img:(./fill_images/rastersymbols-day.png);rect:ACHRES71;offset_x:-43;offset_y:38;" />
+            <style type="pointx.icon" style="key:ACHRES51;check_coll:0;img:(./fill_images/rastersymbols-day.png);rect:ACHRES51;offset_x:-36;offset_y:38;" />
+            <style type="pointx.icon" style="key:FSHRES71;check_coll:0;img:(./fill_images/rastersymbols-day.png);rect:FSHRES71;offset_x:-38;offset_y:19;" />
+            <style type="pointx.icon" style="key:FSHRES51;check_coll:0;img:(./fill_images/rastersymbols-day.png);rect:FSHRES51;offset_x:-30;offset_y:19;" />
+            <style type="pointx.icon" style="key:INFARE51;check_coll:0;img:(./fill_images/rastersymbols-day.png);rect:INFARE51;offset_x:-24;offset_y:24;" />
+            <style type="pointx.icon" style="key:RSRDEF51;check_coll:0;img:(./fill_images/rastersymbols-day.png);rect:RSRDEF51;offset_x:-29;offset_y:29;" />
+        </style>
+    </style>
+    
+    <!-- FAIRWY Fairway-->
+    <style type="multi" style="key:51;">
+        <style type="case.string" field="3">
+            <style type="pointx.icon" style="key:FAIRWY51;check_coll:0;img:(./fill_images/rastersymbols-day.png);rect:FAIRWY51;offset_x:19;offset_y:-40;rotate:[5]" />
+            <style type="pointx.icon" style="key:FAIRWY52;check_coll:0;img:(./fill_images/rastersymbols-day.png);rect:FAIRWY52;offset_x:19;offset_y:-44;rotate:[5]" />
+        </style>
+        <style type="case.string" field="4">
+            <style type="pointx.icon" style="key:ENTRES61;check_coll:0;img:(./fill_images/rastersymbols-day.png);rect:ENTRES61;offset_x:-35;offset_y:30;" />
+            <style type="pointx.icon" style="key:ENTRES71;check_coll:0;img:(./fill_images/rastersymbols-day.png);rect:ENTRES71;offset_x:-36;offset_y:29;" />
+            <style type="pointx.icon" style="key:ENTRES51;check_coll:0;img:(./fill_images/rastersymbols-day.png);rect:ENTRES51;offset_x:-29;offset_y:29;" />
+            <style type="pointx.icon" style="key:ACHRES61;check_coll:0;img:(./fill_images/rastersymbols-day.png);rect:ACHRES61;offset_x:-42;offset_y:38;" />
+            <style type="pointx.icon" style="key:ACHRES71;check_coll:0;img:(./fill_images/rastersymbols-day.png);rect:ACHRES71;offset_x:-43;offset_y:38;" />
+            <style type="pointx.icon" style="key:ACHRES51;check_coll:0;img:(./fill_images/rastersymbols-day.png);rect:ACHRES51;offset_x:-36;offset_y:38;" />
+            <style type="pointx.icon" style="key:FSHRES71;check_coll:0;img:(./fill_images/rastersymbols-day.png);rect:FSHRES71;offset_x:-38;offset_y:19;" />
+            <style type="pointx.icon" style="key:FSHRES51;check_coll:0;img:(./fill_images/rastersymbols-day.png);rect:FSHRES51;offset_x:-30;offset_y:19;" />
+            <style type="pointx.icon" style="key:INFARE51;check_coll:0;img:(./fill_images/rastersymbols-day.png);rect:INFARE51;offset_x:-24;offset_y:24;" />
+            <style type="pointx.icon" style="key:RSRDEF51;check_coll:0;img:(./fill_images/rastersymbols-day.png);rect:RSRDEF51;offset_x:-29;offset_y:29;" />
+        </style>
+    </style>
+    
+    <!-- FERYRT Ferry route-->
+    <style type="case.string" field="3" style="key:53">
+        <style type="pointx.icon" style="key:FRYARE52;check_coll:0;img:(./fill_images/rastersymbols-day.png);rect:FRYARE52;offset_x:19;offset_y:-40;" />
+        <style type="pointx.icon" style="key:FRYARE51;check_coll:0;img:(./fill_images/rastersymbols-day.png);rect:FRYARE51;offset_x:19;offset_y:-44;" />
+    </style>
+    
+    <!-- FSHFAC Fishing facility-->
+    <style type="case.string" field="3" style="key:55">
+        <style type="pointx.icon" style="key:FSHFAC02;check_coll:0;img:(./fill_images/rastersymbols-day.png);rect:FSHFAC02" />
+        <style type="pointx.icon" style="key:FSHFAC03;check_coll:0;img:(./fill_images/rastersymbols-day.png);rect:FSHFAC03" />
+    </style>
+    
+    <!-- FSHGRD Fishing ground-->
+    <style type="pointx.icon" style="key:56;check_coll:0;img:(./fill_images/rastersymbols-day.png);rect:FSHGRD01" />
+    
+    <!-- GATCON Gate-->
+    <style type="case.string" field="3" style="key:61">
+        <style type="pointx.icon" style="key:GATCON03;check_coll:0;img:(./fill_images/rastersymbols-day.png);rect:GATCON03" />
+        <style type="pointx.icon" style="key:GATCON04;check_coll:0;img:(./fill_images/rastersymbols-day.png);rect:GATCON04" />
+    </style>
+    
+    <!-- HRBFAC Harbour facility-->
+    <style type="case.string" field="3" style="key:64">
+        <style type="pointx.icon" style="key:ROLROL01;check_coll:0;img:(./fill_images/rastersymbols-day.png);rect:ROLROL01" />
+        <style type="pointx.icon" style="key:HRBFAC09;check_coll:0;img:(./fill_images/rastersymbols-day.png);rect:HRBFAC09" />
+        <style type="pointx.icon" style="key:SMCFAC02;check_coll:0;img:(./fill_images/rastersymbols-day.png);rect:SMCFAC02" />
+        <style type="pointx.icon" style="key:CHINFO07;check_coll:0;img:(./fill_images/rastersymbols-day.png);rect:CHINFO07" />
+    </style>
+    
+    <!-- ICNARE Incineration area-->
+    <style type="multi" style="key:67"> 
+        <style type="pointx.icon" style="check_coll:0;img:(./fill_images/rastersymbols-day.png);rect:INFARE51;offset_x:-10;offset_y:-12;" />
+        <style type="case.string" field="4">
+            <style type="pointx.icon" style="key:ENTRES61;check_coll:0;img:(./fill_images/rastersymbols-day.png);rect:ENTRES61;offset_x:-35;offset_y:30;" />
+            <style type="pointx.icon" style="key:ENTRES71;check_coll:0;img:(./fill_images/rastersymbols-day.png);rect:ENTRES71;offset_x:-36;offset_y:29;" />
+            <style type="pointx.icon" style="key:ENTRES51;check_coll:0;img:(./fill_images/rastersymbols-day.png);rect:ENTRES51;offset_x:-29;offset_y:29;" />
+            <style type="pointx.icon" style="key:ACHRES61;check_coll:0;img:(./fill_images/rastersymbols-day.png);rect:ACHRES61;offset_x:-42;offset_y:38;" />
+            <style type="pointx.icon" style="key:ACHRES71;check_coll:0;img:(./fill_images/rastersymbols-day.png);rect:ACHRES71;offset_x:-43;offset_y:38;" />
+            <style type="pointx.icon" style="key:ACHRES51;check_coll:0;img:(./fill_images/rastersymbols-day.png);rect:ACHRES51;offset_x:-36;offset_y:38;" />
+            <style type="pointx.icon" style="key:FSHRES71;check_coll:0;img:(./fill_images/rastersymbols-day.png);rect:FSHRES71;offset_x:-38;offset_y:19;" />
+            <style type="pointx.icon" style="key:FSHRES51;check_coll:0;img:(./fill_images/rastersymbols-day.png);rect:FSHRES51;offset_x:-30;offset_y:19;" />
+            <style type="pointx.icon" style="key:INFARE51;check_coll:0;img:(./fill_images/rastersymbols-day.png);rect:INFARE51;offset_x:-24;offset_y:24;" />
+            <style type="pointx.icon" style="key:RSRDEF51;check_coll:0;img:(./fill_images/rastersymbols-day.png);rect:RSRDEF51;offset_x:-29;offset_y:29;" />
+        </style>
+    </style>
+    
+    <!-- ISTZNE Inshore traffic zone -->
+    <style type="multi" style="key:68"> 
+        <style type="pointx.icon" style="check_coll:0;img:(./fill_images/rastersymbols-day.png);rect:ITZARE51;offset_x:-10;offset_y:-12;" />
+        <style type="case.string" field="4">
+            <style type="pointx.icon" style="key:ENTRES61;check_coll:0;img:(./fill_images/rastersymbols-day.png);rect:ENTRES61;offset_x:-35;offset_y:30;" />
+            <style type="pointx.icon" style="key:ENTRES71;check_coll:0;img:(./fill_images/rastersymbols-day.png);rect:ENTRES71;offset_x:-36;offset_y:29;" />
+            <style type="pointx.icon" style="key:ENTRES51;check_coll:0;img:(./fill_images/rastersymbols-day.png);rect:ENTRES51;offset_x:-29;offset_y:29;" />
+            <style type="pointx.icon" style="key:ACHRES61;check_coll:0;img:(./fill_images/rastersymbols-day.png);rect:ACHRES61;offset_x:-42;offset_y:38;" />
+            <style type="pointx.icon" style="key:ACHRES71;check_coll:0;img:(./fill_images/rastersymbols-day.png);rect:ACHRES71;offset_x:-43;offset_y:38;" />
+            <style type="pointx.icon" style="key:ACHRES51;check_coll:0;img:(./fill_images/rastersymbols-day.png);rect:ACHRES51;offset_x:-36;offset_y:38;" />
+            <style type="pointx.icon" style="key:FSHRES71;check_coll:0;img:(./fill_images/rastersymbols-day.png);rect:FSHRES71;offset_x:-38;offset_y:19;" />
+            <style type="pointx.icon" style="key:FSHRES51;check_coll:0;img:(./fill_images/rastersymbols-day.png);rect:FSHRES51;offset_x:-30;offset_y:19;" />
+            <style type="pointx.icon" style="key:INFARE51;check_coll:0;img:(./fill_images/rastersymbols-day.png);rect:INFARE51;offset_x:-24;offset_y:24;" />
+            <style type="pointx.icon" style="key:RSRDEF51;check_coll:0;img:(./fill_images/rastersymbols-day.png);rect:RSRDEF51;offset_x:-29;offset_y:29;" />
+        </style>
+    </style>
+    
+    <!-- LOCMAG Local magnetic anomaly-->
+    <style type="pointx.icon" style="key:78;check_coll:0;img:(./fill_images/rastersymbols-day.png);rect:LOCMAG51" />
+    
+    <!-- MAGVAR Magnetic variation-->
+    <!-- <style type="pointx.icon" style="key:81;check_coll:0;img:(./fill_images/rastersymbols-day.png);rect:MAGVAR51" /> -->
+    
+    <!-- MARCUL Marine farm/culture -->
+    <style type="case.string" field="4" style="key:82">
+        <style type="pointx.icon" style="key:ENTRES61;check_coll:0;img:(./fill_images/rastersymbols-day.png);rect:ENTRES61;offset_x:-35;offset_y:30;" />
+        <style type="pointx.icon" style="key:ENTRES71;check_coll:0;img:(./fill_images/rastersymbols-day.png);rect:ENTRES71;offset_x:-36;offset_y:29;" />
+        <style type="pointx.icon" style="key:ENTRES51;check_coll:0;img:(./fill_images/rastersymbols-day.png);rect:ENTRES51;offset_x:-29;offset_y:29;" />
+        <style type="pointx.icon" style="key:ACHRES61;check_coll:0;img:(./fill_images/rastersymbols-day.png);rect:ACHRES61;offset_x:-42;offset_y:38;" />
+        <style type="pointx.icon" style="key:ACHRES71;check_coll:0;img:(./fill_images/rastersymbols-day.png);rect:ACHRES71;offset_x:-43;offset_y:38;" />
+        <style type="pointx.icon" style="key:ACHRES51;check_coll:0;img:(./fill_images/rastersymbols-day.png);rect:ACHRES51;offset_x:-36;offset_y:38;" />
+        <style type="pointx.icon" style="key:FSHRES71;check_coll:0;img:(./fill_images/rastersymbols-day.png);rect:FSHRES71;offset_x:-38;offset_y:19;" />
+        <style type="pointx.icon" style="key:FSHRES51;check_coll:0;img:(./fill_images/rastersymbols-day.png);rect:FSHRES51;offset_x:-30;offset_y:19;" />
+        <style type="pointx.icon" style="key:INFARE51;check_coll:0;img:(./fill_images/rastersymbols-day.png);rect:INFARE51;offset_x:-24;offset_y:24;" />
+        <style type="pointx.icon" style="key:RSRDEF51;check_coll:0;img:(./fill_images/rastersymbols-day.png);rect:RSRDEF51;offset_x:-29;offset_y:29;" />
+    </style>
+    
+    <!-- MIPARE Military practice area -->
+    <style type="multi" style="key:83"> 
+        <style type="pointx.icon" style="check_coll:0;img:(./fill_images/rastersymbols-day.png);rect:CTYARE51;offset_x:-10;offset_y:-12;" />
+        <style type="case.string" field="4">
+            <style type="pointx.icon" style="key:ENTRES61;check_coll:0;img:(./fill_images/rastersymbols-day.png);rect:ENTRES61;offset_x:-35;offset_y:30;" />
+            <style type="pointx.icon" style="key:ENTRES71;check_coll:0;img:(./fill_images/rastersymbols-day.png);rect:ENTRES71;offset_x:-36;offset_y:29;" />
+            <style type="pointx.icon" style="key:ENTRES51;check_coll:0;img:(./fill_images/rastersymbols-day.png);rect:ENTRES51;offset_x:-29;offset_y:29;" />
+            <style type="pointx.icon" style="key:ACHRES61;check_coll:0;img:(./fill_images/rastersymbols-day.png);rect:ACHRES61;offset_x:-42;offset_y:38;" />
+            <style type="pointx.icon" style="key:ACHRES71;check_coll:0;img:(./fill_images/rastersymbols-day.png);rect:ACHRES71;offset_x:-43;offset_y:38;" />
+            <style type="pointx.icon" style="key:ACHRES51;check_coll:0;img:(./fill_images/rastersymbols-day.png);rect:ACHRES51;offset_x:-36;offset_y:38;" />
+            <style type="pointx.icon" style="key:FSHRES71;check_coll:0;img:(./fill_images/rastersymbols-day.png);rect:FSHRES71;offset_x:-38;offset_y:19;" />
+            <style type="pointx.icon" style="key:FSHRES51;check_coll:0;img:(./fill_images/rastersymbols-day.png);rect:FSHRES51;offset_x:-30;offset_y:19;" />
+            <style type="pointx.icon" style="key:INFARE51;check_coll:0;img:(./fill_images/rastersymbols-day.png);rect:INFARE51;offset_x:-24;offset_y:24;" />
+            <style type="pointx.icon" style="key:RSRDEF51;check_coll:0;img:(./fill_images/rastersymbols-day.png);rect:RSRDEF51;offset_x:-29;offset_y:29;" />
+        </style>
+    </style>
+    
+    <!-- OBSTRN Obstruction-->
+    <layer type="case.string" field="3" style="key:86">
+        <style type="pointx.icon" style="key:FLTHAZ02;check_coll:1;img:(./fill_images/day_simplified.png);rect:(1386,840,1412,866)" />
+        <style type="pointx.icon" style="key:FOULAR01;check_coll:1;img:(./fill_images/day_simplified.png);rect:(154,1190,184,1222)" />
+        <style type="pointx.icon" style="key:FOULGND1;check_coll:1;img:(./fill_images/rastersymbols-day.png);rect:FOULGND1" />
+        <style type="pointx.icon" style="key:ACHARE02;check_coll:1;img:(./fill_images/rastersymbols-day.png);rect:ACHARE02" />
+        <style type="pointx.icon" style="key:ISODGR51;check_coll:1;img:(./fill_images/rastersymbols-day.png);rect:ISODGR51" />
+    </layer>
+
+    <!-- OSPARE Offshore production area-->
+    <style type="multi" style="key:88"> 
+        <style type="pointx.icon" style="check_coll:0;img:(./fill_images/rastersymbols-day.png);rect:CTYARE51;offset_x:-10;offset_y:-12;" />
+        <style type="case.string" field="4">
+            <style type="pointx.icon" style="key:ENTRES61;check_coll:0;img:(./fill_images/rastersymbols-day.png);rect:ENTRES61;offset_x:-35;offset_y:30;" />
+            <style type="pointx.icon" style="key:ENTRES71;check_coll:0;img:(./fill_images/rastersymbols-day.png);rect:ENTRES71;offset_x:-36;offset_y:29;" />
+            <style type="pointx.icon" style="key:ENTRES51;check_coll:0;img:(./fill_images/rastersymbols-day.png);rect:ENTRES51;offset_x:-29;offset_y:29;" />
+            <style type="pointx.icon" style="key:ACHRES61;check_coll:0;img:(./fill_images/rastersymbols-day.png);rect:ACHRES61;offset_x:-42;offset_y:38;" />
+            <style type="pointx.icon" style="key:ACHRES71;check_coll:0;img:(./fill_images/rastersymbols-day.png);rect:ACHRES71;offset_x:-43;offset_y:38;" />
+            <style type="pointx.icon" style="key:ACHRES51;check_coll:0;img:(./fill_images/rastersymbols-day.png);rect:ACHRES51;offset_x:-36;offset_y:38;" />
+            <style type="pointx.icon" style="key:FSHRES71;check_coll:0;img:(./fill_images/rastersymbols-day.png);rect:FSHRES71;offset_x:-38;offset_y:19;" />
+            <style type="pointx.icon" style="key:FSHRES51;check_coll:0;img:(./fill_images/rastersymbols-day.png);rect:FSHRES51;offset_x:-30;offset_y:19;" />
+            <style type="pointx.icon" style="key:INFARE51;check_coll:0;img:(./fill_images/rastersymbols-day.png);rect:INFARE51;offset_x:-24;offset_y:24;" />
+            <style type="pointx.icon" style="key:RSRDEF51;check_coll:0;img:(./fill_images/rastersymbols-day.png);rect:RSRDEF51;offset_x:-29;offset_y:29;" />
+        </style>
+    </style>
+    
+    <!-- PILBOP Pilot boarding place-->
+    <style type="pointx.icon" style="key:91;check_coll:0;img:(./fill_images/rastersymbols-day.png);rect:PILBOP02;offset_x:-30" />
+    
+    <!-- PIPARE Pipeline area-->
+    <style type="multi" style="key:92"> 
+        <style type="pointx.icon" style="check_coll:0;img:(./fill_images/rastersymbols-day.png);rect:INFARE51;offset_x:-10;offset_y:-12;" />
+        <style type="case.string" field="4">
+            <style type="pointx.icon" style="key:ENTRES61;check_coll:0;img:(./fill_images/rastersymbols-day.png);rect:ENTRES61;offset_x:-35;offset_y:30;" />
+            <style type="pointx.icon" style="key:ENTRES71;check_coll:0;img:(./fill_images/rastersymbols-day.png);rect:ENTRES71;offset_x:-36;offset_y:29;" />
+            <style type="pointx.icon" style="key:ENTRES51;check_coll:0;img:(./fill_images/rastersymbols-day.png);rect:ENTRES51;offset_x:-29;offset_y:29;" />
+            <style type="pointx.icon" style="key:ACHRES61;check_coll:0;img:(./fill_images/rastersymbols-day.png);rect:ACHRES61;offset_x:-42;offset_y:38;" />
+            <style type="pointx.icon" style="key:ACHRES71;check_coll:0;img:(./fill_images/rastersymbols-day.png);rect:ACHRES71;offset_x:-43;offset_y:38;" />
+            <style type="pointx.icon" style="key:ACHRES51;check_coll:0;img:(./fill_images/rastersymbols-day.png);rect:ACHRES51;offset_x:-36;offset_y:38;" />
+            <style type="pointx.icon" style="key:FSHRES71;check_coll:0;img:(./fill_images/rastersymbols-day.png);rect:FSHRES71;offset_x:-38;offset_y:19;" />
+            <style type="pointx.icon" style="key:FSHRES51;check_coll:0;img:(./fill_images/rastersymbols-day.png);rect:FSHRES51;offset_x:-30;offset_y:19;" />
+            <style type="pointx.icon" style="key:INFARE51;check_coll:0;img:(./fill_images/rastersymbols-day.png);rect:INFARE51;offset_x:-24;offset_y:24;" />
+            <style type="pointx.icon" style="key:RSRDEF51;check_coll:0;img:(./fill_images/rastersymbols-day.png);rect:RSRDEF51;offset_x:-29;offset_y:29;" />
+        </style>
+    </style>
+    
+    <!-- PRCARE Precautionary area-->
+    <style type="multi" style="key:96"> 
+        <style type="pointx.icon" style="check_coll:0;img:(./fill_images/rastersymbols-day.png);rect:PRCARE51;offset_x:-10;offset_y:-12;" />
+        <style type="case.string" field="4">
+            <style type="pointx.icon" style="key:ENTRES61;check_coll:0;img:(./fill_images/rastersymbols-day.png);rect:ENTRES61;offset_x:-35;offset_y:30;" />
+            <style type="pointx.icon" style="key:ENTRES71;check_coll:0;img:(./fill_images/rastersymbols-day.png);rect:ENTRES71;offset_x:-36;offset_y:29;" />
+            <style type="pointx.icon" style="key:ENTRES51;check_coll:0;img:(./fill_images/rastersymbols-day.png);rect:ENTRES51;offset_x:-29;offset_y:29;" />
+            <style type="pointx.icon" style="key:ACHRES61;check_coll:0;img:(./fill_images/rastersymbols-day.png);rect:ACHRES61;offset_x:-42;offset_y:38;" />
+            <style type="pointx.icon" style="key:ACHRES71;check_coll:0;img:(./fill_images/rastersymbols-day.png);rect:ACHRES71;offset_x:-43;offset_y:38;" />
+            <style type="pointx.icon" style="key:ACHRES51;check_coll:0;img:(./fill_images/rastersymbols-day.png);rect:ACHRES51;offset_x:-36;offset_y:38;" />
+            <style type="pointx.icon" style="key:FSHRES71;check_coll:0;img:(./fill_images/rastersymbols-day.png);rect:FSHRES71;offset_x:-38;offset_y:19;" />
+            <style type="pointx.icon" style="key:FSHRES51;check_coll:0;img:(./fill_images/rastersymbols-day.png);rect:FSHRES51;offset_x:-30;offset_y:19;" />
+            <style type="pointx.icon" style="key:INFARE51;check_coll:0;img:(./fill_images/rastersymbols-day.png);rect:INFARE51;offset_x:-24;offset_y:24;" />
+            <style type="pointx.icon" style="key:RSRDEF51;check_coll:0;img:(./fill_images/rastersymbols-day.png);rect:RSRDEF51;offset_x:-29;offset_y:29;" />
+        </style>
+    </style>
+    
+    <!-- PRDARE Production / storage area-->
+    <layer type="case.string" field="3" style="key:97">
+        <style type="pointx.icon" style="key:RFNERY11;check_coll:1;img:(./fill_images/rastersymbols-day.png);rect:RFNERY11" />
+        <style type="pointx.icon" style="key:TNKFRM11;check_coll:1;img:(./fill_images/rastersymbols-day.png);rect:TNKFRM11" />
+        <style type="pointx.icon" style="key:WNDFRM61;check_coll:1;img:(./fill_images/rastersymbols-day.png);rect:WNDFRM61" />
+        <style type="pointx.icon" style="key:QUARRY01;check_coll:1;img:(./fill_images/rastersymbols-day.png);rect:QUARRY01" />
+        <style type="pointx.icon" style="key:RFNERY01;check_coll:1;img:(./fill_images/rastersymbols-day.png);rect:RFNERY01" />
+        <style type="pointx.icon" style="key:TMBYRD01;check_coll:1;img:(./fill_images/rastersymbols-day.png);rect:TMBYRD01" />
+        <style type="pointx.icon" style="key:TNKFRM01;check_coll:1;img:(./fill_images/rastersymbols-day.png);rect:TNKFRM01" />
+        <style type="pointx.icon" style="key:WNDFRM51;check_coll:1;img:(./fill_images/rastersymbols-day.png);rect:WNDFRM51" />
+    </layer>
+    
+    <!-- RECTRC Recommended track-->
+    <layer type="case.string" field="3" style="key:109">
+        <style type="pointx.icon" style="key:RECTRC58;check_coll:1;img:(./fill_images/rastersymbols-day.png);rect:RECTRC58;rotate:[5]" />
+        <style type="pointx.icon" style="key:RECTRC56;check_coll:1;img:(./fill_images/rastersymbols-day.png);rect:RECTRC56;rotate:[5]" />
+        <style type="pointx.icon" style="key:RECTRC57;check_coll:1;img:(./fill_images/rastersymbols-day.png);rect:RECTRC57;rotate:[5]" />
+        <style type="pointx.icon" style="key:RECTRC55;check_coll:1;img:(./fill_images/rastersymbols-day.png);rect:RECTRC55;rotate:[5]" />
+        <style type="pointx.icon" style="key:RECDEF51;check_coll:1;img:(./fill_images/rastersymbols-day.png);rect:RECDEF51;" />
+    </layer>
+    
+    <!-- RCTLPT Recommended Traffic Lane Part-->
+    <layer type="case.string" field="3" style="key:110">
+        <style type="pointx.icon" style="key:RCTLPT52;check_coll:1;img:(./fill_images/rastersymbols-day.png);rect:RCTLPT52;rotate:[5]" />
+        <style type="pointx.icon" style="key:RTLDEF51;check_coll:1;img:(./fill_images/rastersymbols-day.png);rect:RTLDEF51;" />
+    </layer>
+    
+    <!-- RESARE Restricted area-->
+    <style type="case.string" field="4" style="key:112">
+        <style type="pointx.icon" style="key:ESSARE01;check_coll:1;img:(./fill_images/rastersymbols-day.png);rect:ESSARE01" />
+        <style type="pointx.icon" style="key:PSSARE01;check_coll:1;img:(./fill_images/rastersymbols-day.png);rect:PSSARE01" />
+        <style type="pointx.icon" style="key:ENTRES61;check_coll:1;img:(./fill_images/rastersymbols-day.png);rect:ENTRES61" />
+        <style type="pointx.icon" style="key:ENTRES71;check_coll:1;img:(./fill_images/rastersymbols-day.png);rect:ENTRES71" />
+        <style type="pointx.icon" style="key:ENTRES51;check_coll:1;img:(./fill_images/rastersymbols-day.png);rect:ENTRES51" />
+        <style type="pointx.icon" style="key:ACHRES61;check_coll:1;img:(./fill_images/rastersymbols-day.png);rect:ACHRES61" />
+        <style type="pointx.icon" style="key:ACHRES71;check_coll:1;img:(./fill_images/rastersymbols-day.png);rect:ACHRES71" />
+        <style type="pointx.icon" style="key:ACHRES51;check_coll:1;img:(./fill_images/rastersymbols-day.png);rect:ACHRES51" />
+        <style type="pointx.icon" style="key:FSHRES71;check_coll:1;img:(./fill_images/rastersymbols-day.png);rect:FSHRES71" />
+        <style type="pointx.icon" style="key:FSHRES51;check_coll:1;img:(./fill_images/rastersymbols-day.png);rect:FSHRES51" />
+        <style type="pointx.icon" style="key:INFARE51;check_coll:1;img:(./fill_images/rastersymbols-day.png);rect:INFARE51" />
+        <style type="pointx.icon" style="key:RSRDEF51;check_coll:1;img:(./fill_images/rastersymbols-day.png);rect:RSRDEF51" />
+    </style>
+    
+    <!-- SPLARE Sea-plane landing area-->
+    <style type="multi" style="key:120"> 
+        <style type="pointx.icon" style="check_coll:0;img:(./fill_images/rastersymbols-day.png);rect:CTYARE51;offset_x:-10;offset_y:-12;" />
+        <style type="case.string" field="4">
+            <style type="pointx.icon" style="key:ENTRES61;check_coll:0;img:(./fill_images/rastersymbols-day.png);rect:ENTRES61;offset_x:-35;offset_y:30;" />
+            <style type="pointx.icon" style="key:ENTRES71;check_coll:0;img:(./fill_images/rastersymbols-day.png);rect:ENTRES71;offset_x:-36;offset_y:29;" />
+            <style type="pointx.icon" style="key:ENTRES51;check_coll:0;img:(./fill_images/rastersymbols-day.png);rect:ENTRES51;offset_x:-29;offset_y:29;" />
+            <style type="pointx.icon" style="key:ACHRES61;check_coll:0;img:(./fill_images/rastersymbols-day.png);rect:ACHRES61;offset_x:-42;offset_y:38;" />
+            <style type="pointx.icon" style="key:ACHRES71;check_coll:0;img:(./fill_images/rastersymbols-day.png);rect:ACHRES71;offset_x:-43;offset_y:38;" />
+            <style type="pointx.icon" style="key:ACHRES51;check_coll:0;img:(./fill_images/rastersymbols-day.png);rect:ACHRES51;offset_x:-36;offset_y:38;" />
+            <style type="pointx.icon" style="key:FSHRES71;check_coll:0;img:(./fill_images/rastersymbols-day.png);rect:FSHRES71;offset_x:-38;offset_y:19;" />
+            <style type="pointx.icon" style="key:FSHRES51;check_coll:0;img:(./fill_images/rastersymbols-day.png);rect:FSHRES51;offset_x:-30;offset_y:19;" />
+            <style type="pointx.icon" style="key:INFARE51;check_coll:0;img:(./fill_images/rastersymbols-day.png);rect:INFARE51;offset_x:-24;offset_y:24;" />
+            <style type="pointx.icon" style="key:RSRDEF51;check_coll:0;img:(./fill_images/rastersymbols-day.png);rect:RSRDEF51;offset_x:-29;offset_y:29;" />
+        </style>
+    </style>
+    
+    <!-- SMCFAC Small craft facility-->
+    <style type="pointx.icon" style="key:128;check_coll:0;img:(./fill_images/rastersymbols-day.png);rect:SMCFAC02;" />
+    
+    <!-- Submarine transit lane	SUBTLN-->
+    <style type="multi" style="key:133"> 
+        <style type="pointx.icon" style="check_coll:0;img:(./fill_images/rastersymbols-day.png);rect:CTYARE51;offset_x:-10;offset_y:-12;" />
+        <style type="case.string" field="4">
+            <style type="pointx.icon" style="key:ENTRES61;check_coll:0;img:(./fill_images/rastersymbols-day.png);rect:ENTRES61;offset_x:-35;offset_y:30;" />
+            <style type="pointx.icon" style="key:ENTRES71;check_coll:0;img:(./fill_images/rastersymbols-day.png);rect:ENTRES71;offset_x:-36;offset_y:29;" />
+            <style type="pointx.icon" style="key:ENTRES51;check_coll:0;img:(./fill_images/rastersymbols-day.png);rect:ENTRES51;offset_x:-29;offset_y:29;" />
+            <style type="pointx.icon" style="key:ACHRES61;check_coll:0;img:(./fill_images/rastersymbols-day.png);rect:ACHRES61;offset_x:-42;offset_y:38;" />
+            <style type="pointx.icon" style="key:ACHRES71;check_coll:0;img:(./fill_images/rastersymbols-day.png);rect:ACHRES71;offset_x:-43;offset_y:38;" />
+            <style type="pointx.icon" style="key:ACHRES51;check_coll:0;img:(./fill_images/rastersymbols-day.png);rect:ACHRES51;offset_x:-36;offset_y:38;" />
+            <style type="pointx.icon" style="key:FSHRES71;check_coll:0;img:(./fill_images/rastersymbols-day.png);rect:FSHRES71;offset_x:-38;offset_y:19;" />
+            <style type="pointx.icon" style="key:FSHRES51;check_coll:0;img:(./fill_images/rastersymbols-day.png);rect:FSHRES51;offset_x:-30;offset_y:19;" />
+            <style type="pointx.icon" style="key:INFARE51;check_coll:0;img:(./fill_images/rastersymbols-day.png);rect:INFARE51;offset_x:-24;offset_y:24;" />
+            <style type="pointx.icon" style="key:RSRDEF51;check_coll:0;img:(./fill_images/rastersymbols-day.png);rect:RSRDEF51;offset_x:-29;offset_y:29;" />
+        </style>
+    </style>
+    
+    <!-- SWPARE Swept Area-->
+    <style type="pointx.icon" style="key:134;check_coll:0;img:(./fill_images/rastersymbols-day.png);rect:SWPARE51;" />
+    
+    <!-- TESARE Territorial sea area-->
+    <style type="case.string" field="4" style="key:135">
+        <style type="pointx.icon" style="key:ENTRES61;check_coll:0;img:(./fill_images/rastersymbols-day.png);rect:ENTRES61;offset_x:-35;offset_y:30;" />
+        <style type="pointx.icon" style="key:ENTRES71;check_coll:0;img:(./fill_images/rastersymbols-day.png);rect:ENTRES71;offset_x:-36;offset_y:29;" />
+        <style type="pointx.icon" style="key:ENTRES51;check_coll:0;img:(./fill_images/rastersymbols-day.png);rect:ENTRES51;offset_x:-29;offset_y:29;" />
+        <style type="pointx.icon" style="key:ACHRES61;check_coll:0;img:(./fill_images/rastersymbols-day.png);rect:ACHRES61;offset_x:-42;offset_y:38;" />
+        <style type="pointx.icon" style="key:ACHRES71;check_coll:0;img:(./fill_images/rastersymbols-day.png);rect:ACHRES71;offset_x:-43;offset_y:38;" />
+        <style type="pointx.icon" style="key:ACHRES51;check_coll:0;img:(./fill_images/rastersymbols-day.png);rect:ACHRES51;offset_x:-36;offset_y:38;" />
+        <style type="pointx.icon" style="key:FSHRES71;check_coll:0;img:(./fill_images/rastersymbols-day.png);rect:FSHRES71;offset_x:-38;offset_y:19;" />
+        <style type="pointx.icon" style="key:FSHRES51;check_coll:0;img:(./fill_images/rastersymbols-day.png);rect:FSHRES51;offset_x:-30;offset_y:19;" />
+        <style type="pointx.icon" style="key:INFARE51;check_coll:0;img:(./fill_images/rastersymbols-day.png);rect:INFARE51;offset_x:-24;offset_y:24;" />
+        <style type="pointx.icon" style="key:RSRDEF51;check_coll:0;img:(./fill_images/rastersymbols-day.png);rect:RSRDEF51;offset_x:-29;offset_y:29;" />
+    </style>
+    
+    <!-- TS_PRH Tidal stream - harmonic prediction-->
+    <style type="pointx.icon" style="key:136;check_coll:0;img:(./fill_images/rastersymbols-day.png);rect:TIDSTR01;" />
+    
+    <!-- TS_PNH Tidal stream - non-harmonic prediction-->
+    <style type="pointx.icon" style="key:137;check_coll:0;img:(./fill_images/rastersymbols-day.png);rect:TIDSTR01;" />
+    
+    <!-- TS_PAD Tidal stream panel data-->
+    <style type="pointx.icon" style="key:138;check_coll:0;img:(./fill_images/rastersymbols-day.png);rect:TIDSTR01;" />
+    
+    <!-- TS_TIS Tidal stream - time series-->
+    <style type="pointx.icon" style="key:139;check_coll:0;img:(./fill_images/rastersymbols-day.png);rect:TIDSTR01;" />
+    
+    <!-- T_HMON Tide - harmonic prediction-->
+    <style type="pointx.icon" style="key:140;check_coll:0;img:(./fill_images/rastersymbols-day.png);rect:TIDEHT01;" />
+    
+    <!-- T_NHMN Tide - non-harmonic prediction-->
+    <style type="pointx.icon" style="key:141;check_coll:0;img:(./fill_images/rastersymbols-day.png);rect:TIDEHT01;" />
+    
+    <!-- T_TIMS Tidal stream - time series-->
+    <style type="pointx.icon" style="key:142;check_coll:0;img:(./fill_images/rastersymbols-day.png);rect:TIDEHT01;" />
+    
+    <!-- TIDEWY Tideway-->
+    <style type="latex.point" style="key:143;text:3;type:-1;unicode:false;-1:rank(3),color(0xff1E1E1E),size(30),position(1)"/>
+    
+    <!-- TSSCRS Traffic Separation Scheme Crossing-->
+    <style type="multi" style="key:147"> 
+        <style type="pointx.icon" style="check_coll:0;img:(./fill_images/rastersymbols-day.png);rect:TSSCRS51;offset_x:-10;offset_y:-12;" />
+        <style type="case.string" field="4">
+            <style type="pointx.icon" style="key:ENTRES61;check_coll:0;img:(./fill_images/rastersymbols-day.png);rect:ENTRES61;offset_x:-35;offset_y:30;" />
+            <style type="pointx.icon" style="key:ENTRES71;check_coll:0;img:(./fill_images/rastersymbols-day.png);rect:ENTRES71;offset_x:-36;offset_y:29;" />
+            <style type="pointx.icon" style="key:ENTRES51;check_coll:0;img:(./fill_images/rastersymbols-day.png);rect:ENTRES51;offset_x:-29;offset_y:29;" />
+            <style type="pointx.icon" style="key:ACHRES61;check_coll:0;img:(./fill_images/rastersymbols-day.png);rect:ACHRES61;offset_x:-42;offset_y:38;" />
+            <style type="pointx.icon" style="key:ACHRES71;check_coll:0;img:(./fill_images/rastersymbols-day.png);rect:ACHRES71;offset_x:-43;offset_y:38;" />
+            <style type="pointx.icon" style="key:ACHRES51;check_coll:0;img:(./fill_images/rastersymbols-day.png);rect:ACHRES51;offset_x:-36;offset_y:38;" />
+            <style type="pointx.icon" style="key:FSHRES71;check_coll:0;img:(./fill_images/rastersymbols-day.png);rect:FSHRES71;offset_x:-38;offset_y:19;" />
+            <style type="pointx.icon" style="key:FSHRES51;check_coll:0;img:(./fill_images/rastersymbols-day.png);rect:FSHRES51;offset_x:-30;offset_y:19;" />
+            <style type="pointx.icon" style="key:INFARE51;check_coll:0;img:(./fill_images/rastersymbols-day.png);rect:INFARE51;offset_x:-24;offset_y:24;" />
+            <style type="pointx.icon" style="key:RSRDEF51;check_coll:0;img:(./fill_images/rastersymbols-day.png);rect:RSRDEF51;offset_x:-29;offset_y:29;" />
+        </style>
+    </style>
+    
+    <!-- TSSLPT Traffic Separation Scheme  Lane part-->
+    <style type="multi" style="key:148"> 
+        <style type="pointx.icon" style="check_coll:0;img:(./fill_images/rastersymbols-day.png);rect:TSSLPT51;trans:0.5;rotate:[5]" />
+        <style type="case.string" field="4">
+            <style type="pointx.icon" style="key:ENTRES61;check_coll:0;img:(./fill_images/rastersymbols-day.png);rect:ENTRES61;offset_x:-35;offset_y:30;" />
+            <style type="pointx.icon" style="key:ENTRES71;check_coll:0;img:(./fill_images/rastersymbols-day.png);rect:ENTRES71;offset_x:-36;offset_y:29;" />
+            <style type="pointx.icon" style="key:ENTRES51;check_coll:0;img:(./fill_images/rastersymbols-day.png);rect:ENTRES51;offset_x:-29;offset_y:29;" />
+            <style type="pointx.icon" style="key:ACHRES61;check_coll:0;img:(./fill_images/rastersymbols-day.png);rect:ACHRES61;offset_x:-42;offset_y:38;" />
+            <style type="pointx.icon" style="key:ACHRES71;check_coll:0;img:(./fill_images/rastersymbols-day.png);rect:ACHRES71;offset_x:-43;offset_y:38;" />
+            <style type="pointx.icon" style="key:ACHRES51;check_coll:0;img:(./fill_images/rastersymbols-day.png);rect:ACHRES51;offset_x:-36;offset_y:38;" />
+            <style type="pointx.icon" style="key:FSHRES71;check_coll:0;img:(./fill_images/rastersymbols-day.png);rect:FSHRES71;offset_x:-38;offset_y:19;" />
+            <style type="pointx.icon" style="key:FSHRES51;check_coll:0;img:(./fill_images/rastersymbols-day.png);rect:FSHRES51;offset_x:-30;offset_y:19;" />
+            <style type="pointx.icon" style="key:INFARE51;check_coll:0;img:(./fill_images/rastersymbols-day.png);rect:INFARE51;offset_x:-24;offset_y:24;" />
+            <style type="pointx.icon" style="key:RSRDEF51;check_coll:0;img:(./fill_images/rastersymbols-day.png);rect:RSRDEF51;offset_x:-29;offset_y:29;" />
+        </style>
+    </style>
+    
+    <!-- TSSRON Traffic Separation Scheme  Roundabout-->
+    <style type="multi" style="key:149"> 
+        <style type="pointx.icon" style="check_coll:0;img:(./fill_images/rastersymbols-day.png);rect:TSSRON51;rotate:[5]" />
+        <style type="case.string" field="4">
+            <style type="pointx.icon" style="key:ENTRES61;check_coll:0;img:(./fill_images/rastersymbols-day.png);rect:ENTRES61;offset_x:-35;offset_y:30;" />
+            <style type="pointx.icon" style="key:ENTRES71;check_coll:0;img:(./fill_images/rastersymbols-day.png);rect:ENTRES71;offset_x:-36;offset_y:29;" />
+            <style type="pointx.icon" style="key:ENTRES51;check_coll:0;img:(./fill_images/rastersymbols-day.png);rect:ENTRES51;offset_x:-29;offset_y:29;" />
+            <style type="pointx.icon" style="key:ACHRES61;check_coll:0;img:(./fill_images/rastersymbols-day.png);rect:ACHRES61;offset_x:-42;offset_y:38;" />
+            <style type="pointx.icon" style="key:ACHRES71;check_coll:0;img:(./fill_images/rastersymbols-day.png);rect:ACHRES71;offset_x:-43;offset_y:38;" />
+            <style type="pointx.icon" style="key:ACHRES51;check_coll:0;img:(./fill_images/rastersymbols-day.png);rect:ACHRES51;offset_x:-36;offset_y:38;" />
+            <style type="pointx.icon" style="key:FSHRES71;check_coll:0;img:(./fill_images/rastersymbols-day.png);rect:FSHRES71;offset_x:-38;offset_y:19;" />
+            <style type="pointx.icon" style="key:FSHRES51;check_coll:0;img:(./fill_images/rastersymbols-day.png);rect:FSHRES51;offset_x:-30;offset_y:19;" />
+            <style type="pointx.icon" style="key:INFARE51;check_coll:0;img:(./fill_images/rastersymbols-day.png);rect:INFARE51;offset_x:-24;offset_y:24;" />
+            <style type="pointx.icon" style="key:RSRDEF51;check_coll:0;img:(./fill_images/rastersymbols-day.png);rect:RSRDEF51;offset_x:-29;offset_y:29;" />
+        </style>
+    </style>
+    
+    <!-- TWRTPT Two-way route  part-->
+    <layer type="case.string" field="3" style="key:152">
+        <style type="pointx.icon" style="key:TWRTPT53;check_coll:1;img:(./fill_images/rastersymbols-day.png);rect:TWRTPT53;trans:0.5;rotate:[5]" />
+        <style type="pointx.icon" style="key:TWRTPT52;check_coll:1;img:(./fill_images/rastersymbols-day.png);rect:TWRTPT52;trans:0.5;rotate:[5]" />
+        <style type="pointx.icon" style="key:TWRDEF51;check_coll:1;img:(./fill_images/rastersymbols-day.png);rect:TWRDEF51;trans:0.5" />
+    </layer>
+    
+    <!-- WATTUR Water turbulence-->
+    <style type="pointx.icon" style="key:156;check_coll:0;img:(./fill_images/rastersymbols-day.png);rect:WATTUR02;" />
+    
+    <!-- WEDKLP Weed/Kelp-->
+    <style type="pointx.icon" style="key:158;check_coll:0;img:(./fill_images/rastersymbols-day.png);rect:WEDKLP03;" />
+    
+    <!-- TS_FEB Tidal stream - flood/ebb-->
+    <layer type="case.string" field="3" style="key:160">
+        <style type="pointx.icon" style="key:FLDSTR01;check_coll:1;img:(./fill_images/rastersymbols-day.png);rect:FLDSTR01;rotate:[5]" />
+        <style type="pointx.icon" style="key:EBBSTR01;check_coll:1;img:(./fill_images/rastersymbols-day.png);rect:EBBSTR01;rotate:[5]" />
+        <style type="pointx.icon" style="key:CURENT01;check_coll:1;img:(./fill_images/rastersymbols-day.png);rect:CURENT01;rotate:[5]" />
+        <style type="pointx.icon" style="key:CURDEF01;check_coll:1;img:(./fill_images/rastersymbols-day.png);rect:CURDEF01" />
+    </layer>
+</layer>

@@ -38,7 +38,7 @@
 		"@types/three": "^0.182.0",
 		"earcut": "^3.0.2",
 		"gl-matrix": "^3.4.3",
-		"mapbox-gl": "^3.2.0",
+		"mapbox-gl": "^3.0.0",
 		"pbf": "^4.0.1",
 		"potpack": "^2.1.0",
 		"suncalc": "^1.9.0",

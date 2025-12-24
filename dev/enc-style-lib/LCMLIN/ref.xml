@@ -1,0 +1,175 @@
+<layer name="L_COMMON_MLINE" cache="vtdb#LINE_COMMON_MLINE_%" type="case.int" field="1" minLevel='10' maxLevel='20'>
+    <style type="multi" style="key:11;">  <!-- BRIDGE Bridge-->
+        <style type="linex.solidx" style="color:CHGRD;width:4;cap:0;join:0" />
+    </style>
+    <style type="multi" style="key:21;">  <!-- CBLOHD Cable, overhead-->
+        <style type="linex.dash" style="color:CHGRD;width:4;cap:0;join:0" />
+    </style>
+    <style type="multi" style="key:22;">  <!-- CBLSUB Cable, submarine-->
+        <style type="linex.dash" style="color:CHMGD;width:1.2;cap:0;join:0" />
+    </style>
+    <style type="multi" style="key:23;">  <!-- CANALS Canal-->
+        <style type="linex.solidx" style="color:CHBLK;width:1.2;cap:0;join:0" />
+    </style>
+    <style type="case.int" field="2" style="key:26;">  <!-- CAUSWY Causeway-->
+        <style type="linex.dash" style="key:1;color:LANDF;width:3;cap:0;join:0" />
+        <style type="linex.solidx" style="key:2;color:LANDF;width:3;cap:0;join:0" />
+    </style>
+    <style type="case.int" field="2" style="key:30;">  <!-- COALNE Coastline-->
+        <style type="linex.dash" style="key:1;color:CSTLN;width:1.2;cap:0;join:0" />
+        <style type="linex.solidx" style="key:2;color:CSTLN;width:1.2;cap:0;join:0" />
+    </style>
+    <style type="case.int" field="2" style="key:34;">  <!-- CONVYR Conveyor-->
+        <style type="linex.dash" style="key:1;color:CHGRD;width:4;cap:0;join:0" />
+        <style type="linex.solidx" style="key:2;color:CHGRD;width:3;cap:0;join:0" />
+    </style>
+    <style type="multi" style="key:38;">  <!-- DAMCON Dam-->
+        <style type="linex.solidx" style="color:LANDF;width:4;cap:0;join:0" />
+    </style>
+    <!-- <style type="multi" style="key:43;">  DEPCNT Depth contour
+        <style type="linex.solidx" style="color:DEPCN;width:1;cap:0;join:0" />
+    </style>-->
+    <style type="case.int" field="2" style="key:49;">  <!-- DYKCON Dyke-->
+        <style type="linex.solidx" style="key:1;color:CHBLK;width:2;cap:0;join:0" />
+        <style type="linex.solidx" style="key:2;color:LANDF;width:3;cap:0;join:0" />
+    </style>
+    <style type="case.int" field="2" style="key:52;">  <!-- FNCLNE Fence/wall-->
+        <style type="linex.solidx" style="key:1;color:CHBLK;width:1.2;cap:0;join:0" />
+        <style type="linex.solidx" style="key:2;color:LANDF;width:1.2;cap:0;join:0" />
+    </style>
+    <style type="case.int" field="2" style="key:53;">  <!-- FERYRT Ferry route-->
+        <style type="linex.marker" style="key:1;width:12;join:0;w:10;interval:1.0;img:./fill_images/FERYRT01.png" />
+        <style type="linex.marker" style="key:2;width:12;join:0;w:10;interval:1.0;img:./fill_images/FERYRT02.png" />
+    </style>
+    <style type="case.int" field="2" style="key:55;">  <!-- FSHFAC Fishing facility-->
+        <style type="linex.dash" style="key:1;color:CHBLK;width:1.2;cap:0;join:0" />
+        <style type="linex.dash" style="key:2;color:CHGRD;width:2;cap:0;join:0" />
+    </style>
+    <style type="multi" style="key:57;">  <!-- FLODOC Floating dock-->
+        <style type="linex.solidx" style="color:CSTLN;width:3;cap:0;join:0" />
+    </style>
+    <style type="multi" style="key:59;">  <!-- FORSTC Fortified structure-->
+        <style type="linex.solidx" style="color:LANDF;width:3;cap:0;join:0" />
+    </style>
+    <style type="multi" style="key:61;">  <!-- GATCON Gate-->
+        <style type="linex.solidx" style="color:CSTLN;width:2;cap:0;join:0" />
+    </style>
+    <style type="multi" style="key:70;">  <!-- LAKSHR Lake shore-->
+        <style type="linex.solidx" style="color:CSTLN;width:1.2;cap:0;join:0" />
+    </style>
+    <style type="multi" style="key:71;">  <!-- LNDARE Land area-->
+        <style type="linex.solidx" style="color:CSTLN;width:1.2;cap:0;join:0" />
+    </style>
+    <style type="multi" style="key:72;">  <!-- LNDELV Land elevation-->
+        <style type="linex.solidx" style="color:LANDF;width:1.2;cap:0;join:0" />
+    </style>
+    <style type="case.int" field="2" style="key:74;">  <!-- LNDMRK Landmark-->
+        <style type="linex.solidx" style="key:1;color:CHBLK;width:1.2;cap:0;join:0" />
+        <style type="linex.solidx" style="key:2;color:LANDF;width:1.2;cap:0;join:0" />
+    </style>
+    <style type="multi" style="key:78;">  <!-- LOCMAG Local magnetic anomaly-->
+        <style type="linex.dash" style="color:CHMGF;width:1.2;cap:0;join:0" />
+    </style>
+    <style type="multi" style="key:82;">  <!-- MARCUL Marine farm/culture-->
+        <style type="linex.dash" style="color:CHGRF;width:2;cap:0;join:0" />
+    </style>
+    <style type="case.int" field="2" style="key:84;">  <!-- MORFAC Mooring/warping facility-->
+        <style type="linex.dash" style="key:1;color:CHMGF;width:1.2;cap:0;join:0" />
+        <style type="linex.solidx" style="key:2;color:CSTLN;width:2;cap:0;join:0" />
+    </style>
+    <style type="multi" style="key:85;">  <!-- NAVLNE Navigation line-->
+        <style type="linex.dash" style="color:SYTRK;width:1.5;cap:0;join:0" />
+        <style type="latex.area" style="text:3;type:-1;unicode:false;-1:rank(5),color(0xFF000000),size(30),position(0)"/>
+    </style>
+    <style type="case.int" field="2" style="key:86;">  <!-- OBSTRN Obstruction-->
+        <style type="linex.dash" style="key:1;color:CSTLN;width:1.2;cap:0;join:0" />
+        <style type="linex.dash" style="key:2;color:CHMGD;width:1.2;cap:0;join:0" />
+        <style type="linex.dot" style="key:3;color:CHBLK;width:2;cap:0;join:0" />
+        <style type="linex.dash" style="key:4;color:CHBLK;width:2;cap:0;join:0" />
+    </style>
+    <style type="multi" style="key:89;">  <!-- OILBAR Oil barrier-->
+        <style type="linex.dash" style="color:CHBLK;width:1.2;cap:0;join:0" />
+    </style>
+    <style type="multi" style="key:93;">  <!-- PIPOHD Pipeline, overhead-->
+        <style type="linex.solidx" style="color:CHGRD;width:3;cap:0;join:0" />
+        <style type="latex.area" style="text:3;type:-1;unicode:false;-1:rank(5),color(0xFF000000),size(30),position(0)"/>
+    </style>
+    <style type="multi" style="key:95;">  <!-- PONTON Pontoon-->
+        <style type="linex.solidx" style="color:CSTLN;width:2;cap:0;join:0" />
+    </style>
+    <style type="multi" style="key:99;">  <!-- RADLNE Radar line-->
+        <style type="linex.dash" style="color:TRFCD;width:2;cap:0;join:0" />
+    </style>
+    <style type="multi" style="key:104;">  <!-- RDOCAL Radio calling-in point-->
+        <style type="linex.dash" style="color:TRFCD;width:1.2;cap:0;join:0" />
+    </style>
+    <style type="multi" style="key:106;">  <!-- RAILWY Railway-->
+        <style type="linex.solidx" style="color:LANDF;width:2;cap:0;join:0" />
+    </style>
+    <style type="multi" style="key:107;">  <!-- RAPIDS Rapids-->
+        <style type="linex.solidx" style="color:CHGRD;width:3;cap:0;join:0" />
+    </style>
+    <style type="multi" style="key:108;">  <!-- RCRTCL Recommended route centerline-->
+        <style type="linex.solidx" style="color:CHGRD;width:1.2;cap:0;join:0" />
+    </style>
+    <style type="case.int" field="2" style="key:109;">  <!-- RECTRC Recommended track-->
+        <style type="linex.marker" style="key:1;width:10;join:0;w:10;interval:1.0;img:./fill_images/RECTRC12.png" />
+        <style type="linex.marker" style="key:2;width:10;join:0;w:10;interval:1.0;img:./fill_images/RECTRC10.png" />
+        <style type="linex.marker" style="key:3;width:10;join:0;w:10;interval:1.0;img:./fill_images/RECTRC11.png" />
+        <style type="linex.marker" style="key:4;width:10;join:0;w:10;interval:1.0;img:./fill_images/RECTRC09.png" />
+        <style type="linex.marker" style="key:5;width:10;join:0;w:10;interval:1.0;img:./fill_images/RECDEF02.png" />
+    </style>
+    <style type="multi" style="key:114;">  <!-- RIVERS River-->
+        <style type="linex.solidx" style="color:CHBLK;width:1.2;cap:0;join:0" />
+    </style>
+    <style type="multi" style="key:116;">  <!-- ROADWY Road-->
+        <style type="linex.solidx" style="color:LANDF;width:2;cap:0;join:0" />
+    </style>
+    <style type="multi" style="key:117;">  <!-- RUNWAY Runway-->
+        <style type="linex.solidx" style="color:LANDF;width:3;cap:0;join:0" />
+    </style>
+    <style type="multi" style="key:118;">  <!-- SNDWAV Sand waves-->
+        <style type="linex.dash" style="color:CHGRD;width:2;cap:0;join:0" />
+    </style>
+    <style type="multi" style="key:121;">  <!-- SBDARE Seabed area-->
+        <style type="linex.solidx" style="color:CHGRD;width:1.2;cap:0;join:0" />
+    </style>
+    <style type="case.int" field="2" style="key:122;">  <!-- SLCONS Shoreline Construction-->
+        <style type="linex.dash" style="key:1;color:CSTLN;width:1;cap:0;join:0" />
+        <style type="linex.solidx" style="key:2;color:CSTLN;width:4;cap:0;join:0" />
+        <style type="linex.solidx" style="key:3;color:CSTLN;width:2;cap:0;join:0" />
+        <style type="linex.dash" style="key:4;color:CSTLN;width:2;cap:0;join:0" />
+        <style type="linex.solidx" style="key:5;color:CSTLN;width:2;cap:0;join:0" />
+    </style>
+    <style type="case.int" field="2" style="key:126;">  <!-- SLOTOP Slope topline-->
+        <style type="linex.solidx" style="key:1;color:CHBLK;width:1.2;cap:0;join:0" />
+        <style type="linex.solidx" style="key:2;color:CHGRD;width:1.2;cap:0;join:0" />
+        <style type="linex.solidx" style="key:3;color:LANDF;width:1.2;cap:0;join:0" />
+    </style>
+    <style type="multi" style="key:132;">  <!-- STSLNE Straight territorial sea baseline-->
+        <style type="linex.dash" style="color:CHGRF;width:1.2;cap:0;join:0" />
+    </style>
+    <style type="multi" style="key:143;">  <!-- TIDEWY Tideway-->
+        <style type="linex.solidx" style="color:CHGRF;width:1.2;cap:0;join:0" />
+    </style>
+    <style type="multi" style="key:145;">  <!-- TSELNE Traffic Separation Line-->
+        <style type="linex.solidx" style="color:TRFCF;width:6;cap:0;join:0" />
+    </style>
+    <style type="multi" style="key:146;">  <!-- TSSBND Traffic Separation Scheme  Boundary-->
+        <style type="linex.dash" style="color:TRFCD;width:2;cap:0;join:0" />
+    </style>
+    <style type="case.int" field="2" style="key:151;">  <!-- TUNNEL Tunnel-->
+        <style type="linex.dash" style="key:1;color:CHBLK;width:2.0;cap:0;join:0" />
+        <style type="linex.dash" style="key:2;color:CHGRD;width:1.2;cap:0;join:0" />
+    </style>
+    <style type="multi" style="key:155;">  <!-- VEGATN Vegetation-->
+        <style type="linex.dash" style="color:LANDF;width:1.2;cap:0;join:0" />
+    </style>
+    <style type="multi" style="key:156;">  <!-- VEGATN Vegetation-->
+        <style type="linex.dash" style="color:CHGRD;width:1.2;cap:0;join:0" />
+    </style>
+    <style type="case.int" field="2" style="key:157;">  <!-- WATFAL Waterfall-->
+        <style type="linex.solidx" style="key:1;color:CHWHT;width:3;cap:0;join:0" />
+        <style type="linex.solidx" style="key:2;color:CHGRF;width:3;cap:0;join:0" />
+    </style>
+</layer>

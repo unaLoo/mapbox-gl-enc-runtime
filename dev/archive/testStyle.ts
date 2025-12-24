@@ -1,0 +1,13109 @@
+/*
+// const style = {
+// 	version: 8,
+// 	name: 'S57 Style',
+// 	sources: {
+// 		DEPARE: {
+// 			type: 'vector',
+// 			url: 'https://localhost:3000/mbtiles/DEPARE.mbtiles/tilejson.json',
+// 		},
+// 		LNDARE: {
+// 			type: 'vector',
+// 			url: 'https://localhost:3000/mbtiles/LNDARE.mbtiles/tilejson.json',
+// 		},
+// 		AREA_COMMON_AREA: {
+// 			type: 'vector',
+// 			url: 'https://localhost:3000/mbtiles/area_common_polygon.mbtiles/tilejson.json',
+// 			minzoom: 0,
+// 			maxzoom: 14,
+// 		},
+// 		AREA_COMMON_LINE: {
+// 			type: 'vector',
+// 			url: 'https://localhost:3000/mbtiles/area_common_line.mbtiles/tilejson.json',
+// 		},
+// 		LINE_COMMON_LINE: {
+// 			type: 'vector',
+// 			url: 'https://localhost:3000/mbtiles/line_common.mbtiles/tilejson.json',
+// 		},
+// 		AREA_COMMON_POINT: {
+// 			type: 'vector',
+// 			url: 'https://localhost:3000/mbtiles/area_common_point.mbtiles/tilejson.json',
+// 		},
+// 		SOUNDG: {
+// 			type: 'vector',
+// 			url: 'https://localhost:3000/mbtiles/r15.mbtiles/tilejson.json',
+// 		},
+
+// 		DRGARE: {
+// 			type: 'vector',
+// 			url: 'https://localhost:3000/mbtiles/area_drgare.mbtiles/tilejson.json',
+// 			minzoom: 0,
+// 			maxzoom: 14,
+// 		},
+// 	},
+// 	sprite: '',
+// 	glyphs: 'https://demotiles.maplibre.org/font/{fontstack}/{range}.pbf',
+// 	layers: [
+// 		/// DEPARE
+// 		{
+// 			id: 'DEPARE_FILL',
+// 			type: 'fill',
+// 			source: 'DEPARE',
+// 			'source-layer': 'DEPARE',
+// 			layout: {
+// 				visibility: 'visible',
+// 			},
+// 			paint: {
+// 				'fill-color': [
+// 					'case',
+// 					['all', ['<', ['get', 'DRVAL1'], 0], ['<=', ['get', 'DRVAL2'], 0]],
+// 					'#83B295',
+// 					['<=', ['get', 'DRVAL1'], 2],
+// 					'#73B6EF',
+// 					['<=', ['get', 'DRVAL1'], 5],
+// 					'#98C5F2',
+// 					['<=', ['get', 'DRVAL1'], 10],
+// 					'#BAD5E1',
+// 					'#D4EAEE',
+// 				],
+// 				'fill-opacity': 1,
+// 			},
+// 		},
+// 		/// LNDARE
+// 		{
+// 			id: 'LNDARE_FILL',
+// 			type: 'fill',
+// 			source: 'LNDARE',
+// 			'source-layer': 'LNDARE',
+// 			layout: {
+// 				visibility: 'visible',
+// 			},
+// 			paint: {
+// 				'fill-color': '#c9b97a',
+// 				'fill-opacity': 1,
+// 			},
+// 		},
+
+// 		//#region AREA FILL
+// 		{
+// 			id: 'BUISGL_fill_0',
+// 			type: 'fill',
+// 			source: 'AREA_COMMON_AREA',
+// 			'source-layer': 'area_common_polygon',
+// 			filter: ['==', ['get', 'OBJL'], 12],
+// 			layout: {},
+// 			paint: {
+// 				'fill-color': 'rgb(177,145,57)',
+// 				'fill-opacity': 1,
+// 			},
+// 		},
+// 		{
+// 			id: 'BUAARE_fill_2',
+// 			type: 'fill',
+// 			source: 'AREA_COMMON_AREA',
+// 			'source-layer': 'area_common_polygon',
+// 			filter: ['==', ['get', 'OBJL'], 13],
+// 			layout: {},
+// 			paint: {
+// 				'fill-color': 'rgb(177,145,57)',
+// 				'fill-opacity': 1,
+// 			},
+// 		},
+// 		{
+// 			id: 'CANALS_fill_4',
+// 			type: 'fill',
+// 			source: 'AREA_COMMON_AREA',
+// 			'source-layer': 'area_common_polygon',
+// 			filter: ['==', ['get', 'OBJL'], 23],
+// 			layout: {},
+// 			paint: {
+// 				'fill-color': 'rgb(115,182,239)',
+// 				'fill-opacity': 1,
+// 			},
+// 		},
+// 		{
+// 			id: 'CAUSWY_case-fill_5',
+// 			type: 'fill',
+// 			source: 'AREA_COMMON_AREA',
+// 			'source-layer': 'area_common_polygon',
+// 			filter: ['==', ['get', 'OBJL'], 26],
+// 			layout: {},
+// 			paint: {
+// 				'fill-color': [
+// 					'case',
+// 					['==', ['get', 'FillType'], 1],
+// 					'rgb(131,178,149)',
+// 					['==', ['get', 'FillType'], 2],
+// 					'rgb(177,145,57)',
+// 					'rgba(0,0,0,0)',
+// 				],
+// 				'fill-opacity': 1,
+// 			},
+// 		},
+// 		{
+// 			id: 'CRANES_fill_6',
+// 			type: 'fill',
+// 			source: 'AREA_COMMON_AREA',
+// 			'source-layer': 'area_common_polygon',
+// 			filter: ['==', ['get', 'OBJL'], 35],
+// 			layout: {},
+// 			paint: {
+// 				'fill-color': 'rgb(177,145,57)',
+// 				'fill-opacity': 1,
+// 			},
+// 		},
+// 		{
+// 			id: 'DAMCON_fill_7',
+// 			type: 'fill',
+// 			source: 'AREA_COMMON_AREA',
+// 			'source-layer': 'area_common_polygon',
+// 			filter: ['==', ['get', 'OBJL'], 38],
+// 			layout: {},
+// 			paint: {
+// 				'fill-color': 'rgb(177,145,57)',
+// 				'fill-opacity': 1,
+// 			},
+// 		},
+// 		{
+// 			id: 'DOCARE_fill_8',
+// 			type: 'fill',
+// 			source: 'AREA_COMMON_AREA',
+// 			'source-layer': 'area_common_polygon',
+// 			filter: ['==', ['get', 'OBJL'], 45],
+// 			layout: {},
+// 			paint: {
+// 				'fill-color': 'rgb(115,182,239)',
+// 				'fill-opacity': 1,
+// 			},
+// 		},
+// 		{
+// 			id: 'DRYDOC_fill_9',
+// 			type: 'fill',
+// 			source: 'AREA_COMMON_AREA',
+// 			'source-layer': 'area_common_polygon',
+// 			filter: ['==', ['get', 'OBJL'], 47],
+// 			layout: {},
+// 			paint: {
+// 				'fill-color': 'rgb(201,185,122)',
+// 				'fill-opacity': 1,
+// 			},
+// 		},
+// 		{
+// 			id: 'DYKCON_fill_10',
+// 			type: 'fill',
+// 			source: 'AREA_COMMON_AREA',
+// 			'source-layer': 'area_common_polygon',
+// 			filter: ['==', ['get', 'OBJL'], 49],
+// 			layout: {},
+// 			paint: {
+// 				'fill-color': 'rgb(177,145,57)',
+// 				'fill-opacity': 1,
+// 			},
+// 		},
+// 		{
+// 			id: 'FLODOC_fill_11',
+// 			type: 'fill',
+// 			source: 'AREA_COMMON_AREA',
+// 			'source-layer': 'area_common_polygon',
+// 			filter: ['==', ['get', 'OBJL'], 57],
+// 			layout: {},
+// 			paint: {
+// 				'fill-color': 'rgb(177,145,57)',
+// 				'fill-opacity': 1,
+// 			},
+// 		},
+// 		{
+// 			id: 'FORSTC_fill_12',
+// 			type: 'fill',
+// 			source: 'AREA_COMMON_AREA',
+// 			'source-layer': 'area_common_polygon',
+// 			filter: ['==', ['get', 'OBJL'], 59],
+// 			layout: {},
+// 			paint: {
+// 				'fill-color': 'rgb(177,145,57)',
+// 				'fill-opacity': 1,
+// 			},
+// 		},
+// 		{
+// 			id: 'GATCON_fill_13',
+// 			type: 'fill',
+// 			source: 'AREA_COMMON_AREA',
+// 			'source-layer': 'area_common_polygon',
+// 			filter: ['==', ['get', 'OBJL'], 61],
+// 			layout: {},
+// 			paint: {
+// 				'fill-color': 'rgb(177,145,57)',
+// 				'fill-opacity': 1,
+// 			},
+// 		},
+// 		{
+// 			id: 'HULKES_fill_14',
+// 			type: 'fill',
+// 			source: 'AREA_COMMON_AREA',
+// 			'source-layer': 'area_common_polygon',
+// 			filter: ['==', ['get', 'OBJL'], 65],
+// 			layout: {},
+// 			paint: {
+// 				'fill-color': 'rgb(177,145,57)',
+// 				'fill-opacity': 1,
+// 			},
+// 		},
+// 		{
+// 			id: 'ICEARE_fill_15',
+// 			type: 'fill',
+// 			source: 'AREA_COMMON_AREA',
+// 			'source-layer': 'area_common_polygon',
+// 			filter: ['==', ['get', 'OBJL'], 66],
+// 			layout: {},
+// 			paint: {
+// 				'fill-color': 'rgb(163,180,183)',
+// 				'fill-opacity': 1,
+// 			},
+// 		},
+// 		{
+// 			id: 'ICEARE_pattern_16',
+// 			type: 'fill',
+// 			source: 'AREA_COMMON_AREA',
+// 			'source-layer': 'area_common_polygon',
+// 			filter: ['==', ['get', 'OBJL'], 66],
+// 			layout: {},
+// 			paint: {
+// 				'fill-pattern': 'ICEARE04',
+// 				'fill-opacity': 1,
+// 			},
+// 		},
+// 		{
+// 			id: 'LAKARE_fill_17',
+// 			type: 'fill',
+// 			source: 'AREA_COMMON_AREA',
+// 			'source-layer': 'area_common_polygon',
+// 			filter: ['==', ['get', 'OBJL'], 69],
+// 			layout: {},
+// 			paint: {
+// 				'fill-color': 'rgb(115,182,239)',
+// 				'fill-opacity': 1,
+// 			},
+// 		},
+// 		{
+// 			id: 'LNDRGN_pattern-1_18',
+// 			type: 'fill',
+// 			source: 'AREA_COMMON_AREA',
+// 			'source-layer': 'area_common_polygon',
+// 			filter: ['all', ['==', ['get', 'OBJL'], 73], ['==', ['get', 'FillType'], 1]],
+// 			layout: {},
+// 			paint: {
+// 				'fill-pattern': 'MARSHES1P',
+// 				'fill-opacity': 1,
+// 			},
+// 		},
+
+// 		{
+// 			id: 'LNDMRK_fill_20',
+// 			type: 'fill',
+// 			source: 'AREA_COMMON_AREA',
+// 			'source-layer': 'area_common_polygon',
+// 			filter: ['==', ['get', 'OBJL'], 74],
+// 			layout: {},
+// 			paint: {
+// 				'fill-color': 'rgb(177,145,57)',
+// 				'fill-opacity': 1,
+// 			},
+// 		},
+// 		{
+// 			id: 'LOKBSN_fill_21',
+// 			type: 'fill',
+// 			source: 'AREA_COMMON_AREA',
+// 			'source-layer': 'area_common_polygon',
+// 			filter: ['==', ['get', 'OBJL'], 79],
+// 			layout: {},
+// 			paint: {
+// 				'fill-color': 'rgb(115,182,239)',
+// 				'fill-opacity': 1,
+// 			},
+// 		},
+// 		{
+// 			id: 'MARCUL_pattern_22',
+// 			type: 'fill',
+// 			source: 'AREA_COMMON_AREA',
+// 			'source-layer': 'area_common_polygon',
+// 			filter: ['==', ['get', 'OBJL'], 82],
+// 			layout: {},
+// 			paint: {
+// 				'fill-pattern': 'fish_area1',
+// 				'fill-opacity': 1,
+// 			},
+// 		},
+// 		{
+// 			id: 'MORFAC_fill_23',
+// 			type: 'fill',
+// 			source: 'AREA_COMMON_AREA',
+// 			'source-layer': 'area_common_polygon',
+// 			filter: ['==', ['get', 'OBJL'], 84],
+// 			layout: {},
+// 			paint: {
+// 				'fill-color': 'rgb(177,145,57)',
+// 				'fill-opacity': 1,
+// 			},
+// 		},
+// 		{
+// 			id: 'OFSPLF_fill_24',
+// 			type: 'fill',
+// 			source: 'AREA_COMMON_AREA',
+// 			'source-layer': 'area_common_polygon',
+// 			filter: ['==', ['get', 'OBJL'], 87],
+// 			layout: {},
+// 			paint: {
+// 				'fill-color': 'rgb(177,145,57)',
+// 				'fill-opacity': 1,
+// 			},
+// 		},
+// 		{
+// 			id: 'PONTON_fill_25',
+// 			type: 'fill',
+// 			source: 'AREA_COMMON_AREA',
+// 			'source-layer': 'area_common_polygon',
+// 			filter: ['==', ['get', 'OBJL'], 95],
+// 			layout: {},
+// 			paint: {
+// 				'fill-color': 'rgb(177,145,57)',
+// 				'fill-opacity': 1,
+// 			},
+// 		},
+// 		{
+// 			id: 'PRCARE_fill_26',
+// 			type: 'fill',
+// 			source: 'AREA_COMMON_AREA',
+// 			'source-layer': 'area_common_polygon',
+// 			filter: ['==', ['get', 'OBJL'], 96],
+// 			layout: {},
+// 			paint: {
+// 				// "fill-color": "rgb(197,69,195)",
+// 				'fill-pattern': 'CHMGD_LINE',
+// 				'fill-opacity': 1,
+// 			},
+// 		},
+// 		{
+// 			id: 'PYLONS_fill_27',
+// 			type: 'fill',
+// 			source: 'AREA_COMMON_AREA',
+// 			'source-layer': 'area_common_polygon',
+// 			filter: ['==', ['get', 'OBJL'], 98],
+// 			layout: {},
+// 			paint: {
+// 				'fill-color': 'rgb(177,145,57)',
+// 				'fill-opacity': 1,
+// 			},
+// 		},
+// 		{
+// 			id: 'RAPIDS_fill_28',
+// 			type: 'fill',
+// 			source: 'AREA_COMMON_AREA',
+// 			'source-layer': 'area_common_polygon',
+// 			filter: ['==', ['get', 'OBJL'], 107],
+// 			layout: {},
+// 			paint: {
+// 				'fill-color': 'rgb(125,137,140)',
+// 				'fill-opacity': 1,
+// 			},
+// 		},
+// 		{
+// 			id: 'RIVERS_fill_29',
+// 			type: 'fill',
+// 			source: 'AREA_COMMON_AREA',
+// 			'source-layer': 'area_common_polygon',
+// 			filter: ['==', ['get', 'OBJL'], 114],
+// 			layout: {},
+// 			paint: {
+// 				'fill-color': 'rgb(115,182,239)',
+// 				'fill-opacity': 1,
+// 			},
+// 		},
+// 		{
+// 			id: 'ROADWY_fill_30',
+// 			type: 'fill',
+// 			source: 'AREA_COMMON_AREA',
+// 			'source-layer': 'area_common_polygon',
+// 			filter: ['==', ['get', 'OBJL'], 116],
+// 			layout: {},
+// 			paint: {
+// 				'fill-color': 'rgb(201,185,122)',
+// 				'fill-opacity': 1,
+// 			},
+// 		},
+// 		{
+// 			id: 'RUNWAY_fill_31',
+// 			type: 'fill',
+// 			source: 'AREA_COMMON_AREA',
+// 			'source-layer': 'area_common_polygon',
+// 			filter: ['==', ['get', 'OBJL'], 117],
+// 			layout: {},
+// 			paint: {
+// 				'fill-color': 'rgb(177,145,57)',
+// 				'fill-opacity': 1,
+// 			},
+// 		},
+// 		{
+// 			id: 'SNDWAV_pattern_32',
+// 			type: 'fill',
+// 			source: 'AREA_COMMON_AREA',
+// 			'source-layer': 'area_common_polygon',
+// 			filter: ['==', ['get', 'OBJL'], 118],
+// 			layout: {},
+// 			paint: {
+// 				'fill-pattern': 'SNDWAV01',
+// 				'fill-opacity': 1,
+// 			},
+// 		},
+
+// 		{
+// 			id: 'SBDARE_pattern-1_34',
+// 			type: 'fill',
+// 			source: 'AREA_COMMON_AREA',
+// 			'source-layer': 'area_common_polygon',
+// 			filter: ['all', ['==', ['get', 'OBJL'], 121], ['==', ['get', 'FillType'], 1]],
+// 			layout: {},
+// 			paint: {
+// 				'fill-pattern': 'RCKLDG01',
+// 				'fill-opacity': 1,
+// 			},
+// 		},
+
+// 		{
+// 			id: 'SLCONS_fill_36',
+// 			type: 'fill',
+// 			source: 'AREA_COMMON_AREA',
+// 			'source-layer': 'area_common_polygon',
+// 			filter: ['==', ['get', 'OBJL'], 122],
+// 			layout: {},
+// 			paint: {
+// 				'fill-color': 'rgba(122,176,144,0.2235294117647059)',
+// 				'fill-opacity': 1,
+// 			},
+// 		},
+// 		{
+// 			id: 'SLCONS_fill_37',
+// 			type: 'fill',
+// 			source: 'AREA_COMMON_AREA',
+// 			'source-layer': 'area_common_polygon',
+// 			filter: ['==', ['get', 'OBJL'], 122],
+// 			layout: {},
+// 			paint: {
+// 				'fill-color': 'rgba(255,177,145,0.2235294117647059)',
+// 				'fill-opacity': 1,
+// 			},
+// 		},
+// 		{
+// 			id: 'SILTNK_fill_38',
+// 			type: 'fill',
+// 			source: 'AREA_COMMON_AREA',
+// 			'source-layer': 'area_common_polygon',
+// 			filter: ['==', ['get', 'OBJL'], 125],
+// 			layout: {},
+// 			paint: {
+// 				'fill-color': 'rgb(177,145,57)',
+// 				'fill-opacity': 1,
+// 			},
+// 		},
+// 		{
+// 			id: 'SLOGRD_case-fill_39',
+// 			type: 'fill',
+// 			source: 'AREA_COMMON_AREA',
+// 			'source-layer': 'area_common_polygon',
+// 			filter: ['==', ['get', 'OBJL'], 127],
+// 			layout: {},
+// 			paint: {
+// 				'fill-color': ['case', ['==', ['get', 'FillType'], 1], 'rgb(125,137,140)', 'rgba(0,0,0,0)'],
+// 				'fill-opacity': 1,
+// 			},
+// 		},
+// 		{
+// 			id: 'SMCFAC_fill_40',
+// 			type: 'fill',
+// 			source: 'AREA_COMMON_AREA',
+// 			'source-layer': 'area_common_polygon',
+// 			filter: ['==', ['get', 'OBJL'], 128],
+// 			layout: {},
+// 			paint: {
+// 				'fill-color': 'rgb(177,145,57)',
+// 				'fill-opacity': 1,
+// 			},
+// 		},
+// 		{
+// 			id: 'TSSCRS_fill_41',
+// 			type: 'fill',
+// 			source: 'AREA_COMMON_AREA',
+// 			'source-layer': 'area_common_polygon',
+// 			filter: ['==', ['get', 'OBJL'], 147],
+// 			layout: {},
+// 			paint: {
+// 				'fill-color': 'rgb(197,69,195)',
+// 				'fill-opacity': 1,
+// 			},
+// 		},
+// 		{
+// 			id: 'TSSRON_fill_42',
+// 			type: 'fill',
+// 			source: 'AREA_COMMON_AREA',
+// 			'source-layer': 'area_common_polygon',
+// 			filter: ['==', ['get', 'OBJL'], 149],
+// 			layout: {},
+// 			paint: {
+// 				'fill-color': 'rgb(197,69,195)',
+// 				'fill-opacity': 1,
+// 			},
+// 		},
+// 		{
+// 			id: 'TSEZNE_fill_43',
+// 			type: 'fill',
+// 			source: 'AREA_COMMON_AREA',
+// 			'source-layer': 'area_common_polygon',
+// 			filter: ['==', ['get', 'OBJL'], 150],
+// 			layout: {},
+// 			paint: {
+// 				'fill-color': 'rgb(211,166,233)',
+// 				'fill-opacity': 1,
+// 			},
+// 		},
+// 		{
+// 			id: 'TUNNEL_case-fill_44',
+// 			type: 'fill',
+// 			source: 'AREA_COMMON_AREA',
+// 			'source-layer': 'area_common_polygon',
+// 			filter: ['==', ['get', 'OBJL'], 151],
+// 			layout: {},
+// 			paint: {
+// 				'fill-color': ['case', ['==', ['get', 'FillType'], 1], 'rgb(115,182,239)', 'rgba(0,0,0,0)'],
+// 				'fill-opacity': 1,
+// 			},
+// 		},
+// 		{
+// 			id: 'UNSARE_fill_45',
+// 			type: 'fill',
+// 			source: 'AREA_COMMON_AREA',
+// 			'source-layer': 'area_common_polygon',
+// 			filter: ['==', ['get', 'OBJL'], 154],
+// 			layout: {},
+// 			paint: {
+// 				'fill-color': 'rgb(163,180,183)',
+// 				'fill-opacity': 1,
+// 			},
+// 		},
+// 		{
+// 			id: 'VEGATN_pattern-1_46',
+// 			type: 'fill',
+// 			source: 'AREA_COMMON_AREA',
+// 			'source-layer': 'area_common_polygon',
+// 			filter: ['all', ['==', ['get', 'OBJL'], 155], ['==', ['get', 'FillType'], 1]],
+// 			layout: {},
+// 			paint: {
+// 				'fill-pattern': 'VEGATN03',
+// 				'fill-opacity': 1,
+// 			},
+// 		},
+// 		{
+// 			id: 'VEGATN_pattern-2_47',
+// 			type: 'fill',
+// 			source: 'AREA_COMMON_AREA',
+// 			'source-layer': 'area_common_polygon',
+// 			filter: ['all', ['==', ['get', 'OBJL'], 155], ['==', ['get', 'FillType'], 2]],
+// 			layout: {},
+// 			paint: {
+// 				'fill-pattern': 'VEGATN04',
+// 				'fill-opacity': 1,
+// 			},
+// 		},
+// 		{
+// 			id: 'VEGATN_pattern-3_48',
+// 			type: 'fill',
+// 			source: 'AREA_COMMON_AREA',
+// 			'source-layer': 'area_common_polygon',
+// 			filter: ['all', ['==', ['get', 'OBJL'], 155], ['==', ['get', 'FillType'], 3]],
+// 			layout: {},
+// 			paint: {
+// 				'fill-pattern': 'FOULAR01',
+// 				'fill-opacity': 1,
+// 			},
+// 		},
+// 		{
+// 			id: 'DRGARE_FILL',
+// 			type: 'fill',
+// 			source: 'DRGARE',
+// 			'source-layer': 'area_drgare',
+// 			layout: {
+// 				visibility: 'visible',
+// 			},
+// 			paint: {
+// 				'fill-color': [
+// 					'case',
+// 					['all', ['<', ['get', 'DRVAL1'], 0], ['<=', ['get', 'DRVAL2'], 0]],
+// 					'#58AF9C',
+// 					['<=', ['get', 'DRVAL1'], 2],
+// 					'#61B7FF',
+// 					['<=', ['get', 'DRVAL1'], 5],
+// 					'#82CAFF',
+// 					['<=', ['get', 'DRVAL1'], 10],
+// 					'#A7D9FB',
+// 					['>', ['get', 'DRVAL1'], 10],
+// 					'#C9EDFF',
+// 					'rgba(255, 255, 255, 0)',
+// 				],
+// 				'fill-opacity': 1,
+// 			},
+// 		},
+
+// 		//#endregion
+
+// 		//#region AREA COMMON LINE
+// 		{
+// 			id: 'ADMARE_line',
+// 			type: 'line',
+// 			source: 'AREA_COMMON_LINE',
+// 			'source-layer': 'area_common_line',
+// 			filter: ['all', ['==', ['get', 'OBJL'], 1]],
+// 			layout: {
+// 				'line-cap': 'round',
+// 				'line-join': 'round',
+// 			},
+// 			paint: {
+// 				'line-width': 2,
+// 				'line-color': 'rgb(163, 180, 183)',
+// 				'line-dasharray': [3, 3],
+// 			},
+// 		},
+// 		{
+// 			id: 'AIRARE_line_1',
+// 			type: 'line',
+// 			source: 'AREA_COMMON_LINE',
+// 			'source-layer': 'area_common_line',
+// 			filter: ['all', ['==', ['get', 'OBJL'], 2], ['==', ['get', 'LineType'], 1]],
+// 			layout: {
+// 				'line-cap': 'round',
+// 				'line-join': 'round',
+// 			},
+// 			paint: {
+// 				'line-width': 1.2,
+// 				'line-color': 'rgb(7, 7, 7)',
+// 			},
+// 		},
+// 		{
+// 			id: 'AIRARE_line_2',
+// 			type: 'line',
+// 			source: 'AREA_COMMON_LINE',
+// 			'source-layer': 'area_common_line',
+// 			filter: ['all', ['==', ['get', 'OBJL'], 2], ['==', ['get', 'LineType'], 2]],
+// 			layout: {
+// 				'line-cap': 'round',
+// 				'line-join': 'round',
+// 			},
+// 			paint: {
+// 				'line-width': 1.2,
+// 				'line-color': 'rgb(139, 102, 31)',
+// 			},
+// 		},
+// 		{
+// 			id: 'ACHBRT_line',
+// 			type: 'line',
+// 			source: 'AREA_COMMON_LINE',
+// 			'source-layer': 'area_common_line',
+// 			filter: ['all', ['==', ['get', 'OBJL'], 3]],
+// 			layout: {
+// 				'line-cap': 'round',
+// 				'line-join': 'round',
+// 			},
+// 			paint: {
+// 				'line-width': 2,
+// 				'line-color': 'rgb(197, 69, 195)',
+// 				'line-dasharray': [3, 3],
+// 			},
+// 		},
+// 		{
+// 			id: 'ACHARE_line_marker',
+// 			type: 'line',
+// 			source: 'AREA_COMMON_LINE',
+// 			'source-layer': 'area_common_line',
+// 			filter: ['all', ['==', ['get', 'OBJL'], 4]],
+// 			layout: {
+// 				'line-cap': 'round',
+// 				'line-join': 'round',
+// 			},
+// 			paint: {
+// 				'line-width': 20,
+// 				'line-pattern': 'ACHARE51',
+// 			},
+// 		},
+// 		{
+// 			id: 'BERTHS_line',
+// 			type: 'line',
+// 			source: 'AREA_COMMON_LINE',
+// 			'source-layer': 'area_common_line',
+// 			filter: ['all', ['==', ['get', 'OBJL'], 10]],
+// 			layout: {
+// 				'line-cap': 'round',
+// 				'line-join': 'round',
+// 			},
+// 			paint: {
+// 				'line-width': 2,
+// 				'line-color': 'rgb(197, 69, 195)',
+// 				'line-dasharray': [3, 3],
+// 			},
+// 		},
+// 		{
+// 			id: 'BRIDGE_line',
+// 			type: 'line',
+// 			source: 'AREA_COMMON_LINE',
+// 			'source-layer': 'area_common_line',
+// 			filter: ['all', ['==', ['get', 'OBJL'], 11]],
+// 			layout: {
+// 				'line-cap': 'round',
+// 				'line-join': 'round',
+// 			},
+// 			paint: {
+// 				'line-width': 3,
+// 				'line-color': 'rgb(125, 137, 140)',
+// 			},
+// 		},
+// 		{
+// 			id: 'BUISGL_line_1',
+// 			type: 'line',
+// 			source: 'AREA_COMMON_LINE',
+// 			'source-layer': 'area_common_line',
+// 			filter: ['all', ['==', ['get', 'OBJL'], 12], ['==', ['get', 'LineType'], 1]],
+// 			layout: {
+// 				'line-cap': 'round',
+// 				'line-join': 'round',
+// 			},
+// 			paint: {
+// 				'line-width': 1.2,
+// 				'line-color': 'rgb(7, 7, 7)',
+// 			},
+// 		},
+// 		{
+// 			id: 'BUISGL_line_2',
+// 			type: 'line',
+// 			source: 'AREA_COMMON_LINE',
+// 			'source-layer': 'area_common_line',
+// 			filter: ['all', ['==', ['get', 'OBJL'], 12], ['==', ['get', 'LineType'], 2]],
+// 			layout: {
+// 				'line-cap': 'round',
+// 				'line-join': 'round',
+// 			},
+// 			paint: {
+// 				'line-width': 1.2,
+// 				'line-color': 'rgb(139, 102, 31)',
+// 			},
+// 		},
+// 		{
+// 			id: 'BUAARE_line',
+// 			type: 'line',
+// 			source: 'AREA_COMMON_LINE',
+// 			'source-layer': 'area_common_line',
+// 			filter: ['all', ['==', ['get', 'OBJL'], 13]],
+// 			layout: {
+// 				'line-cap': 'round',
+// 				'line-join': 'round',
+// 			},
+// 			paint: {
+// 				'line-width': 1.2,
+// 				'line-color': 'rgb(139, 102, 31)',
+// 			},
+// 		},
+// 		{
+// 			id: 'CBLARE_line',
+// 			type: 'line',
+// 			source: 'AREA_COMMON_LINE',
+// 			'source-layer': 'area_common_line',
+// 			filter: ['all', ['==', ['get', 'OBJL'], 20]],
+// 			layout: {
+// 				'line-cap': 'round',
+// 				'line-join': 'round',
+// 			},
+// 			paint: {
+// 				'line-width': 2,
+// 				'line-color': 'rgb(197, 69, 195)',
+// 				'line-dasharray': [3, 3],
+// 			},
+// 		},
+// 		{
+// 			id: 'CANALS_line_1',
+// 			type: 'line',
+// 			source: 'AREA_COMMON_LINE',
+// 			'source-layer': 'area_common_line',
+// 			filter: ['all', ['==', ['get', 'OBJL'], 23], ['==', ['get', 'LineType'], 1]],
+// 			layout: {
+// 				'line-cap': 'round',
+// 				'line-join': 'round',
+// 			},
+// 			paint: {
+// 				'line-width': 1.2,
+// 				'line-color': 'rgb(7, 7, 7)',
+// 				'line-dasharray': [3, 3],
+// 			},
+// 		},
+// 		{
+// 			id: 'CANALS_line_2',
+// 			type: 'line',
+// 			source: 'AREA_COMMON_LINE',
+// 			'source-layer': 'area_common_line',
+// 			filter: ['all', ['==', ['get', 'OBJL'], 23], ['==', ['get', 'LineType'], 2]],
+// 			layout: {
+// 				'line-cap': 'round',
+// 				'line-join': 'round',
+// 			},
+// 			paint: {
+// 				'line-width': 1.2,
+// 				'line-color': 'rgb(7, 7, 7)',
+// 			},
+// 		},
+// 		{
+// 			id: 'CTSARE_line',
+// 			type: 'line',
+// 			source: 'AREA_COMMON_LINE',
+// 			'source-layer': 'area_common_line',
+// 			filter: ['all', ['==', ['get', 'OBJL'], 25]],
+// 			layout: {
+// 				'line-cap': 'round',
+// 				'line-join': 'round',
+// 			},
+// 			paint: {
+// 				'line-width': 1.2,
+// 				'line-color': 'rgb(211, 166, 233)',
+// 				'line-dasharray': [3, 3],
+// 			},
+// 		},
+// 		{
+// 			id: 'CAUSWY_line_1',
+// 			type: 'line',
+// 			source: 'AREA_COMMON_LINE',
+// 			'source-layer': 'area_common_line',
+// 			filter: ['all', ['==', ['get', 'OBJL'], 26], ['==', ['get', 'LineType'], 1]],
+// 			layout: {
+// 				'line-cap': 'round',
+// 				'line-join': 'round',
+// 			},
+// 			paint: {
+// 				'line-width': 2,
+// 				'line-color': 'rgb(82, 90, 92)',
+// 				'line-dasharray': [3, 3],
+// 			},
+// 		},
+// 		{
+// 			id: 'CAUSWY_line_2',
+// 			type: 'line',
+// 			source: 'AREA_COMMON_LINE',
+// 			'source-layer': 'area_common_line',
+// 			filter: ['all', ['==', ['get', 'OBJL'], 26], ['==', ['get', 'LineType'], 2]],
+// 			layout: {
+// 				'line-cap': 'round',
+// 				'line-join': 'round',
+// 			},
+// 			paint: {
+// 				'line-width': 1.2,
+// 				'line-color': 'rgb(82, 90, 92)',
+// 			},
+// 		},
+// 		{
+// 			id: 'CTNARE_line',
+// 			type: 'line',
+// 			source: 'AREA_COMMON_LINE',
+// 			'source-layer': 'area_common_line',
+// 			filter: ['all', ['==', ['get', 'OBJL'], 27]],
+// 			layout: {
+// 				'line-cap': 'round',
+// 				'line-join': 'round',
+// 			},
+// 			paint: {
+// 				'line-width': 2,
+// 				'line-color': 'rgb(197, 69, 195)',
+// 				'line-dasharray': [3, 3],
+// 			},
+// 		},
+// 		{
+// 			id: 'CONZNE_line',
+// 			type: 'line',
+// 			source: 'AREA_COMMON_LINE',
+// 			'source-layer': 'area_common_line',
+// 			filter: ['all', ['==', ['get', 'OBJL'], 31]],
+// 			layout: {
+// 				'line-cap': 'round',
+// 				'line-join': 'round',
+// 			},
+// 			paint: {
+// 				'line-width': 2,
+// 				'line-color': 'rgb(163, 180, 183)',
+// 				'line-dasharray': [3, 3],
+// 			},
+// 		},
+// 		{
+// 			id: 'COSARE_line',
+// 			type: 'line',
+// 			source: 'AREA_COMMON_LINE',
+// 			'source-layer': 'area_common_line',
+// 			filter: ['all', ['==', ['get', 'OBJL'], 32]],
+// 			layout: {
+// 				'line-cap': 'round',
+// 				'line-join': 'round',
+// 			},
+// 			paint: {
+// 				'line-width': 2,
+// 				'line-color': 'rgb(163, 180, 183)',
+// 				'line-dasharray': [3, 3],
+// 			},
+// 		},
+// 		{
+// 			id: 'CONVYR_line',
+// 			type: 'line',
+// 			source: 'AREA_COMMON_LINE',
+// 			'source-layer': 'area_common_line',
+// 			filter: ['all', ['==', ['get', 'OBJL'], 34]],
+// 			layout: {
+// 				'line-cap': 'round',
+// 				'line-join': 'round',
+// 			},
+// 			paint: {
+// 				'line-width': 3,
+// 				'line-color': 'rgb(125, 137, 140)',
+// 			},
+// 		},
+// 		{
+// 			id: 'CRANES_line_1',
+// 			type: 'line',
+// 			source: 'AREA_COMMON_LINE',
+// 			'source-layer': 'area_common_line',
+// 			filter: ['all', ['==', ['get', 'OBJL'], 35], ['==', ['get', 'LineType'], 1]],
+// 			layout: {
+// 				'line-cap': 'round',
+// 				'line-join': 'round',
+// 			},
+// 			paint: {
+// 				'line-width': 1.2,
+// 				'line-color': 'rgb(7, 7, 7)',
+// 			},
+// 		},
+// 		{
+// 			id: 'CRANES_line_2',
+// 			type: 'line',
+// 			source: 'AREA_COMMON_LINE',
+// 			'source-layer': 'area_common_line',
+// 			filter: ['all', ['==', ['get', 'OBJL'], 35], ['==', ['get', 'LineType'], 2]],
+// 			layout: {
+// 				'line-cap': 'round',
+// 				'line-join': 'round',
+// 			},
+// 			paint: {
+// 				'line-width': 1.2,
+// 				'line-color': 'rgb(139, 102, 31)',
+// 			},
+// 		},
+// 		{
+// 			id: 'CUSZNE_line',
+// 			type: 'line',
+// 			source: 'AREA_COMMON_LINE',
+// 			'source-layer': 'area_common_line',
+// 			filter: ['all', ['==', ['get', 'OBJL'], 37]],
+// 			layout: {
+// 				'line-cap': 'round',
+// 				'line-join': 'round',
+// 			},
+// 			paint: {
+// 				'line-width': 1.2,
+// 				'line-color': 'rgb(163, 180, 183)',
+// 				'line-dasharray': [3, 3],
+// 			},
+// 		},
+// 		{
+// 			id: 'DAMCON_line_1',
+// 			type: 'line',
+// 			source: 'AREA_COMMON_LINE',
+// 			'source-layer': 'area_common_line',
+// 			filter: ['all', ['==', ['get', 'OBJL'], 38], ['==', ['get', 'LineType'], 1]],
+// 			layout: {
+// 				'line-cap': 'round',
+// 				'line-join': 'round',
+// 			},
+// 			paint: {
+// 				'line-width': 2,
+// 				'line-color': 'rgb(82, 90, 92)',
+// 			},
+// 		},
+// 		{
+// 			id: 'DAMCON_line_2',
+// 			type: 'line',
+// 			source: 'AREA_COMMON_LINE',
+// 			'source-layer': 'area_common_line',
+// 			filter: ['all', ['==', ['get', 'OBJL'], 38], ['==', ['get', 'LineType'], 2]],
+// 			layout: {
+// 				'line-cap': 'round',
+// 				'line-join': 'round',
+// 			},
+// 			paint: {
+// 				'line-width': 1.2,
+// 				'line-color': 'rgb(139, 102, 31)',
+// 			},
+// 		},
+// 		{
+// 			id: 'DWRTPT_line',
+// 			type: 'line',
+// 			source: 'AREA_COMMON_LINE',
+// 			'source-layer': 'area_common_line',
+// 			filter: ['all', ['==', ['get', 'OBJL'], 41]],
+// 			layout: {
+// 				'line-cap': 'round',
+// 				'line-join': 'round',
+// 			},
+// 			paint: {
+// 				'line-width': 2,
+// 				'line-color': 'rgb(197, 69, 195)',
+// 				'line-dasharray': [3, 3],
+// 			},
+// 		},
+// 		{
+// 			id: 'DOCARE_line_1',
+// 			type: 'line',
+// 			source: 'AREA_COMMON_LINE',
+// 			'source-layer': 'area_common_line',
+// 			filter: ['all', ['==', ['get', 'OBJL'], 45], ['==', ['get', 'LineType'], 1]],
+// 			layout: {
+// 				'line-cap': 'round',
+// 				'line-join': 'round',
+// 			},
+// 			paint: {
+// 				'line-width': 1.2,
+// 				'line-color': 'rgb(7, 7, 7)',
+// 				'line-dasharray': [3, 3],
+// 			},
+// 		},
+// 		{
+// 			id: 'DOCARE_line_2',
+// 			type: 'line',
+// 			source: 'AREA_COMMON_LINE',
+// 			'source-layer': 'area_common_line',
+// 			filter: ['all', ['==', ['get', 'OBJL'], 45], ['==', ['get', 'LineType'], 2]],
+// 			layout: {
+// 				'line-cap': 'round',
+// 				'line-join': 'round',
+// 			},
+// 			paint: {
+// 				'line-width': 1.2,
+// 				'line-color': 'rgb(7, 7, 7)',
+// 			},
+// 		},
+// 		{
+// 			id: 'DRGARE_line',
+// 			type: 'line',
+// 			source: 'AREA_COMMON_LINE',
+// 			'source-layer': 'area_common_line',
+// 			filter: ['all', ['==', ['get', 'OBJL'], 46]],
+// 			layout: {
+// 				'line-cap': 'round',
+// 				'line-join': 'round',
+// 			},
+// 			paint: {
+// 				'line-width': 1.2,
+// 				'line-color': 'rgb(163, 180, 183)',
+// 				'line-dasharray': [3, 3],
+// 			},
+// 		},
+// 		{
+// 			id: 'DRYDOC_line',
+// 			type: 'line',
+// 			source: 'AREA_COMMON_LINE',
+// 			'source-layer': 'area_common_line',
+// 			filter: ['all', ['==', ['get', 'OBJL'], 47]],
+// 			layout: {
+// 				'line-cap': 'round',
+// 				'line-join': 'round',
+// 			},
+// 			paint: {
+// 				'line-width': 1,
+// 				'line-color': 'rgb(82, 90, 92)',
+// 			},
+// 		},
+// 		{
+// 			id: 'DMPGRD_line_marker_1',
+// 			type: 'line',
+// 			source: 'AREA_COMMON_LINE',
+// 			'source-layer': 'area_common_line',
+// 			filter: ['all', ['==', ['get', 'OBJL'], 48], ['==', ['get', 'LineType'], 1]],
+// 			layout: {
+// 				'line-cap': 'round',
+// 				'line-join': 'round',
+// 			},
+// 			paint: {
+// 				'line-width': 16,
+// 				'line-pattern': 'NAVARE51',
+// 			},
+// 		},
+// 		{
+// 			id: 'DMPGRD_line_marker_2',
+// 			type: 'line',
+// 			source: 'AREA_COMMON_LINE',
+// 			'source-layer': 'area_common_line',
+// 			filter: ['all', ['==', ['get', 'OBJL'], 48], ['==', ['get', 'LineType'], 2]],
+// 			layout: {
+// 				'line-cap': 'round',
+// 				'line-join': 'round',
+// 			},
+// 			paint: {
+// 				'line-width': 16,
+// 				'line-pattern': 'CTYARE51',
+// 			},
+// 		},
+// 		{
+// 			id: 'DYKCON_line',
+// 			type: 'line',
+// 			source: 'AREA_COMMON_LINE',
+// 			'source-layer': 'area_common_line',
+// 			filter: ['all', ['==', ['get', 'OBJL'], 49]],
+// 			layout: {
+// 				'line-cap': 'round',
+// 				'line-join': 'round',
+// 			},
+// 			paint: {
+// 				'line-width': 1.2,
+// 				'line-color': 'rgb(139, 102, 31)',
+// 			},
+// 		},
+// 		{
+// 			id: 'EXEZNE_line',
+// 			type: 'line',
+// 			source: 'AREA_COMMON_LINE',
+// 			'source-layer': 'area_common_line',
+// 			filter: ['all', ['==', ['get', 'OBJL'], 50]],
+// 			layout: {
+// 				'line-cap': 'round',
+// 				'line-join': 'round',
+// 			},
+// 			paint: {
+// 				'line-width': 2,
+// 				'line-color': 'rgb(163, 180, 183)',
+// 				'line-dasharray': [3, 3],
+// 			},
+// 		},
+// 		{
+// 			id: 'FAIRWY_line_marker',
+// 			type: 'line',
+// 			source: 'AREA_COMMON_LINE',
+// 			'source-layer': 'area_common_line',
+// 			filter: ['all', ['==', ['get', 'OBJL'], 51]],
+// 			layout: {
+// 				'line-cap': 'round',
+// 				'line-join': 'round',
+// 			},
+// 			paint: {
+// 				'line-width': 16,
+// 				'line-pattern': 'NAVARE51',
+// 			},
+// 		},
+// 		{
+// 			id: 'FERYRT_line_1',
+// 			type: 'line',
+// 			source: 'AREA_COMMON_LINE',
+// 			'source-layer': 'area_common_line',
+// 			filter: ['all', ['==', ['get', 'OBJL'], 53], ['==', ['get', 'LineType'], 1]],
+// 			layout: {
+// 				'line-cap': 'round',
+// 				'line-join': 'round',
+// 			},
+// 			paint: {
+// 				'line-width': 2,
+// 				'line-color': 'rgb(7, 7, 7)',
+// 				'line-dasharray': [3, 3],
+// 			},
+// 		},
+// 		{
+// 			id: 'FERYRT_line_2',
+// 			type: 'line',
+// 			source: 'AREA_COMMON_LINE',
+// 			'source-layer': 'area_common_line',
+// 			filter: ['all', ['==', ['get', 'OBJL'], 53], ['==', ['get', 'LineType'], 2]],
+// 			layout: {
+// 				'line-cap': 'round',
+// 				'line-join': 'round',
+// 			},
+// 			paint: {
+// 				'line-width': 2,
+// 				'line-color': 'rgb(197, 69, 195)',
+// 				'line-dasharray': [3, 3],
+// 			},
+// 		},
+// 		{
+// 			id: 'FSHZNE_line',
+// 			type: 'line',
+// 			source: 'AREA_COMMON_LINE',
+// 			'source-layer': 'area_common_line',
+// 			filter: ['all', ['==', ['get', 'OBJL'], 54]],
+// 			layout: {
+// 				'line-cap': 'round',
+// 				'line-join': 'round',
+// 			},
+// 			paint: {
+// 				'line-width': 2,
+// 				'line-color': 'rgb(163, 180, 183)',
+// 				'line-dasharray': [3, 3],
+// 			},
+// 		},
+// 		{
+// 			id: 'FSHFAC_line',
+// 			type: 'line',
+// 			source: 'AREA_COMMON_LINE',
+// 			'source-layer': 'area_common_line',
+// 			filter: ['all', ['==', ['get', 'OBJL'], 55]],
+// 			layout: {
+// 				'line-cap': 'round',
+// 				'line-join': 'round',
+// 			},
+// 			paint: {
+// 				'line-width': 1.2,
+// 				'line-color': 'rgb(125, 137, 140)',
+// 				'line-dasharray': [3, 3],
+// 			},
+// 		},
+// 		{
+// 			id: 'FSHGRD_line',
+// 			type: 'line',
+// 			source: 'AREA_COMMON_LINE',
+// 			'source-layer': 'area_common_line',
+// 			filter: ['all', ['==', ['get', 'OBJL'], 56]],
+// 			layout: {
+// 				'line-cap': 'round',
+// 				'line-join': 'round',
+// 			},
+// 			paint: {
+// 				'line-width': 1.2,
+// 				'line-color': 'rgb(163, 180, 183)',
+// 				'line-dasharray': [3, 3],
+// 			},
+// 		},
+// 		{
+// 			id: 'FLODOC_line',
+// 			type: 'line',
+// 			source: 'AREA_COMMON_LINE',
+// 			'source-layer': 'area_common_line',
+// 			filter: ['all', ['==', ['get', 'OBJL'], 57]],
+// 			layout: {
+// 				'line-cap': 'round',
+// 				'line-join': 'round',
+// 			},
+// 			paint: {
+// 				'line-width': 2,
+// 				'line-color': 'rgb(82, 90, 92)',
+// 			},
+// 		},
+// 		{
+// 			id: 'FORSTC_line_1',
+// 			type: 'line',
+// 			source: 'AREA_COMMON_LINE',
+// 			'source-layer': 'area_common_line',
+// 			filter: ['all', ['==', ['get', 'OBJL'], 59], ['==', ['get', 'LineType'], 1]],
+// 			layout: {
+// 				'line-cap': 'round',
+// 				'line-join': 'round',
+// 			},
+// 			paint: {
+// 				'line-width': 1.2,
+// 				'line-color': 'rgb(7, 7, 7)',
+// 			},
+// 		},
+// 		{
+// 			id: 'FORSTC_line_2',
+// 			type: 'line',
+// 			source: 'AREA_COMMON_LINE',
+// 			'source-layer': 'area_common_line',
+// 			filter: ['all', ['==', ['get', 'OBJL'], 59], ['==', ['get', 'LineType'], 2]],
+// 			layout: {
+// 				'line-cap': 'round',
+// 				'line-join': 'round',
+// 			},
+// 			paint: {
+// 				'line-width': 1.2,
+// 				'line-color': 'rgb(139, 102, 31)',
+// 			},
+// 		},
+// 		{
+// 			id: 'FRPARE_line',
+// 			type: 'line',
+// 			source: 'AREA_COMMON_LINE',
+// 			'source-layer': 'area_common_line',
+// 			filter: ['all', ['==', ['get', 'OBJL'], 60]],
+// 			layout: {
+// 				'line-cap': 'round',
+// 				'line-join': 'round',
+// 			},
+// 			paint: {
+// 				'line-width': 2,
+// 				'line-color': 'rgb(163, 180, 183)',
+// 				'line-dasharray': [3, 3],
+// 			},
+// 		},
+// 		{
+// 			id: 'GATCON_line',
+// 			type: 'line',
+// 			source: 'AREA_COMMON_LINE',
+// 			'source-layer': 'area_common_line',
+// 			filter: ['all', ['==', ['get', 'OBJL'], 61]],
+// 			layout: {
+// 				'line-cap': 'round',
+// 				'line-join': 'round',
+// 			},
+// 			paint: {
+// 				'line-width': 2,
+// 				'line-color': 'rgb(82, 90, 92)',
+// 			},
+// 		},
+// 		{
+// 			id: 'GRIDRN_line',
+// 			type: 'line',
+// 			source: 'AREA_COMMON_LINE',
+// 			'source-layer': 'area_common_line',
+// 			filter: ['all', ['==', ['get', 'OBJL'], 62]],
+// 			layout: {
+// 				'line-cap': 'round',
+// 				'line-join': 'round',
+// 			},
+// 			paint: {
+// 				'line-width': 1.2,
+// 				'line-color': 'rgb(125, 137, 140)',
+// 				'line-dasharray': [3, 3],
+// 			},
+// 		},
+// 		{
+// 			id: 'HRBARE_line',
+// 			type: 'line',
+// 			source: 'AREA_COMMON_LINE',
+// 			'source-layer': 'area_common_line',
+// 			filter: ['all', ['==', ['get', 'OBJL'], 63]],
+// 			layout: {
+// 				'line-cap': 'round',
+// 				'line-join': 'round',
+// 			},
+// 			paint: {
+// 				'line-width': 2,
+// 				'line-color': 'rgb(125, 137, 140)',
+// 				'line-dasharray': [3, 3],
+// 			},
+// 		},
+// 		{
+// 			id: 'HULKES_line',
+// 			type: 'line',
+// 			source: 'AREA_COMMON_LINE',
+// 			'source-layer': 'area_common_line',
+// 			filter: ['all', ['==', ['get', 'OBJL'], 65]],
+// 			layout: {
+// 				'line-cap': 'round',
+// 				'line-join': 'round',
+// 			},
+// 			paint: {
+// 				'line-width': 2,
+// 				'line-color': 'rgb(82, 90, 92)',
+// 			},
+// 		},
+// 		{
+// 			id: 'ICEARE_line',
+// 			type: 'line',
+// 			source: 'AREA_COMMON_LINE',
+// 			'source-layer': 'area_common_line',
+// 			filter: ['all', ['==', ['get', 'OBJL'], 66]],
+// 			layout: {
+// 				'line-cap': 'round',
+// 				'line-join': 'round',
+// 			},
+// 			paint: {
+// 				'line-width': 1.2,
+// 				'line-color': 'rgb(125, 137, 140)',
+// 				'line-dasharray': [3, 3],
+// 			},
+// 		},
+// 		{
+// 			id: 'ICNARE_line',
+// 			type: 'line',
+// 			source: 'AREA_COMMON_LINE',
+// 			'source-layer': 'area_common_line',
+// 			filter: ['all', ['==', ['get', 'OBJL'], 67]],
+// 			layout: {
+// 				'line-cap': 'round',
+// 				'line-join': 'round',
+// 			},
+// 			paint: {
+// 				'line-width': 1.2,
+// 				'line-color': 'rgb(211, 166, 233)',
+// 				'line-dasharray': [3, 3],
+// 			},
+// 		},
+// 		{
+// 			id: 'ISTZNE_line',
+// 			type: 'line',
+// 			source: 'AREA_COMMON_LINE',
+// 			'source-layer': 'area_common_line',
+// 			filter: ['all', ['==', ['get', 'OBJL'], 68]],
+// 			layout: {
+// 				'line-cap': 'round',
+// 				'line-join': 'round',
+// 			},
+// 			paint: {
+// 				'line-width': 1.2,
+// 				'line-color': 'rgb(197, 69, 195)',
+// 				'line-dasharray': [3, 3],
+// 			},
+// 		},
+// 		{
+// 			id: 'LAKARE_line',
+// 			type: 'line',
+// 			source: 'AREA_COMMON_LINE',
+// 			'source-layer': 'area_common_line',
+// 			filter: ['all', ['==', ['get', 'OBJL'], 69]],
+// 			layout: {
+// 				'line-cap': 'round',
+// 				'line-join': 'round',
+// 			},
+// 			paint: {
+// 				'line-width': 1.2,
+// 				'line-color': 'rgb(7, 7, 7)',
+// 			},
+// 		},
+// 		{
+// 			id: 'LNDMRK_line_1',
+// 			type: 'line',
+// 			source: 'AREA_COMMON_LINE',
+// 			'source-layer': 'area_common_line',
+// 			filter: ['all', ['==', ['get', 'OBJL'], 74], ['==', ['get', 'LineType'], 1]],
+// 			layout: {
+// 				'line-cap': 'round',
+// 				'line-join': 'round',
+// 			},
+// 			paint: {
+// 				'line-width': 1.2,
+// 				'line-color': 'rgb(7, 7, 7)',
+// 			},
+// 		},
+// 		{
+// 			id: 'LNDMRK_line_2',
+// 			type: 'line',
+// 			source: 'AREA_COMMON_LINE',
+// 			'source-layer': 'area_common_line',
+// 			filter: ['all', ['==', ['get', 'OBJL'], 74], ['==', ['get', 'LineType'], 2]],
+// 			layout: {
+// 				'line-cap': 'round',
+// 				'line-join': 'round',
+// 			},
+// 			paint: {
+// 				'line-width': 1.2,
+// 				'line-color': 'rgb(139, 102, 31)',
+// 			},
+// 		},
+// 		{
+// 			id: 'LOCMAG_line',
+// 			type: 'line',
+// 			source: 'AREA_COMMON_LINE',
+// 			'source-layer': 'area_common_line',
+// 			filter: ['all', ['==', ['get', 'OBJL'], 78]],
+// 			layout: {
+// 				'line-cap': 'round',
+// 				'line-join': 'round',
+// 			},
+// 			paint: {
+// 				'line-width': 1.2,
+// 				'line-color': 'rgb(125, 137, 140)',
+// 				'line-dasharray': [3, 3],
+// 			},
+// 		},
+// 		{
+// 			id: 'LOKBSN_line',
+// 			type: 'line',
+// 			source: 'AREA_COMMON_LINE',
+// 			'source-layer': 'area_common_line',
+// 			filter: ['all', ['==', ['get', 'OBJL'], 79]],
+// 			layout: {
+// 				'line-cap': 'round',
+// 				'line-join': 'round',
+// 			},
+// 			paint: {
+// 				'line-width': 1.2,
+// 				'line-color': 'rgb(7, 7, 7)',
+// 				'line-dasharray': [3, 3],
+// 			},
+// 		},
+// 		{
+// 			id: 'LOGPON_line',
+// 			type: 'line',
+// 			source: 'AREA_COMMON_LINE',
+// 			'source-layer': 'area_common_line',
+// 			filter: ['all', ['==', ['get', 'OBJL'], 80]],
+// 			layout: {
+// 				'line-cap': 'round',
+// 				'line-join': 'round',
+// 			},
+// 			paint: {
+// 				'line-width': 1.2,
+// 				'line-color': 'rgb(7, 7, 7)',
+// 				'line-dasharray': [3, 3],
+// 			},
+// 		},
+// 		{
+// 			id: 'MARCUL_line',
+// 			type: 'line',
+// 			source: 'AREA_COMMON_LINE',
+// 			'source-layer': 'area_common_line',
+// 			filter: ['all', ['==', ['get', 'OBJL'], 82]],
+// 			layout: {
+// 				'line-cap': 'round',
+// 				'line-join': 'round',
+// 			},
+// 			paint: {
+// 				'line-width': 1.2,
+// 				'line-color': 'rgb(125, 137, 140)',
+// 				'line-dasharray': [3, 3],
+// 			},
+// 		},
+// 		{
+// 			id: 'MIPARE_line',
+// 			type: 'line',
+// 			source: 'AREA_COMMON_LINE',
+// 			'source-layer': 'area_common_line',
+// 			filter: ['all', ['==', ['get', 'OBJL'], 83]],
+// 			layout: {
+// 				'line-cap': 'round',
+// 				'line-join': 'round',
+// 			},
+// 			paint: {
+// 				'line-width': 2,
+// 				'line-color': 'rgb(197, 69, 195)',
+// 				'line-dasharray': [3, 3],
+// 			},
+// 		},
+// 		{
+// 			id: 'MORFAC_line',
+// 			type: 'line',
+// 			source: 'AREA_COMMON_LINE',
+// 			'source-layer': 'area_common_line',
+// 			filter: ['all', ['==', ['get', 'OBJL'], 84]],
+// 			layout: {
+// 				'line-cap': 'round',
+// 				'line-join': 'round',
+// 			},
+// 			paint: {
+// 				'line-width': 1.2,
+// 				'line-color': 'rgb(7, 7, 7)',
+// 			},
+// 		},
+// 		{
+// 			id: 'OBSTRN_line_1',
+// 			type: 'line',
+// 			source: 'AREA_COMMON_LINE',
+// 			'source-layer': 'area_common_line',
+// 			filter: ['all', ['==', ['get', 'OBJL'], 86], ['==', ['get', 'LineType'], 1]],
+// 			layout: {
+// 				'line-cap': 'round',
+// 				'line-join': 'round',
+// 			},
+// 			paint: {
+// 				'line-width': 1.2,
+// 				'line-color': 'rgb(82, 90, 92)',
+// 				'line-dasharray': [3, 3],
+// 			},
+// 		},
+// 		{
+// 			id: 'OBSTRN_line_2',
+// 			type: 'line',
+// 			source: 'AREA_COMMON_LINE',
+// 			'source-layer': 'area_common_line',
+// 			filter: ['all', ['==', ['get', 'OBJL'], 86], ['==', ['get', 'LineType'], 2]],
+// 			layout: {
+// 				'line-cap': 'round',
+// 				'line-join': 'round',
+// 			},
+// 			paint: {
+// 				'line-width': 1.2,
+// 				'line-color': 'rgb(197, 69, 195)',
+// 				'line-dasharray': [3, 3],
+// 			},
+// 		},
+// 		{
+// 			id: 'OBSTRN_line_3',
+// 			type: 'line',
+// 			source: 'AREA_COMMON_LINE',
+// 			'source-layer': 'area_common_line',
+// 			filter: ['all', ['==', ['get', 'OBJL'], 86], ['==', ['get', 'LineType'], 3]],
+// 			layout: {
+// 				'line-cap': 'round',
+// 				'line-join': 'round',
+// 			},
+// 			paint: {
+// 				'line-width': 2,
+// 				'line-color': 'rgb(7, 7, 7)',
+// 				'line-dasharray': [1, 2],
+// 			},
+// 		},
+// 		{
+// 			id: 'OBSTRN_line_4',
+// 			type: 'line',
+// 			source: 'AREA_COMMON_LINE',
+// 			'source-layer': 'area_common_line',
+// 			filter: ['all', ['==', ['get', 'OBJL'], 86], ['==', ['get', 'LineType'], 4]],
+// 			layout: {
+// 				'line-cap': 'round',
+// 				'line-join': 'round',
+// 			},
+// 			paint: {
+// 				'line-width': 2,
+// 				'line-color': 'rgb(7, 7, 7)',
+// 				'line-dasharray': [3, 3],
+// 			},
+// 		},
+// 		{
+// 			id: 'OBSTRN_line_5',
+// 			type: 'line',
+// 			source: 'AREA_COMMON_LINE',
+// 			'source-layer': 'area_common_line',
+// 			filter: ['all', ['==', ['get', 'OBJL'], 86], ['==', ['get', 'LineType'], 5]],
+// 			layout: {
+// 				'line-cap': 'round',
+// 				'line-join': 'round',
+// 			},
+// 			paint: {
+// 				'line-width': 2,
+// 				'line-color': 'rgb(82, 90, 92)',
+// 			},
+// 		},
+// 		{
+// 			id: 'OBSTRN_line_6',
+// 			type: 'line',
+// 			source: 'AREA_COMMON_LINE',
+// 			'source-layer': 'area_common_line',
+// 			filter: ['all', ['==', ['get', 'OBJL'], 86], ['==', ['get', 'LineType'], 6]],
+// 			layout: {
+// 				'line-cap': 'round',
+// 				'line-join': 'round',
+// 			},
+// 			paint: {
+// 				'line-width': 2,
+// 				'line-color': 'rgb(82, 90, 92)',
+// 				'line-dasharray': [3, 3],
+// 			},
+// 		},
+// 		{
+// 			id: 'OFSPLF_line',
+// 			type: 'line',
+// 			source: 'AREA_COMMON_LINE',
+// 			'source-layer': 'area_common_line',
+// 			filter: ['all', ['==', ['get', 'OBJL'], 87]],
+// 			layout: {
+// 				'line-cap': 'round',
+// 				'line-join': 'round',
+// 			},
+// 			paint: {
+// 				'line-width': 4,
+// 				'line-color': 'rgb(82, 90, 92)',
+// 			},
+// 		},
+// 		{
+// 			id: 'OSPARE_line',
+// 			type: 'line',
+// 			source: 'AREA_COMMON_LINE',
+// 			'source-layer': 'area_common_line',
+// 			filter: ['all', ['==', ['get', 'OBJL'], 88]],
+// 			layout: {
+// 				'line-cap': 'round',
+// 				'line-join': 'round',
+// 			},
+// 			paint: {
+// 				'line-width': 2,
+// 				'line-color': 'rgb(197, 69, 195)',
+// 				'line-dasharray': [3, 3],
+// 			},
+// 		},
+// 		{
+// 			id: 'PILBOP_line',
+// 			type: 'line',
+// 			source: 'AREA_COMMON_LINE',
+// 			'source-layer': 'area_common_line',
+// 			filter: ['all', ['==', ['get', 'OBJL'], 91]],
+// 			layout: {
+// 				'line-cap': 'round',
+// 				'line-join': 'round',
+// 			},
+// 			paint: {
+// 				'line-width': 2,
+// 				'line-color': 'rgb(211, 166, 233)',
+// 				'line-dasharray': [3, 3],
+// 			},
+// 		},
+// 		{
+// 			id: 'PIPARE_line_1',
+// 			type: 'line',
+// 			source: 'AREA_COMMON_LINE',
+// 			'source-layer': 'area_common_line',
+// 			filter: ['all', ['==', ['get', 'OBJL'], 92], ['==', ['get', 'LineType'], 1]],
+// 			layout: {
+// 				'line-cap': 'round',
+// 				'line-join': 'round',
+// 			},
+// 			paint: {
+// 				'line-width': 1.2,
+// 				'line-color': 'rgb(197, 69, 195)',
+// 				'line-dasharray': [3, 3],
+// 			},
+// 		},
+// 		{
+// 			id: 'PIPARE_line_2',
+// 			type: 'line',
+// 			source: 'AREA_COMMON_LINE',
+// 			'source-layer': 'area_common_line',
+// 			filter: ['all', ['==', ['get', 'OBJL'], 92], ['==', ['get', 'LineType'], 2]],
+// 			layout: {
+// 				'line-cap': 'round',
+// 				'line-join': 'round',
+// 			},
+// 			paint: {
+// 				'line-width': 1.2,
+// 				'line-color': 'rgb(125, 137, 140)',
+// 				'line-dasharray': [3, 3],
+// 			},
+// 		},
+// 		{
+// 			id: 'PONTON_line',
+// 			type: 'line',
+// 			source: 'AREA_COMMON_LINE',
+// 			'source-layer': 'area_common_line',
+// 			filter: ['all', ['==', ['get', 'OBJL'], 95]],
+// 			layout: {
+// 				'line-cap': 'round',
+// 				'line-join': 'round',
+// 			},
+// 			paint: {
+// 				'line-width': 2,
+// 				'line-color': 'rgb(82, 90, 92)',
+// 			},
+// 		},
+// 		{
+// 			id: 'PRCARE_line',
+// 			type: 'line',
+// 			source: 'AREA_COMMON_LINE',
+// 			'source-layer': 'area_common_line',
+// 			filter: ['all', ['==', ['get', 'OBJL'], 96]],
+// 			layout: {
+// 				'line-cap': 'round',
+// 				'line-join': 'round',
+// 			},
+// 			paint: {
+// 				'line-width': 2,
+// 				'line-color': 'rgb(197, 69, 195)',
+// 				'line-dasharray': [3, 3],
+// 			},
+// 		},
+// 		{
+// 			id: 'PRDARE_line_1',
+// 			type: 'line',
+// 			source: 'AREA_COMMON_LINE',
+// 			'source-layer': 'area_common_line',
+// 			filter: ['all', ['==', ['get', 'OBJL'], 97], ['==', ['get', 'LineType'], 1]],
+// 			layout: {
+// 				'line-cap': 'round',
+// 				'line-join': 'round',
+// 			},
+// 			paint: {
+// 				'line-width': 1.2,
+// 				'line-color': 'rgb(7, 7, 7)',
+// 				'line-dasharray': [3, 3],
+// 			},
+// 		},
+// 		{
+// 			id: 'PRDARE_line_2',
+// 			type: 'line',
+// 			source: 'AREA_COMMON_LINE',
+// 			'source-layer': 'area_common_line',
+// 			filter: ['all', ['==', ['get', 'OBJL'], 97], ['==', ['get', 'LineType'], 2]],
+// 			layout: {
+// 				'line-cap': 'round',
+// 				'line-join': 'round',
+// 			},
+// 			paint: {
+// 				'line-width': 1.2,
+// 				'line-color': 'rgb(139, 102, 31)',
+// 				'line-dasharray': [3, 3],
+// 			},
+// 		},
+// 		{
+// 			id: 'PYLONS_line',
+// 			type: 'line',
+// 			source: 'AREA_COMMON_LINE',
+// 			'source-layer': 'area_common_line',
+// 			filter: ['all', ['==', ['get', 'OBJL'], 98]],
+// 			layout: {
+// 				'line-cap': 'round',
+// 				'line-join': 'round',
+// 			},
+// 			paint: {
+// 				'line-width': 2,
+// 				'line-color': 'rgb(82, 90, 92)',
+// 			},
+// 		},
+// 		{
+// 			id: 'RADRNG_line',
+// 			type: 'line',
+// 			source: 'AREA_COMMON_LINE',
+// 			'source-layer': 'area_common_line',
+// 			filter: ['all', ['==', ['get', 'OBJL'], 100]],
+// 			layout: {
+// 				'line-cap': 'round',
+// 				'line-join': 'round',
+// 			},
+// 			paint: {
+// 				'line-width': 1.2,
+// 				'line-color': 'rgb(211, 166, 233)',
+// 				'line-dasharray': [3, 3],
+// 			},
+// 		},
+// 		{
+// 			id: 'RECTRC_line',
+// 			type: 'line',
+// 			source: 'AREA_COMMON_LINE',
+// 			'source-layer': 'area_common_line',
+// 			filter: ['all', ['==', ['get', 'OBJL'], 109]],
+// 			layout: {
+// 				'line-cap': 'round',
+// 				'line-join': 'round',
+// 			},
+// 			paint: {
+// 				'line-width': 1.2,
+// 				'line-color': 'rgb(125, 137, 140)',
+// 				'line-dasharray': [3, 3],
+// 			},
+// 		},
+// 		{
+// 			id: 'RESARE_line',
+// 			type: 'line',
+// 			source: 'AREA_COMMON_LINE',
+// 			'source-layer': 'area_common_line',
+// 			filter: ['all', ['==', ['get', 'OBJL'], 112]],
+// 			layout: {
+// 				'line-cap': 'round',
+// 				'line-join': 'round',
+// 			},
+// 			paint: {
+// 				'line-width': 1.2,
+// 				'line-color': 'rgb(197, 69, 195)',
+// 				'line-dasharray': [3, 3],
+// 			},
+// 		},
+// 		{
+// 			id: 'RIVERS_line',
+// 			type: 'line',
+// 			source: 'AREA_COMMON_LINE',
+// 			'source-layer': 'area_common_line',
+// 			filter: ['all', ['==', ['get', 'OBJL'], 114]],
+// 			layout: {
+// 				'line-cap': 'round',
+// 				'line-join': 'round',
+// 			},
+// 			paint: {
+// 				'line-width': 1.2,
+// 				'line-color': 'rgb(7, 7, 7)',
+// 			},
+// 		},
+// 		{
+// 			id: 'ROADWY_line',
+// 			type: 'line',
+// 			source: 'AREA_COMMON_LINE',
+// 			'source-layer': 'area_common_line',
+// 			filter: ['all', ['==', ['get', 'OBJL'], 116]],
+// 			layout: {
+// 				'line-cap': 'round',
+// 				'line-join': 'round',
+// 			},
+// 			paint: {
+// 				'line-width': 1.2,
+// 				'line-color': 'rgb(139, 102, 31)',
+// 			},
+// 		},
+// 		{
+// 			id: 'RUNWAY_line_1',
+// 			type: 'line',
+// 			source: 'AREA_COMMON_LINE',
+// 			'source-layer': 'area_common_line',
+// 			filter: ['all', ['==', ['get', 'OBJL'], 117], ['==', ['get', 'LineType'], 1]],
+// 			layout: {
+// 				'line-cap': 'round',
+// 				'line-join': 'round',
+// 			},
+// 			paint: {
+// 				'line-width': 1.2,
+// 				'line-color': 'rgb(7, 7, 7)',
+// 			},
+// 		},
+// 		{
+// 			id: 'SNDWAV_line',
+// 			type: 'line',
+// 			source: 'AREA_COMMON_LINE',
+// 			'source-layer': 'area_common_line',
+// 			filter: ['all', ['==', ['get', 'OBJL'], 118]],
+// 			layout: {
+// 				'line-cap': 'round',
+// 				'line-join': 'round',
+// 			},
+// 			paint: {
+// 				'line-width': 2,
+// 				'line-color': 'rgb(125, 137, 140)',
+// 				'line-dasharray': [3, 3],
+// 			},
+// 		},
+// 		{
+// 			id: 'SPLARE_line',
+// 			type: 'line',
+// 			source: 'AREA_COMMON_LINE',
+// 			'source-layer': 'area_common_line',
+// 			filter: ['all', ['==', ['get', 'OBJL'], 120]],
+// 			layout: {
+// 				'line-cap': 'round',
+// 				'line-join': 'round',
+// 			},
+// 			paint: {
+// 				'line-width': 1.2,
+// 				'line-color': 'rgb(197, 69, 195)',
+// 				'line-dasharray': [3, 3],
+// 			},
+// 		},
+// 		{
+// 			id: 'SBDARE_line',
+// 			type: 'line',
+// 			source: 'AREA_COMMON_LINE',
+// 			'source-layer': 'area_common_line',
+// 			filter: ['all', ['==', ['get', 'OBJL'], 121]],
+// 			layout: {
+// 				'line-cap': 'round',
+// 				'line-join': 'round',
+// 			},
+// 			paint: {
+// 				'line-width': 1.2,
+// 				'line-color': 'rgb(125, 137, 140)',
+// 				'line-dasharray': [3, 3],
+// 			},
+// 		},
+// 		{
+// 			id: 'SLCONS_line',
+// 			type: 'line',
+// 			source: 'AREA_COMMON_LINE',
+// 			'source-layer': 'area_common_line',
+// 			filter: ['all', ['==', ['get', 'OBJL'], 122]],
+// 			layout: {
+// 				'line-cap': 'round',
+// 				'line-join': 'round',
+// 			},
+// 			paint: {
+// 				'line-width': 1.2,
+// 				'line-color': 'rgb(82, 90, 92)',
+// 				'line-dasharray': [3, 3],
+// 			},
+// 		},
+// 		{
+// 			id: 'SILTNK_line_1',
+// 			type: 'line',
+// 			source: 'AREA_COMMON_LINE',
+// 			'source-layer': 'area_common_line',
+// 			filter: ['all', ['==', ['get', 'OBJL'], 125], ['==', ['get', 'LineType'], 1]],
+// 			layout: {
+// 				'line-cap': 'round',
+// 				'line-join': 'round',
+// 			},
+// 			paint: {
+// 				'line-width': 1.2,
+// 				'line-color': 'rgb(7, 7, 7)',
+// 			},
+// 		},
+// 		{
+// 			id: 'SILTNK_line_2',
+// 			type: 'line',
+// 			source: 'AREA_COMMON_LINE',
+// 			'source-layer': 'area_common_line',
+// 			filter: ['all', ['==', ['get', 'OBJL'], 125], ['==', ['get', 'LineType'], 2]],
+// 			layout: {
+// 				'line-cap': 'round',
+// 				'line-join': 'round',
+// 			},
+// 			paint: {
+// 				'line-width': 1.2,
+// 				'line-color': 'rgb(139, 102, 31)',
+// 			},
+// 		},
+// 		{
+// 			id: 'SLOGRD_line_1',
+// 			type: 'line',
+// 			source: 'AREA_COMMON_LINE',
+// 			'source-layer': 'area_common_line',
+// 			filter: ['all', ['==', ['get', 'OBJL'], 127], ['==', ['get', 'LineType'], 1]],
+// 			layout: {
+// 				'line-cap': 'round',
+// 				'line-join': 'round',
+// 			},
+// 			paint: {
+// 				'line-width': 1.2,
+// 				'line-color': 'rgb(7, 7, 7)',
+// 			},
+// 		},
+// 		{
+// 			id: 'SMCFAC_line',
+// 			type: 'line',
+// 			source: 'AREA_COMMON_LINE',
+// 			'source-layer': 'area_common_line',
+// 			filter: ['all', ['==', ['get', 'OBJL'], 128]],
+// 			layout: {
+// 				'line-cap': 'round',
+// 				'line-join': 'round',
+// 			},
+// 			paint: {
+// 				'line-width': 1.2,
+// 				'line-color': 'rgb(139, 102, 31)',
+// 			},
+// 		},
+// 		{
+// 			id: 'SUBTLN_line',
+// 			type: 'line',
+// 			source: 'AREA_COMMON_LINE',
+// 			'source-layer': 'area_common_line',
+// 			filter: ['all', ['==', ['get', 'OBJL'], 133]],
+// 			layout: {
+// 				'line-cap': 'round',
+// 				'line-join': 'round',
+// 			},
+// 			paint: {
+// 				'line-width': 1.2,
+// 				'line-color': 'rgb(197, 69, 195)',
+// 				'line-dasharray': [3, 3],
+// 			},
+// 		},
+// 		{
+// 			id: 'SWPARE_line',
+// 			type: 'line',
+// 			source: 'AREA_COMMON_LINE',
+// 			'source-layer': 'area_common_line',
+// 			filter: ['all', ['==', ['get', 'OBJL'], 134]],
+// 			layout: {
+// 				'line-cap': 'round',
+// 				'line-join': 'round',
+// 			},
+// 			paint: {
+// 				'line-width': 1.2,
+// 				'line-color': 'rgb(125, 137, 140)',
+// 				'line-dasharray': [3, 3],
+// 			},
+// 		},
+
+// 		{
+// 			id: '_texto_line',
+// 			type: 'line',
+// 			source: 'AREA_COMMON_LINE',
+// 			'source-layer': 'area_common_line',
+// 			filter: ['all', ['==', ['get', 'OBJL'], 135]],
+// 			layout: {
+// 				'line-cap': 'round',
+// 				'line-join': 'round',
+// 			},
+// 			paint: {
+// 				'line-width': 2,
+// 				'line-color': 'rgb(163, 180, 183)',
+// 				'line-dasharray': [3, 3],
+// 			},
+// 		},
+// 		{
+// 			id: 'TS_PRH_line',
+// 			type: 'line',
+// 			source: 'AREA_COMMON_LINE',
+// 			'source-layer': 'area_common_line',
+// 			filter: ['all', ['==', ['get', 'OBJL'], 136]],
+// 			layout: {
+// 				'line-cap': 'round',
+// 				'line-join': 'round',
+// 			},
+// 			paint: {
+// 				'line-width': 1.2,
+// 				'line-color': 'rgb(125, 137, 140)',
+// 				'line-dasharray': [3, 3],
+// 			},
+// 		},
+// 		{
+// 			id: 'TS_PNH_line',
+// 			type: 'line',
+// 			source: 'AREA_COMMON_LINE',
+// 			'source-layer': 'area_common_line',
+// 			filter: ['all', ['==', ['get', 'OBJL'], 137]],
+// 			layout: {
+// 				'line-cap': 'round',
+// 				'line-join': 'round',
+// 			},
+// 			paint: {
+// 				'line-width': 1.2,
+// 				'line-color': 'rgb(125, 137, 140)',
+// 				'line-dasharray': [3, 3],
+// 			},
+// 		},
+// 		{
+// 			id: 'TS_PAD_line',
+// 			type: 'line',
+// 			source: 'AREA_COMMON_LINE',
+// 			'source-layer': 'area_common_line',
+// 			filter: ['all', ['==', ['get', 'OBJL'], 138]],
+// 			layout: {
+// 				'line-cap': 'round',
+// 				'line-join': 'round',
+// 			},
+// 			paint: {
+// 				'line-width': 1.2,
+// 				'line-color': 'rgb(125, 137, 140)',
+// 				'line-dasharray': [3, 3],
+// 			},
+// 		},
+// 		{
+// 			id: 'TS_TIS_line',
+// 			type: 'line',
+// 			source: 'AREA_COMMON_LINE',
+// 			'source-layer': 'area_common_line',
+// 			filter: ['all', ['==', ['get', 'OBJL'], 139]],
+// 			layout: {
+// 				'line-cap': 'round',
+// 				'line-join': 'round',
+// 			},
+// 			paint: {
+// 				'line-width': 1.2,
+// 				'line-color': 'rgb(125, 137, 140)',
+// 				'line-dasharray': [3, 3],
+// 			},
+// 		},
+// 		{
+// 			id: 'T_HMON_line',
+// 			type: 'line',
+// 			source: 'AREA_COMMON_LINE',
+// 			'source-layer': 'area_common_line',
+// 			filter: ['all', ['==', ['get', 'OBJL'], 140]],
+// 			layout: {
+// 				'line-cap': 'round',
+// 				'line-join': 'round',
+// 			},
+// 			paint: {
+// 				'line-width': 1.2,
+// 				'line-color': 'rgb(125, 137, 140)',
+// 				'line-dasharray': [3, 3],
+// 			},
+// 		},
+// 		{
+// 			id: 'T_NHMN_line',
+// 			type: 'line',
+// 			source: 'AREA_COMMON_LINE',
+// 			'source-layer': 'area_common_line',
+// 			filter: ['all', ['==', ['get', 'OBJL'], 141]],
+// 			layout: {
+// 				'line-cap': 'round',
+// 				'line-join': 'round',
+// 			},
+// 			paint: {
+// 				'line-width': 1.2,
+// 				'line-color': 'rgb(125, 137, 140)',
+// 				'line-dasharray': [3, 3],
+// 			},
+// 		},
+// 		{
+// 			id: 'T_TIMS_line',
+// 			type: 'line',
+// 			source: 'AREA_COMMON_LINE',
+// 			'source-layer': 'area_common_line',
+// 			filter: ['all', ['==', ['get', 'OBJL'], 142]],
+// 			layout: {
+// 				'line-cap': 'round',
+// 				'line-join': 'round',
+// 			},
+// 			paint: {
+// 				'line-width': 1.2,
+// 				'line-color': 'rgb(125, 137, 140)',
+// 				'line-dasharray': [3, 3],
+// 			},
+// 		},
+// 		{
+// 			id: 'TUNNEL_line_1',
+// 			type: 'line',
+// 			source: 'AREA_COMMON_LINE',
+// 			'source-layer': 'area_common_line',
+// 			filter: ['all', ['==', ['get', 'OBJL'], 151], ['==', ['get', 'LineType'], 1]],
+// 			layout: {
+// 				'line-cap': 'round',
+// 				'line-join': 'round',
+// 			},
+// 			paint: {
+// 				'line-width': 1.2,
+// 				'line-color': 'rgb(7, 7, 7)',
+// 				'line-dasharray': [3, 3],
+// 			},
+// 		},
+// 		{
+// 			id: 'TUNNEL_line_2',
+// 			type: 'line',
+// 			source: 'AREA_COMMON_LINE',
+// 			'source-layer': 'area_common_line',
+// 			filter: ['all', ['==', ['get', 'OBJL'], 151], ['==', ['get', 'LineType'], 2]],
+// 			layout: {
+// 				'line-cap': 'round',
+// 				'line-join': 'round',
+// 			},
+// 			paint: {
+// 				'line-width': 1.2,
+// 				'line-color': 'rgb(125, 137, 140)',
+// 				'line-dasharray': [3, 3],
+// 			},
+// 		},
+// 		{
+// 			id: 'TWRTPT_line',
+// 			type: 'line',
+// 			source: 'AREA_COMMON_LINE',
+// 			'source-layer': 'area_common_line',
+// 			filter: ['all', ['==', ['get', 'OBJL'], 152]],
+// 			layout: {
+// 				'line-cap': 'round',
+// 				'line-join': 'round',
+// 			},
+// 			paint: {
+// 				'line-width': 2,
+// 				'line-color': 'rgb(197, 69, 195)',
+// 				'line-dasharray': [3, 3],
+// 			},
+// 		},
+// 		{
+// 			id: 'UNSARE_line',
+// 			type: 'line',
+// 			source: 'AREA_COMMON_LINE',
+// 			'source-layer': 'area_common_line',
+// 			filter: ['all', ['==', ['get', 'OBJL'], 154]],
+// 			layout: {
+// 				'line-cap': 'round',
+// 				'line-join': 'round',
+// 			},
+// 			paint: {
+// 				'line-width': 2,
+// 				'line-color': 'rgb(125, 137, 140)',
+// 			},
+// 		},
+// 		{
+// 			id: 'VEGATN_line',
+// 			type: 'line',
+// 			source: 'AREA_COMMON_LINE',
+// 			'source-layer': 'area_common_line',
+// 			filter: ['all', ['==', ['get', 'OBJL'], 155]],
+// 			layout: {
+// 				'line-cap': 'round',
+// 				'line-join': 'round',
+// 			},
+// 			paint: {
+// 				'line-width': 1.2,
+// 				'line-color': 'rgb(139, 102, 31)',
+// 				'line-dasharray': [3, 3],
+// 			},
+// 		},
+// 		{
+// 			id: 'WATTUR_line',
+// 			type: 'line',
+// 			source: 'AREA_COMMON_LINE',
+// 			'source-layer': 'area_common_line',
+// 			filter: ['all', ['==', ['get', 'OBJL'], 156]],
+// 			layout: {
+// 				'line-cap': 'round',
+// 				'line-join': 'round',
+// 			},
+// 			paint: {
+// 				'line-width': 1.2,
+// 				'line-color': 'rgb(125, 137, 140)',
+// 				'line-dasharray': [3, 3],
+// 			},
+// 		},
+// 		{
+// 			id: 'WEDKLP_line',
+// 			type: 'line',
+// 			source: 'AREA_COMMON_LINE',
+// 			'source-layer': 'area_common_line',
+// 			filter: ['all', ['==', ['get', 'OBJL'], 158]],
+// 			layout: {
+// 				'line-cap': 'round',
+// 				'line-join': 'round',
+// 			},
+// 			paint: {
+// 				'line-width': 1.2,
+// 				'line-color': 'rgb(163, 180, 183)',
+// 				'line-dasharray': [3, 3],
+// 			},
+// 		},
+// 		{
+// 			id: 'WRECKS_line_1',
+// 			type: 'line',
+// 			source: 'AREA_COMMON_LINE',
+// 			'source-layer': 'area_common_line',
+// 			filter: ['all', ['==', ['get', 'OBJL'], 159], ['==', ['get', 'LineType'], 1]],
+// 			layout: {
+// 				'line-cap': 'round',
+// 				'line-join': 'round',
+// 			},
+// 			paint: {
+// 				'line-width': 1,
+// 				'line-color': 'rgb(7, 7, 7)',
+// 				'line-dasharray': [3, 3],
+// 			},
+// 		},
+// 		{
+// 			id: 'WRECKS_line_2',
+// 			type: 'line',
+// 			source: 'AREA_COMMON_LINE',
+// 			'source-layer': 'area_common_line',
+// 			filter: ['all', ['==', ['get', 'OBJL'], 159], ['==', ['get', 'LineType'], 2]],
+// 			layout: {
+// 				'line-cap': 'round',
+// 				'line-join': 'round',
+// 			},
+// 			paint: {
+// 				'line-width': 2,
+// 				'line-color': 'rgb(7, 7, 7)',
+// 				'line-dasharray': [1, 2],
+// 			},
+// 		},
+// 		{
+// 			id: 'WRECKS_line_3',
+// 			type: 'line',
+// 			source: 'AREA_COMMON_LINE',
+// 			'source-layer': 'area_common_line',
+// 			filter: ['all', ['==', ['get', 'OBJL'], 159], ['==', ['get', 'LineType'], 3]],
+// 			layout: {
+// 				'line-cap': 'round',
+// 				'line-join': 'round',
+// 			},
+// 			paint: {
+// 				'line-width': 2,
+// 				'line-color': 'rgb(7, 7, 7)',
+// 				'line-dasharray': [3, 3],
+// 			},
+// 		},
+// 		{
+// 			id: 'WRECKS_line_4',
+// 			type: 'line',
+// 			source: 'AREA_COMMON_LINE',
+// 			'source-layer': 'area_common_line',
+// 			filter: ['all', ['==', ['get', 'OBJL'], 159], ['==', ['get', 'LineType'], 4]],
+// 			layout: {
+// 				'line-cap': 'round',
+// 				'line-join': 'round',
+// 			},
+// 			paint: {
+// 				'line-width': 2,
+// 				'line-color': 'rgb(82, 90, 92)',
+// 				'line-dasharray': [1, 2],
+// 			},
+// 		},
+// 		{
+// 			id: 'WRECKS_line_5',
+// 			type: 'line',
+// 			source: 'AREA_COMMON_LINE',
+// 			'source-layer': 'area_common_line',
+// 			filter: ['all', ['==', ['get', 'OBJL'], 159], ['==', ['get', 'LineType'], 5]],
+// 			layout: {
+// 				'line-cap': 'round',
+// 				'line-join': 'round',
+// 			},
+// 			paint: {
+// 				'line-width': 2,
+// 				'line-color': 'rgb(82, 90, 92)',
+// 			},
+// 		},
+// 		{
+// 			id: 'WRECKS_line_6',
+// 			type: 'line',
+// 			source: 'AREA_COMMON_LINE',
+// 			'source-layer': 'area_common_line',
+// 			filter: ['all', ['==', ['get', 'OBJL'], 159], ['==', ['get', 'LineType'], 6]],
+// 			layout: {
+// 				'line-cap': 'round',
+// 				'line-join': 'round',
+// 			},
+// 			paint: {
+// 				'line-width': 2,
+// 				'line-color': 'rgb(82, 90, 92)',
+// 				'line-dasharray': [3, 3],
+// 			},
+// 		},
+// 		{
+// 			id: 'TS_FEB_line_1',
+// 			type: 'line',
+// 			source: 'AREA_COMMON_LINE',
+// 			'source-layer': 'area_common_line',
+// 			filter: ['all', ['==', ['get', 'OBJL'], 160], ['==', ['get', 'LineType'], 1]],
+// 			layout: {
+// 				'line-cap': 'round',
+// 				'line-join': 'round',
+// 			},
+// 			paint: {
+// 				'line-width': 1.2,
+// 				'line-color': 'rgb(125, 137, 140)',
+// 				'line-dasharray': [3, 3],
+// 			},
+// 		},
+
+// 		//#endregion
+
+// 		//#region LINE COMMON LINE
+// 		{
+// 			id: 'CL_BRIDGE_line',
+// 			type: 'line',
+// 			source: 'LINE_COMMON_LINE',
+// 			'source-layer': 'line_common',
+// 			filter: ['all', ['==', ['get', 'OBJL'], 11]],
+// 			layout: {
+// 				'line-cap': 'round',
+// 				'line-join': 'round',
+// 			},
+// 			paint: {
+// 				'line-width': 4,
+// 				'line-color': 'rgb(125, 137, 140)',
+// 			},
+// 		},
+// 		{
+// 			id: 'CL_CBLOHD_line',
+// 			type: 'line',
+// 			source: 'LINE_COMMON_LINE',
+// 			'source-layer': 'line_common',
+// 			filter: ['all', ['==', ['get', 'OBJL'], 21]],
+// 			layout: {
+// 				'line-cap': 'round',
+// 				'line-join': 'round',
+// 			},
+// 			paint: {
+// 				'line-width': 4,
+// 				'line-color': 'rgb(125, 137, 140)',
+// 				'line-dasharray': [3, 3],
+// 			},
+// 		},
+// 		{
+// 			id: 'CL_CBLSUB_line',
+// 			type: 'line',
+// 			source: 'LINE_COMMON_LINE',
+// 			'source-layer': 'line_common',
+// 			filter: ['all', ['==', ['get', 'OBJL'], 22]],
+// 			layout: {
+// 				'line-cap': 'round',
+// 				'line-join': 'round',
+// 			},
+// 			paint: {
+// 				'line-width': 1.2,
+// 				'line-color': 'rgb(197, 69, 195)',
+// 				'line-dasharray': [3, 3],
+// 			},
+// 		},
+// 		{
+// 			id: 'CL_CANALS_line',
+// 			type: 'line',
+// 			source: 'LINE_COMMON_LINE',
+// 			'source-layer': 'line_common',
+// 			filter: ['all', ['==', ['get', 'OBJL'], 23]],
+// 			layout: {
+// 				'line-cap': 'round',
+// 				'line-join': 'round',
+// 			},
+// 			paint: {
+// 				'line-width': 1.2,
+// 				'line-color': 'rgb(7, 7, 7)',
+// 			},
+// 		},
+// 		{
+// 			id: 'CL_CAUSWY_line_1',
+// 			type: 'line',
+// 			source: 'LINE_COMMON_LINE',
+// 			'source-layer': 'line_common',
+// 			filter: ['all', ['==', ['get', 'OBJL'], 26], ['==', ['get', 'CATEGORY'], 1]],
+// 			layout: {
+// 				'line-cap': 'round',
+// 				'line-join': 'round',
+// 			},
+// 			paint: {
+// 				'line-width': 3,
+// 				'line-color': 'rgb(139, 102, 31)',
+// 				'line-dasharray': [3, 3],
+// 			},
+// 		},
+// 		{
+// 			id: 'CL_CAUSWY_line_2',
+// 			type: 'line',
+// 			source: 'LINE_COMMON_LINE',
+// 			'source-layer': 'line_common',
+// 			filter: ['all', ['==', ['get', 'OBJL'], 26], ['==', ['get', 'CATEGORY'], 2]],
+// 			layout: {
+// 				'line-cap': 'round',
+// 				'line-join': 'round',
+// 			},
+// 			paint: {
+// 				'line-width': 3,
+// 				'line-color': 'rgb(139, 102, 31)',
+// 			},
+// 		},
+// 		{
+// 			id: 'CL_COALNE_line_1',
+// 			type: 'line',
+// 			source: 'LINE_COMMON_LINE',
+// 			'source-layer': 'line_common',
+// 			filter: ['all', ['==', ['get', 'OBJL'], 30], ['==', ['get', 'CATEGORY'], 1]],
+// 			layout: {
+// 				'line-cap': 'round',
+// 				'line-join': 'round',
+// 			},
+// 			paint: {
+// 				'line-width': 1.2,
+// 				'line-color': 'rgb(82, 90, 92)',
+// 				'line-dasharray': [3, 3],
+// 			},
+// 		},
+// 		{
+// 			id: 'CL_COALNE_line_2',
+// 			type: 'line',
+// 			source: 'LINE_COMMON_LINE',
+// 			'source-layer': 'line_common',
+// 			filter: ['all', ['==', ['get', 'OBJL'], 30], ['==', ['get', 'CATEGORY'], 2]],
+// 			layout: {
+// 				'line-cap': 'round',
+// 				'line-join': 'round',
+// 			},
+// 			paint: {
+// 				'line-width': 1.2,
+// 				'line-color': 'rgb(82, 90, 92)',
+// 			},
+// 		},
+// 		{
+// 			id: 'CL_CONVYR_line_1',
+// 			type: 'line',
+// 			source: 'LINE_COMMON_LINE',
+// 			'source-layer': 'line_common',
+// 			filter: ['all', ['==', ['get', 'OBJL'], 34], ['==', ['get', 'CATEGORY'], 1]],
+// 			layout: {
+// 				'line-cap': 'round',
+// 				'line-join': 'round',
+// 			},
+// 			paint: {
+// 				'line-width': 4,
+// 				'line-color': 'rgb(125, 137, 140)',
+// 				'line-dasharray': [3, 3],
+// 			},
+// 		},
+// 		{
+// 			id: 'CL_CONVYR_line_2',
+// 			type: 'line',
+// 			source: 'LINE_COMMON_LINE',
+// 			'source-layer': 'line_common',
+// 			filter: ['all', ['==', ['get', 'OBJL'], 34], ['==', ['get', 'CATEGORY'], 2]],
+// 			layout: {
+// 				'line-cap': 'round',
+// 				'line-join': 'round',
+// 			},
+// 			paint: {
+// 				'line-width': 3,
+// 				'line-color': 'rgb(125, 137, 140)',
+// 			},
+// 		},
+// 		{
+// 			id: 'CL_DAMCON_line',
+// 			type: 'line',
+// 			source: 'LINE_COMMON_LINE',
+// 			'source-layer': 'line_common',
+// 			filter: ['all', ['==', ['get', 'OBJL'], 38]],
+// 			layout: {
+// 				'line-cap': 'round',
+// 				'line-join': 'round',
+// 			},
+// 			paint: {
+// 				'line-width': 4,
+// 				'line-color': 'rgb(139, 102, 31)',
+// 			},
+// 		},
+// 		{
+// 			id: 'CL_DYKCON_line_1',
+// 			type: 'line',
+// 			source: 'LINE_COMMON_LINE',
+// 			'source-layer': 'line_common',
+// 			filter: ['all', ['==', ['get', 'OBJL'], 49], ['==', ['get', 'CATEGORY'], 1]],
+// 			layout: {
+// 				'line-cap': 'round',
+// 				'line-join': 'round',
+// 			},
+// 			paint: {
+// 				'line-width': 2,
+// 				'line-color': 'rgb(7, 7, 7)',
+// 			},
+// 		},
+// 		{
+// 			id: 'CL_DYKCON_line_2',
+// 			type: 'line',
+// 			source: 'LINE_COMMON_LINE',
+// 			'source-layer': 'line_common',
+// 			filter: ['all', ['==', ['get', 'OBJL'], 49], ['==', ['get', 'CATEGORY'], 2]],
+// 			layout: {
+// 				'line-cap': 'round',
+// 				'line-join': 'round',
+// 			},
+// 			paint: {
+// 				'line-width': 3,
+// 				'line-color': 'rgb(139, 102, 31)',
+// 			},
+// 		},
+// 		{
+// 			id: 'CL_FNCLNE_line_1',
+// 			type: 'line',
+// 			source: 'LINE_COMMON_LINE',
+// 			'source-layer': 'line_common',
+// 			filter: ['all', ['==', ['get', 'OBJL'], 52], ['==', ['get', 'CATEGORY'], 1]],
+// 			layout: {
+// 				'line-cap': 'round',
+// 				'line-join': 'round',
+// 			},
+// 			paint: {
+// 				'line-width': 1.2,
+// 				'line-color': 'rgb(7, 7, 7)',
+// 			},
+// 		},
+// 		{
+// 			id: 'CL_FNCLNE_line_2',
+// 			type: 'line',
+// 			source: 'LINE_COMMON_LINE',
+// 			'source-layer': 'line_common',
+// 			filter: ['all', ['==', ['get', 'OBJL'], 52], ['==', ['get', 'CATEGORY'], 2]],
+// 			layout: {
+// 				'line-cap': 'round',
+// 				'line-join': 'round',
+// 			},
+// 			paint: {
+// 				'line-width': 1.2,
+// 				'line-color': 'rgb(139, 102, 31)',
+// 			},
+// 		},
+// 		{
+// 			id: 'CL_FERYRT_line_marker_1',
+// 			type: 'line',
+// 			source: 'LINE_COMMON_LINE',
+// 			'source-layer': 'line_common',
+// 			filter: ['all', ['==', ['get', 'OBJL'], 53], ['==', ['get', 'LineType'], 1]],
+// 			layout: {
+// 				'line-cap': 'round',
+// 				'line-join': 'round',
+// 			},
+// 			paint: {
+// 				'line-width': 12,
+// 				'line-pattern': 'FERYRT01',
+// 			},
+// 		},
+// 		{
+// 			id: 'CL_FERYRT_line_marker_2',
+// 			type: 'line',
+// 			source: 'LINE_COMMON_LINE',
+// 			'source-layer': 'line_common',
+// 			filter: ['all', ['==', ['get', 'OBJL'], 53], ['==', ['get', 'LineType'], 2]],
+// 			layout: {
+// 				'line-cap': 'round',
+// 				'line-join': 'round',
+// 			},
+// 			paint: {
+// 				'line-width': 12,
+// 				'line-pattern': 'FERYRT02',
+// 			},
+// 		},
+// 		{
+// 			id: 'CL_FSHFAC_line_1',
+// 			type: 'line',
+// 			source: 'LINE_COMMON_LINE',
+// 			'source-layer': 'line_common',
+// 			filter: ['all', ['==', ['get', 'OBJL'], 55], ['==', ['get', 'CATEGORY'], 1]],
+// 			layout: {
+// 				'line-cap': 'round',
+// 				'line-join': 'round',
+// 			},
+// 			paint: {
+// 				'line-width': 1.2,
+// 				'line-color': 'rgb(7, 7, 7)',
+// 				'line-dasharray': [3, 3],
+// 			},
+// 		},
+// 		{
+// 			id: 'CL_FSHFAC_line_2',
+// 			type: 'line',
+// 			source: 'LINE_COMMON_LINE',
+// 			'source-layer': 'line_common',
+// 			filter: ['all', ['==', ['get', 'OBJL'], 55], ['==', ['get', 'CATEGORY'], 2]],
+// 			layout: {
+// 				'line-cap': 'round',
+// 				'line-join': 'round',
+// 			},
+// 			paint: {
+// 				'line-width': 2,
+// 				'line-color': 'rgb(125, 137, 140)',
+// 				'line-dasharray': [3, 3],
+// 			},
+// 		},
+// 		{
+// 			id: 'CL_FLODOC_line',
+// 			type: 'line',
+// 			source: 'LINE_COMMON_LINE',
+// 			'source-layer': 'line_common',
+// 			filter: ['all', ['==', ['get', 'OBJL'], 57]],
+// 			layout: {
+// 				'line-cap': 'round',
+// 				'line-join': 'round',
+// 			},
+// 			paint: {
+// 				'line-width': 3,
+// 				'line-color': 'rgb(82, 90, 92)',
+// 			},
+// 		},
+// 		{
+// 			id: 'CL_FORSTC_line',
+// 			type: 'line',
+// 			source: 'LINE_COMMON_LINE',
+// 			'source-layer': 'line_common',
+// 			filter: ['all', ['==', ['get', 'OBJL'], 59]],
+// 			layout: {
+// 				'line-cap': 'round',
+// 				'line-join': 'round',
+// 			},
+// 			paint: {
+// 				'line-width': 3,
+// 				'line-color': 'rgb(139, 102, 31)',
+// 			},
+// 		},
+// 		{
+// 			id: 'CL_GATCON_line',
+// 			type: 'line',
+// 			source: 'LINE_COMMON_LINE',
+// 			'source-layer': 'line_common',
+// 			filter: ['all', ['==', ['get', 'OBJL'], 61]],
+// 			layout: {
+// 				'line-cap': 'round',
+// 				'line-join': 'round',
+// 			},
+// 			paint: {
+// 				'line-width': 2,
+// 				'line-color': 'rgb(82, 90, 92)',
+// 			},
+// 		},
+// 		{
+// 			id: 'CL_LAKSHR_line',
+// 			type: 'line',
+// 			source: 'LINE_COMMON_LINE',
+// 			'source-layer': 'line_common',
+// 			filter: ['all', ['==', ['get', 'OBJL'], 70]],
+// 			layout: {
+// 				'line-cap': 'round',
+// 				'line-join': 'round',
+// 			},
+// 			paint: {
+// 				'line-width': 1.2,
+// 				'line-color': 'rgb(82, 90, 92)',
+// 			},
+// 		},
+// 		{
+// 			id: 'CL_LNDARE_line',
+// 			type: 'line',
+// 			source: 'LINE_COMMON_LINE',
+// 			'source-layer': 'line_common',
+// 			filter: ['all', ['==', ['get', 'OBJL'], 71]],
+// 			layout: {
+// 				'line-cap': 'round',
+// 				'line-join': 'round',
+// 			},
+// 			paint: {
+// 				'line-width': 1.2,
+// 				'line-color': 'rgb(82, 90, 92)',
+// 			},
+// 		},
+// 		{
+// 			id: 'CL_LNDELV_line',
+// 			type: 'line',
+// 			source: 'LINE_COMMON_LINE',
+// 			'source-layer': 'line_common',
+// 			filter: ['all', ['==', ['get', 'OBJL'], 72]],
+// 			layout: {
+// 				'line-cap': 'round',
+// 				'line-join': 'round',
+// 			},
+// 			paint: {
+// 				'line-width': 1.2,
+// 				'line-color': 'rgb(139, 102, 31)',
+// 			},
+// 		},
+// 		{
+// 			id: 'CL_LNDMRK_line_1',
+// 			type: 'line',
+// 			source: 'LINE_COMMON_LINE',
+// 			'source-layer': 'line_common',
+// 			filter: ['all', ['==', ['get', 'OBJL'], 74], ['==', ['get', 'CATEGORY'], 1]],
+// 			layout: {
+// 				'line-cap': 'round',
+// 				'line-join': 'round',
+// 			},
+// 			paint: {
+// 				'line-width': 1.2,
+// 				'line-color': 'rgb(7, 7, 7)',
+// 			},
+// 		},
+// 		{
+// 			id: 'CL_LNDMRK_line_2',
+// 			type: 'line',
+// 			source: 'LINE_COMMON_LINE',
+// 			'source-layer': 'line_common',
+// 			filter: ['all', ['==', ['get', 'OBJL'], 74], ['==', ['get', 'CATEGORY'], 2]],
+// 			layout: {
+// 				'line-cap': 'round',
+// 				'line-join': 'round',
+// 			},
+// 			paint: {
+// 				'line-width': 1.2,
+// 				'line-color': 'rgb(139, 102, 31)',
+// 			},
+// 		},
+// 		{
+// 			id: 'CL_LOCMAG_line',
+// 			type: 'line',
+// 			source: 'LINE_COMMON_LINE',
+// 			'source-layer': 'line_common',
+// 			filter: ['all', ['==', ['get', 'OBJL'], 78]],
+// 			layout: {
+// 				'line-cap': 'round',
+// 				'line-join': 'round',
+// 			},
+// 			paint: {
+// 				'line-width': 1.2,
+// 				'line-color': 'rgb(211, 166, 233)',
+// 				'line-dasharray': [3, 3],
+// 			},
+// 		},
+// 		{
+// 			id: 'CL_MARCUL_line',
+// 			type: 'line',
+// 			source: 'LINE_COMMON_LINE',
+// 			'source-layer': 'line_common',
+// 			filter: ['all', ['==', ['get', 'OBJL'], 82]],
+// 			layout: {
+// 				'line-cap': 'round',
+// 				'line-join': 'round',
+// 			},
+// 			paint: {
+// 				'line-width': 2,
+// 				'line-color': 'rgb(163, 180, 183)',
+// 				'line-dasharray': [3, 3],
+// 			},
+// 		},
+// 		{
+// 			id: 'CL_MORFAC_line_1',
+// 			type: 'line',
+// 			source: 'LINE_COMMON_LINE',
+// 			'source-layer': 'line_common',
+// 			filter: ['all', ['==', ['get', 'OBJL'], 84], ['==', ['get', 'CATEGORY'], 1]],
+// 			layout: {
+// 				'line-cap': 'round',
+// 				'line-join': 'round',
+// 			},
+// 			paint: {
+// 				'line-width': 1.2,
+// 				'line-color': 'rgb(211, 166, 233)',
+// 				'line-dasharray': [3, 3],
+// 			},
+// 		},
+// 		{
+// 			id: 'CL_MORFAC_line_2',
+// 			type: 'line',
+// 			source: 'LINE_COMMON_LINE',
+// 			'source-layer': 'line_common',
+// 			filter: ['all', ['==', ['get', 'OBJL'], 84], ['==', ['get', 'CATEGORY'], 2]],
+// 			layout: {
+// 				'line-cap': 'round',
+// 				'line-join': 'round',
+// 			},
+// 			paint: {
+// 				'line-width': 2,
+// 				'line-color': 'rgb(82, 90, 92)',
+// 			},
+// 		},
+// 		{
+// 			id: 'CL_NAVLNE_line',
+// 			type: 'line',
+// 			source: 'LINE_COMMON_LINE',
+// 			'source-layer': 'line_common',
+// 			filter: ['all', ['==', ['get', 'OBJL'], 85]],
+// 			layout: {
+// 				'line-cap': 'round',
+// 				'line-join': 'round',
+// 			},
+// 			paint: {
+// 				'line-width': 1.5,
+// 				'line-color': 'rgb(125, 137, 140)',
+// 				'line-dasharray': [3, 3],
+// 			},
+// 		},
+// 		// {
+// 		// 	id: 'CL_NAVLNE_label',
+// 		// 	type: 'symbol',
+// 		// 	source: 'LINE_COMMON_LINE',
+// 		// 	'source-layer': 'line_common',
+// 		// 	filter: ['==', ['get', 'OBJL'], 85],
+// 		// 	layout: {
+// 		// 		'text-field': ['get', 'OBJNAM'],
+// 'text-allow-overlap': false,
+    // 		// 		'text-font': ['Roboto Medium'],
+    // 		// 		'text-size': 30,
+    // 		// 	},
+    // 		// 	paint: {
+    // 		// 		'text-color': '#000000',
+    // 		// 	},
+    // 		// },
+    // 		{
+    // 			id: 'CL_OBSTRN_line_1',
+    // 			type: 'line',
+    // 			source: 'LINE_COMMON_LINE',
+    // 			'source-layer': 'line_common',
+    // 			filter: ['all', ['==', ['get', 'OBJL'], 86], ['==', ['get', 'CATEGORY'], 1]],
+    // 			layout: {
+    // 				'line-cap': 'round',
+    // 				'line-join': 'round',
+    // 			},
+    // 			paint: {
+    // 				'line-width': 1.2,
+    // 				'line-color': 'rgb(82, 90, 92)',
+    // 				'line-dasharray': [3, 3],
+    // 			},
+    // 		},
+    // 		{
+    // 			id: 'CL_OBSTRN_line_2',
+    // 			type: 'line',
+    // 			source: 'LINE_COMMON_LINE',
+    // 			'source-layer': 'line_common',
+    // 			filter: ['all', ['==', ['get', 'OBJL'], 86], ['==', ['get', 'CATEGORY'], 2]],
+    // 			layout: {
+    // 				'line-cap': 'round',
+    // 				'line-join': 'round',
+    // 			},
+    // 			paint: {
+    // 				'line-width': 1.2,
+    // 				'line-color': 'rgb(197, 69, 195)',
+    // 				'line-dasharray': [3, 3],
+    // 			},
+    // 		},
+    // 		{
+    // 			id: 'CL_OBSTRN_line_3',
+    // 			type: 'line',
+    // 			source: 'LINE_COMMON_LINE',
+    // 			'source-layer': 'line_common',
+    // 			filter: ['all', ['==', ['get', 'OBJL'], 86], ['==', ['get', 'CATEGORY'], 3]],
+    // 			layout: {
+    // 				'line-cap': 'round',
+    // 				'line-join': 'round',
+    // 			},
+    // 			paint: {
+    // 				'line-width': 2,
+    // 				'line-color': 'rgb(7, 7, 7)',
+    // 				'line-dasharray': [1, 2],
+    // 			},
+    // 		},
+    // 		{
+    // 			id: 'CL_OBSTRN_line_4',
+    // 			type: 'line',
+    // 			source: 'LINE_COMMON_LINE',
+    // 			'source-layer': 'line_common',
+    // 			filter: ['all', ['==', ['get', 'OBJL'], 86], ['==', ['get', 'CATEGORY'], 4]],
+    // 			layout: {
+    // 				'line-cap': 'round',
+    // 				'line-join': 'round',
+    // 			},
+    // 			paint: {
+    // 				'line-width': 2,
+    // 				'line-color': 'rgb(7, 7, 7)',
+    // 				'line-dasharray': [3, 3],
+    // 			},
+    // 		},
+    // 		{
+    // 			id: 'CL_OILBAR_line',
+    // 			type: 'line',
+    // 			source: 'LINE_COMMON_LINE',
+    // 			'source-layer': 'line_common',
+    // 			filter: ['all', ['==', ['get', 'OBJL'], 89]],
+    // 			layout: {
+    // 				'line-cap': 'round',
+    // 				'line-join': 'round',
+    // 			},
+    // 			paint: {
+    // 				'line-width': 1.2,
+    // 				'line-color': 'rgb(7, 7, 7)',
+    // 				'line-dasharray': [3, 3],
+    // 			},
+    // 		},
+    // 		{
+    // 			id: 'CL_PIPOHD_line',
+    // 			type: 'line',
+    // 			source: 'LINE_COMMON_LINE',
+    // 			'source-layer': 'line_common',
+    // 			filter: ['all', ['==', ['get', 'OBJL'], 93]],
+    // 			layout: {
+    // 				'line-cap': 'round',
+    // 				'line-join': 'round',
+    // 			},
+    // 			paint: {
+    // 				'line-width': 3,
+    // 				'line-color': 'rgb(125, 137, 140)',
+    // 			},
+    // 		},
+    // 		{
+    // 			id: 'CL_PIPOHD_label',
+    // 			type: 'symbol',
+    // 			source: 'LINE_COMMON_LINE',
+    // 			'source-layer': 'line_common',
+    // 			filter: ['==', ['get', 'OBJL'], 93],
+    // 			layout: {
+    // 				'text-field': ['get', 'OBJNAM'],
+    'text-allow-overlap': false,
+        // 				'text-font': ['Roboto Medium'],
+        // 				'text-size': 30,
+        // 			},
+        // 			paint: {
+        // 				'text-color': '#000000',
+        // 			},
+        // 		},
+        // 		{
+        // 			id: 'CL_PONTON_line',
+        // 			type: 'line',
+        // 			source: 'LINE_COMMON_LINE',
+        // 			'source-layer': 'line_common',
+        // 			filter: ['all', ['==', ['get', 'OBJL'], 95]],
+        // 			layout: {
+        // 				'line-cap': 'round',
+        // 				'line-join': 'round',
+        // 			},
+        // 			paint: {
+        // 				'line-width': 2,
+        // 				'line-color': 'rgb(82, 90, 92)',
+        // 			},
+        // 		},
+        // 		{
+        // 			id: 'CL_RADLNE_line',
+        // 			type: 'line',
+        // 			source: 'LINE_COMMON_LINE',
+        // 			'source-layer': 'line_common',
+        // 			filter: ['all', ['==', ['get', 'OBJL'], 99]],
+        // 			layout: {
+        // 				'line-cap': 'round',
+        // 				'line-join': 'round',
+        // 			},
+        // 			paint: {
+        // 				'line-width': 2,
+        // 				'line-color': 'rgb(197, 69, 195)',
+        // 				'line-dasharray': [3, 3],
+        // 			},
+        // 		},
+        // 		{
+        // 			id: 'CL_RDOCAL_line',
+        // 			type: 'line',
+        // 			source: 'LINE_COMMON_LINE',
+        // 			'source-layer': 'line_common',
+        // 			filter: ['all', ['==', ['get', 'OBJL'], 104]],
+        // 			layout: {
+        // 				'line-cap': 'round',
+        // 				'line-join': 'round',
+        // 			},
+        // 			paint: {
+        // 				'line-width': 1.2,
+        // 				'line-color': 'rgb(197, 69, 195)',
+        // 				'line-dasharray': [3, 3],
+        // 			},
+        // 		},
+        // 		{
+        // 			id: 'CL_RAILWY_line',
+        // 			type: 'line',
+        // 			source: 'LINE_COMMON_LINE',
+        // 			'source-layer': 'line_common',
+        // 			filter: ['all', ['==', ['get', 'OBJL'], 106]],
+        // 			layout: {
+        // 				'line-cap': 'round',
+        // 				'line-join': 'round',
+        // 			},
+        // 			paint: {
+        // 				'line-width': 2,
+        // 				'line-color': 'rgb(139, 102, 31)',
+        // 			},
+        // 		},
+        // 		{
+        // 			id: 'CL_RAPIDS_line',
+        // 			type: 'line',
+        // 			source: 'LINE_COMMON_LINE',
+        // 			'source-layer': 'line_common',
+        // 			filter: ['all', ['==', ['get', 'OBJL'], 107]],
+        // 			layout: {
+        // 				'line-cap': 'round',
+        // 				'line-join': 'round',
+        // 			},
+        // 			paint: {
+        // 				'line-width': 3,
+        // 				'line-color': 'rgb(125, 137, 140)',
+        // 			},
+        // 		},
+        // 		{
+        // 			id: 'CL_RCRTCL_line',
+        // 			type: 'line',
+        // 			source: 'LINE_COMMON_LINE',
+        // 			'source-layer': 'line_common',
+        // 			filter: ['all', ['==', ['get', 'OBJL'], 108]],
+        // 			layout: {
+        // 				'line-cap': 'round',
+        // 				'line-join': 'round',
+        // 			},
+        // 			paint: {
+        // 				'line-width': 1.2,
+        // 				'line-color': 'rgb(125, 137, 140)',
+        // 			},
+        // 		},
+        // 		{
+        // 			id: 'CL_RECTRC_line_marker_1',
+        // 			type: 'line',
+        // 			source: 'LINE_COMMON_LINE',
+        // 			'source-layer': 'line_common',
+        // 			filter: ['all', ['==', ['get', 'OBJL'], 109], ['==', ['get', 'LineType'], 1]],
+        // 			layout: {
+        // 				'line-cap': 'round',
+        // 				'line-join': 'round',
+        // 			},
+        // 			paint: {
+        // 				'line-width': 10,
+        // 				'line-pattern': 'RECTRC12',
+        // 			},
+        // 		},
+        // 		{
+        // 			id: 'CL_RECTRC_line_marker_2',
+        // 			type: 'line',
+        // 			source: 'LINE_COMMON_LINE',
+        // 			'source-layer': 'line_common',
+        // 			filter: ['all', ['==', ['get', 'OBJL'], 109], ['==', ['get', 'LineType'], 2]],
+        // 			layout: {
+        // 				'line-cap': 'round',
+        // 				'line-join': 'round',
+        // 			},
+        // 			paint: {
+        // 				'line-width': 10,
+        // 				'line-pattern': 'RECTRC10',
+        // 			},
+        // 		},
+        // 		{
+        // 			id: 'CL_RECTRC_line_marker_3',
+        // 			type: 'line',
+        // 			source: 'LINE_COMMON_LINE',
+        // 			'source-layer': 'line_common',
+        // 			filter: ['all', ['==', ['get', 'OBJL'], 109], ['==', ['get', 'LineType'], 3]],
+        // 			layout: {
+        // 				'line-cap': 'round',
+        // 				'line-join': 'round',
+        // 			},
+        // 			paint: {
+        // 				'line-width': 10,
+        // 				'line-pattern': 'RECTRC11',
+        // 			},
+        // 		},
+        // 		{
+        // 			id: 'CL_RECTRC_line_marker_4',
+        // 			type: 'line',
+        // 			source: 'LINE_COMMON_LINE',
+        // 			'source-layer': 'line_common',
+        // 			filter: ['all', ['==', ['get', 'OBJL'], 109], ['==', ['get', 'LineType'], 4]],
+        // 			layout: {
+        // 				'line-cap': 'round',
+        // 				'line-join': 'round',
+        // 			},
+        // 			paint: {
+        // 				'line-width': 10,
+        // 				'line-pattern': 'RECTRC09',
+        // 			},
+        // 		},
+        // 		{
+        // 			id: 'CL_RECTRC_line_marker_5',
+        // 			type: 'line',
+        // 			source: 'LINE_COMMON_LINE',
+        // 			'source-layer': 'line_common',
+        // 			filter: ['all', ['==', ['get', 'OBJL'], 109], ['==', ['get', 'LineType'], 5]],
+        // 			layout: {
+        // 				'line-cap': 'round',
+        // 				'line-join': 'round',
+        // 			},
+        // 			paint: {
+        // 				'line-width': 10,
+        // 				'line-pattern': 'RECDEF02',
+        // 			},
+        // 		},
+        // 		{
+        // 			id: 'CL_RIVERS_line',
+        // 			type: 'line',
+        // 			source: 'LINE_COMMON_LINE',
+        // 			'source-layer': 'line_common',
+        // 			filter: ['all', ['==', ['get', 'OBJL'], 114]],
+        // 			layout: {
+        // 				'line-cap': 'round',
+        // 				'line-join': 'round',
+        // 			},
+        // 			paint: {
+        // 				'line-width': 1.2,
+        // 				'line-color': 'rgb(7, 7, 7)',
+        // 			},
+        // 		},
+        // 		{
+        // 			id: 'CL_ROADWY_line',
+        // 			type: 'line',
+        // 			source: 'LINE_COMMON_LINE',
+        // 			'source-layer': 'line_common',
+        // 			filter: ['all', ['==', ['get', 'OBJL'], 116]],
+        // 			layout: {
+        // 				'line-cap': 'round',
+        // 				'line-join': 'round',
+        // 			},
+        // 			paint: {
+        // 				'line-width': 2,
+        // 				'line-color': 'rgb(139, 102, 31)',
+        // 			},
+        // 		},
+        // 		{
+        // 			id: 'CL_RUNWAY_line',
+        // 			type: 'line',
+        // 			source: 'LINE_COMMON_LINE',
+        // 			'source-layer': 'line_common',
+        // 			filter: ['all', ['==', ['get', 'OBJL'], 117]],
+        // 			layout: {
+        // 				'line-cap': 'round',
+        // 				'line-join': 'round',
+        // 			},
+        // 			paint: {
+        // 				'line-width': 3,
+        // 				'line-color': 'rgb(139, 102, 31)',
+        // 			},
+        // 		},
+        // 		{
+        // 			id: 'CL_SNDWAV_line',
+        // 			type: 'line',
+        // 			source: 'LINE_COMMON_LINE',
+        // 			'source-layer': 'line_common',
+        // 			filter: ['all', ['==', ['get', 'OBJL'], 118]],
+        // 			layout: {
+        // 				'line-cap': 'round',
+        // 				'line-join': 'round',
+        // 			},
+        // 			paint: {
+        // 				'line-width': 2,
+        // 				'line-color': 'rgb(125, 137, 140)',
+        // 				'line-dasharray': [3, 3],
+        // 			},
+        // 		},
+        // 		{
+        // 			id: 'CL_SBDARE_line',
+        // 			type: 'line',
+        // 			source: 'LINE_COMMON_LINE',
+        // 			'source-layer': 'line_common',
+        // 			filter: ['all', ['==', ['get', 'OBJL'], 121]],
+        // 			layout: {
+        // 				'line-cap': 'round',
+        // 				'line-join': 'round',
+        // 			},
+        // 			paint: {
+        // 				'line-width': 1.2,
+        // 				'line-color': 'rgb(125, 137, 140)',
+        // 			},
+        // 		},
+        // 		{
+        // 			id: 'CL_SLCONS_line_1',
+        // 			type: 'line',
+        // 			source: 'LINE_COMMON_LINE',
+        // 			'source-layer': 'line_common',
+        // 			filter: ['all', ['==', ['get', 'OBJL'], 122], ['==', ['get', 'CATEGORY'], 1]],
+        // 			layout: {
+        // 				'line-cap': 'round',
+        // 				'line-join': 'round',
+        // 			},
+        // 			paint: {
+        // 				'line-width': 1,
+        // 				'line-color': 'rgb(82, 90, 92)',
+        // 				'line-dasharray': [3, 3],
+        // 			},
+        // 		},
+        // 		{
+        // 			id: 'CL_SLCONS_line_2',
+        // 			type: 'line',
+        // 			source: 'LINE_COMMON_LINE',
+        // 			'source-layer': 'line_common',
+        // 			filter: ['all', ['==', ['get', 'OBJL'], 122], ['==', ['get', 'CATEGORY'], 2]],
+        // 			layout: {
+        // 				'line-cap': 'round',
+        // 				'line-join': 'round',
+        // 			},
+        // 			paint: {
+        // 				'line-width': 4,
+        // 				'line-color': 'rgb(82, 90, 92)',
+        // 			},
+        // 		},
+        // 		{
+        // 			id: 'CL_SLCONS_line_3',
+        // 			type: 'line',
+        // 			source: 'LINE_COMMON_LINE',
+        // 			'source-layer': 'line_common',
+        // 			filter: ['all', ['==', ['get', 'OBJL'], 122], ['==', ['get', 'CATEGORY'], 3]],
+        // 			layout: {
+        // 				'line-cap': 'round',
+        // 				'line-join': 'round',
+        // 			},
+        // 			paint: {
+        // 				'line-width': 2,
+        // 				'line-color': 'rgb(82, 90, 92)',
+        // 			},
+        // 		},
+        // 		{
+        // 			id: 'CL_SLCONS_line_4',
+        // 			type: 'line',
+        // 			source: 'LINE_COMMON_LINE',
+        // 			'source-layer': 'line_common',
+        // 			filter: ['all', ['==', ['get', 'OBJL'], 122], ['==', ['get', 'CATEGORY'], 4]],
+        // 			layout: {
+        // 				'line-cap': 'round',
+        // 				'line-join': 'round',
+        // 			},
+        // 			paint: {
+        // 				'line-width': 2,
+        // 				'line-color': 'rgb(82, 90, 92)',
+        // 				'line-dasharray': [3, 3],
+        // 			},
+        // 		},
+        // 		{
+        // 			id: 'CL_SLCONS_line_5',
+        // 			type: 'line',
+        // 			source: 'LINE_COMMON_LINE',
+        // 			'source-layer': 'line_common',
+        // 			filter: ['all', ['==', ['get', 'OBJL'], 122], ['==', ['get', 'CATEGORY'], 5]],
+        // 			layout: {
+        // 				'line-cap': 'round',
+        // 				'line-join': 'round',
+        // 			},
+        // 			paint: {
+        // 				'line-width': 2,
+        // 				'line-color': 'rgb(82, 90, 92)',
+        // 			},
+        // 		},
+        // 		{
+        // 			id: 'CL_SLOTOP_line_1',
+        // 			type: 'line',
+        // 			source: 'LINE_COMMON_LINE',
+        // 			'source-layer': 'line_common',
+        // 			filter: ['all', ['==', ['get', 'OBJL'], 126], ['==', ['get', 'CATEGORY'], 1]],
+        // 			layout: {
+        // 				'line-cap': 'round',
+        // 				'line-join': 'round',
+        // 			},
+        // 			paint: {
+        // 				'line-width': 1.2,
+        // 				'line-color': 'rgb(7, 7, 7)',
+        // 			},
+        // 		},
+        // 		{
+        // 			id: 'CL_SLOTOP_line_2',
+        // 			type: 'line',
+        // 			source: 'LINE_COMMON_LINE',
+        // 			'source-layer': 'line_common',
+        // 			filter: ['all', ['==', ['get', 'OBJL'], 126], ['==', ['get', 'CATEGORY'], 2]],
+        // 			layout: {
+        // 				'line-cap': 'round',
+        // 				'line-join': 'round',
+        // 			},
+        // 			paint: {
+        // 				'line-width': 1.2,
+        // 				'line-color': 'rgb(125, 137, 140)',
+        // 			},
+        // 		},
+        // 		{
+        // 			id: 'CL_SLOTOP_line_3',
+        // 			type: 'line',
+        // 			source: 'LINE_COMMON_LINE',
+        // 			'source-layer': 'line_common',
+        // 			filter: ['all', ['==', ['get', 'OBJL'], 126], ['==', ['get', 'CATEGORY'], 3]],
+        // 			layout: {
+        // 				'line-cap': 'round',
+        // 				'line-join': 'round',
+        // 			},
+        // 			paint: {
+        // 				'line-width': 1.2,
+        // 				'line-color': 'rgb(139, 102, 31)',
+        // 			},
+        // 		},
+        // 		{
+        // 			id: 'CL_STSLNE_line',
+        // 			type: 'line',
+        // 			source: 'LINE_COMMON_LINE',
+        // 			'source-layer': 'line_common',
+        // 			filter: ['all', ['==', ['get', 'OBJL'], 132]],
+        // 			layout: {
+        // 				'line-cap': 'round',
+        // 				'line-join': 'round',
+        // 			},
+        // 			paint: {
+        // 				'line-width': 1.2,
+        // 				'line-color': 'rgb(163, 180, 183)',
+        // 				'line-dasharray': [3, 3],
+        // 			},
+        // 		},
+        // 		{
+        // 			id: 'CL_TIDEWY_line',
+        // 			type: 'line',
+        // 			source: 'LINE_COMMON_LINE',
+        // 			'source-layer': 'line_common',
+        // 			filter: ['all', ['==', ['get', 'OBJL'], 143]],
+        // 			layout: {
+        // 				'line-cap': 'round',
+        // 				'line-join': 'round',
+        // 			},
+        // 			paint: {
+        // 				'line-width': 1.2,
+        // 				'line-color': 'rgb(163, 180, 183)',
+        // 			},
+        // 		},
+        // 		{
+        // 			id: 'CL_TSELNE_line',
+        // 			type: 'line',
+        // 			source: 'LINE_COMMON_LINE',
+        // 			'source-layer': 'line_common',
+        // 			filter: ['all', ['==', ['get', 'OBJL'], 145]],
+        // 			layout: {
+        // 				'line-cap': 'round',
+        // 				'line-join': 'round',
+        // 			},
+        // 			paint: {
+        // 				'line-width': 6,
+        // 				'line-color': 'rgb(211, 166, 233)',
+        // 			},
+        // 		},
+        // 		// {
+        // 		//     "id": "CL_TSSBND_line",
+        // 		//     "type": "line",
+        // 		//     "source": "LINE_COMMON_LINE",
+        // 		//     "source-layer": "line_common",
+        // 		//     "filter": [
+        // 		//         "all",
+        // 		//         [
+        // 		//             "==",
+        // 		//             [
+        // 		//                 "get",
+        // 		//                 "OBJL"
+        // 		//             ],
+        // 		//             146
+        // 		//         ]
+        // 		//     ],
+        // 		//     "layout": {
+        // 		//         "line-cap": "round",
+        // 		//         "line-join": "round"
+        // 		//     },
+        // 		//     "paint": {
+        // 		//         "line-width": 2,
+        // 		//         "line-color": "rgb(197, 69, 195)",
+        // 		//         "line-dasharray": [
+        // 		//             3,
+        // 		//             3
+        // 		//         ]
+        // 		//     }
+        // 		// },
+        // 		{
+        // 			id: 'CL_TUNNEL_line_1',
+        // 			type: 'line',
+        // 			source: 'LINE_COMMON_LINE',
+        // 			'source-layer': 'line_common',
+        // 			filter: ['all', ['==', ['get', 'OBJL'], 151], ['==', ['get', 'CATEGORY'], 1]],
+        // 			layout: {
+        // 				'line-cap': 'round',
+        // 				'line-join': 'round',
+        // 			},
+        // 			paint: {
+        // 				'line-width': 2,
+        // 				'line-color': 'rgb(7, 7, 7)',
+        // 				'line-dasharray': [3, 3],
+        // 			},
+        // 		},
+        // 		{
+        // 			id: 'CL_TUNNEL_line_2',
+        // 			type: 'line',
+        // 			source: 'LINE_COMMON_LINE',
+        // 			'source-layer': 'line_common',
+        // 			filter: ['all', ['==', ['get', 'OBJL'], 151], ['==', ['get', 'CATEGORY'], 2]],
+        // 			layout: {
+        // 				'line-cap': 'round',
+        // 				'line-join': 'round',
+        // 			},
+        // 			paint: {
+        // 				'line-width': 1.2,
+        // 				'line-color': 'rgb(125, 137, 140)',
+        // 				'line-dasharray': [3, 3],
+        // 			},
+        // 		},
+        // 		{
+        // 			id: 'CL_VEGATN_line',
+        // 			type: 'line',
+        // 			source: 'LINE_COMMON_LINE',
+        // 			'source-layer': 'line_common',
+        // 			filter: ['all', ['==', ['get', 'OBJL'], 155]],
+        // 			layout: {
+        // 				'line-cap': 'round',
+        // 				'line-join': 'round',
+        // 			},
+        // 			paint: {
+        // 				'line-width': 1.2,
+        // 				'line-color': 'rgb(139, 102, 31)',
+        // 				'line-dasharray': [3, 3],
+        // 			},
+        // 		},
+        // 		{
+        // 			id: 'CL_WATTUR_line',
+        // 			type: 'line',
+        // 			source: 'LINE_COMMON_LINE',
+        // 			'source-layer': 'line_common',
+        // 			filter: ['all', ['==', ['get', 'OBJL'], 156]],
+        // 			layout: {
+        // 				'line-cap': 'round',
+        // 				'line-join': 'round',
+        // 			},
+        // 			paint: {
+        // 				'line-width': 1.2,
+        // 				'line-color': 'rgb(125, 137, 140)',
+        // 				'line-dasharray': [3, 3],
+        // 			},
+        // 		},
+        // 		{
+        // 			id: 'CL_WATFAL_line_1',
+        // 			type: 'line',
+        // 			source: 'LINE_COMMON_LINE',
+        // 			'source-layer': 'line_common',
+        // 			filter: ['all', ['==', ['get', 'OBJL'], 157], ['==', ['get', 'CATEGORY'], 1]],
+        // 			layout: {
+        // 				'line-cap': 'round',
+        // 				'line-join': 'round',
+        // 			},
+        // 			paint: {
+        // 				'line-width': 3,
+        // 				'line-color': 'rgb(212, 234, 238)',
+        // 			},
+        // 		},
+        // 		{
+        // 			id: 'CL_WATFAL_line_2',
+        // 			type: 'line',
+        // 			source: 'LINE_COMMON_LINE',
+        // 			'source-layer': 'line_common',
+        // 			filter: ['all', ['==', ['get', 'OBJL'], 157], ['==', ['get', 'CATEGORY'], 2]],
+        // 			layout: {
+        // 				'line-cap': 'round',
+        // 				'line-join': 'round',
+        // 			},
+        // 			paint: {
+        // 				'line-width': 3,
+        // 				'line-color': 'rgb(163, 180, 183)',
+        // 			},
+        // 		},
+        // 		//#endregion
+
+        // 		//#region  AREA_COMMON_ICON
+        // 		{
+        // 			"id": "ACHARE_icon_ACHARE02_1",
+        // 			"type": "symbol",
+        // 			"source": "AREA_COMMON_POINT",
+        // 			"source-layer": "area_common_point",
+        // 			"filter": [
+        // 				"all",
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"OBJL"
+        // 					],
+        // 					4
+        // 				],
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"MarkerName1"
+        // 					],
+        // 					"ACHARE02"
+        // 				]
+        // 			],
+        // 			"layout": {
+        // 				"icon-image": "ACHARE02",
+        // 				"icon-allow-overlap": true,
+        // 				"icon-rotation-alignment": "map",
+        // 				"symbol-placement": "point"
+        // 			},
+        // 			"paint": {}
+        // 		},
+        // 		{
+        // 			"id": "ACHARE_icon_ACHARE51_2",
+        // 			"type": "symbol",
+        // 			"source": "AREA_COMMON_POINT",
+        // 			"source-layer": "area_common_point",
+        // 			"filter": [
+        // 				"all",
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"OBJL"
+        // 					],
+        // 					4
+        // 				],
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"MarkerName1"
+        // 					],
+        // 					"ACHARE51"
+        // 				]
+        // 			],
+        // 			"layout": {
+        // 				"icon-image": "ACHARE51",
+        // 				"icon-allow-overlap": true,
+        // 				"icon-rotation-alignment": "map",
+        // 				"symbol-placement": "point"
+        // 			},
+        // 			"paint": {}
+        // 		},
+        // 		{
+        // 			"id": "ACHARE_icon_ENTRES61_3",
+        // 			"type": "symbol",
+        // 			"source": "AREA_COMMON_POINT",
+        // 			"source-layer": "area_common_point",
+        // 			"filter": [
+        // 				"all",
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"OBJL"
+        // 					],
+        // 					4
+        // 				],
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"MarkerName2"
+        // 					],
+        // 					"ENTRES61"
+        // 				]
+        // 			],
+        // 			"layout": {
+        // 				"icon-image": "ENTRES61",
+        // 				"icon-allow-overlap": true,
+        // 				"icon-rotation-alignment": "map",
+        // 				"symbol-placement": "point",
+        // 				"icon-offset": [
+        // 					-4.4,
+        // 					3.8
+        // 				]
+        // 			},
+        // 			"paint": {}
+        // 		},
+        // 		{
+        // 			"id": "ACHARE_icon_ENTRES71_4",
+        // 			"type": "symbol",
+        // 			"source": "AREA_COMMON_POINT",
+        // 			"source-layer": "area_common_point",
+        // 			"filter": [
+        // 				"all",
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"OBJL"
+        // 					],
+        // 					4
+        // 				],
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"MarkerName2"
+        // 					],
+        // 					"ENTRES71"
+        // 				]
+        // 			],
+        // 			"layout": {
+        // 				"icon-image": "ENTRES71",
+        // 				"icon-allow-overlap": true,
+        // 				"icon-rotation-alignment": "map",
+        // 				"symbol-placement": "point",
+        // 				"icon-offset": [
+        // 					-4.5,
+        // 					3.6
+        // 				]
+        // 			},
+        // 			"paint": {}
+        // 		},
+        // 		{
+        // 			"id": "ACHARE_icon_ENTRES51_5",
+        // 			"type": "symbol",
+        // 			"source": "AREA_COMMON_POINT",
+        // 			"source-layer": "area_common_point",
+        // 			"filter": [
+        // 				"all",
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"OBJL"
+        // 					],
+        // 					4
+        // 				],
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"MarkerName2"
+        // 					],
+        // 					"ENTRES51"
+        // 				]
+        // 			],
+        // 			"layout": {
+        // 				"icon-image": "ENTRES51",
+        // 				"icon-allow-overlap": true,
+        // 				"icon-rotation-alignment": "map",
+        // 				"symbol-placement": "point",
+        // 				"icon-offset": [
+        // 					-3.6,
+        // 					3.6
+        // 				]
+        // 			},
+        // 			"paint": {}
+        // 		},
+        // 		{
+        // 			"id": "ACHARE_icon_ACHRES61_6",
+        // 			"type": "symbol",
+        // 			"source": "AREA_COMMON_POINT",
+        // 			"source-layer": "area_common_point",
+        // 			"filter": [
+        // 				"all",
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"OBJL"
+        // 					],
+        // 					4
+        // 				],
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"MarkerName2"
+        // 					],
+        // 					"ACHRES61"
+        // 				]
+        // 			],
+        // 			"layout": {
+        // 				"icon-image": "ACHRES61",
+        // 				"icon-allow-overlap": true,
+        // 				"icon-rotation-alignment": "map",
+        // 				"symbol-placement": "point",
+        // 				"icon-offset": [
+        // 					-5.2,
+        // 					4.8
+        // 				]
+        // 			},
+        // 			"paint": {}
+        // 		},
+        // 		{
+        // 			"id": "ACHARE_icon_ACHRES71_7",
+        // 			"type": "symbol",
+        // 			"source": "AREA_COMMON_POINT",
+        // 			"source-layer": "area_common_point",
+        // 			"filter": [
+        // 				"all",
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"OBJL"
+        // 					],
+        // 					4
+        // 				],
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"MarkerName2"
+        // 					],
+        // 					"ACHRES71"
+        // 				]
+        // 			],
+        // 			"layout": {
+        // 				"icon-image": "ACHRES71",
+        // 				"icon-allow-overlap": true,
+        // 				"icon-rotation-alignment": "map",
+        // 				"symbol-placement": "point",
+        // 				"icon-offset": [
+        // 					-5.4,
+        // 					4.8
+        // 				]
+        // 			},
+        // 			"paint": {}
+        // 		},
+        // 		{
+        // 			"id": "ACHARE_icon_ACHRES51_8",
+        // 			"type": "symbol",
+        // 			"source": "AREA_COMMON_POINT",
+        // 			"source-layer": "area_common_point",
+        // 			"filter": [
+        // 				"all",
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"OBJL"
+        // 					],
+        // 					4
+        // 				],
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"MarkerName2"
+        // 					],
+        // 					"ACHRES51"
+        // 				]
+        // 			],
+        // 			"layout": {
+        // 				"icon-image": "ACHRES51",
+        // 				"icon-allow-overlap": true,
+        // 				"icon-rotation-alignment": "map",
+        // 				"symbol-placement": "point",
+        // 				"icon-offset": [
+        // 					-4.5,
+        // 					4.8
+        // 				]
+        // 			},
+        // 			"paint": {}
+        // 		},
+        // 		{
+        // 			"id": "ACHARE_icon_FSHRES71_9",
+        // 			"type": "symbol",
+        // 			"source": "AREA_COMMON_POINT",
+        // 			"source-layer": "area_common_point",
+        // 			"filter": [
+        // 				"all",
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"OBJL"
+        // 					],
+        // 					4
+        // 				],
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"MarkerName2"
+        // 					],
+        // 					"FSHRES71"
+        // 				]
+        // 			],
+        // 			"layout": {
+        // 				"icon-image": "FSHRES71",
+        // 				"icon-allow-overlap": true,
+        // 				"icon-rotation-alignment": "map",
+        // 				"symbol-placement": "point",
+        // 				"icon-offset": [
+        // 					-4.8,
+        // 					2.4
+        // 				]
+        // 			},
+        // 			"paint": {}
+        // 		},
+        // 		{
+        // 			"id": "ACHARE_icon_FSHRES51_10",
+        // 			"type": "symbol",
+        // 			"source": "AREA_COMMON_POINT",
+        // 			"source-layer": "area_common_point",
+        // 			"filter": [
+        // 				"all",
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"OBJL"
+        // 					],
+        // 					4
+        // 				],
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"MarkerName2"
+        // 					],
+        // 					"FSHRES51"
+        // 				]
+        // 			],
+        // 			"layout": {
+        // 				"icon-image": "FSHRES51",
+        // 				"icon-allow-overlap": true,
+        // 				"icon-rotation-alignment": "map",
+        // 				"symbol-placement": "point",
+        // 				"icon-offset": [
+        // 					-3.8,
+        // 					2.4
+        // 				]
+        // 			},
+        // 			"paint": {}
+        // 		},
+        // 		{
+        // 			"id": "ACHARE_icon_INFARE51_11",
+        // 			"type": "symbol",
+        // 			"source": "AREA_COMMON_POINT",
+        // 			"source-layer": "area_common_point",
+        // 			"filter": [
+        // 				"all",
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"OBJL"
+        // 					],
+        // 					4
+        // 				],
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"MarkerName2"
+        // 					],
+        // 					"INFARE51"
+        // 				]
+        // 			],
+        // 			"layout": {
+        // 				"icon-image": "INFARE51",
+        // 				"icon-allow-overlap": true,
+        // 				"icon-rotation-alignment": "map",
+        // 				"symbol-placement": "point",
+        // 				"icon-offset": [
+        // 					-3.0,
+        // 					3.0
+        // 				]
+        // 			},
+        // 			"paint": {}
+        // 		},
+        // 		{
+        // 			"id": "ACHARE_icon_RSRDEF51_12",
+        // 			"type": "symbol",
+        // 			"source": "AREA_COMMON_POINT",
+        // 			"source-layer": "area_common_point",
+        // 			"filter": [
+        // 				"all",
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"OBJL"
+        // 					],
+        // 					4
+        // 				],
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"MarkerName2"
+        // 					],
+        // 					"RSRDEF51"
+        // 				]
+        // 			],
+        // 			"layout": {
+        // 				"icon-image": "RSRDEF51",
+        // 				"icon-allow-overlap": true,
+        // 				"icon-rotation-alignment": "map",
+        // 				"symbol-placement": "point",
+        // 				"icon-offset": [
+        // 					-3.6,
+        // 					3.6
+        // 				]
+        // 			},
+        // 			"paint": {}
+        // 		},
+        // 		{
+        // 			"id": "BERTHS_icon_BRTHNO01_13",
+        // 			"type": "symbol",
+        // 			"source": "AREA_COMMON_POINT",
+        // 			"source-layer": "area_common_point",
+        // 			"filter": [
+        // 				"all",
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"OBJL"
+        // 					],
+        // 					10
+        // 				]
+        // 			],
+        // 			"layout": {
+        // 				"icon-image": "BRTHNO01",
+        // 				"icon-allow-overlap": true,
+        // 				"icon-rotation-alignment": "map",
+        // 				"symbol-placement": "point"
+        // 			},
+        // 			"paint": {}
+        // 		},
+        // 		{
+        // 			"id": "BRIDGE_icon_BRIDGE01_14",
+        // 			"type": "symbol",
+        // 			"source": "AREA_COMMON_POINT",
+        // 			"source-layer": "area_common_point",
+        // 			"filter": [
+        // 				"all",
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"OBJL"
+        // 					],
+        // 					11
+        // 				],
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"MarkerName1"
+        // 					],
+        // 					"BRIDGE01"
+        // 				]
+        // 			],
+        // 			"layout": {
+        // 				"icon-image": "BRIDGE01",
+        // 				"icon-allow-overlap": true,
+        // 				"icon-rotation-alignment": "map",
+        // 				"symbol-placement": "point"
+        // 			},
+        // 			"paint": {}
+        // 		},
+        // 		{
+        // 			"id": "BRIDGE_label_15",
+        // 			"type": "symbol",
+        // 			"source": "AREA_COMMON_POINT",
+        // 			"source-layer": "area_common_point",
+        // 			"filter": [
+        // 				"==",
+        // 				[
+        // 					"get",
+        // 					"OBJL"
+        // 				],
+        // 				11
+        // 			],
+        // 			"layout": {
+        // 				"text-field": [
+        // 					"get",
+        // 					"OBJNAM"
+        // 				],
+        // 				"text-font": [
+        // 					"Roboto Medium"
+        // 				],
+        // 				"text-size": 30
+        // 			},
+        // 			"paint": {
+        // 				"text-color": "#000000"
+        // 			}
+        // 		},
+        // 		{
+        // 			"id": "CBLARE_icon_CBLARE51_16",
+        // 			"type": "symbol",
+        // 			"source": "AREA_COMMON_POINT",
+        // 			"source-layer": "area_common_point",
+        // 			"filter": [
+        // 				"all",
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"OBJL"
+        // 					],
+        // 					20
+        // 				]
+        // 			],
+        // 			"layout": {
+        // 				"icon-image": "CBLARE51",
+        // 				"icon-allow-overlap": true,
+        // 				"icon-rotation-alignment": "map",
+        // 				"symbol-placement": "point",
+        // 				"icon-offset": [
+        // 					-12.5,
+        // 					-1.2
+        // 				]
+        // 			},
+        // 			"paint": {}
+        // 		},
+        // 		{
+        // 			"id": "CBLARE_icon_ENTRES61_17",
+        // 			"type": "symbol",
+        // 			"source": "AREA_COMMON_POINT",
+        // 			"source-layer": "area_common_point",
+        // 			"filter": [
+        // 				"all",
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"OBJL"
+        // 					],
+        // 					20
+        // 				],
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"MarkerName2"
+        // 					],
+        // 					"ENTRES61"
+        // 				]
+        // 			],
+        // 			"layout": {
+        // 				"icon-image": "ENTRES61",
+        // 				"icon-allow-overlap": true,
+        // 				"icon-rotation-alignment": "map",
+        // 				"symbol-placement": "point",
+        // 				"icon-offset": [
+        // 					-4.4,
+        // 					3.8
+        // 				]
+        // 			},
+        // 			"paint": {}
+        // 		},
+        // 		{
+        // 			"id": "CBLARE_icon_ENTRES71_18",
+        // 			"type": "symbol",
+        // 			"source": "AREA_COMMON_POINT",
+        // 			"source-layer": "area_common_point",
+        // 			"filter": [
+        // 				"all",
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"OBJL"
+        // 					],
+        // 					20
+        // 				],
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"MarkerName2"
+        // 					],
+        // 					"ENTRES71"
+        // 				]
+        // 			],
+        // 			"layout": {
+        // 				"icon-image": "ENTRES71",
+        // 				"icon-allow-overlap": true,
+        // 				"icon-rotation-alignment": "map",
+        // 				"symbol-placement": "point",
+        // 				"icon-offset": [
+        // 					-4.5,
+        // 					3.6
+        // 				]
+        // 			},
+        // 			"paint": {}
+        // 		},
+        // 		{
+        // 			"id": "CBLARE_icon_ENTRES51_19",
+        // 			"type": "symbol",
+        // 			"source": "AREA_COMMON_POINT",
+        // 			"source-layer": "area_common_point",
+        // 			"filter": [
+        // 				"all",
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"OBJL"
+        // 					],
+        // 					20
+        // 				],
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"MarkerName2"
+        // 					],
+        // 					"ENTRES51"
+        // 				]
+        // 			],
+        // 			"layout": {
+        // 				"icon-image": "ENTRES51",
+        // 				"icon-allow-overlap": true,
+        // 				"icon-rotation-alignment": "map",
+        // 				"symbol-placement": "point",
+        // 				"icon-offset": [
+        // 					-3.6,
+        // 					3.6
+        // 				]
+        // 			},
+        // 			"paint": {}
+        // 		},
+        // 		{
+        // 			"id": "CBLARE_icon_ACHRES61_20",
+        // 			"type": "symbol",
+        // 			"source": "AREA_COMMON_POINT",
+        // 			"source-layer": "area_common_point",
+        // 			"filter": [
+        // 				"all",
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"OBJL"
+        // 					],
+        // 					20
+        // 				],
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"MarkerName2"
+        // 					],
+        // 					"ACHRES61"
+        // 				]
+        // 			],
+        // 			"layout": {
+        // 				"icon-image": "ACHRES61",
+        // 				"icon-allow-overlap": true,
+        // 				"icon-rotation-alignment": "map",
+        // 				"symbol-placement": "point",
+        // 				"icon-offset": [
+        // 					-5.2,
+        // 					4.8
+        // 				]
+        // 			},
+        // 			"paint": {}
+        // 		},
+        // 		{
+        // 			"id": "CBLARE_icon_ACHRES71_21",
+        // 			"type": "symbol",
+        // 			"source": "AREA_COMMON_POINT",
+        // 			"source-layer": "area_common_point",
+        // 			"filter": [
+        // 				"all",
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"OBJL"
+        // 					],
+        // 					20
+        // 				],
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"MarkerName2"
+        // 					],
+        // 					"ACHRES71"
+        // 				]
+        // 			],
+        // 			"layout": {
+        // 				"icon-image": "ACHRES71",
+        // 				"icon-allow-overlap": true,
+        // 				"icon-rotation-alignment": "map",
+        // 				"symbol-placement": "point",
+        // 				"icon-offset": [
+        // 					-5.4,
+        // 					4.8
+        // 				]
+        // 			},
+        // 			"paint": {}
+        // 		},
+        // 		{
+        // 			"id": "CBLARE_icon_ACHRES51_22",
+        // 			"type": "symbol",
+        // 			"source": "AREA_COMMON_POINT",
+        // 			"source-layer": "area_common_point",
+        // 			"filter": [
+        // 				"all",
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"OBJL"
+        // 					],
+        // 					20
+        // 				],
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"MarkerName2"
+        // 					],
+        // 					"ACHRES51"
+        // 				]
+        // 			],
+        // 			"layout": {
+        // 				"icon-image": "ACHRES51",
+        // 				"icon-allow-overlap": true,
+        // 				"icon-rotation-alignment": "map",
+        // 				"symbol-placement": "point",
+        // 				"icon-offset": [
+        // 					-4.5,
+        // 					4.8
+        // 				]
+        // 			},
+        // 			"paint": {}
+        // 		},
+        // 		{
+        // 			"id": "CBLARE_icon_FSHRES71_23",
+        // 			"type": "symbol",
+        // 			"source": "AREA_COMMON_POINT",
+        // 			"source-layer": "area_common_point",
+        // 			"filter": [
+        // 				"all",
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"OBJL"
+        // 					],
+        // 					20
+        // 				],
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"MarkerName2"
+        // 					],
+        // 					"FSHRES71"
+        // 				]
+        // 			],
+        // 			"layout": {
+        // 				"icon-image": "FSHRES71",
+        // 				"icon-allow-overlap": true,
+        // 				"icon-rotation-alignment": "map",
+        // 				"symbol-placement": "point",
+        // 				"icon-offset": [
+        // 					-4.8,
+        // 					2.4
+        // 				]
+        // 			},
+        // 			"paint": {}
+        // 		},
+        // 		{
+        // 			"id": "CBLARE_icon_FSHRES51_24",
+        // 			"type": "symbol",
+        // 			"source": "AREA_COMMON_POINT",
+        // 			"source-layer": "area_common_point",
+        // 			"filter": [
+        // 				"all",
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"OBJL"
+        // 					],
+        // 					20
+        // 				],
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"MarkerName2"
+        // 					],
+        // 					"FSHRES51"
+        // 				]
+        // 			],
+        // 			"layout": {
+        // 				"icon-image": "FSHRES51",
+        // 				"icon-allow-overlap": true,
+        // 				"icon-rotation-alignment": "map",
+        // 				"symbol-placement": "point",
+        // 				"icon-offset": [
+        // 					-3.8,
+        // 					2.4
+        // 				]
+        // 			},
+        // 			"paint": {}
+        // 		},
+        // 		{
+        // 			"id": "CBLARE_icon_INFARE51_25",
+        // 			"type": "symbol",
+        // 			"source": "AREA_COMMON_POINT",
+        // 			"source-layer": "area_common_point",
+        // 			"filter": [
+        // 				"all",
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"OBJL"
+        // 					],
+        // 					20
+        // 				],
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"MarkerName2"
+        // 					],
+        // 					"INFARE51"
+        // 				]
+        // 			],
+        // 			"layout": {
+        // 				"icon-image": "INFARE51",
+        // 				"icon-allow-overlap": true,
+        // 				"icon-rotation-alignment": "map",
+        // 				"symbol-placement": "point",
+        // 				"icon-offset": [
+        // 					-3.0,
+        // 					3.0
+        // 				]
+        // 			},
+        // 			"paint": {}
+        // 		},
+        // 		{
+        // 			"id": "CBLARE_icon_RSRDEF51_26",
+        // 			"type": "symbol",
+        // 			"source": "AREA_COMMON_POINT",
+        // 			"source-layer": "area_common_point",
+        // 			"filter": [
+        // 				"all",
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"OBJL"
+        // 					],
+        // 					20
+        // 				],
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"MarkerName2"
+        // 					],
+        // 					"RSRDEF51"
+        // 				]
+        // 			],
+        // 			"layout": {
+        // 				"icon-image": "RSRDEF51",
+        // 				"icon-allow-overlap": true,
+        // 				"icon-rotation-alignment": "map",
+        // 				"symbol-placement": "point",
+        // 				"icon-offset": [
+        // 					-3.6,
+        // 					3.6
+        // 				]
+        // 			},
+        // 			"paint": {}
+        // 		},
+        // 		{
+        // 			"id": "CTSARE_icon_INFARE51_27",
+        // 			"type": "symbol",
+        // 			"source": "AREA_COMMON_POINT",
+        // 			"source-layer": "area_common_point",
+        // 			"filter": [
+        // 				"all",
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"OBJL"
+        // 					],
+        // 					25
+        // 				]
+        // 			],
+        // 			"layout": {
+        // 				"icon-image": "INFARE51",
+        // 				"icon-allow-overlap": true,
+        // 				"icon-rotation-alignment": "map",
+        // 				"symbol-placement": "point"
+        // 			},
+        // 			"paint": {}
+        // 		},
+        // 		{
+        // 			"id": "CTNARE_icon_CTNARE51_28",
+        // 			"type": "symbol",
+        // 			"source": "AREA_COMMON_POINT",
+        // 			"source-layer": "area_common_point",
+        // 			"filter": [
+        // 				"all",
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"OBJL"
+        // 					],
+        // 					27
+        // 				]
+        // 			],
+        // 			"layout": {
+        // 				"icon-image": "CTNARE51",
+        // 				"icon-allow-overlap": true,
+        // 				"icon-rotation-alignment": "map",
+        // 				"symbol-placement": "point"
+        // 			},
+        // 			"paint": {}
+        // 		},
+        // 		{
+        // 			"id": "CHKPNT_icon_POSGEN04_29",
+        // 			"type": "symbol",
+        // 			"source": "AREA_COMMON_POINT",
+        // 			"source-layer": "area_common_point",
+        // 			"filter": [
+        // 				"all",
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"OBJL"
+        // 					],
+        // 					28
+        // 				]
+        // 			],
+        // 			"layout": {
+        // 				"icon-image": "POSGEN04",
+        // 				"icon-allow-overlap": true,
+        // 				"icon-rotation-alignment": "map",
+        // 				"symbol-placement": "point"
+        // 			},
+        // 			"paint": {}
+        // 		},
+        // 		{
+        // 			"id": "CONVYR_icon_RACNSP01_30",
+        // 			"type": "symbol",
+        // 			"source": "AREA_COMMON_POINT",
+        // 			"source-layer": "area_common_point",
+        // 			"filter": [
+        // 				"all",
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"OBJL"
+        // 					],
+        // 					34
+        // 				],
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"MarkerName1"
+        // 					],
+        // 					"RACNSP01"
+        // 				]
+        // 			],
+        // 			"layout": {
+        // 				"icon-image": "RACNSP01",
+        // 				"icon-allow-overlap": true,
+        // 				"icon-rotation-alignment": "map",
+        // 				"symbol-placement": "point"
+        // 			},
+        // 			"paint": {}
+        // 		},
+        // 		{
+        // 			"id": "DWRTPT_icon_DWRTPT51_31",
+        // 			"type": "symbol",
+        // 			"source": "AREA_COMMON_POINT",
+        // 			"source-layer": "area_common_point",
+        // 			"filter": [
+        // 				"all",
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"OBJL"
+        // 					],
+        // 					41
+        // 				]
+        // 			],
+        // 			"layout": {
+        // 				"icon-image": "DWRTPT51",
+        // 				"icon-allow-overlap": true,
+        // 				"icon-rotation-alignment": "map",
+        // 				"symbol-placement": "point",
+        // 				"icon-rotate": [
+        // 					"get",
+        // 					"ORIENT"
+        // 				]
+        // 			},
+        // 			"paint": {}
+        // 		},
+        // 		{
+        // 			"id": "DWRTPT_icon_TSSLPT51_32",
+        // 			"type": "symbol",
+        // 			"source": "AREA_COMMON_POINT",
+        // 			"source-layer": "area_common_point",
+        // 			"filter": [
+        // 				"all",
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"OBJL"
+        // 					],
+        // 					41
+        // 				],
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"MarkerName1"
+        // 					],
+        // 					"TSSLPT51"
+        // 				]
+        // 			],
+        // 			"layout": {
+        // 				"icon-image": "TSSLPT51",
+        // 				"icon-allow-overlap": true,
+        // 				"icon-rotation-alignment": "map",
+        // 				"symbol-placement": "point",
+        // 				"icon-offset": [
+        // 					2.4,
+        // 					-5.0
+        // 				]
+        // 			},
+        // 			"paint": {}
+        // 		},
+        // 		{
+        // 			"id": "DWRTPT_icon_DWRUTE51_33",
+        // 			"type": "symbol",
+        // 			"source": "AREA_COMMON_POINT",
+        // 			"source-layer": "area_common_point",
+        // 			"filter": [
+        // 				"all",
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"OBJL"
+        // 					],
+        // 					41
+        // 				],
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"MarkerName1"
+        // 					],
+        // 					"DWRUTE51"
+        // 				]
+        // 			],
+        // 			"layout": {
+        // 				"icon-image": "DWRUTE51",
+        // 				"icon-allow-overlap": true,
+        // 				"icon-rotation-alignment": "map",
+        // 				"symbol-placement": "point",
+        // 				"icon-offset": [
+        // 					2.4,
+        // 					-5.5
+        // 				]
+        // 			},
+        // 			"paint": {}
+        // 		},
+        // 		{
+        // 			"id": "DWRTPT_icon_TWRTPT52_34",
+        // 			"type": "symbol",
+        // 			"source": "AREA_COMMON_POINT",
+        // 			"source-layer": "area_common_point",
+        // 			"filter": [
+        // 				"all",
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"OBJL"
+        // 					],
+        // 					41
+        // 				],
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"MarkerName1"
+        // 					],
+        // 					"TWRTPT52"
+        // 				]
+        // 			],
+        // 			"layout": {
+        // 				"icon-image": "TWRTPT52",
+        // 				"icon-allow-overlap": true,
+        // 				"icon-rotation-alignment": "map",
+        // 				"symbol-placement": "point",
+        // 				"icon-offset": [
+        // 					2.4,
+        // 					-5.1
+        // 				]
+        // 			},
+        // 			"paint": {}
+        // 		},
+        // 		{
+        // 			"id": "DWRTPT_icon_ENTRES61_35",
+        // 			"type": "symbol",
+        // 			"source": "AREA_COMMON_POINT",
+        // 			"source-layer": "area_common_point",
+        // 			"filter": [
+        // 				"all",
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"OBJL"
+        // 					],
+        // 					41
+        // 				],
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"MarkerName2"
+        // 					],
+        // 					"ENTRES61"
+        // 				]
+        // 			],
+        // 			"layout": {
+        // 				"icon-image": "ENTRES61",
+        // 				"icon-allow-overlap": true,
+        // 				"icon-rotation-alignment": "map",
+        // 				"symbol-placement": "point",
+        // 				"icon-offset": [
+        // 					-4.4,
+        // 					3.8
+        // 				]
+        // 			},
+        // 			"paint": {}
+        // 		},
+        // 		{
+        // 			"id": "DWRTPT_icon_ENTRES71_36",
+        // 			"type": "symbol",
+        // 			"source": "AREA_COMMON_POINT",
+        // 			"source-layer": "area_common_point",
+        // 			"filter": [
+        // 				"all",
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"OBJL"
+        // 					],
+        // 					41
+        // 				],
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"MarkerName2"
+        // 					],
+        // 					"ENTRES71"
+        // 				]
+        // 			],
+        // 			"layout": {
+        // 				"icon-image": "ENTRES71",
+        // 				"icon-allow-overlap": true,
+        // 				"icon-rotation-alignment": "map",
+        // 				"symbol-placement": "point",
+        // 				"icon-offset": [
+        // 					-4.5,
+        // 					3.6
+        // 				]
+        // 			},
+        // 			"paint": {}
+        // 		},
+        // 		{
+        // 			"id": "DWRTPT_icon_ENTRES51_37",
+        // 			"type": "symbol",
+        // 			"source": "AREA_COMMON_POINT",
+        // 			"source-layer": "area_common_point",
+        // 			"filter": [
+        // 				"all",
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"OBJL"
+        // 					],
+        // 					41
+        // 				],
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"MarkerName2"
+        // 					],
+        // 					"ENTRES51"
+        // 				]
+        // 			],
+        // 			"layout": {
+        // 				"icon-image": "ENTRES51",
+        // 				"icon-allow-overlap": true,
+        // 				"icon-rotation-alignment": "map",
+        // 				"symbol-placement": "point",
+        // 				"icon-offset": [
+        // 					-3.6,
+        // 					3.6
+        // 				]
+        // 			},
+        // 			"paint": {}
+        // 		},
+        // 		{
+        // 			"id": "DWRTPT_icon_ACHRES61_38",
+        // 			"type": "symbol",
+        // 			"source": "AREA_COMMON_POINT",
+        // 			"source-layer": "area_common_point",
+        // 			"filter": [
+        // 				"all",
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"OBJL"
+        // 					],
+        // 					41
+        // 				],
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"MarkerName2"
+        // 					],
+        // 					"ACHRES61"
+        // 				]
+        // 			],
+        // 			"layout": {
+        // 				"icon-image": "ACHRES61",
+        // 				"icon-allow-overlap": true,
+        // 				"icon-rotation-alignment": "map",
+        // 				"symbol-placement": "point",
+        // 				"icon-offset": [
+        // 					-5.2,
+        // 					4.8
+        // 				]
+        // 			},
+        // 			"paint": {}
+        // 		},
+        // 		{
+        // 			"id": "DWRTPT_icon_ACHRES71_39",
+        // 			"type": "symbol",
+        // 			"source": "AREA_COMMON_POINT",
+        // 			"source-layer": "area_common_point",
+        // 			"filter": [
+        // 				"all",
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"OBJL"
+        // 					],
+        // 					41
+        // 				],
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"MarkerName2"
+        // 					],
+        // 					"ACHRES71"
+        // 				]
+        // 			],
+        // 			"layout": {
+        // 				"icon-image": "ACHRES71",
+        // 				"icon-allow-overlap": true,
+        // 				"icon-rotation-alignment": "map",
+        // 				"symbol-placement": "point",
+        // 				"icon-offset": [
+        // 					-5.4,
+        // 					4.8
+        // 				]
+        // 			},
+        // 			"paint": {}
+        // 		},
+        // 		{
+        // 			"id": "DWRTPT_icon_ACHRES51_40",
+        // 			"type": "symbol",
+        // 			"source": "AREA_COMMON_POINT",
+        // 			"source-layer": "area_common_point",
+        // 			"filter": [
+        // 				"all",
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"OBJL"
+        // 					],
+        // 					41
+        // 				],
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"MarkerName2"
+        // 					],
+        // 					"ACHRES51"
+        // 				]
+        // 			],
+        // 			"layout": {
+        // 				"icon-image": "ACHRES51",
+        // 				"icon-allow-overlap": true,
+        // 				"icon-rotation-alignment": "map",
+        // 				"symbol-placement": "point",
+        // 				"icon-offset": [
+        // 					-4.5,
+        // 					4.8
+        // 				]
+        // 			},
+        // 			"paint": {}
+        // 		},
+        // 		{
+        // 			"id": "DWRTPT_icon_FSHRES71_41",
+        // 			"type": "symbol",
+        // 			"source": "AREA_COMMON_POINT",
+        // 			"source-layer": "area_common_point",
+        // 			"filter": [
+        // 				"all",
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"OBJL"
+        // 					],
+        // 					41
+        // 				],
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"MarkerName2"
+        // 					],
+        // 					"FSHRES71"
+        // 				]
+        // 			],
+        // 			"layout": {
+        // 				"icon-image": "FSHRES71",
+        // 				"icon-allow-overlap": true,
+        // 				"icon-rotation-alignment": "map",
+        // 				"symbol-placement": "point",
+        // 				"icon-offset": [
+        // 					-4.8,
+        // 					2.4
+        // 				]
+        // 			},
+        // 			"paint": {}
+        // 		},
+        // 		{
+        // 			"id": "DWRTPT_icon_FSHRES51_42",
+        // 			"type": "symbol",
+        // 			"source": "AREA_COMMON_POINT",
+        // 			"source-layer": "area_common_point",
+        // 			"filter": [
+        // 				"all",
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"OBJL"
+        // 					],
+        // 					41
+        // 				],
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"MarkerName2"
+        // 					],
+        // 					"FSHRES51"
+        // 				]
+        // 			],
+        // 			"layout": {
+        // 				"icon-image": "FSHRES51",
+        // 				"icon-allow-overlap": true,
+        // 				"icon-rotation-alignment": "map",
+        // 				"symbol-placement": "point",
+        // 				"icon-offset": [
+        // 					-3.8,
+        // 					2.4
+        // 				]
+        // 			},
+        // 			"paint": {}
+        // 		},
+        // 		{
+        // 			"id": "DWRTPT_icon_INFARE51_43",
+        // 			"type": "symbol",
+        // 			"source": "AREA_COMMON_POINT",
+        // 			"source-layer": "area_common_point",
+        // 			"filter": [
+        // 				"all",
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"OBJL"
+        // 					],
+        // 					41
+        // 				],
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"MarkerName2"
+        // 					],
+        // 					"INFARE51"
+        // 				]
+        // 			],
+        // 			"layout": {
+        // 				"icon-image": "INFARE51",
+        // 				"icon-allow-overlap": true,
+        // 				"icon-rotation-alignment": "map",
+        // 				"symbol-placement": "point",
+        // 				"icon-offset": [
+        // 					-3.0,
+        // 					3.0
+        // 				]
+        // 			},
+        // 			"paint": {}
+        // 		},
+        // 		{
+        // 			"id": "DWRTPT_icon_RSRDEF51_44",
+        // 			"type": "symbol",
+        // 			"source": "AREA_COMMON_POINT",
+        // 			"source-layer": "area_common_point",
+        // 			"filter": [
+        // 				"all",
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"OBJL"
+        // 					],
+        // 					41
+        // 				],
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"MarkerName2"
+        // 					],
+        // 					"RSRDEF51"
+        // 				]
+        // 			],
+        // 			"layout": {
+        // 				"icon-image": "RSRDEF51",
+        // 				"icon-allow-overlap": true,
+        // 				"icon-rotation-alignment": "map",
+        // 				"symbol-placement": "point",
+        // 				"icon-offset": [
+        // 					-3.6,
+        // 					3.6
+        // 				]
+        // 			},
+        // 			"paint": {}
+        // 		},
+        // 		{
+        // 			"id": "DMPGRD_icon_ENTRES61_45",
+        // 			"type": "symbol",
+        // 			"source": "AREA_COMMON_POINT",
+        // 			"source-layer": "area_common_point",
+        // 			"filter": [
+        // 				"all",
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"OBJL"
+        // 					],
+        // 					48
+        // 				],
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"MarkerName2"
+        // 					],
+        // 					"ENTRES61"
+        // 				]
+        // 			],
+        // 			"layout": {
+        // 				"icon-image": "ENTRES61",
+        // 				"icon-allow-overlap": true,
+        // 				"icon-rotation-alignment": "map",
+        // 				"symbol-placement": "point",
+        // 				"icon-offset": [
+        // 					-4.4,
+        // 					3.8
+        // 				]
+        // 			},
+        // 			"paint": {}
+        // 		},
+        // 		{
+        // 			"id": "DMPGRD_icon_ENTRES71_46",
+        // 			"type": "symbol",
+        // 			"source": "AREA_COMMON_POINT",
+        // 			"source-layer": "area_common_point",
+        // 			"filter": [
+        // 				"all",
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"OBJL"
+        // 					],
+        // 					48
+        // 				],
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"MarkerName2"
+        // 					],
+        // 					"ENTRES71"
+        // 				]
+        // 			],
+        // 			"layout": {
+        // 				"icon-image": "ENTRES71",
+        // 				"icon-allow-overlap": true,
+        // 				"icon-rotation-alignment": "map",
+        // 				"symbol-placement": "point",
+        // 				"icon-offset": [
+        // 					-4.5,
+        // 					3.6
+        // 				]
+        // 			},
+        // 			"paint": {}
+        // 		},
+        // 		{
+        // 			"id": "DMPGRD_icon_ENTRES51_47",
+        // 			"type": "symbol",
+        // 			"source": "AREA_COMMON_POINT",
+        // 			"source-layer": "area_common_point",
+        // 			"filter": [
+        // 				"all",
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"OBJL"
+        // 					],
+        // 					48
+        // 				],
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"MarkerName2"
+        // 					],
+        // 					"ENTRES51"
+        // 				]
+        // 			],
+        // 			"layout": {
+        // 				"icon-image": "ENTRES51",
+        // 				"icon-allow-overlap": true,
+        // 				"icon-rotation-alignment": "map",
+        // 				"symbol-placement": "point",
+        // 				"icon-offset": [
+        // 					-3.6,
+        // 					3.6
+        // 				]
+        // 			},
+        // 			"paint": {}
+        // 		},
+        // 		{
+        // 			"id": "DMPGRD_icon_ACHRES61_48",
+        // 			"type": "symbol",
+        // 			"source": "AREA_COMMON_POINT",
+        // 			"source-layer": "area_common_point",
+        // 			"filter": [
+        // 				"all",
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"OBJL"
+        // 					],
+        // 					48
+        // 				],
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"MarkerName2"
+        // 					],
+        // 					"ACHRES61"
+        // 				]
+        // 			],
+        // 			"layout": {
+        // 				"icon-image": "ACHRES61",
+        // 				"icon-allow-overlap": true,
+        // 				"icon-rotation-alignment": "map",
+        // 				"symbol-placement": "point",
+        // 				"icon-offset": [
+        // 					-5.2,
+        // 					4.8
+        // 				]
+        // 			},
+        // 			"paint": {}
+        // 		},
+        // 		{
+        // 			"id": "DMPGRD_icon_ACHRES71_49",
+        // 			"type": "symbol",
+        // 			"source": "AREA_COMMON_POINT",
+        // 			"source-layer": "area_common_point",
+        // 			"filter": [
+        // 				"all",
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"OBJL"
+        // 					],
+        // 					48
+        // 				],
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"MarkerName2"
+        // 					],
+        // 					"ACHRES71"
+        // 				]
+        // 			],
+        // 			"layout": {
+        // 				"icon-image": "ACHRES71",
+        // 				"icon-allow-overlap": true,
+        // 				"icon-rotation-alignment": "map",
+        // 				"symbol-placement": "point",
+        // 				"icon-offset": [
+        // 					-5.4,
+        // 					4.8
+        // 				]
+        // 			},
+        // 			"paint": {}
+        // 		},
+        // 		{
+        // 			"id": "DMPGRD_icon_ACHRES51_50",
+        // 			"type": "symbol",
+        // 			"source": "AREA_COMMON_POINT",
+        // 			"source-layer": "area_common_point",
+        // 			"filter": [
+        // 				"all",
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"OBJL"
+        // 					],
+        // 					48
+        // 				],
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"MarkerName2"
+        // 					],
+        // 					"ACHRES51"
+        // 				]
+        // 			],
+        // 			"layout": {
+        // 				"icon-image": "ACHRES51",
+        // 				"icon-allow-overlap": true,
+        // 				"icon-rotation-alignment": "map",
+        // 				"symbol-placement": "point",
+        // 				"icon-offset": [
+        // 					-4.5,
+        // 					4.8
+        // 				]
+        // 			},
+        // 			"paint": {}
+        // 		},
+        // 		{
+        // 			"id": "DMPGRD_icon_FSHRES71_51",
+        // 			"type": "symbol",
+        // 			"source": "AREA_COMMON_POINT",
+        // 			"source-layer": "area_common_point",
+        // 			"filter": [
+        // 				"all",
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"OBJL"
+        // 					],
+        // 					48
+        // 				],
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"MarkerName2"
+        // 					],
+        // 					"FSHRES71"
+        // 				]
+        // 			],
+        // 			"layout": {
+        // 				"icon-image": "FSHRES71",
+        // 				"icon-allow-overlap": true,
+        // 				"icon-rotation-alignment": "map",
+        // 				"symbol-placement": "point",
+        // 				"icon-offset": [
+        // 					-4.8,
+        // 					2.4
+        // 				]
+        // 			},
+        // 			"paint": {}
+        // 		},
+        // 		{
+        // 			"id": "DMPGRD_icon_FSHRES51_52",
+        // 			"type": "symbol",
+        // 			"source": "AREA_COMMON_POINT",
+        // 			"source-layer": "area_common_point",
+        // 			"filter": [
+        // 				"all",
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"OBJL"
+        // 					],
+        // 					48
+        // 				],
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"MarkerName2"
+        // 					],
+        // 					"FSHRES51"
+        // 				]
+        // 			],
+        // 			"layout": {
+        // 				"icon-image": "FSHRES51",
+        // 				"icon-allow-overlap": true,
+        // 				"icon-rotation-alignment": "map",
+        // 				"symbol-placement": "point",
+        // 				"icon-offset": [
+        // 					-3.8,
+        // 					2.4
+        // 				]
+        // 			},
+        // 			"paint": {}
+        // 		},
+        // 		{
+        // 			"id": "DMPGRD_icon_INFARE51_53",
+        // 			"type": "symbol",
+        // 			"source": "AREA_COMMON_POINT",
+        // 			"source-layer": "area_common_point",
+        // 			"filter": [
+        // 				"all",
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"OBJL"
+        // 					],
+        // 					48
+        // 				],
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"MarkerName2"
+        // 					],
+        // 					"INFARE51"
+        // 				]
+        // 			],
+        // 			"layout": {
+        // 				"icon-image": "INFARE51",
+        // 				"icon-allow-overlap": true,
+        // 				"icon-rotation-alignment": "map",
+        // 				"symbol-placement": "point",
+        // 				"icon-offset": [
+        // 					-3.0,
+        // 					3.0
+        // 				]
+        // 			},
+        // 			"paint": {}
+        // 		},
+        // 		{
+        // 			"id": "DMPGRD_icon_RSRDEF51_54",
+        // 			"type": "symbol",
+        // 			"source": "AREA_COMMON_POINT",
+        // 			"source-layer": "area_common_point",
+        // 			"filter": [
+        // 				"all",
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"OBJL"
+        // 					],
+        // 					48
+        // 				],
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"MarkerName2"
+        // 					],
+        // 					"RSRDEF51"
+        // 				]
+        // 			],
+        // 			"layout": {
+        // 				"icon-image": "RSRDEF51",
+        // 				"icon-allow-overlap": true,
+        // 				"icon-rotation-alignment": "map",
+        // 				"symbol-placement": "point",
+        // 				"icon-offset": [
+        // 					-3.6,
+        // 					3.6
+        // 				]
+        // 			},
+        // 			"paint": {}
+        // 		},
+        // 		{
+        // 			"id": "FAIRWY_icon_FAIRWY51_55",
+        // 			"type": "symbol",
+        // 			"source": "AREA_COMMON_POINT",
+        // 			"source-layer": "area_common_point",
+        // 			"filter": [
+        // 				"all",
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"OBJL"
+        // 					],
+        // 					51
+        // 				],
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"MarkerName1"
+        // 					],
+        // 					"FAIRWY51"
+        // 				]
+        // 			],
+        // 			"layout": {
+        // 				"icon-image": "FAIRWY51",
+        // 				"icon-allow-overlap": true,
+        // 				"icon-rotation-alignment": "map",
+        // 				"symbol-placement": "point",
+        // 				"icon-offset": [
+        // 					2.4,
+        // 					-5.0
+        // 				],
+        // 				"icon-rotate": [
+        // 					"get",
+        // 					"ORIENT"
+        // 				]
+        // 			},
+        // 			"paint": {}
+        // 		},
+        // 		{
+        // 			"id": "FAIRWY_icon_FAIRWY52_56",
+        // 			"type": "symbol",
+        // 			"source": "AREA_COMMON_POINT",
+        // 			"source-layer": "area_common_point",
+        // 			"filter": [
+        // 				"all",
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"OBJL"
+        // 					],
+        // 					51
+        // 				],
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"MarkerName1"
+        // 					],
+        // 					"FAIRWY52"
+        // 				]
+        // 			],
+        // 			"layout": {
+        // 				"icon-image": "FAIRWY52",
+        // 				"icon-allow-overlap": true,
+        // 				"icon-rotation-alignment": "map",
+        // 				"symbol-placement": "point",
+        // 				"icon-offset": [
+        // 					2.4,
+        // 					-5.5
+        // 				],
+        // 				"icon-rotate": [
+        // 					"get",
+        // 					"ORIENT"
+        // 				]
+        // 			},
+        // 			"paint": {}
+        // 		},
+        // 		{
+        // 			"id": "FAIRWY_icon_ENTRES61_57",
+        // 			"type": "symbol",
+        // 			"source": "AREA_COMMON_POINT",
+        // 			"source-layer": "area_common_point",
+        // 			"filter": [
+        // 				"all",
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"OBJL"
+        // 					],
+        // 					51
+        // 				],
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"MarkerName2"
+        // 					],
+        // 					"ENTRES61"
+        // 				]
+        // 			],
+        // 			"layout": {
+        // 				"icon-image": "ENTRES61",
+        // 				"icon-allow-overlap": true,
+        // 				"icon-rotation-alignment": "map",
+        // 				"symbol-placement": "point",
+        // 				"icon-offset": [
+        // 					-4.4,
+        // 					3.8
+        // 				]
+        // 			},
+        // 			"paint": {}
+        // 		},
+        // 		{
+        // 			"id": "FAIRWY_icon_ENTRES71_58",
+        // 			"type": "symbol",
+        // 			"source": "AREA_COMMON_POINT",
+        // 			"source-layer": "area_common_point",
+        // 			"filter": [
+        // 				"all",
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"OBJL"
+        // 					],
+        // 					51
+        // 				],
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"MarkerName2"
+        // 					],
+        // 					"ENTRES71"
+        // 				]
+        // 			],
+        // 			"layout": {
+        // 				"icon-image": "ENTRES71",
+        // 				"icon-allow-overlap": true,
+        // 				"icon-rotation-alignment": "map",
+        // 				"symbol-placement": "point",
+        // 				"icon-offset": [
+        // 					-4.5,
+        // 					3.6
+        // 				]
+        // 			},
+        // 			"paint": {}
+        // 		},
+        // 		{
+        // 			"id": "FAIRWY_icon_ENTRES51_59",
+        // 			"type": "symbol",
+        // 			"source": "AREA_COMMON_POINT",
+        // 			"source-layer": "area_common_point",
+        // 			"filter": [
+        // 				"all",
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"OBJL"
+        // 					],
+        // 					51
+        // 				],
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"MarkerName2"
+        // 					],
+        // 					"ENTRES51"
+        // 				]
+        // 			],
+        // 			"layout": {
+        // 				"icon-image": "ENTRES51",
+        // 				"icon-allow-overlap": true,
+        // 				"icon-rotation-alignment": "map",
+        // 				"symbol-placement": "point",
+        // 				"icon-offset": [
+        // 					-3.6,
+        // 					3.6
+        // 				]
+        // 			},
+        // 			"paint": {}
+        // 		},
+        // 		{
+        // 			"id": "FAIRWY_icon_ACHRES61_60",
+        // 			"type": "symbol",
+        // 			"source": "AREA_COMMON_POINT",
+        // 			"source-layer": "area_common_point",
+        // 			"filter": [
+        // 				"all",
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"OBJL"
+        // 					],
+        // 					51
+        // 				],
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"MarkerName2"
+        // 					],
+        // 					"ACHRES61"
+        // 				]
+        // 			],
+        // 			"layout": {
+        // 				"icon-image": "ACHRES61",
+        // 				"icon-allow-overlap": true,
+        // 				"icon-rotation-alignment": "map",
+        // 				"symbol-placement": "point",
+        // 				"icon-offset": [
+        // 					-5.2,
+        // 					4.8
+        // 				]
+        // 			},
+        // 			"paint": {}
+        // 		},
+        // 		{
+        // 			"id": "FAIRWY_icon_ACHRES71_61",
+        // 			"type": "symbol",
+        // 			"source": "AREA_COMMON_POINT",
+        // 			"source-layer": "area_common_point",
+        // 			"filter": [
+        // 				"all",
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"OBJL"
+        // 					],
+        // 					51
+        // 				],
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"MarkerName2"
+        // 					],
+        // 					"ACHRES71"
+        // 				]
+        // 			],
+        // 			"layout": {
+        // 				"icon-image": "ACHRES71",
+        // 				"icon-allow-overlap": true,
+        // 				"icon-rotation-alignment": "map",
+        // 				"symbol-placement": "point",
+        // 				"icon-offset": [
+        // 					-5.4,
+        // 					4.8
+        // 				]
+        // 			},
+        // 			"paint": {}
+        // 		},
+        // 		{
+        // 			"id": "FAIRWY_icon_ACHRES51_62",
+        // 			"type": "symbol",
+        // 			"source": "AREA_COMMON_POINT",
+        // 			"source-layer": "area_common_point",
+        // 			"filter": [
+        // 				"all",
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"OBJL"
+        // 					],
+        // 					51
+        // 				],
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"MarkerName2"
+        // 					],
+        // 					"ACHRES51"
+        // 				]
+        // 			],
+        // 			"layout": {
+        // 				"icon-image": "ACHRES51",
+        // 				"icon-allow-overlap": true,
+        // 				"icon-rotation-alignment": "map",
+        // 				"symbol-placement": "point",
+        // 				"icon-offset": [
+        // 					-4.5,
+        // 					4.8
+        // 				]
+        // 			},
+        // 			"paint": {}
+        // 		},
+        // 		{
+        // 			"id": "FAIRWY_icon_FSHRES71_63",
+        // 			"type": "symbol",
+        // 			"source": "AREA_COMMON_POINT",
+        // 			"source-layer": "area_common_point",
+        // 			"filter": [
+        // 				"all",
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"OBJL"
+        // 					],
+        // 					51
+        // 				],
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"MarkerName2"
+        // 					],
+        // 					"FSHRES71"
+        // 				]
+        // 			],
+        // 			"layout": {
+        // 				"icon-image": "FSHRES71",
+        // 				"icon-allow-overlap": true,
+        // 				"icon-rotation-alignment": "map",
+        // 				"symbol-placement": "point",
+        // 				"icon-offset": [
+        // 					-4.8,
+        // 					2.4
+        // 				]
+        // 			},
+        // 			"paint": {}
+        // 		},
+        // 		{
+        // 			"id": "FAIRWY_icon_FSHRES51_64",
+        // 			"type": "symbol",
+        // 			"source": "AREA_COMMON_POINT",
+        // 			"source-layer": "area_common_point",
+        // 			"filter": [
+        // 				"all",
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"OBJL"
+        // 					],
+        // 					51
+        // 				],
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"MarkerName2"
+        // 					],
+        // 					"FSHRES51"
+        // 				]
+        // 			],
+        // 			"layout": {
+        // 				"icon-image": "FSHRES51",
+        // 				"icon-allow-overlap": true,
+        // 				"icon-rotation-alignment": "map",
+        // 				"symbol-placement": "point",
+        // 				"icon-offset": [
+        // 					-3.8,
+        // 					2.4
+        // 				]
+        // 			},
+        // 			"paint": {}
+        // 		},
+        // 		{
+        // 			"id": "FAIRWY_icon_INFARE51_65",
+        // 			"type": "symbol",
+        // 			"source": "AREA_COMMON_POINT",
+        // 			"source-layer": "area_common_point",
+        // 			"filter": [
+        // 				"all",
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"OBJL"
+        // 					],
+        // 					51
+        // 				],
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"MarkerName2"
+        // 					],
+        // 					"INFARE51"
+        // 				]
+        // 			],
+        // 			"layout": {
+        // 				"icon-image": "INFARE51",
+        // 				"icon-allow-overlap": true,
+        // 				"icon-rotation-alignment": "map",
+        // 				"symbol-placement": "point",
+        // 				"icon-offset": [
+        // 					-3.0,
+        // 					3.0
+        // 				]
+        // 			},
+        // 			"paint": {}
+        // 		},
+        // 		{
+        // 			"id": "FAIRWY_icon_RSRDEF51_66",
+        // 			"type": "symbol",
+        // 			"source": "AREA_COMMON_POINT",
+        // 			"source-layer": "area_common_point",
+        // 			"filter": [
+        // 				"all",
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"OBJL"
+        // 					],
+        // 					51
+        // 				],
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"MarkerName2"
+        // 					],
+        // 					"RSRDEF51"
+        // 				]
+        // 			],
+        // 			"layout": {
+        // 				"icon-image": "RSRDEF51",
+        // 				"icon-allow-overlap": true,
+        // 				"icon-rotation-alignment": "map",
+        // 				"symbol-placement": "point",
+        // 				"icon-offset": [
+        // 					-3.6,
+        // 					3.6
+        // 				]
+        // 			},
+        // 			"paint": {}
+        // 		},
+        // 		{
+        // 			"id": "FERYRT_icon_FRYARE52_67",
+        // 			"type": "symbol",
+        // 			"source": "AREA_COMMON_POINT",
+        // 			"source-layer": "area_common_point",
+        // 			"filter": [
+        // 				"all",
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"OBJL"
+        // 					],
+        // 					53
+        // 				],
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"MarkerName1"
+        // 					],
+        // 					"FRYARE52"
+        // 				]
+        // 			],
+        // 			"layout": {
+        // 				"icon-image": "FRYARE52",
+        // 				"icon-allow-overlap": true,
+        // 				"icon-rotation-alignment": "map",
+        // 				"symbol-placement": "point",
+        // 				"icon-offset": [
+        // 					2.4,
+        // 					-5.0
+        // 				]
+        // 			},
+        // 			"paint": {}
+        // 		},
+        // 		{
+        // 			"id": "FERYRT_icon_FRYARE51_68",
+        // 			"type": "symbol",
+        // 			"source": "AREA_COMMON_POINT",
+        // 			"source-layer": "area_common_point",
+        // 			"filter": [
+        // 				"all",
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"OBJL"
+        // 					],
+        // 					53
+        // 				],
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"MarkerName1"
+        // 					],
+        // 					"FRYARE51"
+        // 				]
+        // 			],
+        // 			"layout": {
+        // 				"icon-image": "FRYARE51",
+        // 				"icon-allow-overlap": true,
+        // 				"icon-rotation-alignment": "map",
+        // 				"symbol-placement": "point",
+        // 				"icon-offset": [
+        // 					2.4,
+        // 					-5.5
+        // 				]
+        // 			},
+        // 			"paint": {}
+        // 		},
+        // 		{
+        // 			"id": "FSHFAC_icon_FSHFAC02_69",
+        // 			"type": "symbol",
+        // 			"source": "AREA_COMMON_POINT",
+        // 			"source-layer": "area_common_point",
+        // 			"filter": [
+        // 				"all",
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"OBJL"
+        // 					],
+        // 					55
+        // 				],
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"MarkerName1"
+        // 					],
+        // 					"FSHFAC02"
+        // 				]
+        // 			],
+        // 			"layout": {
+        // 				"icon-image": "FSHFAC02",
+        // 				"icon-allow-overlap": true,
+        // 				"icon-rotation-alignment": "map",
+        // 				"symbol-placement": "point"
+        // 			},
+        // 			"paint": {}
+        // 		},
+        // 		{
+        // 			"id": "FSHFAC_icon_FSHFAC03_70",
+        // 			"type": "symbol",
+        // 			"source": "AREA_COMMON_POINT",
+        // 			"source-layer": "area_common_point",
+        // 			"filter": [
+        // 				"all",
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"OBJL"
+        // 					],
+        // 					55
+        // 				],
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"MarkerName1"
+        // 					],
+        // 					"FSHFAC03"
+        // 				]
+        // 			],
+        // 			"layout": {
+        // 				"icon-image": "FSHFAC03",
+        // 				"icon-allow-overlap": true,
+        // 				"icon-rotation-alignment": "map",
+        // 				"symbol-placement": "point"
+        // 			},
+        // 			"paint": {}
+        // 		},
+        // 		{
+        // 			"id": "FSHGRD_icon_FSHGRD01_71",
+        // 			"type": "symbol",
+        // 			"source": "AREA_COMMON_POINT",
+        // 			"source-layer": "area_common_point",
+        // 			"filter": [
+        // 				"all",
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"OBJL"
+        // 					],
+        // 					56
+        // 				]
+        // 			],
+        // 			"layout": {
+        // 				"icon-image": "FSHGRD01",
+        // 				"icon-allow-overlap": true,
+        // 				"icon-rotation-alignment": "map",
+        // 				"symbol-placement": "point"
+        // 			},
+        // 			"paint": {}
+        // 		},
+        // 		{
+        // 			"id": "GATCON_icon_GATCON03_72",
+        // 			"type": "symbol",
+        // 			"source": "AREA_COMMON_POINT",
+        // 			"source-layer": "area_common_point",
+        // 			"filter": [
+        // 				"all",
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"OBJL"
+        // 					],
+        // 					61
+        // 				],
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"MarkerName1"
+        // 					],
+        // 					"GATCON03"
+        // 				]
+        // 			],
+        // 			"layout": {
+        // 				"icon-image": "GATCON03",
+        // 				"icon-allow-overlap": true,
+        // 				"icon-rotation-alignment": "map",
+        // 				"symbol-placement": "point"
+        // 			},
+        // 			"paint": {}
+        // 		},
+        // 		{
+        // 			"id": "GATCON_icon_GATCON04_73",
+        // 			"type": "symbol",
+        // 			"source": "AREA_COMMON_POINT",
+        // 			"source-layer": "area_common_point",
+        // 			"filter": [
+        // 				"all",
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"OBJL"
+        // 					],
+        // 					61
+        // 				],
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"MarkerName1"
+        // 					],
+        // 					"GATCON04"
+        // 				]
+        // 			],
+        // 			"layout": {
+        // 				"icon-image": "GATCON04",
+        // 				"icon-allow-overlap": true,
+        // 				"icon-rotation-alignment": "map",
+        // 				"symbol-placement": "point"
+        // 			},
+        // 			"paint": {}
+        // 		},
+        // 		{
+        // 			"id": "HRBFAC_icon_ROLROL01_74",
+        // 			"type": "symbol",
+        // 			"source": "AREA_COMMON_POINT",
+        // 			"source-layer": "area_common_point",
+        // 			"filter": [
+        // 				"all",
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"OBJL"
+        // 					],
+        // 					64
+        // 				],
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"MarkerName1"
+        // 					],
+        // 					"ROLROL01"
+        // 				]
+        // 			],
+        // 			"layout": {
+        // 				"icon-image": "ROLROL01",
+        // 				"icon-allow-overlap": true,
+        // 				"icon-rotation-alignment": "map",
+        // 				"symbol-placement": "point"
+        // 			},
+        // 			"paint": {}
+        // 		},
+        // 		{
+        // 			"id": "HRBFAC_icon_HRBFAC09_75",
+        // 			"type": "symbol",
+        // 			"source": "AREA_COMMON_POINT",
+        // 			"source-layer": "area_common_point",
+        // 			"filter": [
+        // 				"all",
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"OBJL"
+        // 					],
+        // 					64
+        // 				],
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"MarkerName1"
+        // 					],
+        // 					"HRBFAC09"
+        // 				]
+        // 			],
+        // 			"layout": {
+        // 				"icon-image": "HRBFAC09",
+        // 				"icon-allow-overlap": true,
+        // 				"icon-rotation-alignment": "map",
+        // 				"symbol-placement": "point"
+        // 			},
+        // 			"paint": {}
+        // 		},
+        // 		{
+        // 			"id": "HRBFAC_icon_SMCFAC02_76",
+        // 			"type": "symbol",
+        // 			"source": "AREA_COMMON_POINT",
+        // 			"source-layer": "area_common_point",
+        // 			"filter": [
+        // 				"all",
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"OBJL"
+        // 					],
+        // 					64
+        // 				],
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"MarkerName1"
+        // 					],
+        // 					"SMCFAC02"
+        // 				]
+        // 			],
+        // 			"layout": {
+        // 				"icon-image": "SMCFAC02",
+        // 				"icon-allow-overlap": true,
+        // 				"icon-rotation-alignment": "map",
+        // 				"symbol-placement": "point"
+        // 			},
+        // 			"paint": {}
+        // 		},
+        // 		{
+        // 			"id": "HRBFAC_icon_CHINFO07_77",
+        // 			"type": "symbol",
+        // 			"source": "AREA_COMMON_POINT",
+        // 			"source-layer": "area_common_point",
+        // 			"filter": [
+        // 				"all",
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"OBJL"
+        // 					],
+        // 					64
+        // 				],
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"MarkerName1"
+        // 					],
+        // 					"CHINFO07"
+        // 				]
+        // 			],
+        // 			"layout": {
+        // 				"icon-image": "CHINFO07",
+        // 				"icon-allow-overlap": true,
+        // 				"icon-rotation-alignment": "map",
+        // 				"symbol-placement": "point"
+        // 			},
+        // 			"paint": {}
+        // 		},
+        // 		{
+        // 			"id": "ICNARE_icon_INFARE51_78",
+        // 			"type": "symbol",
+        // 			"source": "AREA_COMMON_POINT",
+        // 			"source-layer": "area_common_point",
+        // 			"filter": [
+        // 				"all",
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"OBJL"
+        // 					],
+        // 					67
+        // 				]
+        // 			],
+        // 			"layout": {
+        // 				"icon-image": "INFARE51",
+        // 				"icon-allow-overlap": true,
+        // 				"icon-rotation-alignment": "map",
+        // 				"symbol-placement": "point",
+        // 				"icon-offset": [
+        // 					-1.2,
+        // 					-1.5
+        // 				]
+        // 			},
+        // 			"paint": {}
+        // 		},
+        // 		{
+        // 			"id": "ICNARE_icon_ENTRES61_79",
+        // 			"type": "symbol",
+        // 			"source": "AREA_COMMON_POINT",
+        // 			"source-layer": "area_common_point",
+        // 			"filter": [
+        // 				"all",
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"OBJL"
+        // 					],
+        // 					67
+        // 				],
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"MarkerName2"
+        // 					],
+        // 					"ENTRES61"
+        // 				]
+        // 			],
+        // 			"layout": {
+        // 				"icon-image": "ENTRES61",
+        // 				"icon-allow-overlap": true,
+        // 				"icon-rotation-alignment": "map",
+        // 				"symbol-placement": "point",
+        // 				"icon-offset": [
+        // 					-4.4,
+        // 					3.8
+        // 				]
+        // 			},
+        // 			"paint": {}
+        // 		},
+        // 		{
+        // 			"id": "ICNARE_icon_ENTRES71_80",
+        // 			"type": "symbol",
+        // 			"source": "AREA_COMMON_POINT",
+        // 			"source-layer": "area_common_point",
+        // 			"filter": [
+        // 				"all",
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"OBJL"
+        // 					],
+        // 					67
+        // 				],
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"MarkerName2"
+        // 					],
+        // 					"ENTRES71"
+        // 				]
+        // 			],
+        // 			"layout": {
+        // 				"icon-image": "ENTRES71",
+        // 				"icon-allow-overlap": true,
+        // 				"icon-rotation-alignment": "map",
+        // 				"symbol-placement": "point",
+        // 				"icon-offset": [
+        // 					-4.5,
+        // 					3.6
+        // 				]
+        // 			},
+        // 			"paint": {}
+        // 		},
+        // 		{
+        // 			"id": "ICNARE_icon_ENTRES51_81",
+        // 			"type": "symbol",
+        // 			"source": "AREA_COMMON_POINT",
+        // 			"source-layer": "area_common_point",
+        // 			"filter": [
+        // 				"all",
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"OBJL"
+        // 					],
+        // 					67
+        // 				],
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"MarkerName2"
+        // 					],
+        // 					"ENTRES51"
+        // 				]
+        // 			],
+        // 			"layout": {
+        // 				"icon-image": "ENTRES51",
+        // 				"icon-allow-overlap": true,
+        // 				"icon-rotation-alignment": "map",
+        // 				"symbol-placement": "point",
+        // 				"icon-offset": [
+        // 					-3.6,
+        // 					3.6
+        // 				]
+        // 			},
+        // 			"paint": {}
+        // 		},
+        // 		{
+        // 			"id": "ICNARE_icon_ACHRES61_82",
+        // 			"type": "symbol",
+        // 			"source": "AREA_COMMON_POINT",
+        // 			"source-layer": "area_common_point",
+        // 			"filter": [
+        // 				"all",
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"OBJL"
+        // 					],
+        // 					67
+        // 				],
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"MarkerName2"
+        // 					],
+        // 					"ACHRES61"
+        // 				]
+        // 			],
+        // 			"layout": {
+        // 				"icon-image": "ACHRES61",
+        // 				"icon-allow-overlap": true,
+        // 				"icon-rotation-alignment": "map",
+        // 				"symbol-placement": "point",
+        // 				"icon-offset": [
+        // 					-5.2,
+        // 					4.8
+        // 				]
+        // 			},
+        // 			"paint": {}
+        // 		},
+        // 		{
+        // 			"id": "ICNARE_icon_ACHRES71_83",
+        // 			"type": "symbol",
+        // 			"source": "AREA_COMMON_POINT",
+        // 			"source-layer": "area_common_point",
+        // 			"filter": [
+        // 				"all",
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"OBJL"
+        // 					],
+        // 					67
+        // 				],
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"MarkerName2"
+        // 					],
+        // 					"ACHRES71"
+        // 				]
+        // 			],
+        // 			"layout": {
+        // 				"icon-image": "ACHRES71",
+        // 				"icon-allow-overlap": true,
+        // 				"icon-rotation-alignment": "map",
+        // 				"symbol-placement": "point",
+        // 				"icon-offset": [
+        // 					-5.4,
+        // 					4.8
+        // 				]
+        // 			},
+        // 			"paint": {}
+        // 		},
+        // 		{
+        // 			"id": "ICNARE_icon_ACHRES51_84",
+        // 			"type": "symbol",
+        // 			"source": "AREA_COMMON_POINT",
+        // 			"source-layer": "area_common_point",
+        // 			"filter": [
+        // 				"all",
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"OBJL"
+        // 					],
+        // 					67
+        // 				],
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"MarkerName2"
+        // 					],
+        // 					"ACHRES51"
+        // 				]
+        // 			],
+        // 			"layout": {
+        // 				"icon-image": "ACHRES51",
+        // 				"icon-allow-overlap": true,
+        // 				"icon-rotation-alignment": "map",
+        // 				"symbol-placement": "point",
+        // 				"icon-offset": [
+        // 					-4.5,
+        // 					4.8
+        // 				]
+        // 			},
+        // 			"paint": {}
+        // 		},
+        // 		{
+        // 			"id": "ICNARE_icon_FSHRES71_85",
+        // 			"type": "symbol",
+        // 			"source": "AREA_COMMON_POINT",
+        // 			"source-layer": "area_common_point",
+        // 			"filter": [
+        // 				"all",
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"OBJL"
+        // 					],
+        // 					67
+        // 				],
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"MarkerName2"
+        // 					],
+        // 					"FSHRES71"
+        // 				]
+        // 			],
+        // 			"layout": {
+        // 				"icon-image": "FSHRES71",
+        // 				"icon-allow-overlap": true,
+        // 				"icon-rotation-alignment": "map",
+        // 				"symbol-placement": "point",
+        // 				"icon-offset": [
+        // 					-4.8,
+        // 					2.4
+        // 				]
+        // 			},
+        // 			"paint": {}
+        // 		},
+        // 		{
+        // 			"id": "ICNARE_icon_FSHRES51_86",
+        // 			"type": "symbol",
+        // 			"source": "AREA_COMMON_POINT",
+        // 			"source-layer": "area_common_point",
+        // 			"filter": [
+        // 				"all",
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"OBJL"
+        // 					],
+        // 					67
+        // 				],
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"MarkerName2"
+        // 					],
+        // 					"FSHRES51"
+        // 				]
+        // 			],
+        // 			"layout": {
+        // 				"icon-image": "FSHRES51",
+        // 				"icon-allow-overlap": true,
+        // 				"icon-rotation-alignment": "map",
+        // 				"symbol-placement": "point",
+        // 				"icon-offset": [
+        // 					-3.8,
+        // 					2.4
+        // 				]
+        // 			},
+        // 			"paint": {}
+        // 		},
+        // 		{
+        // 			"id": "ICNARE_icon_INFARE51_87",
+        // 			"type": "symbol",
+        // 			"source": "AREA_COMMON_POINT",
+        // 			"source-layer": "area_common_point",
+        // 			"filter": [
+        // 				"all",
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"OBJL"
+        // 					],
+        // 					67
+        // 				],
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"MarkerName2"
+        // 					],
+        // 					"INFARE51"
+        // 				]
+        // 			],
+        // 			"layout": {
+        // 				"icon-image": "INFARE51",
+        // 				"icon-allow-overlap": true,
+        // 				"icon-rotation-alignment": "map",
+        // 				"symbol-placement": "point",
+        // 				"icon-offset": [
+        // 					-3.0,
+        // 					3.0
+        // 				]
+        // 			},
+        // 			"paint": {}
+        // 		},
+        // 		{
+        // 			"id": "ICNARE_icon_RSRDEF51_88",
+        // 			"type": "symbol",
+        // 			"source": "AREA_COMMON_POINT",
+        // 			"source-layer": "area_common_point",
+        // 			"filter": [
+        // 				"all",
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"OBJL"
+        // 					],
+        // 					67
+        // 				],
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"MarkerName2"
+        // 					],
+        // 					"RSRDEF51"
+        // 				]
+        // 			],
+        // 			"layout": {
+        // 				"icon-image": "RSRDEF51",
+        // 				"icon-allow-overlap": true,
+        // 				"icon-rotation-alignment": "map",
+        // 				"symbol-placement": "point",
+        // 				"icon-offset": [
+        // 					-3.6,
+        // 					3.6
+        // 				]
+        // 			},
+        // 			"paint": {}
+        // 		},
+        // 		{
+        // 			"id": "ISTZNE_icon_ITZARE51_89",
+        // 			"type": "symbol",
+        // 			"source": "AREA_COMMON_POINT",
+        // 			"source-layer": "area_common_point",
+        // 			"filter": [
+        // 				"all",
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"OBJL"
+        // 					],
+        // 					68
+        // 				]
+        // 			],
+        // 			"layout": {
+        // 				"icon-image": "ITZARE51",
+        // 				"icon-allow-overlap": true,
+        // 				"icon-rotation-alignment": "map",
+        // 				"symbol-placement": "point",
+        // 				"icon-offset": [
+        // 					-1.2,
+        // 					-1.5
+        // 				]
+        // 			},
+        // 			"paint": {}
+        // 		},
+        // 		{
+        // 			"id": "ISTZNE_icon_ENTRES61_90",
+        // 			"type": "symbol",
+        // 			"source": "AREA_COMMON_POINT",
+        // 			"source-layer": "area_common_point",
+        // 			"filter": [
+        // 				"all",
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"OBJL"
+        // 					],
+        // 					68
+        // 				],
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"MarkerName2"
+        // 					],
+        // 					"ENTRES61"
+        // 				]
+        // 			],
+        // 			"layout": {
+        // 				"icon-image": "ENTRES61",
+        // 				"icon-allow-overlap": true,
+        // 				"icon-rotation-alignment": "map",
+        // 				"symbol-placement": "point",
+        // 				"icon-offset": [
+        // 					-4.4,
+        // 					3.8
+        // 				]
+        // 			},
+        // 			"paint": {}
+        // 		},
+        // 		{
+        // 			"id": "ISTZNE_icon_ENTRES71_91",
+        // 			"type": "symbol",
+        // 			"source": "AREA_COMMON_POINT",
+        // 			"source-layer": "area_common_point",
+        // 			"filter": [
+        // 				"all",
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"OBJL"
+        // 					],
+        // 					68
+        // 				],
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"MarkerName2"
+        // 					],
+        // 					"ENTRES71"
+        // 				]
+        // 			],
+        // 			"layout": {
+        // 				"icon-image": "ENTRES71",
+        // 				"icon-allow-overlap": true,
+        // 				"icon-rotation-alignment": "map",
+        // 				"symbol-placement": "point",
+        // 				"icon-offset": [
+        // 					-4.5,
+        // 					3.6
+        // 				]
+        // 			},
+        // 			"paint": {}
+        // 		},
+        // 		{
+        // 			"id": "ISTZNE_icon_ENTRES51_92",
+        // 			"type": "symbol",
+        // 			"source": "AREA_COMMON_POINT",
+        // 			"source-layer": "area_common_point",
+        // 			"filter": [
+        // 				"all",
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"OBJL"
+        // 					],
+        // 					68
+        // 				],
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"MarkerName2"
+        // 					],
+        // 					"ENTRES51"
+        // 				]
+        // 			],
+        // 			"layout": {
+        // 				"icon-image": "ENTRES51",
+        // 				"icon-allow-overlap": true,
+        // 				"icon-rotation-alignment": "map",
+        // 				"symbol-placement": "point",
+        // 				"icon-offset": [
+        // 					-3.6,
+        // 					3.6
+        // 				]
+        // 			},
+        // 			"paint": {}
+        // 		},
+        // 		{
+        // 			"id": "ISTZNE_icon_ACHRES61_93",
+        // 			"type": "symbol",
+        // 			"source": "AREA_COMMON_POINT",
+        // 			"source-layer": "area_common_point",
+        // 			"filter": [
+        // 				"all",
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"OBJL"
+        // 					],
+        // 					68
+        // 				],
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"MarkerName2"
+        // 					],
+        // 					"ACHRES61"
+        // 				]
+        // 			],
+        // 			"layout": {
+        // 				"icon-image": "ACHRES61",
+        // 				"icon-allow-overlap": true,
+        // 				"icon-rotation-alignment": "map",
+        // 				"symbol-placement": "point",
+        // 				"icon-offset": [
+        // 					-5.2,
+        // 					4.8
+        // 				]
+        // 			},
+        // 			"paint": {}
+        // 		},
+        // 		{
+        // 			"id": "ISTZNE_icon_ACHRES71_94",
+        // 			"type": "symbol",
+        // 			"source": "AREA_COMMON_POINT",
+        // 			"source-layer": "area_common_point",
+        // 			"filter": [
+        // 				"all",
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"OBJL"
+        // 					],
+        // 					68
+        // 				],
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"MarkerName2"
+        // 					],
+        // 					"ACHRES71"
+        // 				]
+        // 			],
+        // 			"layout": {
+        // 				"icon-image": "ACHRES71",
+        // 				"icon-allow-overlap": true,
+        // 				"icon-rotation-alignment": "map",
+        // 				"symbol-placement": "point",
+        // 				"icon-offset": [
+        // 					-5.4,
+        // 					4.8
+        // 				]
+        // 			},
+        // 			"paint": {}
+        // 		},
+        // 		{
+        // 			"id": "ISTZNE_icon_ACHRES51_95",
+        // 			"type": "symbol",
+        // 			"source": "AREA_COMMON_POINT",
+        // 			"source-layer": "area_common_point",
+        // 			"filter": [
+        // 				"all",
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"OBJL"
+        // 					],
+        // 					68
+        // 				],
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"MarkerName2"
+        // 					],
+        // 					"ACHRES51"
+        // 				]
+        // 			],
+        // 			"layout": {
+        // 				"icon-image": "ACHRES51",
+        // 				"icon-allow-overlap": true,
+        // 				"icon-rotation-alignment": "map",
+        // 				"symbol-placement": "point",
+        // 				"icon-offset": [
+        // 					-4.5,
+        // 					4.8
+        // 				]
+        // 			},
+        // 			"paint": {}
+        // 		},
+        // 		{
+        // 			"id": "ISTZNE_icon_FSHRES71_96",
+        // 			"type": "symbol",
+        // 			"source": "AREA_COMMON_POINT",
+        // 			"source-layer": "area_common_point",
+        // 			"filter": [
+        // 				"all",
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"OBJL"
+        // 					],
+        // 					68
+        // 				],
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"MarkerName2"
+        // 					],
+        // 					"FSHRES71"
+        // 				]
+        // 			],
+        // 			"layout": {
+        // 				"icon-image": "FSHRES71",
+        // 				"icon-allow-overlap": true,
+        // 				"icon-rotation-alignment": "map",
+        // 				"symbol-placement": "point",
+        // 				"icon-offset": [
+        // 					-4.8,
+        // 					2.4
+        // 				]
+        // 			},
+        // 			"paint": {}
+        // 		},
+        // 		{
+        // 			"id": "ISTZNE_icon_FSHRES51_97",
+        // 			"type": "symbol",
+        // 			"source": "AREA_COMMON_POINT",
+        // 			"source-layer": "area_common_point",
+        // 			"filter": [
+        // 				"all",
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"OBJL"
+        // 					],
+        // 					68
+        // 				],
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"MarkerName2"
+        // 					],
+        // 					"FSHRES51"
+        // 				]
+        // 			],
+        // 			"layout": {
+        // 				"icon-image": "FSHRES51",
+        // 				"icon-allow-overlap": true,
+        // 				"icon-rotation-alignment": "map",
+        // 				"symbol-placement": "point",
+        // 				"icon-offset": [
+        // 					-3.8,
+        // 					2.4
+        // 				]
+        // 			},
+        // 			"paint": {}
+        // 		},
+        // 		{
+        // 			"id": "ISTZNE_icon_INFARE51_98",
+        // 			"type": "symbol",
+        // 			"source": "AREA_COMMON_POINT",
+        // 			"source-layer": "area_common_point",
+        // 			"filter": [
+        // 				"all",
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"OBJL"
+        // 					],
+        // 					68
+        // 				],
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"MarkerName2"
+        // 					],
+        // 					"INFARE51"
+        // 				]
+        // 			],
+        // 			"layout": {
+        // 				"icon-image": "INFARE51",
+        // 				"icon-allow-overlap": true,
+        // 				"icon-rotation-alignment": "map",
+        // 				"symbol-placement": "point",
+        // 				"icon-offset": [
+        // 					-3.0,
+        // 					3.0
+        // 				]
+        // 			},
+        // 			"paint": {}
+        // 		},
+        // 		{
+        // 			"id": "ISTZNE_icon_RSRDEF51_99",
+        // 			"type": "symbol",
+        // 			"source": "AREA_COMMON_POINT",
+        // 			"source-layer": "area_common_point",
+        // 			"filter": [
+        // 				"all",
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"OBJL"
+        // 					],
+        // 					68
+        // 				],
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"MarkerName2"
+        // 					],
+        // 					"RSRDEF51"
+        // 				]
+        // 			],
+        // 			"layout": {
+        // 				"icon-image": "RSRDEF51",
+        // 				"icon-allow-overlap": true,
+        // 				"icon-rotation-alignment": "map",
+        // 				"symbol-placement": "point",
+        // 				"icon-offset": [
+        // 					-3.6,
+        // 					3.6
+        // 				]
+        // 			},
+        // 			"paint": {}
+        // 		},
+        // 		{
+        // 			"id": "LOCMAG_icon_LOCMAG51_100",
+        // 			"type": "symbol",
+        // 			"source": "AREA_COMMON_POINT",
+        // 			"source-layer": "area_common_point",
+        // 			"filter": [
+        // 				"all",
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"OBJL"
+        // 					],
+        // 					78
+        // 				]
+        // 			],
+        // 			"layout": {
+        // 				"icon-image": "LOCMAG51",
+        // 				"icon-allow-overlap": true,
+        // 				"icon-rotation-alignment": "map",
+        // 				"symbol-placement": "point"
+        // 			},
+        // 			"paint": {}
+        // 		},
+        // 		{
+        // 			"id": "MARCUL_icon_ENTRES61_101",
+        // 			"type": "symbol",
+        // 			"source": "AREA_COMMON_POINT",
+        // 			"source-layer": "area_common_point",
+        // 			"filter": [
+        // 				"all",
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"OBJL"
+        // 					],
+        // 					82
+        // 				],
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"MarkerName2"
+        // 					],
+        // 					"ENTRES61"
+        // 				]
+        // 			],
+        // 			"layout": {
+        // 				"icon-image": "ENTRES61",
+        // 				"icon-allow-overlap": true,
+        // 				"icon-rotation-alignment": "map",
+        // 				"symbol-placement": "point",
+        // 				"icon-offset": [
+        // 					-4.4,
+        // 					3.8
+        // 				]
+        // 			},
+        // 			"paint": {}
+        // 		},
+        // 		{
+        // 			"id": "MARCUL_icon_ENTRES71_102",
+        // 			"type": "symbol",
+        // 			"source": "AREA_COMMON_POINT",
+        // 			"source-layer": "area_common_point",
+        // 			"filter": [
+        // 				"all",
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"OBJL"
+        // 					],
+        // 					82
+        // 				],
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"MarkerName2"
+        // 					],
+        // 					"ENTRES71"
+        // 				]
+        // 			],
+        // 			"layout": {
+        // 				"icon-image": "ENTRES71",
+        // 				"icon-allow-overlap": true,
+        // 				"icon-rotation-alignment": "map",
+        // 				"symbol-placement": "point",
+        // 				"icon-offset": [
+        // 					-4.5,
+        // 					3.6
+        // 				]
+        // 			},
+        // 			"paint": {}
+        // 		},
+        // 		{
+        // 			"id": "MARCUL_icon_ENTRES51_103",
+        // 			"type": "symbol",
+        // 			"source": "AREA_COMMON_POINT",
+        // 			"source-layer": "area_common_point",
+        // 			"filter": [
+        // 				"all",
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"OBJL"
+        // 					],
+        // 					82
+        // 				],
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"MarkerName2"
+        // 					],
+        // 					"ENTRES51"
+        // 				]
+        // 			],
+        // 			"layout": {
+        // 				"icon-image": "ENTRES51",
+        // 				"icon-allow-overlap": true,
+        // 				"icon-rotation-alignment": "map",
+        // 				"symbol-placement": "point",
+        // 				"icon-offset": [
+        // 					-3.6,
+        // 					3.6
+        // 				]
+        // 			},
+        // 			"paint": {}
+        // 		},
+        // 		{
+        // 			"id": "MARCUL_icon_ACHRES61_104",
+        // 			"type": "symbol",
+        // 			"source": "AREA_COMMON_POINT",
+        // 			"source-layer": "area_common_point",
+        // 			"filter": [
+        // 				"all",
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"OBJL"
+        // 					],
+        // 					82
+        // 				],
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"MarkerName2"
+        // 					],
+        // 					"ACHRES61"
+        // 				]
+        // 			],
+        // 			"layout": {
+        // 				"icon-image": "ACHRES61",
+        // 				"icon-allow-overlap": true,
+        // 				"icon-rotation-alignment": "map",
+        // 				"symbol-placement": "point",
+        // 				"icon-offset": [
+        // 					-5.2,
+        // 					4.8
+        // 				]
+        // 			},
+        // 			"paint": {}
+        // 		},
+        // 		{
+        // 			"id": "MARCUL_icon_ACHRES71_105",
+        // 			"type": "symbol",
+        // 			"source": "AREA_COMMON_POINT",
+        // 			"source-layer": "area_common_point",
+        // 			"filter": [
+        // 				"all",
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"OBJL"
+        // 					],
+        // 					82
+        // 				],
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"MarkerName2"
+        // 					],
+        // 					"ACHRES71"
+        // 				]
+        // 			],
+        // 			"layout": {
+        // 				"icon-image": "ACHRES71",
+        // 				"icon-allow-overlap": true,
+        // 				"icon-rotation-alignment": "map",
+        // 				"symbol-placement": "point",
+        // 				"icon-offset": [
+        // 					-5.4,
+        // 					4.8
+        // 				]
+        // 			},
+        // 			"paint": {}
+        // 		},
+        // 		{
+        // 			"id": "MARCUL_icon_ACHRES51_106",
+        // 			"type": "symbol",
+        // 			"source": "AREA_COMMON_POINT",
+        // 			"source-layer": "area_common_point",
+        // 			"filter": [
+        // 				"all",
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"OBJL"
+        // 					],
+        // 					82
+        // 				],
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"MarkerName2"
+        // 					],
+        // 					"ACHRES51"
+        // 				]
+        // 			],
+        // 			"layout": {
+        // 				"icon-image": "ACHRES51",
+        // 				"icon-allow-overlap": true,
+        // 				"icon-rotation-alignment": "map",
+        // 				"symbol-placement": "point",
+        // 				"icon-offset": [
+        // 					-4.5,
+        // 					4.8
+        // 				]
+        // 			},
+        // 			"paint": {}
+        // 		},
+        // 		{
+        // 			"id": "MARCUL_icon_FSHRES71_107",
+        // 			"type": "symbol",
+        // 			"source": "AREA_COMMON_POINT",
+        // 			"source-layer": "area_common_point",
+        // 			"filter": [
+        // 				"all",
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"OBJL"
+        // 					],
+        // 					82
+        // 				],
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"MarkerName2"
+        // 					],
+        // 					"FSHRES71"
+        // 				]
+        // 			],
+        // 			"layout": {
+        // 				"icon-image": "FSHRES71",
+        // 				"icon-allow-overlap": true,
+        // 				"icon-rotation-alignment": "map",
+        // 				"symbol-placement": "point",
+        // 				"icon-offset": [
+        // 					-4.8,
+        // 					2.4
+        // 				]
+        // 			},
+        // 			"paint": {}
+        // 		},
+        // 		{
+        // 			"id": "MARCUL_icon_FSHRES51_108",
+        // 			"type": "symbol",
+        // 			"source": "AREA_COMMON_POINT",
+        // 			"source-layer": "area_common_point",
+        // 			"filter": [
+        // 				"all",
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"OBJL"
+        // 					],
+        // 					82
+        // 				],
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"MarkerName2"
+        // 					],
+        // 					"FSHRES51"
+        // 				]
+        // 			],
+        // 			"layout": {
+        // 				"icon-image": "FSHRES51",
+        // 				"icon-allow-overlap": true,
+        // 				"icon-rotation-alignment": "map",
+        // 				"symbol-placement": "point",
+        // 				"icon-offset": [
+        // 					-3.8,
+        // 					2.4
+        // 				]
+        // 			},
+        // 			"paint": {}
+        // 		},
+        // 		{
+        // 			"id": "MARCUL_icon_INFARE51_109",
+        // 			"type": "symbol",
+        // 			"source": "AREA_COMMON_POINT",
+        // 			"source-layer": "area_common_point",
+        // 			"filter": [
+        // 				"all",
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"OBJL"
+        // 					],
+        // 					82
+        // 				],
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"MarkerName2"
+        // 					],
+        // 					"INFARE51"
+        // 				]
+        // 			],
+        // 			"layout": {
+        // 				"icon-image": "INFARE51",
+        // 				"icon-allow-overlap": true,
+        // 				"icon-rotation-alignment": "map",
+        // 				"symbol-placement": "point",
+        // 				"icon-offset": [
+        // 					-3.0,
+        // 					3.0
+        // 				]
+        // 			},
+        // 			"paint": {}
+        // 		},
+        // 		{
+        // 			"id": "MARCUL_icon_RSRDEF51_110",
+        // 			"type": "symbol",
+        // 			"source": "AREA_COMMON_POINT",
+        // 			"source-layer": "area_common_point",
+        // 			"filter": [
+        // 				"all",
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"OBJL"
+        // 					],
+        // 					82
+        // 				],
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"MarkerName2"
+        // 					],
+        // 					"RSRDEF51"
+        // 				]
+        // 			],
+        // 			"layout": {
+        // 				"icon-image": "RSRDEF51",
+        // 				"icon-allow-overlap": true,
+        // 				"icon-rotation-alignment": "map",
+        // 				"symbol-placement": "point",
+        // 				"icon-offset": [
+        // 					-3.6,
+        // 					3.6
+        // 				]
+        // 			},
+        // 			"paint": {}
+        // 		},
+        // 		{
+        // 			"id": "MIPARE_icon_CTYARE51_111",
+        // 			"type": "symbol",
+        // 			"source": "AREA_COMMON_POINT",
+        // 			"source-layer": "area_common_point",
+        // 			"filter": [
+        // 				"all",
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"OBJL"
+        // 					],
+        // 					83
+        // 				]
+        // 			],
+        // 			"layout": {
+        // 				"icon-image": "CTYARE51",
+        // 				"icon-allow-overlap": true,
+        // 				"icon-rotation-alignment": "map",
+        // 				"symbol-placement": "point",
+        // 				"icon-offset": [
+        // 					-1.2,
+        // 					-1.5
+        // 				]
+        // 			},
+        // 			"paint": {}
+        // 		},
+        // 		{
+        // 			"id": "MIPARE_icon_ENTRES61_112",
+        // 			"type": "symbol",
+        // 			"source": "AREA_COMMON_POINT",
+        // 			"source-layer": "area_common_point",
+        // 			"filter": [
+        // 				"all",
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"OBJL"
+        // 					],
+        // 					83
+        // 				],
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"MarkerName2"
+        // 					],
+        // 					"ENTRES61"
+        // 				]
+        // 			],
+        // 			"layout": {
+        // 				"icon-image": "ENTRES61",
+        // 				"icon-allow-overlap": true,
+        // 				"icon-rotation-alignment": "map",
+        // 				"symbol-placement": "point",
+        // 				"icon-offset": [
+        // 					-4.4,
+        // 					3.8
+        // 				]
+        // 			},
+        // 			"paint": {}
+        // 		},
+        // 		{
+        // 			"id": "MIPARE_icon_ENTRES71_113",
+        // 			"type": "symbol",
+        // 			"source": "AREA_COMMON_POINT",
+        // 			"source-layer": "area_common_point",
+        // 			"filter": [
+        // 				"all",
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"OBJL"
+        // 					],
+        // 					83
+        // 				],
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"MarkerName2"
+        // 					],
+        // 					"ENTRES71"
+        // 				]
+        // 			],
+        // 			"layout": {
+        // 				"icon-image": "ENTRES71",
+        // 				"icon-allow-overlap": true,
+        // 				"icon-rotation-alignment": "map",
+        // 				"symbol-placement": "point",
+        // 				"icon-offset": [
+        // 					-4.5,
+        // 					3.6
+        // 				]
+        // 			},
+        // 			"paint": {}
+        // 		},
+        // 		{
+        // 			"id": "MIPARE_icon_ENTRES51_114",
+        // 			"type": "symbol",
+        // 			"source": "AREA_COMMON_POINT",
+        // 			"source-layer": "area_common_point",
+        // 			"filter": [
+        // 				"all",
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"OBJL"
+        // 					],
+        // 					83
+        // 				],
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"MarkerName2"
+        // 					],
+        // 					"ENTRES51"
+        // 				]
+        // 			],
+        // 			"layout": {
+        // 				"icon-image": "ENTRES51",
+        // 				"icon-allow-overlap": true,
+        // 				"icon-rotation-alignment": "map",
+        // 				"symbol-placement": "point",
+        // 				"icon-offset": [
+        // 					-3.6,
+        // 					3.6
+        // 				]
+        // 			},
+        // 			"paint": {}
+        // 		},
+        // 		{
+        // 			"id": "MIPARE_icon_ACHRES61_115",
+        // 			"type": "symbol",
+        // 			"source": "AREA_COMMON_POINT",
+        // 			"source-layer": "area_common_point",
+        // 			"filter": [
+        // 				"all",
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"OBJL"
+        // 					],
+        // 					83
+        // 				],
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"MarkerName2"
+        // 					],
+        // 					"ACHRES61"
+        // 				]
+        // 			],
+        // 			"layout": {
+        // 				"icon-image": "ACHRES61",
+        // 				"icon-allow-overlap": true,
+        // 				"icon-rotation-alignment": "map",
+        // 				"symbol-placement": "point",
+        // 				"icon-offset": [
+        // 					-5.2,
+        // 					4.8
+        // 				]
+        // 			},
+        // 			"paint": {}
+        // 		},
+        // 		{
+        // 			"id": "MIPARE_icon_ACHRES71_116",
+        // 			"type": "symbol",
+        // 			"source": "AREA_COMMON_POINT",
+        // 			"source-layer": "area_common_point",
+        // 			"filter": [
+        // 				"all",
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"OBJL"
+        // 					],
+        // 					83
+        // 				],
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"MarkerName2"
+        // 					],
+        // 					"ACHRES71"
+        // 				]
+        // 			],
+        // 			"layout": {
+        // 				"icon-image": "ACHRES71",
+        // 				"icon-allow-overlap": true,
+        // 				"icon-rotation-alignment": "map",
+        // 				"symbol-placement": "point",
+        // 				"icon-offset": [
+        // 					-5.4,
+        // 					4.8
+        // 				]
+        // 			},
+        // 			"paint": {}
+        // 		},
+        // 		{
+        // 			"id": "MIPARE_icon_ACHRES51_117",
+        // 			"type": "symbol",
+        // 			"source": "AREA_COMMON_POINT",
+        // 			"source-layer": "area_common_point",
+        // 			"filter": [
+        // 				"all",
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"OBJL"
+        // 					],
+        // 					83
+        // 				],
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"MarkerName2"
+        // 					],
+        // 					"ACHRES51"
+        // 				]
+        // 			],
+        // 			"layout": {
+        // 				"icon-image": "ACHRES51",
+        // 				"icon-allow-overlap": true,
+        // 				"icon-rotation-alignment": "map",
+        // 				"symbol-placement": "point",
+        // 				"icon-offset": [
+        // 					-4.5,
+        // 					4.8
+        // 				]
+        // 			},
+        // 			"paint": {}
+        // 		},
+        // 		{
+        // 			"id": "MIPARE_icon_FSHRES71_118",
+        // 			"type": "symbol",
+        // 			"source": "AREA_COMMON_POINT",
+        // 			"source-layer": "area_common_point",
+        // 			"filter": [
+        // 				"all",
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"OBJL"
+        // 					],
+        // 					83
+        // 				],
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"MarkerName2"
+        // 					],
+        // 					"FSHRES71"
+        // 				]
+        // 			],
+        // 			"layout": {
+        // 				"icon-image": "FSHRES71",
+        // 				"icon-allow-overlap": true,
+        // 				"icon-rotation-alignment": "map",
+        // 				"symbol-placement": "point",
+        // 				"icon-offset": [
+        // 					-4.8,
+        // 					2.4
+        // 				]
+        // 			},
+        // 			"paint": {}
+        // 		},
+        // 		{
+        // 			"id": "MIPARE_icon_FSHRES51_119",
+        // 			"type": "symbol",
+        // 			"source": "AREA_COMMON_POINT",
+        // 			"source-layer": "area_common_point",
+        // 			"filter": [
+        // 				"all",
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"OBJL"
+        // 					],
+        // 					83
+        // 				],
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"MarkerName2"
+        // 					],
+        // 					"FSHRES51"
+        // 				]
+        // 			],
+        // 			"layout": {
+        // 				"icon-image": "FSHRES51",
+        // 				"icon-allow-overlap": true,
+        // 				"icon-rotation-alignment": "map",
+        // 				"symbol-placement": "point",
+        // 				"icon-offset": [
+        // 					-3.8,
+        // 					2.4
+        // 				]
+        // 			},
+        // 			"paint": {}
+        // 		},
+        // 		{
+        // 			"id": "MIPARE_icon_INFARE51_120",
+        // 			"type": "symbol",
+        // 			"source": "AREA_COMMON_POINT",
+        // 			"source-layer": "area_common_point",
+        // 			"filter": [
+        // 				"all",
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"OBJL"
+        // 					],
+        // 					83
+        // 				],
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"MarkerName2"
+        // 					],
+        // 					"INFARE51"
+        // 				]
+        // 			],
+        // 			"layout": {
+        // 				"icon-image": "INFARE51",
+        // 				"icon-allow-overlap": true,
+        // 				"icon-rotation-alignment": "map",
+        // 				"symbol-placement": "point",
+        // 				"icon-offset": [
+        // 					-3.0,
+        // 					3.0
+        // 				]
+        // 			},
+        // 			"paint": {}
+        // 		},
+        // 		{
+        // 			"id": "MIPARE_icon_RSRDEF51_121",
+        // 			"type": "symbol",
+        // 			"source": "AREA_COMMON_POINT",
+        // 			"source-layer": "area_common_point",
+        // 			"filter": [
+        // 				"all",
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"OBJL"
+        // 					],
+        // 					83
+        // 				],
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"MarkerName2"
+        // 					],
+        // 					"RSRDEF51"
+        // 				]
+        // 			],
+        // 			"layout": {
+        // 				"icon-image": "RSRDEF51",
+        // 				"icon-allow-overlap": true,
+        // 				"icon-rotation-alignment": "map",
+        // 				"symbol-placement": "point",
+        // 				"icon-offset": [
+        // 					-3.6,
+        // 					3.6
+        // 				]
+        // 			},
+        // 			"paint": {}
+        // 		},
+        // 		{
+        // 			"id": "OSPARE_icon_CTYARE51_122",
+        // 			"type": "symbol",
+        // 			"source": "AREA_COMMON_POINT",
+        // 			"source-layer": "area_common_point",
+        // 			"filter": [
+        // 				"all",
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"OBJL"
+        // 					],
+        // 					88
+        // 				]
+        // 			],
+        // 			"layout": {
+        // 				"icon-image": "CTYARE51",
+        // 				"icon-allow-overlap": true,
+        // 				"icon-rotation-alignment": "map",
+        // 				"symbol-placement": "point",
+        // 				"icon-offset": [
+        // 					-1.2,
+        // 					-1.5
+        // 				]
+        // 			},
+        // 			"paint": {}
+        // 		},
+        // 		{
+        // 			"id": "OSPARE_icon_ENTRES61_123",
+        // 			"type": "symbol",
+        // 			"source": "AREA_COMMON_POINT",
+        // 			"source-layer": "area_common_point",
+        // 			"filter": [
+        // 				"all",
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"OBJL"
+        // 					],
+        // 					88
+        // 				],
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"MarkerName2"
+        // 					],
+        // 					"ENTRES61"
+        // 				]
+        // 			],
+        // 			"layout": {
+        // 				"icon-image": "ENTRES61",
+        // 				"icon-allow-overlap": true,
+        // 				"icon-rotation-alignment": "map",
+        // 				"symbol-placement": "point",
+        // 				"icon-offset": [
+        // 					-4.4,
+        // 					3.8
+        // 				]
+        // 			},
+        // 			"paint": {}
+        // 		},
+        // 		{
+        // 			"id": "OSPARE_icon_ENTRES71_124",
+        // 			"type": "symbol",
+        // 			"source": "AREA_COMMON_POINT",
+        // 			"source-layer": "area_common_point",
+        // 			"filter": [
+        // 				"all",
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"OBJL"
+        // 					],
+        // 					88
+        // 				],
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"MarkerName2"
+        // 					],
+        // 					"ENTRES71"
+        // 				]
+        // 			],
+        // 			"layout": {
+        // 				"icon-image": "ENTRES71",
+        // 				"icon-allow-overlap": true,
+        // 				"icon-rotation-alignment": "map",
+        // 				"symbol-placement": "point",
+        // 				"icon-offset": [
+        // 					-4.5,
+        // 					3.6
+        // 				]
+        // 			},
+        // 			"paint": {}
+        // 		},
+        // 		{
+        // 			"id": "OSPARE_icon_ENTRES51_125",
+        // 			"type": "symbol",
+        // 			"source": "AREA_COMMON_POINT",
+        // 			"source-layer": "area_common_point",
+        // 			"filter": [
+        // 				"all",
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"OBJL"
+        // 					],
+        // 					88
+        // 				],
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"MarkerName2"
+        // 					],
+        // 					"ENTRES51"
+        // 				]
+        // 			],
+        // 			"layout": {
+        // 				"icon-image": "ENTRES51",
+        // 				"icon-allow-overlap": true,
+        // 				"icon-rotation-alignment": "map",
+        // 				"symbol-placement": "point",
+        // 				"icon-offset": [
+        // 					-3.6,
+        // 					3.6
+        // 				]
+        // 			},
+        // 			"paint": {}
+        // 		},
+        // 		{
+        // 			"id": "OSPARE_icon_ACHRES61_126",
+        // 			"type": "symbol",
+        // 			"source": "AREA_COMMON_POINT",
+        // 			"source-layer": "area_common_point",
+        // 			"filter": [
+        // 				"all",
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"OBJL"
+        // 					],
+        // 					88
+        // 				],
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"MarkerName2"
+        // 					],
+        // 					"ACHRES61"
+        // 				]
+        // 			],
+        // 			"layout": {
+        // 				"icon-image": "ACHRES61",
+        // 				"icon-allow-overlap": true,
+        // 				"icon-rotation-alignment": "map",
+        // 				"symbol-placement": "point",
+        // 				"icon-offset": [
+        // 					-5.2,
+        // 					4.8
+        // 				]
+        // 			},
+        // 			"paint": {}
+        // 		},
+        // 		{
+        // 			"id": "OSPARE_icon_ACHRES71_127",
+        // 			"type": "symbol",
+        // 			"source": "AREA_COMMON_POINT",
+        // 			"source-layer": "area_common_point",
+        // 			"filter": [
+        // 				"all",
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"OBJL"
+        // 					],
+        // 					88
+        // 				],
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"MarkerName2"
+        // 					],
+        // 					"ACHRES71"
+        // 				]
+        // 			],
+        // 			"layout": {
+        // 				"icon-image": "ACHRES71",
+        // 				"icon-allow-overlap": true,
+        // 				"icon-rotation-alignment": "map",
+        // 				"symbol-placement": "point",
+        // 				"icon-offset": [
+        // 					-5.4,
+        // 					4.8
+        // 				]
+        // 			},
+        // 			"paint": {}
+        // 		},
+        // 		{
+        // 			"id": "OSPARE_icon_ACHRES51_128",
+        // 			"type": "symbol",
+        // 			"source": "AREA_COMMON_POINT",
+        // 			"source-layer": "area_common_point",
+        // 			"filter": [
+        // 				"all",
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"OBJL"
+        // 					],
+        // 					88
+        // 				],
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"MarkerName2"
+        // 					],
+        // 					"ACHRES51"
+        // 				]
+        // 			],
+        // 			"layout": {
+        // 				"icon-image": "ACHRES51",
+        // 				"icon-allow-overlap": true,
+        // 				"icon-rotation-alignment": "map",
+        // 				"symbol-placement": "point",
+        // 				"icon-offset": [
+        // 					-4.5,
+        // 					4.8
+        // 				]
+        // 			},
+        // 			"paint": {}
+        // 		},
+        // 		{
+        // 			"id": "OSPARE_icon_FSHRES71_129",
+        // 			"type": "symbol",
+        // 			"source": "AREA_COMMON_POINT",
+        // 			"source-layer": "area_common_point",
+        // 			"filter": [
+        // 				"all",
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"OBJL"
+        // 					],
+        // 					88
+        // 				],
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"MarkerName2"
+        // 					],
+        // 					"FSHRES71"
+        // 				]
+        // 			],
+        // 			"layout": {
+        // 				"icon-image": "FSHRES71",
+        // 				"icon-allow-overlap": true,
+        // 				"icon-rotation-alignment": "map",
+        // 				"symbol-placement": "point",
+        // 				"icon-offset": [
+        // 					-4.8,
+        // 					2.4
+        // 				]
+        // 			},
+        // 			"paint": {}
+        // 		},
+        // 		{
+        // 			"id": "OSPARE_icon_FSHRES51_130",
+        // 			"type": "symbol",
+        // 			"source": "AREA_COMMON_POINT",
+        // 			"source-layer": "area_common_point",
+        // 			"filter": [
+        // 				"all",
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"OBJL"
+        // 					],
+        // 					88
+        // 				],
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"MarkerName2"
+        // 					],
+        // 					"FSHRES51"
+        // 				]
+        // 			],
+        // 			"layout": {
+        // 				"icon-image": "FSHRES51",
+        // 				"icon-allow-overlap": true,
+        // 				"icon-rotation-alignment": "map",
+        // 				"symbol-placement": "point",
+        // 				"icon-offset": [
+        // 					-3.8,
+        // 					2.4
+        // 				]
+        // 			},
+        // 			"paint": {}
+        // 		},
+        // 		{
+        // 			"id": "OSPARE_icon_INFARE51_131",
+        // 			"type": "symbol",
+        // 			"source": "AREA_COMMON_POINT",
+        // 			"source-layer": "area_common_point",
+        // 			"filter": [
+        // 				"all",
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"OBJL"
+        // 					],
+        // 					88
+        // 				],
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"MarkerName2"
+        // 					],
+        // 					"INFARE51"
+        // 				]
+        // 			],
+        // 			"layout": {
+        // 				"icon-image": "INFARE51",
+        // 				"icon-allow-overlap": true,
+        // 				"icon-rotation-alignment": "map",
+        // 				"symbol-placement": "point",
+        // 				"icon-offset": [
+        // 					-3.0,
+        // 					3.0
+        // 				]
+        // 			},
+        // 			"paint": {}
+        // 		},
+        // 		{
+        // 			"id": "OSPARE_icon_RSRDEF51_132",
+        // 			"type": "symbol",
+        // 			"source": "AREA_COMMON_POINT",
+        // 			"source-layer": "area_common_point",
+        // 			"filter": [
+        // 				"all",
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"OBJL"
+        // 					],
+        // 					88
+        // 				],
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"MarkerName2"
+        // 					],
+        // 					"RSRDEF51"
+        // 				]
+        // 			],
+        // 			"layout": {
+        // 				"icon-image": "RSRDEF51",
+        // 				"icon-allow-overlap": true,
+        // 				"icon-rotation-alignment": "map",
+        // 				"symbol-placement": "point",
+        // 				"icon-offset": [
+        // 					-3.6,
+        // 					3.6
+        // 				]
+        // 			},
+        // 			"paint": {}
+        // 		},
+        // 		{
+        // 			"id": "PILBOP_icon_PILBOP02_133",
+        // 			"type": "symbol",
+        // 			"source": "AREA_COMMON_POINT",
+        // 			"source-layer": "area_common_point",
+        // 			"filter": [
+        // 				"all",
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"OBJL"
+        // 					],
+        // 					91
+        // 				]
+        // 			],
+        // 			"layout": {
+        // 				"icon-image": "PILBOP02",
+        // 				"icon-allow-overlap": true,
+        // 				"icon-rotation-alignment": "map",
+        // 				"symbol-placement": "point",
+        // 				"icon-offset": [
+        // 					-3.8,
+        // 					0.0
+        // 				]
+        // 			},
+        // 			"paint": {}
+        // 		},
+        // 		{
+        // 			"id": "PIPARE_icon_INFARE51_134",
+        // 			"type": "symbol",
+        // 			"source": "AREA_COMMON_POINT",
+        // 			"source-layer": "area_common_point",
+        // 			"filter": [
+        // 				"all",
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"OBJL"
+        // 					],
+        // 					92
+        // 				]
+        // 			],
+        // 			"layout": {
+        // 				"icon-image": "INFARE51",
+        // 				"icon-allow-overlap": true,
+        // 				"icon-rotation-alignment": "map",
+        // 				"symbol-placement": "point",
+        // 				"icon-offset": [
+        // 					-1.2,
+        // 					-1.5
+        // 				]
+        // 			},
+        // 			"paint": {}
+        // 		},
+        // 		{
+        // 			"id": "PIPARE_icon_ENTRES61_135",
+        // 			"type": "symbol",
+        // 			"source": "AREA_COMMON_POINT",
+        // 			"source-layer": "area_common_point",
+        // 			"filter": [
+        // 				"all",
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"OBJL"
+        // 					],
+        // 					92
+        // 				],
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"MarkerName2"
+        // 					],
+        // 					"ENTRES61"
+        // 				]
+        // 			],
+        // 			"layout": {
+        // 				"icon-image": "ENTRES61",
+        // 				"icon-allow-overlap": true,
+        // 				"icon-rotation-alignment": "map",
+        // 				"symbol-placement": "point",
+        // 				"icon-offset": [
+        // 					-4.4,
+        // 					3.8
+        // 				]
+        // 			},
+        // 			"paint": {}
+        // 		},
+        // 		{
+        // 			"id": "PIPARE_icon_ENTRES71_136",
+        // 			"type": "symbol",
+        // 			"source": "AREA_COMMON_POINT",
+        // 			"source-layer": "area_common_point",
+        // 			"filter": [
+        // 				"all",
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"OBJL"
+        // 					],
+        // 					92
+        // 				],
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"MarkerName2"
+        // 					],
+        // 					"ENTRES71"
+        // 				]
+        // 			],
+        // 			"layout": {
+        // 				"icon-image": "ENTRES71",
+        // 				"icon-allow-overlap": true,
+        // 				"icon-rotation-alignment": "map",
+        // 				"symbol-placement": "point",
+        // 				"icon-offset": [
+        // 					-4.5,
+        // 					3.6
+        // 				]
+        // 			},
+        // 			"paint": {}
+        // 		},
+        // 		{
+        // 			"id": "PIPARE_icon_ENTRES51_137",
+        // 			"type": "symbol",
+        // 			"source": "AREA_COMMON_POINT",
+        // 			"source-layer": "area_common_point",
+        // 			"filter": [
+        // 				"all",
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"OBJL"
+        // 					],
+        // 					92
+        // 				],
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"MarkerName2"
+        // 					],
+        // 					"ENTRES51"
+        // 				]
+        // 			],
+        // 			"layout": {
+        // 				"icon-image": "ENTRES51",
+        // 				"icon-allow-overlap": true,
+        // 				"icon-rotation-alignment": "map",
+        // 				"symbol-placement": "point",
+        // 				"icon-offset": [
+        // 					-3.6,
+        // 					3.6
+        // 				]
+        // 			},
+        // 			"paint": {}
+        // 		},
+        // 		{
+        // 			"id": "PIPARE_icon_ACHRES61_138",
+        // 			"type": "symbol",
+        // 			"source": "AREA_COMMON_POINT",
+        // 			"source-layer": "area_common_point",
+        // 			"filter": [
+        // 				"all",
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"OBJL"
+        // 					],
+        // 					92
+        // 				],
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"MarkerName2"
+        // 					],
+        // 					"ACHRES61"
+        // 				]
+        // 			],
+        // 			"layout": {
+        // 				"icon-image": "ACHRES61",
+        // 				"icon-allow-overlap": true,
+        // 				"icon-rotation-alignment": "map",
+        // 				"symbol-placement": "point",
+        // 				"icon-offset": [
+        // 					-5.2,
+        // 					4.8
+        // 				]
+        // 			},
+        // 			"paint": {}
+        // 		},
+        // 		{
+        // 			"id": "PIPARE_icon_ACHRES71_139",
+        // 			"type": "symbol",
+        // 			"source": "AREA_COMMON_POINT",
+        // 			"source-layer": "area_common_point",
+        // 			"filter": [
+        // 				"all",
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"OBJL"
+        // 					],
+        // 					92
+        // 				],
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"MarkerName2"
+        // 					],
+        // 					"ACHRES71"
+        // 				]
+        // 			],
+        // 			"layout": {
+        // 				"icon-image": "ACHRES71",
+        // 				"icon-allow-overlap": true,
+        // 				"icon-rotation-alignment": "map",
+        // 				"symbol-placement": "point",
+        // 				"icon-offset": [
+        // 					-5.4,
+        // 					4.8
+        // 				]
+        // 			},
+        // 			"paint": {}
+        // 		},
+        // 		{
+        // 			"id": "PIPARE_icon_ACHRES51_140",
+        // 			"type": "symbol",
+        // 			"source": "AREA_COMMON_POINT",
+        // 			"source-layer": "area_common_point",
+        // 			"filter": [
+        // 				"all",
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"OBJL"
+        // 					],
+        // 					92
+        // 				],
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"MarkerName2"
+        // 					],
+        // 					"ACHRES51"
+        // 				]
+        // 			],
+        // 			"layout": {
+        // 				"icon-image": "ACHRES51",
+        // 				"icon-allow-overlap": true,
+        // 				"icon-rotation-alignment": "map",
+        // 				"symbol-placement": "point",
+        // 				"icon-offset": [
+        // 					-4.5,
+        // 					4.8
+        // 				]
+        // 			},
+        // 			"paint": {}
+        // 		},
+        // 		{
+        // 			"id": "PIPARE_icon_FSHRES71_141",
+        // 			"type": "symbol",
+        // 			"source": "AREA_COMMON_POINT",
+        // 			"source-layer": "area_common_point",
+        // 			"filter": [
+        // 				"all",
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"OBJL"
+        // 					],
+        // 					92
+        // 				],
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"MarkerName2"
+        // 					],
+        // 					"FSHRES71"
+        // 				]
+        // 			],
+        // 			"layout": {
+        // 				"icon-image": "FSHRES71",
+        // 				"icon-allow-overlap": true,
+        // 				"icon-rotation-alignment": "map",
+        // 				"symbol-placement": "point",
+        // 				"icon-offset": [
+        // 					-4.8,
+        // 					2.4
+        // 				]
+        // 			},
+        // 			"paint": {}
+        // 		},
+        // 		{
+        // 			"id": "PIPARE_icon_FSHRES51_142",
+        // 			"type": "symbol",
+        // 			"source": "AREA_COMMON_POINT",
+        // 			"source-layer": "area_common_point",
+        // 			"filter": [
+        // 				"all",
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"OBJL"
+        // 					],
+        // 					92
+        // 				],
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"MarkerName2"
+        // 					],
+        // 					"FSHRES51"
+        // 				]
+        // 			],
+        // 			"layout": {
+        // 				"icon-image": "FSHRES51",
+        // 				"icon-allow-overlap": true,
+        // 				"icon-rotation-alignment": "map",
+        // 				"symbol-placement": "point",
+        // 				"icon-offset": [
+        // 					-3.8,
+        // 					2.4
+        // 				]
+        // 			},
+        // 			"paint": {}
+        // 		},
+        // 		{
+        // 			"id": "PIPARE_icon_INFARE51_143",
+        // 			"type": "symbol",
+        // 			"source": "AREA_COMMON_POINT",
+        // 			"source-layer": "area_common_point",
+        // 			"filter": [
+        // 				"all",
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"OBJL"
+        // 					],
+        // 					92
+        // 				],
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"MarkerName2"
+        // 					],
+        // 					"INFARE51"
+        // 				]
+        // 			],
+        // 			"layout": {
+        // 				"icon-image": "INFARE51",
+        // 				"icon-allow-overlap": true,
+        // 				"icon-rotation-alignment": "map",
+        // 				"symbol-placement": "point",
+        // 				"icon-offset": [
+        // 					-3.0,
+        // 					3.0
+        // 				]
+        // 			},
+        // 			"paint": {}
+        // 		},
+        // 		{
+        // 			"id": "PIPARE_icon_RSRDEF51_144",
+        // 			"type": "symbol",
+        // 			"source": "AREA_COMMON_POINT",
+        // 			"source-layer": "area_common_point",
+        // 			"filter": [
+        // 				"all",
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"OBJL"
+        // 					],
+        // 					92
+        // 				],
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"MarkerName2"
+        // 					],
+        // 					"RSRDEF51"
+        // 				]
+        // 			],
+        // 			"layout": {
+        // 				"icon-image": "RSRDEF51",
+        // 				"icon-allow-overlap": true,
+        // 				"icon-rotation-alignment": "map",
+        // 				"symbol-placement": "point",
+        // 				"icon-offset": [
+        // 					-3.6,
+        // 					3.6
+        // 				]
+        // 			},
+        // 			"paint": {}
+        // 		},
+        // 		{
+        // 			"id": "PRCARE_icon_PRCARE51_145",
+        // 			"type": "symbol",
+        // 			"source": "AREA_COMMON_POINT",
+        // 			"source-layer": "area_common_point",
+        // 			"filter": [
+        // 				"all",
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"OBJL"
+        // 					],
+        // 					96
+        // 				]
+        // 			],
+        // 			"layout": {
+        // 				"icon-image": "PRCARE51",
+        // 				"icon-allow-overlap": true,
+        // 				"icon-rotation-alignment": "map",
+        // 				"symbol-placement": "point",
+        // 				"icon-offset": [
+        // 					-1.2,
+        // 					-1.5
+        // 				]
+        // 			},
+        // 			"paint": {}
+        // 		},
+        // 		{
+        // 			"id": "PRCARE_icon_ENTRES61_146",
+        // 			"type": "symbol",
+        // 			"source": "AREA_COMMON_POINT",
+        // 			"source-layer": "area_common_point",
+        // 			"filter": [
+        // 				"all",
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"OBJL"
+        // 					],
+        // 					96
+        // 				],
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"MarkerName2"
+        // 					],
+        // 					"ENTRES61"
+        // 				]
+        // 			],
+        // 			"layout": {
+        // 				"icon-image": "ENTRES61",
+        // 				"icon-allow-overlap": true,
+        // 				"icon-rotation-alignment": "map",
+        // 				"symbol-placement": "point",
+        // 				"icon-offset": [
+        // 					-4.4,
+        // 					3.8
+        // 				]
+        // 			},
+        // 			"paint": {}
+        // 		},
+        // 		{
+        // 			"id": "PRCARE_icon_ENTRES71_147",
+        // 			"type": "symbol",
+        // 			"source": "AREA_COMMON_POINT",
+        // 			"source-layer": "area_common_point",
+        // 			"filter": [
+        // 				"all",
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"OBJL"
+        // 					],
+        // 					96
+        // 				],
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"MarkerName2"
+        // 					],
+        // 					"ENTRES71"
+        // 				]
+        // 			],
+        // 			"layout": {
+        // 				"icon-image": "ENTRES71",
+        // 				"icon-allow-overlap": true,
+        // 				"icon-rotation-alignment": "map",
+        // 				"symbol-placement": "point",
+        // 				"icon-offset": [
+        // 					-4.5,
+        // 					3.6
+        // 				]
+        // 			},
+        // 			"paint": {}
+        // 		},
+        // 		{
+        // 			"id": "PRCARE_icon_ENTRES51_148",
+        // 			"type": "symbol",
+        // 			"source": "AREA_COMMON_POINT",
+        // 			"source-layer": "area_common_point",
+        // 			"filter": [
+        // 				"all",
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"OBJL"
+        // 					],
+        // 					96
+        // 				],
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"MarkerName2"
+        // 					],
+        // 					"ENTRES51"
+        // 				]
+        // 			],
+        // 			"layout": {
+        // 				"icon-image": "ENTRES51",
+        // 				"icon-allow-overlap": true,
+        // 				"icon-rotation-alignment": "map",
+        // 				"symbol-placement": "point",
+        // 				"icon-offset": [
+        // 					-3.6,
+        // 					3.6
+        // 				]
+        // 			},
+        // 			"paint": {}
+        // 		},
+        // 		{
+        // 			"id": "PRCARE_icon_ACHRES61_149",
+        // 			"type": "symbol",
+        // 			"source": "AREA_COMMON_POINT",
+        // 			"source-layer": "area_common_point",
+        // 			"filter": [
+        // 				"all",
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"OBJL"
+        // 					],
+        // 					96
+        // 				],
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"MarkerName2"
+        // 					],
+        // 					"ACHRES61"
+        // 				]
+        // 			],
+        // 			"layout": {
+        // 				"icon-image": "ACHRES61",
+        // 				"icon-allow-overlap": true,
+        // 				"icon-rotation-alignment": "map",
+        // 				"symbol-placement": "point",
+        // 				"icon-offset": [
+        // 					-5.2,
+        // 					4.8
+        // 				]
+        // 			},
+        // 			"paint": {}
+        // 		},
+        // 		{
+        // 			"id": "PRCARE_icon_ACHRES71_150",
+        // 			"type": "symbol",
+        // 			"source": "AREA_COMMON_POINT",
+        // 			"source-layer": "area_common_point",
+        // 			"filter": [
+        // 				"all",
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"OBJL"
+        // 					],
+        // 					96
+        // 				],
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"MarkerName2"
+        // 					],
+        // 					"ACHRES71"
+        // 				]
+        // 			],
+        // 			"layout": {
+        // 				"icon-image": "ACHRES71",
+        // 				"icon-allow-overlap": true,
+        // 				"icon-rotation-alignment": "map",
+        // 				"symbol-placement": "point",
+        // 				"icon-offset": [
+        // 					-5.4,
+        // 					4.8
+        // 				]
+        // 			},
+        // 			"paint": {}
+        // 		},
+        // 		{
+        // 			"id": "PRCARE_icon_ACHRES51_151",
+        // 			"type": "symbol",
+        // 			"source": "AREA_COMMON_POINT",
+        // 			"source-layer": "area_common_point",
+        // 			"filter": [
+        // 				"all",
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"OBJL"
+        // 					],
+        // 					96
+        // 				],
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"MarkerName2"
+        // 					],
+        // 					"ACHRES51"
+        // 				]
+        // 			],
+        // 			"layout": {
+        // 				"icon-image": "ACHRES51",
+        // 				"icon-allow-overlap": true,
+        // 				"icon-rotation-alignment": "map",
+        // 				"symbol-placement": "point",
+        // 				"icon-offset": [
+        // 					-4.5,
+        // 					4.8
+        // 				]
+        // 			},
+        // 			"paint": {}
+        // 		},
+        // 		{
+        // 			"id": "PRCARE_icon_FSHRES71_152",
+        // 			"type": "symbol",
+        // 			"source": "AREA_COMMON_POINT",
+        // 			"source-layer": "area_common_point",
+        // 			"filter": [
+        // 				"all",
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"OBJL"
+        // 					],
+        // 					96
+        // 				],
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"MarkerName2"
+        // 					],
+        // 					"FSHRES71"
+        // 				]
+        // 			],
+        // 			"layout": {
+        // 				"icon-image": "FSHRES71",
+        // 				"icon-allow-overlap": true,
+        // 				"icon-rotation-alignment": "map",
+        // 				"symbol-placement": "point",
+        // 				"icon-offset": [
+        // 					-4.8,
+        // 					2.4
+        // 				]
+        // 			},
+        // 			"paint": {}
+        // 		},
+        // 		{
+        // 			"id": "PRCARE_icon_FSHRES51_153",
+        // 			"type": "symbol",
+        // 			"source": "AREA_COMMON_POINT",
+        // 			"source-layer": "area_common_point",
+        // 			"filter": [
+        // 				"all",
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"OBJL"
+        // 					],
+        // 					96
+        // 				],
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"MarkerName2"
+        // 					],
+        // 					"FSHRES51"
+        // 				]
+        // 			],
+        // 			"layout": {
+        // 				"icon-image": "FSHRES51",
+        // 				"icon-allow-overlap": true,
+        // 				"icon-rotation-alignment": "map",
+        // 				"symbol-placement": "point",
+        // 				"icon-offset": [
+        // 					-3.8,
+        // 					2.4
+        // 				]
+        // 			},
+        // 			"paint": {}
+        // 		},
+        // 		{
+        // 			"id": "PRCARE_icon_INFARE51_154",
+        // 			"type": "symbol",
+        // 			"source": "AREA_COMMON_POINT",
+        // 			"source-layer": "area_common_point",
+        // 			"filter": [
+        // 				"all",
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"OBJL"
+        // 					],
+        // 					96
+        // 				],
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"MarkerName2"
+        // 					],
+        // 					"INFARE51"
+        // 				]
+        // 			],
+        // 			"layout": {
+        // 				"icon-image": "INFARE51",
+        // 				"icon-allow-overlap": true,
+        // 				"icon-rotation-alignment": "map",
+        // 				"symbol-placement": "point",
+        // 				"icon-offset": [
+        // 					-3.0,
+        // 					3.0
+        // 				]
+        // 			},
+        // 			"paint": {}
+        // 		},
+        // 		{
+        // 			"id": "PRCARE_icon_RSRDEF51_155",
+        // 			"type": "symbol",
+        // 			"source": "AREA_COMMON_POINT",
+        // 			"source-layer": "area_common_point",
+        // 			"filter": [
+        // 				"all",
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"OBJL"
+        // 					],
+        // 					96
+        // 				],
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"MarkerName2"
+        // 					],
+        // 					"RSRDEF51"
+        // 				]
+        // 			],
+        // 			"layout": {
+        // 				"icon-image": "RSRDEF51",
+        // 				"icon-allow-overlap": true,
+        // 				"icon-rotation-alignment": "map",
+        // 				"symbol-placement": "point",
+        // 				"icon-offset": [
+        // 					-3.6,
+        // 					3.6
+        // 				]
+        // 			},
+        // 			"paint": {}
+        // 		},
+        // 		{
+        // 			"id": "RESARE_icon_ESSARE01_156",
+        // 			"type": "symbol",
+        // 			"source": "AREA_COMMON_POINT",
+        // 			"source-layer": "area_common_point",
+        // 			"filter": [
+        // 				"all",
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"OBJL"
+        // 					],
+        // 					112
+        // 				],
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"MarkerName2"
+        // 					],
+        // 					"ESSARE01"
+        // 				]
+        // 			],
+        // 			"layout": {
+        // 				"icon-image": "ESSARE01",
+        // 				"icon-allow-overlap": true,
+        // 				"icon-rotation-alignment": "map",
+        // 				"symbol-placement": "point"
+        // 			},
+        // 			"paint": {}
+        // 		},
+        // 		{
+        // 			"id": "RESARE_icon_PSSARE01_157",
+        // 			"type": "symbol",
+        // 			"source": "AREA_COMMON_POINT",
+        // 			"source-layer": "area_common_point",
+        // 			"filter": [
+        // 				"all",
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"OBJL"
+        // 					],
+        // 					112
+        // 				],
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"MarkerName2"
+        // 					],
+        // 					"PSSARE01"
+        // 				]
+        // 			],
+        // 			"layout": {
+        // 				"icon-image": "PSSARE01",
+        // 				"icon-allow-overlap": true,
+        // 				"icon-rotation-alignment": "map",
+        // 				"symbol-placement": "point"
+        // 			},
+        // 			"paint": {}
+        // 		},
+        // 		{
+        // 			"id": "RESARE_icon_ENTRES61_158",
+        // 			"type": "symbol",
+        // 			"source": "AREA_COMMON_POINT",
+        // 			"source-layer": "area_common_point",
+        // 			"filter": [
+        // 				"all",
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"OBJL"
+        // 					],
+        // 					112
+        // 				],
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"MarkerName2"
+        // 					],
+        // 					"ENTRES61"
+        // 				]
+        // 			],
+        // 			"layout": {
+        // 				"icon-image": "ENTRES61",
+        // 				"icon-allow-overlap": true,
+        // 				"icon-rotation-alignment": "map",
+        // 				"symbol-placement": "point"
+        // 			},
+        // 			"paint": {}
+        // 		},
+        // 		{
+        // 			"id": "RESARE_icon_ENTRES71_159",
+        // 			"type": "symbol",
+        // 			"source": "AREA_COMMON_POINT",
+        // 			"source-layer": "area_common_point",
+        // 			"filter": [
+        // 				"all",
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"OBJL"
+        // 					],
+        // 					112
+        // 				],
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"MarkerName2"
+        // 					],
+        // 					"ENTRES71"
+        // 				]
+        // 			],
+        // 			"layout": {
+        // 				"icon-image": "ENTRES71",
+        // 				"icon-allow-overlap": true,
+        // 				"icon-rotation-alignment": "map",
+        // 				"symbol-placement": "point"
+        // 			},
+        // 			"paint": {}
+        // 		},
+        // 		{
+        // 			"id": "RESARE_icon_ENTRES51_160",
+        // 			"type": "symbol",
+        // 			"source": "AREA_COMMON_POINT",
+        // 			"source-layer": "area_common_point",
+        // 			"filter": [
+        // 				"all",
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"OBJL"
+        // 					],
+        // 					112
+        // 				],
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"MarkerName2"
+        // 					],
+        // 					"ENTRES51"
+        // 				]
+        // 			],
+        // 			"layout": {
+        // 				"icon-image": "ENTRES51",
+        // 				"icon-allow-overlap": true,
+        // 				"icon-rotation-alignment": "map",
+        // 				"symbol-placement": "point"
+        // 			},
+        // 			"paint": {}
+        // 		},
+        // 		{
+        // 			"id": "RESARE_icon_ACHRES61_161",
+        // 			"type": "symbol",
+        // 			"source": "AREA_COMMON_POINT",
+        // 			"source-layer": "area_common_point",
+        // 			"filter": [
+        // 				"all",
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"OBJL"
+        // 					],
+        // 					112
+        // 				],
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"MarkerName2"
+        // 					],
+        // 					"ACHRES61"
+        // 				]
+        // 			],
+        // 			"layout": {
+        // 				"icon-image": "ACHRES61",
+        // 				"icon-allow-overlap": true,
+        // 				"icon-rotation-alignment": "map",
+        // 				"symbol-placement": "point"
+        // 			},
+        // 			"paint": {}
+        // 		},
+        // 		{
+        // 			"id": "RESARE_icon_ACHRES71_162",
+        // 			"type": "symbol",
+        // 			"source": "AREA_COMMON_POINT",
+        // 			"source-layer": "area_common_point",
+        // 			"filter": [
+        // 				"all",
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"OBJL"
+        // 					],
+        // 					112
+        // 				],
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"MarkerName2"
+        // 					],
+        // 					"ACHRES71"
+        // 				]
+        // 			],
+        // 			"layout": {
+        // 				"icon-image": "ACHRES71",
+        // 				"icon-allow-overlap": true,
+        // 				"icon-rotation-alignment": "map",
+        // 				"symbol-placement": "point"
+        // 			},
+        // 			"paint": {}
+        // 		},
+        // 		{
+        // 			"id": "RESARE_icon_ACHRES51_163",
+        // 			"type": "symbol",
+        // 			"source": "AREA_COMMON_POINT",
+        // 			"source-layer": "area_common_point",
+        // 			"filter": [
+        // 				"all",
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"OBJL"
+        // 					],
+        // 					112
+        // 				],
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"MarkerName2"
+        // 					],
+        // 					"ACHRES51"
+        // 				]
+        // 			],
+        // 			"layout": {
+        // 				"icon-image": "ACHRES51",
+        // 				"icon-allow-overlap": true,
+        // 				"icon-rotation-alignment": "map",
+        // 				"symbol-placement": "point"
+        // 			},
+        // 			"paint": {}
+        // 		},
+        // 		{
+        // 			"id": "RESARE_icon_FSHRES71_164",
+        // 			"type": "symbol",
+        // 			"source": "AREA_COMMON_POINT",
+        // 			"source-layer": "area_common_point",
+        // 			"filter": [
+        // 				"all",
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"OBJL"
+        // 					],
+        // 					112
+        // 				],
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"MarkerName2"
+        // 					],
+        // 					"FSHRES71"
+        // 				]
+        // 			],
+        // 			"layout": {
+        // 				"icon-image": "FSHRES71",
+        // 				"icon-allow-overlap": true,
+        // 				"icon-rotation-alignment": "map",
+        // 				"symbol-placement": "point"
+        // 			},
+        // 			"paint": {}
+        // 		},
+        // 		{
+        // 			"id": "RESARE_icon_FSHRES51_165",
+        // 			"type": "symbol",
+        // 			"source": "AREA_COMMON_POINT",
+        // 			"source-layer": "area_common_point",
+        // 			"filter": [
+        // 				"all",
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"OBJL"
+        // 					],
+        // 					112
+        // 				],
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"MarkerName2"
+        // 					],
+        // 					"FSHRES51"
+        // 				]
+        // 			],
+        // 			"layout": {
+        // 				"icon-image": "FSHRES51",
+        // 				"icon-allow-overlap": true,
+        // 				"icon-rotation-alignment": "map",
+        // 				"symbol-placement": "point"
+        // 			},
+        // 			"paint": {}
+        // 		},
+        // 		{
+        // 			"id": "RESARE_icon_INFARE51_166",
+        // 			"type": "symbol",
+        // 			"source": "AREA_COMMON_POINT",
+        // 			"source-layer": "area_common_point",
+        // 			"filter": [
+        // 				"all",
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"OBJL"
+        // 					],
+        // 					112
+        // 				],
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"MarkerName2"
+        // 					],
+        // 					"INFARE51"
+        // 				]
+        // 			],
+        // 			"layout": {
+        // 				"icon-image": "INFARE51",
+        // 				"icon-allow-overlap": true,
+        // 				"icon-rotation-alignment": "map",
+        // 				"symbol-placement": "point"
+        // 			},
+        // 			"paint": {}
+        // 		},
+        // 		{
+        // 			"id": "RESARE_icon_RSRDEF51_167",
+        // 			"type": "symbol",
+        // 			"source": "AREA_COMMON_POINT",
+        // 			"source-layer": "area_common_point",
+        // 			"filter": [
+        // 				"all",
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"OBJL"
+        // 					],
+        // 					112
+        // 				],
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"MarkerName2"
+        // 					],
+        // 					"RSRDEF51"
+        // 				]
+        // 			],
+        // 			"layout": {
+        // 				"icon-image": "RSRDEF51",
+        // 				"icon-allow-overlap": true,
+        // 				"icon-rotation-alignment": "map",
+        // 				"symbol-placement": "point"
+        // 			},
+        // 			"paint": {}
+        // 		},
+        // 		{
+        // 			"id": "SPLARE_icon_CTYARE51_168",
+        // 			"type": "symbol",
+        // 			"source": "AREA_COMMON_POINT",
+        // 			"source-layer": "area_common_point",
+        // 			"filter": [
+        // 				"all",
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"OBJL"
+        // 					],
+        // 					120
+        // 				]
+        // 			],
+        // 			"layout": {
+        // 				"icon-image": "CTYARE51",
+        // 				"icon-allow-overlap": true,
+        // 				"icon-rotation-alignment": "map",
+        // 				"symbol-placement": "point",
+        // 				"icon-offset": [
+        // 					-1.2,
+        // 					-1.5
+        // 				]
+        // 			},
+        // 			"paint": {}
+        // 		},
+        // 		{
+        // 			"id": "SPLARE_icon_ENTRES61_169",
+        // 			"type": "symbol",
+        // 			"source": "AREA_COMMON_POINT",
+        // 			"source-layer": "area_common_point",
+        // 			"filter": [
+        // 				"all",
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"OBJL"
+        // 					],
+        // 					120
+        // 				],
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"MarkerName2"
+        // 					],
+        // 					"ENTRES61"
+        // 				]
+        // 			],
+        // 			"layout": {
+        // 				"icon-image": "ENTRES61",
+        // 				"icon-allow-overlap": true,
+        // 				"icon-rotation-alignment": "map",
+        // 				"symbol-placement": "point",
+        // 				"icon-offset": [
+        // 					-4.4,
+        // 					3.8
+        // 				]
+        // 			},
+        // 			"paint": {}
+        // 		},
+        // 		{
+        // 			"id": "SPLARE_icon_ENTRES71_170",
+        // 			"type": "symbol",
+        // 			"source": "AREA_COMMON_POINT",
+        // 			"source-layer": "area_common_point",
+        // 			"filter": [
+        // 				"all",
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"OBJL"
+        // 					],
+        // 					120
+        // 				],
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"MarkerName2"
+        // 					],
+        // 					"ENTRES71"
+        // 				]
+        // 			],
+        // 			"layout": {
+        // 				"icon-image": "ENTRES71",
+        // 				"icon-allow-overlap": true,
+        // 				"icon-rotation-alignment": "map",
+        // 				"symbol-placement": "point",
+        // 				"icon-offset": [
+        // 					-4.5,
+        // 					3.6
+        // 				]
+        // 			},
+        // 			"paint": {}
+        // 		},
+        // 		{
+        // 			"id": "SPLARE_icon_ENTRES51_171",
+        // 			"type": "symbol",
+        // 			"source": "AREA_COMMON_POINT",
+        // 			"source-layer": "area_common_point",
+        // 			"filter": [
+        // 				"all",
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"OBJL"
+        // 					],
+        // 					120
+        // 				],
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"MarkerName2"
+        // 					],
+        // 					"ENTRES51"
+        // 				]
+        // 			],
+        // 			"layout": {
+        // 				"icon-image": "ENTRES51",
+        // 				"icon-allow-overlap": true,
+        // 				"icon-rotation-alignment": "map",
+        // 				"symbol-placement": "point",
+        // 				"icon-offset": [
+        // 					-3.6,
+        // 					3.6
+        // 				]
+        // 			},
+        // 			"paint": {}
+        // 		},
+        // 		{
+        // 			"id": "SPLARE_icon_ACHRES61_172",
+        // 			"type": "symbol",
+        // 			"source": "AREA_COMMON_POINT",
+        // 			"source-layer": "area_common_point",
+        // 			"filter": [
+        // 				"all",
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"OBJL"
+        // 					],
+        // 					120
+        // 				],
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"MarkerName2"
+        // 					],
+        // 					"ACHRES61"
+        // 				]
+        // 			],
+        // 			"layout": {
+        // 				"icon-image": "ACHRES61",
+        // 				"icon-allow-overlap": true,
+        // 				"icon-rotation-alignment": "map",
+        // 				"symbol-placement": "point",
+        // 				"icon-offset": [
+        // 					-5.2,
+        // 					4.8
+        // 				]
+        // 			},
+        // 			"paint": {}
+        // 		},
+        // 		{
+        // 			"id": "SPLARE_icon_ACHRES71_173",
+        // 			"type": "symbol",
+        // 			"source": "AREA_COMMON_POINT",
+        // 			"source-layer": "area_common_point",
+        // 			"filter": [
+        // 				"all",
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"OBJL"
+        // 					],
+        // 					120
+        // 				],
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"MarkerName2"
+        // 					],
+        // 					"ACHRES71"
+        // 				]
+        // 			],
+        // 			"layout": {
+        // 				"icon-image": "ACHRES71",
+        // 				"icon-allow-overlap": true,
+        // 				"icon-rotation-alignment": "map",
+        // 				"symbol-placement": "point",
+        // 				"icon-offset": [
+        // 					-5.4,
+        // 					4.8
+        // 				]
+        // 			},
+        // 			"paint": {}
+        // 		},
+        // 		{
+        // 			"id": "SPLARE_icon_ACHRES51_174",
+        // 			"type": "symbol",
+        // 			"source": "AREA_COMMON_POINT",
+        // 			"source-layer": "area_common_point",
+        // 			"filter": [
+        // 				"all",
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"OBJL"
+        // 					],
+        // 					120
+        // 				],
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"MarkerName2"
+        // 					],
+        // 					"ACHRES51"
+        // 				]
+        // 			],
+        // 			"layout": {
+        // 				"icon-image": "ACHRES51",
+        // 				"icon-allow-overlap": true,
+        // 				"icon-rotation-alignment": "map",
+        // 				"symbol-placement": "point",
+        // 				"icon-offset": [
+        // 					-4.5,
+        // 					4.8
+        // 				]
+        // 			},
+        // 			"paint": {}
+        // 		},
+        // 		{
+        // 			"id": "SPLARE_icon_FSHRES71_175",
+        // 			"type": "symbol",
+        // 			"source": "AREA_COMMON_POINT",
+        // 			"source-layer": "area_common_point",
+        // 			"filter": [
+        // 				"all",
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"OBJL"
+        // 					],
+        // 					120
+        // 				],
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"MarkerName2"
+        // 					],
+        // 					"FSHRES71"
+        // 				]
+        // 			],
+        // 			"layout": {
+        // 				"icon-image": "FSHRES71",
+        // 				"icon-allow-overlap": true,
+        // 				"icon-rotation-alignment": "map",
+        // 				"symbol-placement": "point",
+        // 				"icon-offset": [
+        // 					-4.8,
+        // 					2.4
+        // 				]
+        // 			},
+        // 			"paint": {}
+        // 		},
+        // 		{
+        // 			"id": "SPLARE_icon_FSHRES51_176",
+        // 			"type": "symbol",
+        // 			"source": "AREA_COMMON_POINT",
+        // 			"source-layer": "area_common_point",
+        // 			"filter": [
+        // 				"all",
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"OBJL"
+        // 					],
+        // 					120
+        // 				],
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"MarkerName2"
+        // 					],
+        // 					"FSHRES51"
+        // 				]
+        // 			],
+        // 			"layout": {
+        // 				"icon-image": "FSHRES51",
+        // 				"icon-allow-overlap": true,
+        // 				"icon-rotation-alignment": "map",
+        // 				"symbol-placement": "point",
+        // 				"icon-offset": [
+        // 					-3.8,
+        // 					2.4
+        // 				]
+        // 			},
+        // 			"paint": {}
+        // 		},
+        // 		{
+        // 			"id": "SPLARE_icon_INFARE51_177",
+        // 			"type": "symbol",
+        // 			"source": "AREA_COMMON_POINT",
+        // 			"source-layer": "area_common_point",
+        // 			"filter": [
+        // 				"all",
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"OBJL"
+        // 					],
+        // 					120
+        // 				],
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"MarkerName2"
+        // 					],
+        // 					"INFARE51"
+        // 				]
+        // 			],
+        // 			"layout": {
+        // 				"icon-image": "INFARE51",
+        // 				"icon-allow-overlap": true,
+        // 				"icon-rotation-alignment": "map",
+        // 				"symbol-placement": "point",
+        // 				"icon-offset": [
+        // 					-3.0,
+        // 					3.0
+        // 				]
+        // 			},
+        // 			"paint": {}
+        // 		},
+        // 		{
+        // 			"id": "SPLARE_icon_RSRDEF51_178",
+        // 			"type": "symbol",
+        // 			"source": "AREA_COMMON_POINT",
+        // 			"source-layer": "area_common_point",
+        // 			"filter": [
+        // 				"all",
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"OBJL"
+        // 					],
+        // 					120
+        // 				],
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"MarkerName2"
+        // 					],
+        // 					"RSRDEF51"
+        // 				]
+        // 			],
+        // 			"layout": {
+        // 				"icon-image": "RSRDEF51",
+        // 				"icon-allow-overlap": true,
+        // 				"icon-rotation-alignment": "map",
+        // 				"symbol-placement": "point",
+        // 				"icon-offset": [
+        // 					-3.6,
+        // 					3.6
+        // 				]
+        // 			},
+        // 			"paint": {}
+        // 		},
+        // 		{
+        // 			"id": "SMCFAC_icon_SMCFAC02_179",
+        // 			"type": "symbol",
+        // 			"source": "AREA_COMMON_POINT",
+        // 			"source-layer": "area_common_point",
+        // 			"filter": [
+        // 				"all",
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"OBJL"
+        // 					],
+        // 					128
+        // 				]
+        // 			],
+        // 			"layout": {
+        // 				"icon-image": "SMCFAC02",
+        // 				"icon-allow-overlap": true,
+        // 				"icon-rotation-alignment": "map",
+        // 				"symbol-placement": "point"
+        // 			},
+        // 			"paint": {}
+        // 		},
+        // 		{
+        // 			"id": "SUBTLN_icon_CTYARE51_180",
+        // 			"type": "symbol",
+        // 			"source": "AREA_COMMON_POINT",
+        // 			"source-layer": "area_common_point",
+        // 			"filter": [
+        // 				"all",
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"OBJL"
+        // 					],
+        // 					133
+        // 				]
+        // 			],
+        // 			"layout": {
+        // 				"icon-image": "CTYARE51",
+        // 				"icon-allow-overlap": true,
+        // 				"icon-rotation-alignment": "map",
+        // 				"symbol-placement": "point",
+        // 				"icon-offset": [
+        // 					-1.2,
+        // 					-1.5
+        // 				]
+        // 			},
+        // 			"paint": {}
+        // 		},
+        // 		{
+        // 			"id": "SUBTLN_icon_ENTRES61_181",
+        // 			"type": "symbol",
+        // 			"source": "AREA_COMMON_POINT",
+        // 			"source-layer": "area_common_point",
+        // 			"filter": [
+        // 				"all",
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"OBJL"
+        // 					],
+        // 					133
+        // 				],
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"MarkerName2"
+        // 					],
+        // 					"ENTRES61"
+        // 				]
+        // 			],
+        // 			"layout": {
+        // 				"icon-image": "ENTRES61",
+        // 				"icon-allow-overlap": true,
+        // 				"icon-rotation-alignment": "map",
+        // 				"symbol-placement": "point",
+        // 				"icon-offset": [
+        // 					-4.4,
+        // 					3.8
+        // 				]
+        // 			},
+        // 			"paint": {}
+        // 		},
+        // 		{
+        // 			"id": "SUBTLN_icon_ENTRES71_182",
+        // 			"type": "symbol",
+        // 			"source": "AREA_COMMON_POINT",
+        // 			"source-layer": "area_common_point",
+        // 			"filter": [
+        // 				"all",
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"OBJL"
+        // 					],
+        // 					133
+        // 				],
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"MarkerName2"
+        // 					],
+        // 					"ENTRES71"
+        // 				]
+        // 			],
+        // 			"layout": {
+        // 				"icon-image": "ENTRES71",
+        // 				"icon-allow-overlap": true,
+        // 				"icon-rotation-alignment": "map",
+        // 				"symbol-placement": "point",
+        // 				"icon-offset": [
+        // 					-4.5,
+        // 					3.6
+        // 				]
+        // 			},
+        // 			"paint": {}
+        // 		},
+        // 		{
+        // 			"id": "SUBTLN_icon_ENTRES51_183",
+        // 			"type": "symbol",
+        // 			"source": "AREA_COMMON_POINT",
+        // 			"source-layer": "area_common_point",
+        // 			"filter": [
+        // 				"all",
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"OBJL"
+        // 					],
+        // 					133
+        // 				],
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"MarkerName2"
+        // 					],
+        // 					"ENTRES51"
+        // 				]
+        // 			],
+        // 			"layout": {
+        // 				"icon-image": "ENTRES51",
+        // 				"icon-allow-overlap": true,
+        // 				"icon-rotation-alignment": "map",
+        // 				"symbol-placement": "point",
+        // 				"icon-offset": [
+        // 					-3.6,
+        // 					3.6
+        // 				]
+        // 			},
+        // 			"paint": {}
+        // 		},
+        // 		{
+        // 			"id": "SUBTLN_icon_ACHRES61_184",
+        // 			"type": "symbol",
+        // 			"source": "AREA_COMMON_POINT",
+        // 			"source-layer": "area_common_point",
+        // 			"filter": [
+        // 				"all",
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"OBJL"
+        // 					],
+        // 					133
+        // 				],
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"MarkerName2"
+        // 					],
+        // 					"ACHRES61"
+        // 				]
+        // 			],
+        // 			"layout": {
+        // 				"icon-image": "ACHRES61",
+        // 				"icon-allow-overlap": true,
+        // 				"icon-rotation-alignment": "map",
+        // 				"symbol-placement": "point",
+        // 				"icon-offset": [
+        // 					-5.2,
+        // 					4.8
+        // 				]
+        // 			},
+        // 			"paint": {}
+        // 		},
+        // 		{
+        // 			"id": "SUBTLN_icon_ACHRES71_185",
+        // 			"type": "symbol",
+        // 			"source": "AREA_COMMON_POINT",
+        // 			"source-layer": "area_common_point",
+        // 			"filter": [
+        // 				"all",
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"OBJL"
+        // 					],
+        // 					133
+        // 				],
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"MarkerName2"
+        // 					],
+        // 					"ACHRES71"
+        // 				]
+        // 			],
+        // 			"layout": {
+        // 				"icon-image": "ACHRES71",
+        // 				"icon-allow-overlap": true,
+        // 				"icon-rotation-alignment": "map",
+        // 				"symbol-placement": "point",
+        // 				"icon-offset": [
+        // 					-5.4,
+        // 					4.8
+        // 				]
+        // 			},
+        // 			"paint": {}
+        // 		},
+        // 		{
+        // 			"id": "SUBTLN_icon_ACHRES51_186",
+        // 			"type": "symbol",
+        // 			"source": "AREA_COMMON_POINT",
+        // 			"source-layer": "area_common_point",
+        // 			"filter": [
+        // 				"all",
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"OBJL"
+        // 					],
+        // 					133
+        // 				],
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"MarkerName2"
+        // 					],
+        // 					"ACHRES51"
+        // 				]
+        // 			],
+        // 			"layout": {
+        // 				"icon-image": "ACHRES51",
+        // 				"icon-allow-overlap": true,
+        // 				"icon-rotation-alignment": "map",
+        // 				"symbol-placement": "point",
+        // 				"icon-offset": [
+        // 					-4.5,
+        // 					4.8
+        // 				]
+        // 			},
+        // 			"paint": {}
+        // 		},
+        // 		{
+        // 			"id": "SUBTLN_icon_FSHRES71_187",
+        // 			"type": "symbol",
+        // 			"source": "AREA_COMMON_POINT",
+        // 			"source-layer": "area_common_point",
+        // 			"filter": [
+        // 				"all",
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"OBJL"
+        // 					],
+        // 					133
+        // 				],
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"MarkerName2"
+        // 					],
+        // 					"FSHRES71"
+        // 				]
+        // 			],
+        // 			"layout": {
+        // 				"icon-image": "FSHRES71",
+        // 				"icon-allow-overlap": true,
+        // 				"icon-rotation-alignment": "map",
+        // 				"symbol-placement": "point",
+        // 				"icon-offset": [
+        // 					-4.8,
+        // 					2.4
+        // 				]
+        // 			},
+        // 			"paint": {}
+        // 		},
+        // 		{
+        // 			"id": "SUBTLN_icon_FSHRES51_188",
+        // 			"type": "symbol",
+        // 			"source": "AREA_COMMON_POINT",
+        // 			"source-layer": "area_common_point",
+        // 			"filter": [
+        // 				"all",
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"OBJL"
+        // 					],
+        // 					133
+        // 				],
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"MarkerName2"
+        // 					],
+        // 					"FSHRES51"
+        // 				]
+        // 			],
+        // 			"layout": {
+        // 				"icon-image": "FSHRES51",
+        // 				"icon-allow-overlap": true,
+        // 				"icon-rotation-alignment": "map",
+        // 				"symbol-placement": "point",
+        // 				"icon-offset": [
+        // 					-3.8,
+        // 					2.4
+        // 				]
+        // 			},
+        // 			"paint": {}
+        // 		},
+        // 		{
+        // 			"id": "SUBTLN_icon_INFARE51_189",
+        // 			"type": "symbol",
+        // 			"source": "AREA_COMMON_POINT",
+        // 			"source-layer": "area_common_point",
+        // 			"filter": [
+        // 				"all",
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"OBJL"
+        // 					],
+        // 					133
+        // 				],
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"MarkerName2"
+        // 					],
+        // 					"INFARE51"
+        // 				]
+        // 			],
+        // 			"layout": {
+        // 				"icon-image": "INFARE51",
+        // 				"icon-allow-overlap": true,
+        // 				"icon-rotation-alignment": "map",
+        // 				"symbol-placement": "point",
+        // 				"icon-offset": [
+        // 					-3.0,
+        // 					3.0
+        // 				]
+        // 			},
+        // 			"paint": {}
+        // 		},
+        // 		{
+        // 			"id": "SUBTLN_icon_RSRDEF51_190",
+        // 			"type": "symbol",
+        // 			"source": "AREA_COMMON_POINT",
+        // 			"source-layer": "area_common_point",
+        // 			"filter": [
+        // 				"all",
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"OBJL"
+        // 					],
+        // 					133
+        // 				],
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"MarkerName2"
+        // 					],
+        // 					"RSRDEF51"
+        // 				]
+        // 			],
+        // 			"layout": {
+        // 				"icon-image": "RSRDEF51",
+        // 				"icon-allow-overlap": true,
+        // 				"icon-rotation-alignment": "map",
+        // 				"symbol-placement": "point",
+        // 				"icon-offset": [
+        // 					-3.6,
+        // 					3.6
+        // 				]
+        // 			},
+        // 			"paint": {}
+        // 		},
+        // 		{
+        // 			"id": "SWPARE_icon_SWPARE51_191",
+        // 			"type": "symbol",
+        // 			"source": "AREA_COMMON_POINT",
+        // 			"source-layer": "area_common_point",
+        // 			"filter": [
+        // 				"all",
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"OBJL"
+        // 					],
+        // 					134
+        // 				]
+        // 			],
+        // 			"layout": {
+        // 				"icon-image": "SWPARE51",
+        // 				"icon-allow-overlap": true,
+        // 				"icon-rotation-alignment": "map",
+        // 				"symbol-placement": "point"
+        // 			},
+        // 			"paint": {}
+        // 		},
+        // 		{
+        // 			"id": "_texto_icon_ENTRES61_192",
+        // 			"type": "symbol",
+        // 			"source": "AREA_COMMON_POINT",
+        // 			"source-layer": "area_common_point",
+        // 			"filter": [
+        // 				"all",
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"OBJL"
+        // 					],
+        // 					135
+        // 				],
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"MarkerName2"
+        // 					],
+        // 					"ENTRES61"
+        // 				]
+        // 			],
+        // 			"layout": {
+        // 				"icon-image": "ENTRES61",
+        // 				"icon-allow-overlap": true,
+        // 				"icon-rotation-alignment": "map",
+        // 				"symbol-placement": "point",
+        // 				"icon-offset": [
+        // 					-4.4,
+        // 					3.8
+        // 				]
+        // 			},
+        // 			"paint": {}
+        // 		},
+        // 		{
+        // 			"id": "_texto_icon_ENTRES71_193",
+        // 			"type": "symbol",
+        // 			"source": "AREA_COMMON_POINT",
+        // 			"source-layer": "area_common_point",
+        // 			"filter": [
+        // 				"all",
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"OBJL"
+        // 					],
+        // 					135
+        // 				],
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"MarkerName2"
+        // 					],
+        // 					"ENTRES71"
+        // 				]
+        // 			],
+        // 			"layout": {
+        // 				"icon-image": "ENTRES71",
+        // 				"icon-allow-overlap": true,
+        // 				"icon-rotation-alignment": "map",
+        // 				"symbol-placement": "point",
+        // 				"icon-offset": [
+        // 					-4.5,
+        // 					3.6
+        // 				]
+        // 			},
+        // 			"paint": {}
+        // 		},
+        // 		{
+        // 			"id": "_texto_icon_ENTRES51_194",
+        // 			"type": "symbol",
+        // 			"source": "AREA_COMMON_POINT",
+        // 			"source-layer": "area_common_point",
+        // 			"filter": [
+        // 				"all",
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"OBJL"
+        // 					],
+        // 					135
+        // 				],
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"MarkerName2"
+        // 					],
+        // 					"ENTRES51"
+        // 				]
+        // 			],
+        // 			"layout": {
+        // 				"icon-image": "ENTRES51",
+        // 				"icon-allow-overlap": true,
+        // 				"icon-rotation-alignment": "map",
+        // 				"symbol-placement": "point",
+        // 				"icon-offset": [
+        // 					-3.6,
+        // 					3.6
+        // 				]
+        // 			},
+        // 			"paint": {}
+        // 		},
+        // 		{
+        // 			"id": "_texto_icon_ACHRES61_195",
+        // 			"type": "symbol",
+        // 			"source": "AREA_COMMON_POINT",
+        // 			"source-layer": "area_common_point",
+        // 			"filter": [
+        // 				"all",
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"OBJL"
+        // 					],
+        // 					135
+        // 				],
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"MarkerName2"
+        // 					],
+        // 					"ACHRES61"
+        // 				]
+        // 			],
+        // 			"layout": {
+        // 				"icon-image": "ACHRES61",
+        // 				"icon-allow-overlap": true,
+        // 				"icon-rotation-alignment": "map",
+        // 				"symbol-placement": "point",
+        // 				"icon-offset": [
+        // 					-5.2,
+        // 					4.8
+        // 				]
+        // 			},
+        // 			"paint": {}
+        // 		},
+        // 		{
+        // 			"id": "_texto_icon_ACHRES71_196",
+        // 			"type": "symbol",
+        // 			"source": "AREA_COMMON_POINT",
+        // 			"source-layer": "area_common_point",
+        // 			"filter": [
+        // 				"all",
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"OBJL"
+        // 					],
+        // 					135
+        // 				],
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"MarkerName2"
+        // 					],
+        // 					"ACHRES71"
+        // 				]
+        // 			],
+        // 			"layout": {
+        // 				"icon-image": "ACHRES71",
+        // 				"icon-allow-overlap": true,
+        // 				"icon-rotation-alignment": "map",
+        // 				"symbol-placement": "point",
+        // 				"icon-offset": [
+        // 					-5.4,
+        // 					4.8
+        // 				]
+        // 			},
+        // 			"paint": {}
+        // 		},
+        // 		{
+        // 			"id": "_texto_icon_ACHRES51_197",
+        // 			"type": "symbol",
+        // 			"source": "AREA_COMMON_POINT",
+        // 			"source-layer": "area_common_point",
+        // 			"filter": [
+        // 				"all",
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"OBJL"
+        // 					],
+        // 					135
+        // 				],
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"MarkerName2"
+        // 					],
+        // 					"ACHRES51"
+        // 				]
+        // 			],
+        // 			"layout": {
+        // 				"icon-image": "ACHRES51",
+        // 				"icon-allow-overlap": true,
+        // 				"icon-rotation-alignment": "map",
+        // 				"symbol-placement": "point",
+        // 				"icon-offset": [
+        // 					-4.5,
+        // 					4.8
+        // 				]
+        // 			},
+        // 			"paint": {}
+        // 		},
+        // 		{
+        // 			"id": "_texto_icon_FSHRES71_198",
+        // 			"type": "symbol",
+        // 			"source": "AREA_COMMON_POINT",
+        // 			"source-layer": "area_common_point",
+        // 			"filter": [
+        // 				"all",
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"OBJL"
+        // 					],
+        // 					135
+        // 				],
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"MarkerName2"
+        // 					],
+        // 					"FSHRES71"
+        // 				]
+        // 			],
+        // 			"layout": {
+        // 				"icon-image": "FSHRES71",
+        // 				"icon-allow-overlap": true,
+        // 				"icon-rotation-alignment": "map",
+        // 				"symbol-placement": "point",
+        // 				"icon-offset": [
+        // 					-4.8,
+        // 					2.4
+        // 				]
+        // 			},
+        // 			"paint": {}
+        // 		},
+        // 		{
+        // 			"id": "_texto_icon_FSHRES51_199",
+        // 			"type": "symbol",
+        // 			"source": "AREA_COMMON_POINT",
+        // 			"source-layer": "area_common_point",
+        // 			"filter": [
+        // 				"all",
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"OBJL"
+        // 					],
+        // 					135
+        // 				],
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"MarkerName2"
+        // 					],
+        // 					"FSHRES51"
+        // 				]
+        // 			],
+        // 			"layout": {
+        // 				"icon-image": "FSHRES51",
+        // 				"icon-allow-overlap": true,
+        // 				"icon-rotation-alignment": "map",
+        // 				"symbol-placement": "point",
+        // 				"icon-offset": [
+        // 					-3.8,
+        // 					2.4
+        // 				]
+        // 			},
+        // 			"paint": {}
+        // 		},
+        // 		{
+        // 			"id": "_texto_icon_INFARE51_200",
+        // 			"type": "symbol",
+        // 			"source": "AREA_COMMON_POINT",
+        // 			"source-layer": "area_common_point",
+        // 			"filter": [
+        // 				"all",
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"OBJL"
+        // 					],
+        // 					135
+        // 				],
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"MarkerName2"
+        // 					],
+        // 					"INFARE51"
+        // 				]
+        // 			],
+        // 			"layout": {
+        // 				"icon-image": "INFARE51",
+        // 				"icon-allow-overlap": true,
+        // 				"icon-rotation-alignment": "map",
+        // 				"symbol-placement": "point",
+        // 				"icon-offset": [
+        // 					-3.0,
+        // 					3.0
+        // 				]
+        // 			},
+        // 			"paint": {}
+        // 		},
+        // 		{
+        // 			"id": "_texto_icon_RSRDEF51_201",
+        // 			"type": "symbol",
+        // 			"source": "AREA_COMMON_POINT",
+        // 			"source-layer": "area_common_point",
+        // 			"filter": [
+        // 				"all",
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"OBJL"
+        // 					],
+        // 					135
+        // 				],
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"MarkerName2"
+        // 					],
+        // 					"RSRDEF51"
+        // 				]
+        // 			],
+        // 			"layout": {
+        // 				"icon-image": "RSRDEF51",
+        // 				"icon-allow-overlap": true,
+        // 				"icon-rotation-alignment": "map",
+        // 				"symbol-placement": "point",
+        // 				"icon-offset": [
+        // 					-3.6,
+        // 					3.6
+        // 				]
+        // 			},
+        // 			"paint": {}
+        // 		},
+        // 		{
+        // 			"id": "TS_PRH_icon_TIDSTR01_202",
+        // 			"type": "symbol",
+        // 			"source": "AREA_COMMON_POINT",
+        // 			"source-layer": "area_common_point",
+        // 			"filter": [
+        // 				"all",
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"OBJL"
+        // 					],
+        // 					136
+        // 				]
+        // 			],
+        // 			"layout": {
+        // 				"icon-image": "TIDSTR01",
+        // 				"icon-allow-overlap": true,
+        // 				"icon-rotation-alignment": "map",
+        // 				"symbol-placement": "point"
+        // 			},
+        // 			"paint": {}
+        // 		},
+        // 		{
+        // 			"id": "TS_PNH_icon_TIDSTR01_203",
+        // 			"type": "symbol",
+        // 			"source": "AREA_COMMON_POINT",
+        // 			"source-layer": "area_common_point",
+        // 			"filter": [
+        // 				"all",
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"OBJL"
+        // 					],
+        // 					137
+        // 				]
+        // 			],
+        // 			"layout": {
+        // 				"icon-image": "TIDSTR01",
+        // 				"icon-allow-overlap": true,
+        // 				"icon-rotation-alignment": "map",
+        // 				"symbol-placement": "point"
+        // 			},
+        // 			"paint": {}
+        // 		},
+        // 		{
+        // 			"id": "TS_PAD_icon_TIDSTR01_204",
+        // 			"type": "symbol",
+        // 			"source": "AREA_COMMON_POINT",
+        // 			"source-layer": "area_common_point",
+        // 			"filter": [
+        // 				"all",
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"OBJL"
+        // 					],
+        // 					138
+        // 				]
+        // 			],
+        // 			"layout": {
+        // 				"icon-image": "TIDSTR01",
+        // 				"icon-allow-overlap": true,
+        // 				"icon-rotation-alignment": "map",
+        // 				"symbol-placement": "point"
+        // 			},
+        // 			"paint": {}
+        // 		},
+        // 		{
+        // 			"id": "TS_TIS_icon_TIDSTR01_205",
+        // 			"type": "symbol",
+        // 			"source": "AREA_COMMON_POINT",
+        // 			"source-layer": "area_common_point",
+        // 			"filter": [
+        // 				"all",
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"OBJL"
+        // 					],
+        // 					139
+        // 				]
+        // 			],
+        // 			"layout": {
+        // 				"icon-image": "TIDSTR01",
+        // 				"icon-allow-overlap": true,
+        // 				"icon-rotation-alignment": "map",
+        // 				"symbol-placement": "point"
+        // 			},
+        // 			"paint": {}
+        // 		},
+        // 		{
+        // 			"id": "T_HMON_icon_TIDEHT01_206",
+        // 			"type": "symbol",
+        // 			"source": "AREA_COMMON_POINT",
+        // 			"source-layer": "area_common_point",
+        // 			"filter": [
+        // 				"all",
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"OBJL"
+        // 					],
+        // 					140
+        // 				]
+        // 			],
+        // 			"layout": {
+        // 				"icon-image": "TIDEHT01",
+        // 				"icon-allow-overlap": true,
+        // 				"icon-rotation-alignment": "map",
+        // 				"symbol-placement": "point"
+        // 			},
+        // 			"paint": {}
+        // 		},
+        // 		{
+        // 			"id": "T_NHMN_icon_TIDEHT01_207",
+        // 			"type": "symbol",
+        // 			"source": "AREA_COMMON_POINT",
+        // 			"source-layer": "area_common_point",
+        // 			"filter": [
+        // 				"all",
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"OBJL"
+        // 					],
+        // 					141
+        // 				]
+        // 			],
+        // 			"layout": {
+        // 				"icon-image": "TIDEHT01",
+        // 				"icon-allow-overlap": true,
+        // 				"icon-rotation-alignment": "map",
+        // 				"symbol-placement": "point"
+        // 			},
+        // 			"paint": {}
+        // 		},
+        // 		{
+        // 			"id": "T_TIMS_icon_TIDEHT01_208",
+        // 			"type": "symbol",
+        // 			"source": "AREA_COMMON_POINT",
+        // 			"source-layer": "area_common_point",
+        // 			"filter": [
+        // 				"all",
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"OBJL"
+        // 					],
+        // 					142
+        // 				]
+        // 			],
+        // 			"layout": {
+        // 				"icon-image": "TIDEHT01",
+        // 				"icon-allow-overlap": true,
+        // 				"icon-rotation-alignment": "map",
+        // 				"symbol-placement": "point"
+        // 			},
+        // 			"paint": {}
+        // 		},
+        // 		{
+        // 			"id": "TIDEWY_label_209",
+        // 			"type": "symbol",
+        // 			"source": "AREA_COMMON_POINT",
+        // 			"source-layer": "area_common_point",
+        // 			"filter": [
+        // 				"==",
+        // 				[
+        // 					"get",
+        // 					"OBJL"
+        // 				],
+        // 				143
+        // 			],
+        // 			"layout": {
+        // 				"text-field": [
+        // 					"get",
+        // 					"OBJNAM"
+        // 				],
+        // 				"text-font": [
+        // 					"Roboto Medium"
+        // 				],
+        // 				"text-size": 30
+        // 			},
+        // 			"paint": {
+        // 				"text-color": "#1E1E1E"
+        // 			}
+        // 		},
+        // 		{
+        // 			"id": "TSSCRS_icon_TSSCRS51_210",
+        // 			"type": "symbol",
+        // 			"source": "AREA_COMMON_POINT",
+        // 			"source-layer": "area_common_point",
+        // 			"filter": [
+        // 				"all",
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"OBJL"
+        // 					],
+        // 					147
+        // 				]
+        // 			],
+        // 			"layout": {
+        // 				"icon-image": "TSSCRS51",
+        // 				"icon-allow-overlap": true,
+        // 				"icon-rotation-alignment": "map",
+        // 				"symbol-placement": "point",
+        // 				"icon-offset": [
+        // 					-1.2,
+        // 					-1.5
+        // 				]
+        // 			},
+        // 			"paint": {}
+        // 		},
+        // 		{
+        // 			"id": "TSSCRS_icon_ENTRES61_211",
+        // 			"type": "symbol",
+        // 			"source": "AREA_COMMON_POINT",
+        // 			"source-layer": "area_common_point",
+        // 			"filter": [
+        // 				"all",
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"OBJL"
+        // 					],
+        // 					147
+        // 				],
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"MarkerName2"
+        // 					],
+        // 					"ENTRES61"
+        // 				]
+        // 			],
+        // 			"layout": {
+        // 				"icon-image": "ENTRES61",
+        // 				"icon-allow-overlap": true,
+        // 				"icon-rotation-alignment": "map",
+        // 				"symbol-placement": "point",
+        // 				"icon-offset": [
+        // 					-4.4,
+        // 					3.8
+        // 				]
+        // 			},
+        // 			"paint": {}
+        // 		},
+        // 		{
+        // 			"id": "TSSCRS_icon_ENTRES71_212",
+        // 			"type": "symbol",
+        // 			"source": "AREA_COMMON_POINT",
+        // 			"source-layer": "area_common_point",
+        // 			"filter": [
+        // 				"all",
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"OBJL"
+        // 					],
+        // 					147
+        // 				],
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"MarkerName2"
+        // 					],
+        // 					"ENTRES71"
+        // 				]
+        // 			],
+        // 			"layout": {
+        // 				"icon-image": "ENTRES71",
+        // 				"icon-allow-overlap": true,
+        // 				"icon-rotation-alignment": "map",
+        // 				"symbol-placement": "point",
+        // 				"icon-offset": [
+        // 					-4.5,
+        // 					3.6
+        // 				]
+        // 			},
+        // 			"paint": {}
+        // 		},
+        // 		{
+        // 			"id": "TSSCRS_icon_ENTRES51_213",
+        // 			"type": "symbol",
+        // 			"source": "AREA_COMMON_POINT",
+        // 			"source-layer": "area_common_point",
+        // 			"filter": [
+        // 				"all",
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"OBJL"
+        // 					],
+        // 					147
+        // 				],
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"MarkerName2"
+        // 					],
+        // 					"ENTRES51"
+        // 				]
+        // 			],
+        // 			"layout": {
+        // 				"icon-image": "ENTRES51",
+        // 				"icon-allow-overlap": true,
+        // 				"icon-rotation-alignment": "map",
+        // 				"symbol-placement": "point",
+        // 				"icon-offset": [
+        // 					-3.6,
+        // 					3.6
+        // 				]
+        // 			},
+        // 			"paint": {}
+        // 		},
+        // 		{
+        // 			"id": "TSSCRS_icon_ACHRES61_214",
+        // 			"type": "symbol",
+        // 			"source": "AREA_COMMON_POINT",
+        // 			"source-layer": "area_common_point",
+        // 			"filter": [
+        // 				"all",
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"OBJL"
+        // 					],
+        // 					147
+        // 				],
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"MarkerName2"
+        // 					],
+        // 					"ACHRES61"
+        // 				]
+        // 			],
+        // 			"layout": {
+        // 				"icon-image": "ACHRES61",
+        // 				"icon-allow-overlap": true,
+        // 				"icon-rotation-alignment": "map",
+        // 				"symbol-placement": "point",
+        // 				"icon-offset": [
+        // 					-5.2,
+        // 					4.8
+        // 				]
+        // 			},
+        // 			"paint": {}
+        // 		},
+        // 		{
+        // 			"id": "TSSCRS_icon_ACHRES71_215",
+        // 			"type": "symbol",
+        // 			"source": "AREA_COMMON_POINT",
+        // 			"source-layer": "area_common_point",
+        // 			"filter": [
+        // 				"all",
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"OBJL"
+        // 					],
+        // 					147
+        // 				],
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"MarkerName2"
+        // 					],
+        // 					"ACHRES71"
+        // 				]
+        // 			],
+        // 			"layout": {
+        // 				"icon-image": "ACHRES71",
+        // 				"icon-allow-overlap": true,
+        // 				"icon-rotation-alignment": "map",
+        // 				"symbol-placement": "point",
+        // 				"icon-offset": [
+        // 					-5.4,
+        // 					4.8
+        // 				]
+        // 			},
+        // 			"paint": {}
+        // 		},
+        // 		{
+        // 			"id": "TSSCRS_icon_ACHRES51_216",
+        // 			"type": "symbol",
+        // 			"source": "AREA_COMMON_POINT",
+        // 			"source-layer": "area_common_point",
+        // 			"filter": [
+        // 				"all",
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"OBJL"
+        // 					],
+        // 					147
+        // 				],
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"MarkerName2"
+        // 					],
+        // 					"ACHRES51"
+        // 				]
+        // 			],
+        // 			"layout": {
+        // 				"icon-image": "ACHRES51",
+        // 				"icon-allow-overlap": true,
+        // 				"icon-rotation-alignment": "map",
+        // 				"symbol-placement": "point",
+        // 				"icon-offset": [
+        // 					-4.5,
+        // 					4.8
+        // 				]
+        // 			},
+        // 			"paint": {}
+        // 		},
+        // 		{
+        // 			"id": "TSSCRS_icon_FSHRES71_217",
+        // 			"type": "symbol",
+        // 			"source": "AREA_COMMON_POINT",
+        // 			"source-layer": "area_common_point",
+        // 			"filter": [
+        // 				"all",
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"OBJL"
+        // 					],
+        // 					147
+        // 				],
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"MarkerName2"
+        // 					],
+        // 					"FSHRES71"
+        // 				]
+        // 			],
+        // 			"layout": {
+        // 				"icon-image": "FSHRES71",
+        // 				"icon-allow-overlap": true,
+        // 				"icon-rotation-alignment": "map",
+        // 				"symbol-placement": "point",
+        // 				"icon-offset": [
+        // 					-4.8,
+        // 					2.4
+        // 				]
+        // 			},
+        // 			"paint": {}
+        // 		},
+        // 		{
+        // 			"id": "TSSCRS_icon_FSHRES51_218",
+        // 			"type": "symbol",
+        // 			"source": "AREA_COMMON_POINT",
+        // 			"source-layer": "area_common_point",
+        // 			"filter": [
+        // 				"all",
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"OBJL"
+        // 					],
+        // 					147
+        // 				],
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"MarkerName2"
+        // 					],
+        // 					"FSHRES51"
+        // 				]
+        // 			],
+        // 			"layout": {
+        // 				"icon-image": "FSHRES51",
+        // 				"icon-allow-overlap": true,
+        // 				"icon-rotation-alignment": "map",
+        // 				"symbol-placement": "point",
+        // 				"icon-offset": [
+        // 					-3.8,
+        // 					2.4
+        // 				]
+        // 			},
+        // 			"paint": {}
+        // 		},
+        // 		{
+        // 			"id": "TSSCRS_icon_INFARE51_219",
+        // 			"type": "symbol",
+        // 			"source": "AREA_COMMON_POINT",
+        // 			"source-layer": "area_common_point",
+        // 			"filter": [
+        // 				"all",
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"OBJL"
+        // 					],
+        // 					147
+        // 				],
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"MarkerName2"
+        // 					],
+        // 					"INFARE51"
+        // 				]
+        // 			],
+        // 			"layout": {
+        // 				"icon-image": "INFARE51",
+        // 				"icon-allow-overlap": true,
+        // 				"icon-rotation-alignment": "map",
+        // 				"symbol-placement": "point",
+        // 				"icon-offset": [
+        // 					-3.0,
+        // 					3.0
+        // 				]
+        // 			},
+        // 			"paint": {}
+        // 		},
+        // 		{
+        // 			"id": "TSSCRS_icon_RSRDEF51_220",
+        // 			"type": "symbol",
+        // 			"source": "AREA_COMMON_POINT",
+        // 			"source-layer": "area_common_point",
+        // 			"filter": [
+        // 				"all",
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"OBJL"
+        // 					],
+        // 					147
+        // 				],
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"MarkerName2"
+        // 					],
+        // 					"RSRDEF51"
+        // 				]
+        // 			],
+        // 			"layout": {
+        // 				"icon-image": "RSRDEF51",
+        // 				"icon-allow-overlap": true,
+        // 				"icon-rotation-alignment": "map",
+        // 				"symbol-placement": "point",
+        // 				"icon-offset": [
+        // 					-3.6,
+        // 					3.6
+        // 				]
+        // 			},
+        // 			"paint": {}
+        // 		},
+        // 		{
+        // 			"id": "TSSLPT_icon_TSSLPT51_221",
+        // 			"type": "symbol",
+        // 			"source": "AREA_COMMON_POINT",
+        // 			"source-layer": "area_common_point",
+        // 			"filter": [
+        // 				"all",
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"OBJL"
+        // 					],
+        // 					148
+        // 				]
+        // 			],
+        // 			"layout": {
+        // 				"icon-image": "TSSLPT51",
+        // 				"icon-allow-overlap": true,
+        // 				"icon-rotation-alignment": "map",
+        // 				"symbol-placement": "point",
+        // 				"icon-rotate": [
+        // 					"get",
+        // 					"ORIENT"
+        // 				]
+        // 			},
+        // 			"paint": {}
+        // 		},
+        // 		{
+        // 			"id": "TSSLPT_icon_ENTRES61_222",
+        // 			"type": "symbol",
+        // 			"source": "AREA_COMMON_POINT",
+        // 			"source-layer": "area_common_point",
+        // 			"filter": [
+        // 				"all",
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"OBJL"
+        // 					],
+        // 					148
+        // 				],
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"MarkerName2"
+        // 					],
+        // 					"ENTRES61"
+        // 				]
+        // 			],
+        // 			"layout": {
+        // 				"icon-image": "ENTRES61",
+        // 				"icon-allow-overlap": true,
+        // 				"icon-rotation-alignment": "map",
+        // 				"symbol-placement": "point",
+        // 				"icon-offset": [
+        // 					-4.4,
+        // 					3.8
+        // 				]
+        // 			},
+        // 			"paint": {}
+        // 		},
+        // 		{
+        // 			"id": "TSSLPT_icon_ENTRES71_223",
+        // 			"type": "symbol",
+        // 			"source": "AREA_COMMON_POINT",
+        // 			"source-layer": "area_common_point",
+        // 			"filter": [
+        // 				"all",
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"OBJL"
+        // 					],
+        // 					148
+        // 				],
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"MarkerName2"
+        // 					],
+        // 					"ENTRES71"
+        // 				]
+        // 			],
+        // 			"layout": {
+        // 				"icon-image": "ENTRES71",
+        // 				"icon-allow-overlap": true,
+        // 				"icon-rotation-alignment": "map",
+        // 				"symbol-placement": "point",
+        // 				"icon-offset": [
+        // 					-4.5,
+        // 					3.6
+        // 				]
+        // 			},
+        // 			"paint": {}
+        // 		},
+        // 		{
+        // 			"id": "TSSLPT_icon_ENTRES51_224",
+        // 			"type": "symbol",
+        // 			"source": "AREA_COMMON_POINT",
+        // 			"source-layer": "area_common_point",
+        // 			"filter": [
+        // 				"all",
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"OBJL"
+        // 					],
+        // 					148
+        // 				],
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"MarkerName2"
+        // 					],
+        // 					"ENTRES51"
+        // 				]
+        // 			],
+        // 			"layout": {
+        // 				"icon-image": "ENTRES51",
+        // 				"icon-allow-overlap": true,
+        // 				"icon-rotation-alignment": "map",
+        // 				"symbol-placement": "point",
+        // 				"icon-offset": [
+        // 					-3.6,
+        // 					3.6
+        // 				]
+        // 			},
+        // 			"paint": {}
+        // 		},
+        // 		{
+        // 			"id": "TSSLPT_icon_ACHRES61_225",
+        // 			"type": "symbol",
+        // 			"source": "AREA_COMMON_POINT",
+        // 			"source-layer": "area_common_point",
+        // 			"filter": [
+        // 				"all",
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"OBJL"
+        // 					],
+        // 					148
+        // 				],
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"MarkerName2"
+        // 					],
+        // 					"ACHRES61"
+        // 				]
+        // 			],
+        // 			"layout": {
+        // 				"icon-image": "ACHRES61",
+        // 				"icon-allow-overlap": true,
+        // 				"icon-rotation-alignment": "map",
+        // 				"symbol-placement": "point",
+        // 				"icon-offset": [
+        // 					-5.2,
+        // 					4.8
+        // 				]
+        // 			},
+        // 			"paint": {}
+        // 		},
+        // 		{
+        // 			"id": "TSSLPT_icon_ACHRES71_226",
+        // 			"type": "symbol",
+        // 			"source": "AREA_COMMON_POINT",
+        // 			"source-layer": "area_common_point",
+        // 			"filter": [
+        // 				"all",
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"OBJL"
+        // 					],
+        // 					148
+        // 				],
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"MarkerName2"
+        // 					],
+        // 					"ACHRES71"
+        // 				]
+        // 			],
+        // 			"layout": {
+        // 				"icon-image": "ACHRES71",
+        // 				"icon-allow-overlap": true,
+        // 				"icon-rotation-alignment": "map",
+        // 				"symbol-placement": "point",
+        // 				"icon-offset": [
+        // 					-5.4,
+        // 					4.8
+        // 				]
+        // 			},
+        // 			"paint": {}
+        // 		},
+        // 		{
+        // 			"id": "TSSLPT_icon_ACHRES51_227",
+        // 			"type": "symbol",
+        // 			"source": "AREA_COMMON_POINT",
+        // 			"source-layer": "area_common_point",
+        // 			"filter": [
+        // 				"all",
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"OBJL"
+        // 					],
+        // 					148
+        // 				],
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"MarkerName2"
+        // 					],
+        // 					"ACHRES51"
+        // 				]
+        // 			],
+        // 			"layout": {
+        // 				"icon-image": "ACHRES51",
+        // 				"icon-allow-overlap": true,
+        // 				"icon-rotation-alignment": "map",
+        // 				"symbol-placement": "point",
+        // 				"icon-offset": [
+        // 					-4.5,
+        // 					4.8
+        // 				]
+        // 			},
+        // 			"paint": {}
+        // 		},
+        // 		{
+        // 			"id": "TSSLPT_icon_FSHRES71_228",
+        // 			"type": "symbol",
+        // 			"source": "AREA_COMMON_POINT",
+        // 			"source-layer": "area_common_point",
+        // 			"filter": [
+        // 				"all",
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"OBJL"
+        // 					],
+        // 					148
+        // 				],
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"MarkerName2"
+        // 					],
+        // 					"FSHRES71"
+        // 				]
+        // 			],
+        // 			"layout": {
+        // 				"icon-image": "FSHRES71",
+        // 				"icon-allow-overlap": true,
+        // 				"icon-rotation-alignment": "map",
+        // 				"symbol-placement": "point",
+        // 				"icon-offset": [
+        // 					-4.8,
+        // 					2.4
+        // 				]
+        // 			},
+        // 			"paint": {}
+        // 		},
+        // 		{
+        // 			"id": "TSSLPT_icon_FSHRES51_229",
+        // 			"type": "symbol",
+        // 			"source": "AREA_COMMON_POINT",
+        // 			"source-layer": "area_common_point",
+        // 			"filter": [
+        // 				"all",
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"OBJL"
+        // 					],
+        // 					148
+        // 				],
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"MarkerName2"
+        // 					],
+        // 					"FSHRES51"
+        // 				]
+        // 			],
+        // 			"layout": {
+        // 				"icon-image": "FSHRES51",
+        // 				"icon-allow-overlap": true,
+        // 				"icon-rotation-alignment": "map",
+        // 				"symbol-placement": "point",
+        // 				"icon-offset": [
+        // 					-3.8,
+        // 					2.4
+        // 				]
+        // 			},
+        // 			"paint": {}
+        // 		},
+        // 		{
+        // 			"id": "TSSLPT_icon_INFARE51_230",
+        // 			"type": "symbol",
+        // 			"source": "AREA_COMMON_POINT",
+        // 			"source-layer": "area_common_point",
+        // 			"filter": [
+        // 				"all",
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"OBJL"
+        // 					],
+        // 					148
+        // 				],
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"MarkerName2"
+        // 					],
+        // 					"INFARE51"
+        // 				]
+        // 			],
+        // 			"layout": {
+        // 				"icon-image": "INFARE51",
+        // 				"icon-allow-overlap": true,
+        // 				"icon-rotation-alignment": "map",
+        // 				"symbol-placement": "point",
+        // 				"icon-offset": [
+        // 					-3.0,
+        // 					3.0
+        // 				]
+        // 			},
+        // 			"paint": {}
+        // 		},
+        // 		{
+        // 			"id": "TSSLPT_icon_RSRDEF51_231",
+        // 			"type": "symbol",
+        // 			"source": "AREA_COMMON_POINT",
+        // 			"source-layer": "area_common_point",
+        // 			"filter": [
+        // 				"all",
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"OBJL"
+        // 					],
+        // 					148
+        // 				],
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"MarkerName2"
+        // 					],
+        // 					"RSRDEF51"
+        // 				]
+        // 			],
+        // 			"layout": {
+        // 				"icon-image": "RSRDEF51",
+        // 				"icon-allow-overlap": true,
+        // 				"icon-rotation-alignment": "map",
+        // 				"symbol-placement": "point",
+        // 				"icon-offset": [
+        // 					-3.6,
+        // 					3.6
+        // 				]
+        // 			},
+        // 			"paint": {}
+        // 		},
+        // 		{
+        // 			"id": "TSSRON_icon_TSSRON51_232",
+        // 			"type": "symbol",
+        // 			"source": "AREA_COMMON_POINT",
+        // 			"source-layer": "area_common_point",
+        // 			"filter": [
+        // 				"all",
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"OBJL"
+        // 					],
+        // 					149
+        // 				]
+        // 			],
+        // 			"layout": {
+        // 				"icon-image": "TSSRON51",
+        // 				"icon-allow-overlap": true,
+        // 				"icon-rotation-alignment": "map",
+        // 				"symbol-placement": "point",
+        // 				"icon-rotate": [
+        // 					"get",
+        // 					"ORIENT"
+        // 				]
+        // 			},
+        // 			"paint": {}
+        // 		},
+        // 		{
+        // 			"id": "TSSRON_icon_ENTRES61_233",
+        // 			"type": "symbol",
+        // 			"source": "AREA_COMMON_POINT",
+        // 			"source-layer": "area_common_point",
+        // 			"filter": [
+        // 				"all",
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"OBJL"
+        // 					],
+        // 					149
+        // 				],
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"MarkerName2"
+        // 					],
+        // 					"ENTRES61"
+        // 				]
+        // 			],
+        // 			"layout": {
+        // 				"icon-image": "ENTRES61",
+        // 				"icon-allow-overlap": true,
+        // 				"icon-rotation-alignment": "map",
+        // 				"symbol-placement": "point",
+        // 				"icon-offset": [
+        // 					-4.4,
+        // 					3.8
+        // 				]
+        // 			},
+        // 			"paint": {}
+        // 		},
+        // 		{
+        // 			"id": "TSSRON_icon_ENTRES71_234",
+        // 			"type": "symbol",
+        // 			"source": "AREA_COMMON_POINT",
+        // 			"source-layer": "area_common_point",
+        // 			"filter": [
+        // 				"all",
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"OBJL"
+        // 					],
+        // 					149
+        // 				],
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"MarkerName2"
+        // 					],
+        // 					"ENTRES71"
+        // 				]
+        // 			],
+        // 			"layout": {
+        // 				"icon-image": "ENTRES71",
+        // 				"icon-allow-overlap": true,
+        // 				"icon-rotation-alignment": "map",
+        // 				"symbol-placement": "point",
+        // 				"icon-offset": [
+        // 					-4.5,
+        // 					3.6
+        // 				]
+        // 			},
+        // 			"paint": {}
+        // 		},
+        // 		{
+        // 			"id": "TSSRON_icon_ENTRES51_235",
+        // 			"type": "symbol",
+        // 			"source": "AREA_COMMON_POINT",
+        // 			"source-layer": "area_common_point",
+        // 			"filter": [
+        // 				"all",
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"OBJL"
+        // 					],
+        // 					149
+        // 				],
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"MarkerName2"
+        // 					],
+        // 					"ENTRES51"
+        // 				]
+        // 			],
+        // 			"layout": {
+        // 				"icon-image": "ENTRES51",
+        // 				"icon-allow-overlap": true,
+        // 				"icon-rotation-alignment": "map",
+        // 				"symbol-placement": "point",
+        // 				"icon-offset": [
+        // 					-3.6,
+        // 					3.6
+        // 				]
+        // 			},
+        // 			"paint": {}
+        // 		},
+        // 		{
+        // 			"id": "TSSRON_icon_ACHRES61_236",
+        // 			"type": "symbol",
+        // 			"source": "AREA_COMMON_POINT",
+        // 			"source-layer": "area_common_point",
+        // 			"filter": [
+        // 				"all",
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"OBJL"
+        // 					],
+        // 					149
+        // 				],
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"MarkerName2"
+        // 					],
+        // 					"ACHRES61"
+        // 				]
+        // 			],
+        // 			"layout": {
+        // 				"icon-image": "ACHRES61",
+        // 				"icon-allow-overlap": true,
+        // 				"icon-rotation-alignment": "map",
+        // 				"symbol-placement": "point",
+        // 				"icon-offset": [
+        // 					-5.2,
+        // 					4.8
+        // 				]
+        // 			},
+        // 			"paint": {}
+        // 		},
+        // 		{
+        // 			"id": "TSSRON_icon_ACHRES71_237",
+        // 			"type": "symbol",
+        // 			"source": "AREA_COMMON_POINT",
+        // 			"source-layer": "area_common_point",
+        // 			"filter": [
+        // 				"all",
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"OBJL"
+        // 					],
+        // 					149
+        // 				],
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"MarkerName2"
+        // 					],
+        // 					"ACHRES71"
+        // 				]
+        // 			],
+        // 			"layout": {
+        // 				"icon-image": "ACHRES71",
+        // 				"icon-allow-overlap": true,
+        // 				"icon-rotation-alignment": "map",
+        // 				"symbol-placement": "point",
+        // 				"icon-offset": [
+        // 					-5.4,
+        // 					4.8
+        // 				]
+        // 			},
+        // 			"paint": {}
+        // 		},
+        // 		{
+        // 			"id": "TSSRON_icon_ACHRES51_238",
+        // 			"type": "symbol",
+        // 			"source": "AREA_COMMON_POINT",
+        // 			"source-layer": "area_common_point",
+        // 			"filter": [
+        // 				"all",
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"OBJL"
+        // 					],
+        // 					149
+        // 				],
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"MarkerName2"
+        // 					],
+        // 					"ACHRES51"
+        // 				]
+        // 			],
+        // 			"layout": {
+        // 				"icon-image": "ACHRES51",
+        // 				"icon-allow-overlap": true,
+        // 				"icon-rotation-alignment": "map",
+        // 				"symbol-placement": "point",
+        // 				"icon-offset": [
+        // 					-4.5,
+        // 					4.8
+        // 				]
+        // 			},
+        // 			"paint": {}
+        // 		},
+        // 		{
+        // 			"id": "TSSRON_icon_FSHRES71_239",
+        // 			"type": "symbol",
+        // 			"source": "AREA_COMMON_POINT",
+        // 			"source-layer": "area_common_point",
+        // 			"filter": [
+        // 				"all",
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"OBJL"
+        // 					],
+        // 					149
+        // 				],
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"MarkerName2"
+        // 					],
+        // 					"FSHRES71"
+        // 				]
+        // 			],
+        // 			"layout": {
+        // 				"icon-image": "FSHRES71",
+        // 				"icon-allow-overlap": true,
+        // 				"icon-rotation-alignment": "map",
+        // 				"symbol-placement": "point",
+        // 				"icon-offset": [
+        // 					-4.8,
+        // 					2.4
+        // 				]
+        // 			},
+        // 			"paint": {}
+        // 		},
+        // 		{
+        // 			"id": "TSSRON_icon_FSHRES51_240",
+        // 			"type": "symbol",
+        // 			"source": "AREA_COMMON_POINT",
+        // 			"source-layer": "area_common_point",
+        // 			"filter": [
+        // 				"all",
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"OBJL"
+        // 					],
+        // 					149
+        // 				],
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"MarkerName2"
+        // 					],
+        // 					"FSHRES51"
+        // 				]
+        // 			],
+        // 			"layout": {
+        // 				"icon-image": "FSHRES51",
+        // 				"icon-allow-overlap": true,
+        // 				"icon-rotation-alignment": "map",
+        // 				"symbol-placement": "point",
+        // 				"icon-offset": [
+        // 					-3.8,
+        // 					2.4
+        // 				]
+        // 			},
+        // 			"paint": {}
+        // 		},
+        // 		{
+        // 			"id": "TSSRON_icon_INFARE51_241",
+        // 			"type": "symbol",
+        // 			"source": "AREA_COMMON_POINT",
+        // 			"source-layer": "area_common_point",
+        // 			"filter": [
+        // 				"all",
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"OBJL"
+        // 					],
+        // 					149
+        // 				],
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"MarkerName2"
+        // 					],
+        // 					"INFARE51"
+        // 				]
+        // 			],
+        // 			"layout": {
+        // 				"icon-image": "INFARE51",
+        // 				"icon-allow-overlap": true,
+        // 				"icon-rotation-alignment": "map",
+        // 				"symbol-placement": "point",
+        // 				"icon-offset": [
+        // 					-3.0,
+        // 					3.0
+        // 				]
+        // 			},
+        // 			"paint": {}
+        // 		},
+        // 		{
+        // 			"id": "TSSRON_icon_RSRDEF51_242",
+        // 			"type": "symbol",
+        // 			"source": "AREA_COMMON_POINT",
+        // 			"source-layer": "area_common_point",
+        // 			"filter": [
+        // 				"all",
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"OBJL"
+        // 					],
+        // 					149
+        // 				],
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"MarkerName2"
+        // 					],
+        // 					"RSRDEF51"
+        // 				]
+        // 			],
+        // 			"layout": {
+        // 				"icon-image": "RSRDEF51",
+        // 				"icon-allow-overlap": true,
+        // 				"icon-rotation-alignment": "map",
+        // 				"symbol-placement": "point",
+        // 				"icon-offset": [
+        // 					-3.6,
+        // 					3.6
+        // 				]
+        // 			},
+        // 			"paint": {}
+        // 		},
+        // 		{
+        // 			"id": "WATTUR_icon_WATTUR02_243",
+        // 			"type": "symbol",
+        // 			"source": "AREA_COMMON_POINT",
+        // 			"source-layer": "area_common_point",
+        // 			"filter": [
+        // 				"all",
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"OBJL"
+        // 					],
+        // 					156
+        // 				]
+        // 			],
+        // 			"layout": {
+        // 				"icon-image": "WATTUR02",
+        // 				"icon-allow-overlap": true,
+        // 				"icon-rotation-alignment": "map",
+        // 				"symbol-placement": "point"
+        // 			},
+        // 			"paint": {}
+        // 		},
+        // 		{
+        // 			"id": "WEDKLP_icon_WEDKLP03_244",
+        // 			"type": "symbol",
+        // 			"source": "AREA_COMMON_POINT",
+        // 			"source-layer": "area_common_point",
+        // 			"filter": [
+        // 				"all",
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"OBJL"
+        // 					],
+        // 					158
+        // 				]
+        // 			],
+        // 			"layout": {
+        // 				"icon-image": "WEDKLP03",
+        // 				"icon-allow-overlap": true,
+        // 				"icon-rotation-alignment": "map",
+        // 				"symbol-placement": "point"
+        // 			},
+        // 			"paint": {}
+        // 		},
+        // 		{
+        // 			"id": "OBSTRN_icon_1386,840,1412,866_245",
+        // 			"type": "symbol",
+        // 			"source": "AREA_COMMON_POINT",
+        // 			"source-layer": "area_common_point",
+        // 			"filter": [
+        // 				"all",
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"OBJL"
+        // 					],
+        // 					86
+        // 				],
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"MarkerName1"
+        // 					],
+        // 					"FLTHAZ02"
+        // 				]
+        // 			],
+        // 			"layout": {
+        // 				"icon-image": "1386,840,1412,866",
+        // 				"icon-allow-overlap": true,
+        // 				"icon-rotation-alignment": "map",
+        // 				"symbol-placement": "point"
+        // 			},
+        // 			"paint": {}
+        // 		},
+        // 		{
+        // 			"id": "OBSTRN_icon_154,1190,184,1222_246",
+        // 			"type": "symbol",
+        // 			"source": "AREA_COMMON_POINT",
+        // 			"source-layer": "area_common_point",
+        // 			"filter": [
+        // 				"all",
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"OBJL"
+        // 					],
+        // 					86
+        // 				],
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"MarkerName1"
+        // 					],
+        // 					"FOULAR01"
+        // 				]
+        // 			],
+        // 			"layout": {
+        // 				"icon-image": "154,1190,184,1222",
+        // 				"icon-allow-overlap": true,
+        // 				"icon-rotation-alignment": "map",
+        // 				"symbol-placement": "point"
+        // 			},
+        // 			"paint": {}
+        // 		},
+        // 		{
+        // 			"id": "OBSTRN_icon_FOULGND1_247",
+        // 			"type": "symbol",
+        // 			"source": "AREA_COMMON_POINT",
+        // 			"source-layer": "area_common_point",
+        // 			"filter": [
+        // 				"all",
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"OBJL"
+        // 					],
+        // 					86
+        // 				],
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"MarkerName1"
+        // 					],
+        // 					"FOULGND1"
+        // 				]
+        // 			],
+        // 			"layout": {
+        // 				"icon-image": "FOULGND1",
+        // 				"icon-allow-overlap": true,
+        // 				"icon-rotation-alignment": "map",
+        // 				"symbol-placement": "point"
+        // 			},
+        // 			"paint": {}
+        // 		},
+        // 		{
+        // 			"id": "OBSTRN_icon_ACHARE02_248",
+        // 			"type": "symbol",
+        // 			"source": "AREA_COMMON_POINT",
+        // 			"source-layer": "area_common_point",
+        // 			"filter": [
+        // 				"all",
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"OBJL"
+        // 					],
+        // 					86
+        // 				],
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"MarkerName1"
+        // 					],
+        // 					"ACHARE02"
+        // 				]
+        // 			],
+        // 			"layout": {
+        // 				"icon-image": "ACHARE02",
+        // 				"icon-allow-overlap": true,
+        // 				"icon-rotation-alignment": "map",
+        // 				"symbol-placement": "point"
+        // 			},
+        // 			"paint": {}
+        // 		},
+        // 		{
+        // 			"id": "OBSTRN_icon_ISODGR51_249",
+        // 			"type": "symbol",
+        // 			"source": "AREA_COMMON_POINT",
+        // 			"source-layer": "area_common_point",
+        // 			"filter": [
+        // 				"all",
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"OBJL"
+        // 					],
+        // 					86
+        // 				],
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"MarkerName1"
+        // 					],
+        // 					"ISODGR51"
+        // 				]
+        // 			],
+        // 			"layout": {
+        // 				"icon-image": "ISODGR51",
+        // 				"icon-allow-overlap": true,
+        // 				"icon-rotation-alignment": "map",
+        // 				"symbol-placement": "point"
+        // 			},
+        // 			"paint": {}
+        // 		},
+        // 		{
+        // 			"id": "PRDARE_icon_RFNERY11_250",
+        // 			"type": "symbol",
+        // 			"source": "AREA_COMMON_POINT",
+        // 			"source-layer": "area_common_point",
+        // 			"filter": [
+        // 				"all",
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"OBJL"
+        // 					],
+        // 					97
+        // 				],
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"MarkerName1"
+        // 					],
+        // 					"RFNERY11"
+        // 				]
+        // 			],
+        // 			"layout": {
+        // 				"icon-image": "RFNERY11",
+        // 				"icon-allow-overlap": true,
+        // 				"icon-rotation-alignment": "map",
+        // 				"symbol-placement": "point"
+        // 			},
+        // 			"paint": {}
+        // 		},
+        // 		{
+        // 			"id": "PRDARE_icon_TNKFRM11_251",
+        // 			"type": "symbol",
+        // 			"source": "AREA_COMMON_POINT",
+        // 			"source-layer": "area_common_point",
+        // 			"filter": [
+        // 				"all",
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"OBJL"
+        // 					],
+        // 					97
+        // 				],
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"MarkerName1"
+        // 					],
+        // 					"TNKFRM11"
+        // 				]
+        // 			],
+        // 			"layout": {
+        // 				"icon-image": "TNKFRM11",
+        // 				"icon-allow-overlap": true,
+        // 				"icon-rotation-alignment": "map",
+        // 				"symbol-placement": "point"
+        // 			},
+        // 			"paint": {}
+        // 		},
+        // 		{
+        // 			"id": "PRDARE_icon_WNDFRM61_252",
+        // 			"type": "symbol",
+        // 			"source": "AREA_COMMON_POINT",
+        // 			"source-layer": "area_common_point",
+        // 			"filter": [
+        // 				"all",
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"OBJL"
+        // 					],
+        // 					97
+        // 				],
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"MarkerName1"
+        // 					],
+        // 					"WNDFRM61"
+        // 				]
+        // 			],
+        // 			"layout": {
+        // 				"icon-image": "WNDFRM61",
+        // 				"icon-allow-overlap": true,
+        // 				"icon-rotation-alignment": "map",
+        // 				"symbol-placement": "point"
+        // 			},
+        // 			"paint": {}
+        // 		},
+        // 		{
+        // 			"id": "PRDARE_icon_QUARRY01_253",
+        // 			"type": "symbol",
+        // 			"source": "AREA_COMMON_POINT",
+        // 			"source-layer": "area_common_point",
+        // 			"filter": [
+        // 				"all",
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"OBJL"
+        // 					],
+        // 					97
+        // 				],
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"MarkerName1"
+        // 					],
+        // 					"QUARRY01"
+        // 				]
+        // 			],
+        // 			"layout": {
+        // 				"icon-image": "QUARRY01",
+        // 				"icon-allow-overlap": true,
+        // 				"icon-rotation-alignment": "map",
+        // 				"symbol-placement": "point"
+        // 			},
+        // 			"paint": {}
+        // 		},
+        // 		{
+        // 			"id": "PRDARE_icon_RFNERY01_254",
+        // 			"type": "symbol",
+        // 			"source": "AREA_COMMON_POINT",
+        // 			"source-layer": "area_common_point",
+        // 			"filter": [
+        // 				"all",
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"OBJL"
+        // 					],
+        // 					97
+        // 				],
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"MarkerName1"
+        // 					],
+        // 					"RFNERY01"
+        // 				]
+        // 			],
+        // 			"layout": {
+        // 				"icon-image": "RFNERY01",
+        // 				"icon-allow-overlap": true,
+        // 				"icon-rotation-alignment": "map",
+        // 				"symbol-placement": "point"
+        // 			},
+        // 			"paint": {}
+        // 		},
+        // 		{
+        // 			"id": "PRDARE_icon_TMBYRD01_255",
+        // 			"type": "symbol",
+        // 			"source": "AREA_COMMON_POINT",
+        // 			"source-layer": "area_common_point",
+        // 			"filter": [
+        // 				"all",
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"OBJL"
+        // 					],
+        // 					97
+        // 				],
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"MarkerName1"
+        // 					],
+        // 					"TMBYRD01"
+        // 				]
+        // 			],
+        // 			"layout": {
+        // 				"icon-image": "TMBYRD01",
+        // 				"icon-allow-overlap": true,
+        // 				"icon-rotation-alignment": "map",
+        // 				"symbol-placement": "point"
+        // 			},
+        // 			"paint": {}
+        // 		},
+        // 		{
+        // 			"id": "PRDARE_icon_TNKFRM01_256",
+        // 			"type": "symbol",
+        // 			"source": "AREA_COMMON_POINT",
+        // 			"source-layer": "area_common_point",
+        // 			"filter": [
+        // 				"all",
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"OBJL"
+        // 					],
+        // 					97
+        // 				],
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"MarkerName1"
+        // 					],
+        // 					"TNKFRM01"
+        // 				]
+        // 			],
+        // 			"layout": {
+        // 				"icon-image": "TNKFRM01",
+        // 				"icon-allow-overlap": true,
+        // 				"icon-rotation-alignment": "map",
+        // 				"symbol-placement": "point"
+        // 			},
+        // 			"paint": {}
+        // 		},
+        // 		{
+        // 			"id": "PRDARE_icon_WNDFRM51_257",
+        // 			"type": "symbol",
+        // 			"source": "AREA_COMMON_POINT",
+        // 			"source-layer": "area_common_point",
+        // 			"filter": [
+        // 				"all",
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"OBJL"
+        // 					],
+        // 					97
+        // 				],
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"MarkerName1"
+        // 					],
+        // 					"WNDFRM51"
+        // 				]
+        // 			],
+        // 			"layout": {
+        // 				"icon-image": "WNDFRM51",
+        // 				"icon-allow-overlap": true,
+        // 				"icon-rotation-alignment": "map",
+        // 				"symbol-placement": "point"
+        // 			},
+        // 			"paint": {}
+        // 		},
+        // 		{
+        // 			"id": "RECTRC_icon_RECTRC58_258",
+        // 			"type": "symbol",
+        // 			"source": "AREA_COMMON_POINT",
+        // 			"source-layer": "area_common_point",
+        // 			"filter": [
+        // 				"all",
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"OBJL"
+        // 					],
+        // 					109
+        // 				],
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"MarkerName1"
+        // 					],
+        // 					"RECTRC58"
+        // 				]
+        // 			],
+        // 			"layout": {
+        // 				"icon-image": "RECTRC58",
+        // 				"icon-allow-overlap": true,
+        // 				"icon-rotation-alignment": "map",
+        // 				"symbol-placement": "point",
+        // 				"icon-rotate": [
+        // 					"get",
+        // 					"ORIENT"
+        // 				]
+        // 			},
+        // 			"paint": {}
+        // 		},
+        // 		{
+        // 			"id": "RECTRC_icon_RECTRC56_259",
+        // 			"type": "symbol",
+        // 			"source": "AREA_COMMON_POINT",
+        // 			"source-layer": "area_common_point",
+        // 			"filter": [
+        // 				"all",
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"OBJL"
+        // 					],
+        // 					109
+        // 				],
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"MarkerName1"
+        // 					],
+        // 					"RECTRC56"
+        // 				]
+        // 			],
+        // 			"layout": {
+        // 				"icon-image": "RECTRC56",
+        // 				"icon-allow-overlap": true,
+        // 				"icon-rotation-alignment": "map",
+        // 				"symbol-placement": "point",
+        // 				"icon-rotate": [
+        // 					"get",
+        // 					"ORIENT"
+        // 				]
+        // 			},
+        // 			"paint": {}
+        // 		},
+        // 		{
+        // 			"id": "RECTRC_icon_RECTRC57_260",
+        // 			"type": "symbol",
+        // 			"source": "AREA_COMMON_POINT",
+        // 			"source-layer": "area_common_point",
+        // 			"filter": [
+        // 				"all",
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"OBJL"
+        // 					],
+        // 					109
+        // 				],
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"MarkerName1"
+        // 					],
+        // 					"RECTRC57"
+        // 				]
+        // 			],
+        // 			"layout": {
+        // 				"icon-image": "RECTRC57",
+        // 				"icon-allow-overlap": true,
+        // 				"icon-rotation-alignment": "map",
+        // 				"symbol-placement": "point",
+        // 				"icon-rotate": [
+        // 					"get",
+        // 					"ORIENT"
+        // 				]
+        // 			},
+        // 			"paint": {}
+        // 		},
+        // 		{
+        // 			"id": "RECTRC_icon_RECTRC55_261",
+        // 			"type": "symbol",
+        // 			"source": "AREA_COMMON_POINT",
+        // 			"source-layer": "area_common_point",
+        // 			"filter": [
+        // 				"all",
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"OBJL"
+        // 					],
+        // 					109
+        // 				],
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"MarkerName1"
+        // 					],
+        // 					"RECTRC55"
+        // 				]
+        // 			],
+        // 			"layout": {
+        // 				"icon-image": "RECTRC55",
+        // 				"icon-allow-overlap": true,
+        // 				"icon-rotation-alignment": "map",
+        // 				"symbol-placement": "point",
+        // 				"icon-rotate": [
+        // 					"get",
+        // 					"ORIENT"
+        // 				]
+        // 			},
+        // 			"paint": {}
+        // 		},
+        // 		{
+        // 			"id": "RECTRC_icon_RECDEF51_262",
+        // 			"type": "symbol",
+        // 			"source": "AREA_COMMON_POINT",
+        // 			"source-layer": "area_common_point",
+        // 			"filter": [
+        // 				"all",
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"OBJL"
+        // 					],
+        // 					109
+        // 				],
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"MarkerName1"
+        // 					],
+        // 					"RECDEF51"
+        // 				]
+        // 			],
+        // 			"layout": {
+        // 				"icon-image": "RECDEF51",
+        // 				"icon-allow-overlap": true,
+        // 				"icon-rotation-alignment": "map",
+        // 				"symbol-placement": "point"
+        // 			},
+        // 			"paint": {}
+        // 		},
+        // 		{
+        // 			"id": "RCTLPT_icon_RCTLPT52_263",
+        // 			"type": "symbol",
+        // 			"source": "AREA_COMMON_POINT",
+        // 			"source-layer": "area_common_point",
+        // 			"filter": [
+        // 				"all",
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"OBJL"
+        // 					],
+        // 					110
+        // 				],
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"MarkerName1"
+        // 					],
+        // 					"RCTLPT52"
+        // 				]
+        // 			],
+        // 			"layout": {
+        // 				"icon-image": "RCTLPT52",
+        // 				"icon-allow-overlap": true,
+        // 				"icon-rotation-alignment": "map",
+        // 				"symbol-placement": "point",
+        // 				"icon-rotate": [
+        // 					"get",
+        // 					"ORIENT"
+        // 				]
+        // 			},
+        // 			"paint": {}
+        // 		},
+        // 		{
+        // 			"id": "RCTLPT_icon_RTLDEF51_264",
+        // 			"type": "symbol",
+        // 			"source": "AREA_COMMON_POINT",
+        // 			"source-layer": "area_common_point",
+        // 			"filter": [
+        // 				"all",
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"OBJL"
+        // 					],
+        // 					110
+        // 				],
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"MarkerName1"
+        // 					],
+        // 					"RTLDEF51"
+        // 				]
+        // 			],
+        // 			"layout": {
+        // 				"icon-image": "RTLDEF51",
+        // 				"icon-allow-overlap": true,
+        // 				"icon-rotation-alignment": "map",
+        // 				"symbol-placement": "point"
+        // 			},
+        // 			"paint": {}
+        // 		},
+        // 		{
+        // 			"id": "TWRTPT_icon_TWRTPT53_265",
+        // 			"type": "symbol",
+        // 			"source": "AREA_COMMON_POINT",
+        // 			"source-layer": "area_common_point",
+        // 			"filter": [
+        // 				"all",
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"OBJL"
+        // 					],
+        // 					152
+        // 				],
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"MarkerName1"
+        // 					],
+        // 					"TWRTPT53"
+        // 				]
+        // 			],
+        // 			"layout": {
+        // 				"icon-image": "TWRTPT53",
+        // 				"icon-allow-overlap": true,
+        // 				"icon-rotation-alignment": "map",
+        // 				"symbol-placement": "point",
+        // 				"icon-rotate": [
+        // 					"get",
+        // 					"ORIENT"
+        // 				]
+        // 			},
+        // 			"paint": {}
+        // 		},
+        // 		{
+        // 			"id": "TWRTPT_icon_TWRTPT52_266",
+        // 			"type": "symbol",
+        // 			"source": "AREA_COMMON_POINT",
+        // 			"source-layer": "area_common_point",
+        // 			"filter": [
+        // 				"all",
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"OBJL"
+        // 					],
+        // 					152
+        // 				],
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"MarkerName1"
+        // 					],
+        // 					"TWRTPT52"
+        // 				]
+        // 			],
+        // 			"layout": {
+        // 				"icon-image": "TWRTPT52",
+        // 				"icon-allow-overlap": true,
+        // 				"icon-rotation-alignment": "map",
+        // 				"symbol-placement": "point",
+        // 				"icon-rotate": [
+        // 					"get",
+        // 					"ORIENT"
+        // 				]
+        // 			},
+        // 			"paint": {}
+        // 		},
+        // 		{
+        // 			"id": "TWRTPT_icon_TWRDEF51_267",
+        // 			"type": "symbol",
+        // 			"source": "AREA_COMMON_POINT",
+        // 			"source-layer": "area_common_point",
+        // 			"filter": [
+        // 				"all",
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"OBJL"
+        // 					],
+        // 					152
+        // 				],
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"MarkerName1"
+        // 					],
+        // 					"TWRDEF51"
+        // 				]
+        // 			],
+        // 			"layout": {
+        // 				"icon-image": "TWRDEF51",
+        // 				"icon-allow-overlap": true,
+        // 				"icon-rotation-alignment": "map",
+        // 				"symbol-placement": "point"
+        // 			},
+        // 			"paint": {}
+        // 		},
+        // 		{
+        // 			"id": "TS_FEB_icon_FLDSTR01_268",
+        // 			"type": "symbol",
+        // 			"source": "AREA_COMMON_POINT",
+        // 			"source-layer": "area_common_point",
+        // 			"filter": [
+        // 				"all",
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"OBJL"
+        // 					],
+        // 					160
+        // 				],
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"MarkerName1"
+        // 					],
+        // 					"FLDSTR01"
+        // 				]
+        // 			],
+        // 			"layout": {
+        // 				"icon-image": "FLDSTR01",
+        // 				"icon-allow-overlap": true,
+        // 				"icon-rotation-alignment": "map",
+        // 				"symbol-placement": "point",
+        // 				"icon-rotate": [
+        // 					"get",
+        // 					"ORIENT"
+        // 				]
+        // 			},
+        // 			"paint": {}
+        // 		},
+        // 		{
+        // 			"id": "TS_FEB_icon_EBBSTR01_269",
+        // 			"type": "symbol",
+        // 			"source": "AREA_COMMON_POINT",
+        // 			"source-layer": "area_common_point",
+        // 			"filter": [
+        // 				"all",
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"OBJL"
+        // 					],
+        // 					160
+        // 				],
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"MarkerName1"
+        // 					],
+        // 					"EBBSTR01"
+        // 				]
+        // 			],
+        // 			"layout": {
+        // 				"icon-image": "EBBSTR01",
+        // 				"icon-allow-overlap": true,
+        // 				"icon-rotation-alignment": "map",
+        // 				"symbol-placement": "point",
+        // 				"icon-rotate": [
+        // 					"get",
+        // 					"ORIENT"
+        // 				]
+        // 			},
+        // 			"paint": {}
+        // 		},
+        // 		{
+        // 			"id": "TS_FEB_icon_CURENT01_270",
+        // 			"type": "symbol",
+        // 			"source": "AREA_COMMON_POINT",
+        // 			"source-layer": "area_common_point",
+        // 			"filter": [
+        // 				"all",
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"OBJL"
+        // 					],
+        // 					160
+        // 				],
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"MarkerName1"
+        // 					],
+        // 					"CURENT01"
+        // 				]
+        // 			],
+        // 			"layout": {
+        // 				"icon-image": "CURENT01",
+        // 				"icon-allow-overlap": true,
+        // 				"icon-rotation-alignment": "map",
+        // 				"symbol-placement": "point",
+        // 				"icon-rotate": [
+        // 					"get",
+        // 					"ORIENT"
+        // 				]
+        // 			},
+        // 			"paint": {}
+        // 		},
+        // 		{
+        // 			"id": "TS_FEB_icon_CURDEF01_271",
+        // 			"type": "symbol",
+        // 			"source": "AREA_COMMON_POINT",
+        // 			"source-layer": "area_common_point",
+        // 			"filter": [
+        // 				"all",
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"OBJL"
+        // 					],
+        // 					160
+        // 				],
+        // 				[
+        // 					"==",
+        // 					[
+        // 						"get",
+        // 						"MarkerName1"
+        // 					],
+        // 					"CURDEF01"
+        // 				]
+        // 			],
+        // 			"layout": {
+        // 				"icon-image": "CURDEF01",
+        // 				"icon-allow-overlap": true,
+        // 				"icon-rotation-alignment": "map",
+        // 				"symbol-placement": "point"
+        // 			},
+        // 			"paint": {}
+        // 		},
+
+
+        // 		//#endregion
+
+
+        // 		// #region TEXT
+        // 		{
+        // 			id: 'NAVLNE_label',
+        // 			type: 'symbol',
+        // 			source: 'AREA_COMMON_LINE',
+        // 			'source-layer': 'area_common_line',
+        // 			filter: ['==', ['get', 'OBJL'], 85],
+        // 			layout: {
+        // 				'text-field': ['get', 'OBJNAM'],
+        // 'text-allow-overlap': false,
+            // 				'text-font': ['Roboto Medium'],
+            // 				'text-size': 30,
+            // 			},
+            // 			paint: {
+            // 				'text-color': '#000000',
+            // 			},
+            // 		},
+            // 		{
+            // 			id: 'PIPOHD_label',
+            // 			type: 'symbol',
+            // 			source: 'AREA_COMMON_LINE',
+            // 			'source-layer': 'area_common_line',
+            // 			filter: ['==', ['get', 'OBJL'], 93],
+            // 			layout: {
+            // 				'text-field': ['get', 'OBJNAM'],
+            'text-allow-overlap': false,
+                // 				'text-font': ['Roboto Medium'],
+                // 				'text-size': 30,
+                // 			},
+                // 			paint: {
+                // 				'text-color': '#000000',
+                // 			},
+                // 		},
+                // 		{
+                // 			id: 'BUISGL_symbol_1',
+                // 			type: 'symbol',
+                // 			source: 'AREA_COMMON_AREA',
+                // 			'source-layer': 'area_common_polygon',
+                // 			filter: ['==', ['get', 'OBJL'], 12],
+                // 			layout: {
+                // 				'text-field': ['get', 'OBJNAM'],
+                'text-allow-overlap': false,
+                    // 				'text-font': ['Roboto Medium'],
+                    // 				'text-size': 13,
+                    // 			},
+                    // 			paint: {
+                    // 				'text-color': 'rgba(0,0,0,1)',
+                    // 			},
+                    // 		},
+                    // 		{
+                    // 			id: 'LNDRGN_symbol_19',
+                    // 			type: 'symbol',
+                    // 			source: 'AREA_COMMON_AREA',
+                    // 			'source-layer': 'area_common_polygon',
+                    // 			filter: ['all', ['==', ['get', 'OBJL'], 73], ['==', ['get', 'FillType'], 2]],
+                    // 			layout: {
+                    // 				'text-field': ['get', 'OBJNAM'],
+                    'text-allow-overlap': false,
+                        // 				'text-font': ['Roboto Medium'],
+                        // 				'text-size': 13,
+                        // 			},
+                        // 			paint: {
+                        // 				'text-color': 'rgba(0,0,0,1)',
+                        // 			},
+                        // 		},
+                        // 		{
+                        // 			id: 'SBDARE_symbol_35',
+                        // 			type: 'symbol',
+                        // 			source: 'AREA_COMMON_AREA',
+                        // 			'source-layer': 'area_common_polygon',
+                        // 			filter: ['all', ['==', ['get', 'OBJL'], 121], ['==', ['get', 'FillType'], 2]],
+                        // 			layout: {
+                        // 				'text-field': ['get', 'OBJNAM'],
+                        'text-allow-overlap': false,
+                            // 				'text-font': ['Roboto Medium'],
+                            // 				'text-size': 13,
+                            // 			},
+                            // 			paint: {
+                            // 				'text-color': 'rgba(0,0,0,1)',
+                            // 			},
+                            // 		},
+                            // 		{
+                            // 			id: 'SEAARE_symbol_33',
+                            // 			type: 'symbol',
+                            // 			source: 'AREA_COMMON_AREA',
+                            // 			'source-layer': 'area_common_polygon',
+                            // 			filter: ['==', ['get', 'OBJL'], 119],
+                            // 			layout: {
+                            // 				'text-field': ['get', 'OBJNAM'],
+                            'text-allow-overlap': false,
+                                // 				'text-font': ['Roboto Medium'],
+                                // 				'text-size': 13,
+                                // 			},
+                                // 			paint: {
+                                // 				'text-color': 'rgba(0,0,0,1)',
+                                // 			},
+                                // 		},
+                                // 		{
+                                // 			id: 'BUAARE_symbol_3',
+                                // 			type: 'symbol',
+                                // 			source: 'AREA_COMMON_AREA',
+                                // 			'source-layer': 'area_common_polygon',
+                                // 			filter: ['==', ['get', 'OBJL'], 13],
+                                // 			layout: {
+                                // 				'text-field': ['get', 'OBJNAM'],
+                                'text-allow-overlap': false,
+// 				'text-font': ['Roboto Medium'],
+// 				'text-size': 13,
+// 			},
+// 			paint: {
+// 				'text-color': 'rgba(0,0,0,1)',
+// 			},
+// 		},
+// 		//#endregion
+
+// 		// // SOUNDG
+// 		// {
+// 		// 	id: 'SOUNDG_TEXT_I',
+// 		// 	type: 'symbol',
+// 		// 	source: 'SOUNDG',
+// 		// 	'source-layer': 'soundg3d',
+// 		// 	layout: {
+// 		// 		'text-field': [
+// 		// 			'format',
+// 		// 			// 整数部分
+// 		// 			[
+// 		// 				'slice',
+// 		// 				['to-string', ['get', 'VAL']],
+// 		// 				0,
+// 		// 				['index-of', '.', ['to-string', ['get', 'VAL']]]
+// 		// 			], // 返回 str 
+// 		// 			{ 'font-scale': 1.0 }, // 返回 desc
+// 		// 			' ',
+// 		// 			{ 'font-scale': 0.1 },
+// 		// 			// 小数部分
+// 		// 			[
+// 		// 				'case',
+// 		// 				[
+// 		// 					'all',
+// 		// 					// 1. 有小数部分
+// 		// 					['!=', ['index-of', '.', ['to-string', ['get', 'VAL']]], -1],
+// 		// 					// 2. 小数部分有意义 avoid .0
+// 		// 					['>', ['length',
+// 		// 						['slice', ['to-string', ['get', 'VAL']], ['+', ['index-of', '.', ['to-string', ['get', 'VAL']]], 1]]
+// 		// 					], 0]
+// 		// 				], // condition 
+// 		// 				[
+// 		// 					'slice',
+// 		// 					['to-string', ['get', 'VAL']],
+// 		// 					['+', ['index-of', '.', ['to-string', ['get', 'VAL']]], 1] // 从小数点开始截取（包含小数点）
+// 		// 				], // true, 返回 decimal str
+// 		// 				'' // false, 返回 empty str
+// 		// 			],
+// 		// 			{
+// 		// 				'font-scale': 0.8,
+// 		// 			}
+// 		// 		],
+// 		// 		'text-font': ['Roboto Regular'],
+// 		// 		'text-size': 16,
+// 		// 		'text-rotate': 5,
+// 		// 		'text-pitch-alignment': 'map'
+// 		// 		// 'text-allow-overlap': true
+// 		// 	},
+// 		// 	paint: {
+// 		// 		'text-color': 'rgba(139, 139, 139, 1)',
+// 		// 		'text-halo-color': 'rgba(0, 0, 0, 1)',
+// 		// 	},
+// 		// },
+// 	],
+// }
+*/
+
+import mapboxgl from 'mapbox-gl'
+const addTestLayer = (map: mapboxgl.Map, style: mapboxgl.StyleSpecification) => {
+	const sources = style.sources
+	const layers = style.layers
+
+	// prepare fill-patterns
+	let patterns: Array<{
+		url: string
+		name: string
+	}> = []
+
+	const patternSet = new Set()
+
+	layers.forEach((l) => {
+		let pattern: any = null
+		if (l.paint!['fill-pattern']) pattern = l.paint!['fill-pattern']
+		else if (l.paint!['line-pattern']) pattern = l.paint!['line-pattern']
+
+		if (pattern == null) return
+		if (typeof pattern !== 'string') return
+		if (patternSet.has(pattern)) return
+
+		patterns.push({
+			name: pattern,
+			url: `http://127.0.0.1:8081/${pattern}.png`,
+		})
+		patternSet.add(pattern)
+	})
+	const filteded = ['FOULAR01', 'ACHARE51', 'CTYARE51']
+	patterns = patterns.filter((p) => !filteded.includes(p.name))
+
+	return addImgs(map, patterns).then((_) => {
+		console.log('all img loaded')
+		for (const [key, value] of Object.entries(sources)) {
+			map.addSource(key, value as unknown as mapboxgl.AnySourceData)
+		}
+
+		for (const layer of layers) {
+			map.addLayer(layer as mapboxgl.AnyLayer)
+		}
+	})
+}
+
+const addImgs = (
+	map: mapboxgl.Map,
+	patterns: Array<{
+		url: string
+		name: string
+	}>,
+) => {
+	return new Promise((resolve) => {
+		let finishCount = 0
+		patterns.forEach((pat) => {
+			map.loadImage(pat.url, (err, image) => {
+				if (err) throw err
+
+				map.addImage(pat.name, image!)
+				finishCount++
+
+				if (finishCount === patterns.length) {
+					resolve('ok')
+				}
+			})
+		})
+	})
+}
+
+export default addTestLayer

@@ -1,0 +1,138 @@
+<layer name="A_COMMON_AREA" cache="vtdb#AREA_COMMON_AREA_%" type="case.int" field="1" minLevel='10' maxLevel='20'>
+    <!-- fill style 0 ： simple Fill -->
+    <style type="multi" style="key:12;"> <!-- BUISGL Building, single-->
+        <!-- <style type="areax.simplefill" style="color:CHBRN;fill_style:0;" tag="1" /> -->
+        <!-- <style type="latex.area" style="text:2;type:-1;unicode:false;-1:rank(5),color(0xFF000000),size(30),position(0)"/> -->
+    </style>
+    <!-- position(5) ? -->
+    <style type="multi" style="key:13;"> <!-- BUAARE Built-up area-->
+        <!-- <style type="areax.simplefill" style="color:CHBRN;fill_style:0;" tag="1" /> -->
+        <!-- <style type="latex.area" style="text:2;hide_dupl:0;type:-1;unicode:false;-1:rank(5),color(0xFF000000),size(30),position(5)"/> -->
+    </style>
+    <style type="multi" style="key:23;"> <!-- CANALS Canal-->
+        <!-- <style type="areax.simplefill" style="color:DEPVS;fill_style:0;" /> -->
+    </style>
+    <style type="case.int" field="4" style="key:26;"> <!-- CAUSWY Causeway-->
+        <!-- <style type="areax.simplefill" style="key:1;color:DEPIT;fill_style:0;" />
+        <style type="areax.simplefill" style="key:2;color:CHBRN;fill_style:0;" /> -->
+    </style>
+    <style type="multi" style="key:35;"> <!-- CRANES Crane-->
+        <!-- <style type="areax.simplefill" style="color:CHBRN;fill_style:0;" /> -->
+    </style>
+    <style type="multi" style="key:38;"> <!-- DAMCON Dam-->
+        <!-- <style type="areax.simplefill" style="color:CHBRN;fill_style:0;" /> -->
+    </style>
+    <style type="multi" style="key:45;"> <!-- DOCARE Dock area-->
+        <!-- <style type="areax.simplefill" style="color:DEPVS;fill_style:0;" /> -->
+    </style>
+    <style type="multi" style="key:47;"> <!-- DRYDOC Dry dock-->
+        <!-- <style type="areax.simplefill" style="color:LANDA;fill_style:0;" /> -->
+    </style>
+    <style type="multi" style="key:49;"> <!-- DYKCON Dyke-->
+        <!-- <style type="areax.simplefill" style="color:CHBRN;fill_style:0;" /> -->
+    </style>
+    <style type="multi" style="key:57;">  <!-- FLODOC Floating dock-->
+        <!-- <style type="areax.simplefill" style="color:CHBRN;fill_style:0;" /> -->
+    </style>
+    <style type="multi" style="key:59;">  <!-- FORSTC Fortified structure-->
+        <!-- <style type="areax.simplefill" style="color:CHBRN;fill_style:0;" /> -->
+    </style>
+    <style type="multi" style="key:61;"> <!-- GATCON Gate-->
+        <!-- <style type="areax.simplefill" style="color:CHBRN;fill_style:0;" /> -->
+    </style>
+    <style type="multi" style="key:65;"> <!-- HULKES Hulk-->
+        <!-- <style type="areax.simplefill" style="color:CHBRN;fill_style:0;" /> -->
+    </style>
+    <style type="multi" style="key:66;"> <!-- ICEARE Ice area-->
+        <!-- <style type="areax.simplefill" style="color:NODTA;fill_style:0;" tag="1"/>
+        <style type="areax.rasterfill" style="img:(./fill_images/ICEARE04.png);scale_x:2.5;scale_y:-2.5;trans:1.0" tag="1" /> -->
+    </style>
+    <style type="multi" style="key:69;"> <!-- LAKARE Lake-->
+        <!-- <style type="areax.simplefill" style="color:DEPVS;fill_style:0;" /> -->
+    </style>
+    <style type="case.int" field="4" style="key:73;"> <!-- LNDRGN Land region-->
+        <!-- <style type="areax.rasterfill" style="key:1;img:(./fill_images/MARSHES1P.png);scale_x:2.5;scale_y:-2.5;trans:1.0" tag="1" />
+        <style type="latex.area" style="key:2;text:2;hide_dupl:0;type:-1;unicode:false;-1:rank(5),bold(1),color(0xFF000000),size(30),position(0)"/> -->
+    </style>
+    <style type="multi" style="key:74;">  <!-- LNDMRK Landmark-->
+        <!-- <style type="areax.simplefill" style="color:CHBRN;fill_style:0;" /> -->
+    </style>
+    <style type="multi" style="key:79;">  <!-- LOKBSN Lock basin-->
+        <!-- <style type="areax.simplefill" style="color:DEPVS;fill_style:0;" /> -->
+    </style>
+    <style type="multi" style="key:82;">  <!-- MARCUL Marine farm/culture-->
+        <!-- <style type="areax.rasterfill" style="img:(./fill_images/fish_area1.png);scale_x:5.0;scale_y:-5.0;trans:1.0" tag="1" /> -->
+    </style>
+    <style type="multi" style="key:84;">  <!-- MORFAC Mooring/warping facility-->
+        <!-- <style type="areax.simplefill" style="color:CHBRN;fill_style:0;" /> -->
+    </style>
+    <style type="multi" style="key:87;">  <!-- OFSPLF Offshore platform-->
+        <!-- <style type="areax.simplefill" style="color:CHBRN;fill_style:0;" /> -->
+    </style>
+    <style type="multi" style="key:95;"> <!-- PONTON Pontoon-->
+        <!-- <style type="areax.simplefill" style="color:CHBRN;fill_style:0;" /> -->
+    </style>
+    <style type="multi" style="key:96;"> <!-- PRCARE Precautionary area-->
+        <!-- <style type="areax.simplefill" style="color:CHMGD;fill_style:4;" /> -->
+    </style>
+    <style type="multi" style="key:98;"> <!-- PYLONS Pylon/bridge support-->
+        <!-- <style type="areax.simplefill" style="color:CHBRN;fill_style:0;" /> -->
+    </style>
+    <style type="multi" style="key:107;"> <!-- RAPIDS Rapids-->
+        <!-- <style type="areax.simplefill" style="color:CHGRD;fill_style:0;" /> -->
+    </style>
+    <style type="multi" style="key:114;"> <!-- RIVERS River-->
+        <!-- <style type="areax.simplefill" style="color:DEPVS;fill_style:0;" /> -->
+    </style>
+    <style type="multi" style="key:116;"> <!-- ROADWY Road-->
+        <!-- <style type="areax.simplefill" style="color:LANDA;fill_style:0;" /> -->
+    </style>
+    <style type="multi" style="key:117;"> <!-- RUNWAY Runway-->
+        <!-- <style type="areax.simplefill" style="color:CHBRN;fill_style:0;" /> -->
+    </style>
+    <style type="multi" style="key:118;"> <!-- SNDWAV Sand waves-->
+        <!-- <style type="areax.rasterfill" style="img:(./fill_images/SNDWAV01.png);scale_x:2.5;scale_y:-2.5;trans:1.0" tag="1" /> -->
+    </style>
+    <style type="multi" style="key:119;"> <!-- SEAARE Sea area / named water area-->
+        <!-- <style type="latex.area" style="text:2;type:-1;unicode:false;-1:rank(5),color(0xFF000000),size(30),position(5)"/> -->
+    </style>
+    <style type="case.int" field="4" style="key:121;"> <!-- SBDARE Seabed area-->
+        <!-- <style type="areax.rasterfill" style="key:1;img:(./fill_images/RCKLDG01.png);scale_x:2.5;scale_y:-2.5;trans:1.0" tag="1" />
+        <style type="latex.area" style="key:2;text:2;type:-1;unicode:false;-1:rank(5),color(0xFF000000),size(30),position(0)"/> -->
+    </style>
+    <style type="multi" style="key:122;"> <!-- SLCONS Shoreline Construction-->
+        <style type="areax.simplefill" style="color:[122,176,144,57];fill_style:0;" />
+        <style type="areax.simplefill" style="color:[255,177,145,57];fill_style:3;" />
+    </style>
+    <style type="multi" style="key:125;"> <!-- SILTNK Silo / tank-->
+        <!-- <style type="areax.simplefill" style="color:CHBRN;fill_style:0" tag="1" /> -->
+    </style>
+    <style type="case.int" field="4" style="key:127;"> <!-- SLOGRD Sloping ground-->
+        <!-- <style type="areax.simplefill" style="key:1;color:CHGRD;fill_style:0;" /> -->
+    </style>
+    <style type="multi" style="key:128;"> <!-- SMCFAC Small craft facility-->
+        <!-- <style type="areax.simplefill" style="color:CHBRN;fill_style:0" tag="1" /> -->
+    </style>
+    <style type="multi" style="key:147;"> <!-- TSSCRS Traffic Separation Scheme Crossing-->
+        <!-- <style type="areax.simplefill" style="color:CHMGD;fill_style:4;" /> -->
+    </style>
+    <style type="multi" style="key:149;"> <!-- TSSRON Traffic Separation Scheme  Roundabout-->
+        <!-- <style type="areax.simplefill" style="color:CHMGD;fill_style:4;" /> -->
+    </style>
+    <style type="multi" style="key:150;"> <!-- TSEZNE Traffic Separation Zone-->
+        <!-- <style type="areax.simplefill" style="color:TRFCF;fill_style:0" tag="1" /> -->
+    </style>
+    <style type="case.int" field="4" style="key:151;"> <!-- TUNNEL Tunnel-->
+        <!-- <style type="areax.simplefill" style="key:1;color:DEPVS;fill_style:0;" /> -->
+    </style>
+    <style type="multi" style="key:154"> <!-- UNSARE Unsurveyed area-->
+        <!-- <style type="areax.simplefill" style="color:RES01;fill_style:0" tag="1" />
+        <style type="areax.linepattern" style="line_color:CHGRD;line_style:1;line_width:4;line_interval:40;offset_y:20" tag="1" />
+        <style type="areax.linepattern" style="line_color:CHGRD;line_style:1;line_width:4;line_interval:40;offset_y:20" tag="1" />	 -->
+    </style>
+    <style type="case.int" field="4" style="key:155;"> <!-- VEGATN Vegetation-->
+        <!-- <style type="areax.rasterfill" style="key:1;img:(./fill_images/VEGATN03.png);scale_x:2.5;scale_y:-2.5;trans:1.0" tag="1" />
+        <style type="areax.rasterfill" style="key:2;img:(./fill_images/VEGATN04.png);scale_x:2.5;scale_y:-2.5;trans:1.0" tag="1" />
+        <style type="areax.rasterfill" style="key:3;img:(./fill_images/FOULAR01.png);scale_x:2.5;scale_y:-2.5;trans:1.0" tag="1" /> -->
+    </style>
+</layer>

@@ -1,0 +1,42 @@
+<layer name="P_COMMON_TEXT" cache="vtdb#POINT_COMMON_ICON_%" type="case.int" field="1" minLevel='10' maxLevel='20'>
+    <!-- BCNLAT Beacon, lateral-->
+    <style type="latex.point" style="key:7;text:3;hide_dupl:0;type:-1;unicode:false;-1:rank(5),color(0xFF000000),size(30),position(3),rect(-13, -13, 13, 13)"/>
+    
+    <!-- BERTHS Berth-->
+    <style type="latex.point" style="key:10;text:3;hide_dupl:0;type:-1;unicode:false;-1:rank(5),color(0xFF000000),size(30),position(1),rect(-13, -13, 13, 13)"/>
+    
+    <!-- BOYLAT Buoy, lateral-->
+    <style type="latex.point" style="key:17;text:3;hide_dupl:0;type:-1;unicode:false;-1:rank(5),color(0xFF000000),size(30),position(3),rect(-13, -13, 13, 13)"/>
+    
+    <!-- BOYSPP Buoy, special purpose/general-->
+    <style type="latex.point" style="key:19;text:3;hide_dupl:0;type:-1;unicode:false;-1:rank(5),color(0xFF000000),size(30),position(3),rect(-13, -13, 13, 13)"/>
+    
+    <!-- LNDELV Land elevation-->
+    <style type="latex.point" style="key:72;text:3;hide_dupl:0;type:-1;unicode:false;-1:rank(5),color(0xFF000000),size(30),position(3),rect(-13, -13, 13, 13)"/>
+    
+    <!-- LNDRGN Land region-->
+    <style type="latex.point" style="key:73;text:3;hide_dupl:0;type:-1;unicode:false;-1:rank(5),color(0xFF000000),size(30),position(2),rect(-13, -13, 13, 13)"/>
+    
+    <!-- OBSTRN Obstruction-->
+    <style type="latex.point" style="key:86;text:3;hide_dupl:0;half_dot:1;type:-1;unicode:false;-1:rank(5),color(0xFF7d898c),size(30),position(5),rect(-13, -13, 13, 13)"/>
+    
+    <!-- SBDARE Seabed area-->
+    <style type="latex.point" style="key:121;text:3;hide_dupl:0;type:-1;unicode:false;-1:rank(5),color(0xFF7d898c),size(30),position(1),rect(-13, -13, 13, 13)"/>
+    
+    <!-- UWTROC Underwater rock / awash rock-->
+    <style type="latex.point" style="key:153;text:3;hide_dupl:0;half_dot:1;type:-1;unicode:false;-1:rank(5),color(0xFF7d898c),size(30),position(2),rect(-13, -13, 13, 13)"/>
+    
+    <!-- WRECKS Wreck-->
+    <style type="multi" style="key:159">
+        <style type="latex.point" style="key:159;text:3;hide_dupl:0;check_coll:false;type:-1;unicode:false;-1:rank(5),color(0xFF7d898c),size(30),position(5),rect(-13, -13, 13, 13)"/>
+        <!-- <style type="latex.point" style="key:159;text:5;hide_dupl:0;check_coll:false;type:-1;unicode:false;-1:rank(5),color(0xFF7d898c),size(30),position(5),rect(-13, -13, 13, 13)"/> -->
+    </style>
+    
+    <!-- TS_FEB Tidal stream - flood/ebb-->
+    <style type="latex.point" style="key:160;text:3;hide_dupl:0;type:-1;unicode:false;-1:rank(5),color(0xFF7d898c),size(30),position(1),rect(-13, -13, 13, 13)"/>
+    
+    <!-- ANNOTA Annotation -->
+    <style type="multi" style="key:22001;">
+        <style type="latex.point" style="text:3;type:-1;unicode:false;-1:rank(3),color(0xff1E1E1E),size(30),position(1)" />
+    </style>
+</layer>
