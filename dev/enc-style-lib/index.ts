@@ -54,9 +54,9 @@ export function generateStyle(config: StyleConfig = defaultStyleConfig): StyleSp
         glyphs: staticServer + '/fonts/{fontstack}/{range}.pbf',
         sprite: spriteUrl,
         layers: [
-            ...lndare.fills,
+            // ...lndare.fills,
             ...depare.fills,
-            ...comare.fills,
+            // ...comare.fills,
             ...drgare.fills,
             ...obstrn.fills,
             ...comare.lines,
@@ -106,14 +106,28 @@ export function updateMapWithStyle(map: mapboxgl.Map, style: mapboxgl.StyleSpeci
     const filteded = ['FOULAR01', 'ACHARE51', 'CTYARE51']
     patterns = patterns.filter((p) => !filteded.includes(p.name))
 
-    map.setStyle(style)
+    map.setStyle({
+        ...style,
+        "imports": [
+            {
+                "id": "basemap",
+                // "url": "mapbox://styles/mapbox/standard",
+                "url": 'mapbox://styles/mapbox/satellite-v9',
+                // 'url': 'mapbox://styles/mapbox/streets-v12',
+            }
+        ]
+    })
+
+    map.once('style.load', () => {
+        map.getLayer('lights-layer') && map.removeLayer('lights-layer')
+        const lightLayer = new LIGHTSLAYER(colors)
+        map.addLayer(lightLayer, 'PCMMRK_LNDMRK_SYMBOL')
+    })
+
     return addImgs(map, patterns).then((_) => {
         console.log('all img loaded')
 
-        // map.once('style.load', () => {
-        //     const lightLayer = new LIGHTSLAYER(colors)
-        //     map.addLayer(lightLayer, 'PCMMRK_LNDMRK_SYMBOL')
-        // })
+
     })
 }
 
@@ -125,8 +139,7 @@ function addImgs(
         name: string
     }>,
 ) {
-    console.log('load imgs', patterns)
-    removeImgs(map, patterns)
+    removeRelative(map, patterns)
 
     return new Promise((resolve) => {
         let finishCount = 0
@@ -146,7 +159,7 @@ function addImgs(
 }
 
 
-function removeImgs(
+function removeRelative(
     map: mapboxgl.Map,
     patterns: Array<{
         url: string

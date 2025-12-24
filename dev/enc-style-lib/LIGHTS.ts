@@ -44,7 +44,7 @@ export default class LIGHTSLAYER implements CustomLayerInterface {
     mapUpdateHandler: Function
 
     constructor(colors: ColorTableType) {
-        this.id = 'test-custom-layer';
+        this.id = 'lights-layer';
         this.type = 'custom';
         this.renderingMode = '2d';
         // this.debug = throttle(this._debug, 300, true).bind(this)
@@ -617,7 +617,7 @@ export default class LIGHTSLAYER implements CustomLayerInterface {
         this._initDashLineProgram()
 
         this.map.on('moveend', this.mapUpdateHandler as any)
-        setTimeout(this.mapUpdateHandler, 300);
+        setTimeout(this.mapUpdateHandler, 500);
     }
 
     render(gl: WebGL2RenderingContext, matrix: number[]): void {
