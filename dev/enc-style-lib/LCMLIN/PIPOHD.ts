@@ -28,7 +28,8 @@ export function createPIPOHDLines(colors: ColorTableType) {
 	}
 	return {
 		lines: [LCMLIN_PIPOHD_LINE] as LineLayerSpecification[],
-		symbols: [LCMLIN_PIPOHD_TEXT] as SymbolLayerSpecification[],
+		symbols: [] as SymbolLayerSpecification[],
+		texts: [LCMLIN_PIPOHD_TEXT] as SymbolLayerSpecification[],
 	}
 }
 

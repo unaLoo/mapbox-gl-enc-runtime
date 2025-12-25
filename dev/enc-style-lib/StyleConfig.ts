@@ -2,15 +2,18 @@ import { ThemeName, ColorTables, ColorTableType } from './ColorTable'
 
 export interface StyleConfig {
     theme: ThemeName
-    // 未来可扩展的配置项
+    showLand?: boolean
+    showText?: boolean
+    basemap?: 'raster' | 'vector'
     // safetyDepth: number
     // displayMode: 'base' | 'standard' | 'all'
-    // showSoundings: boolean
-    // showLights: boolean
 }
 
 export const defaultStyleConfig: StyleConfig = {
     theme: 'DAY_BRIGHT',
+    showLand: true,
+    showText: true,
+    basemap: 'vector'
 }
 
 // 根据配置获取颜色表

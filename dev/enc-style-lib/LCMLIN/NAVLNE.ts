@@ -27,7 +27,8 @@ export function createNAVLNELines(colors: ColorTableType) {
 	}
 	return {
 		lines: [LCMLIN_NAVLNE_LINE] as LineLayerSpecification[],
-		symbols: [LCMLIN_NAVLNE_TEXT] as SymbolLayerSpecification[],
+		symbols: [] as SymbolLayerSpecification[],
+		texts: [LCMLIN_NAVLNE_TEXT] as SymbolLayerSpecification[],
 	}
 }
 

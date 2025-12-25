@@ -30,8 +30,9 @@ const ACMMRK_BRIDGE_TEXT: SymbolLayerSpecification = {
 	},
 }
 
-const symbols: SymbolLayerSpecification[] = [ACMMRK_BRIDGE_SYMBOL, ACMMRK_BRIDGE_TEXT]
+const symbols: SymbolLayerSpecification[] = [ACMMRK_BRIDGE_SYMBOL]
 
 export default {
 	symbols,
+	texts: [ACMMRK_BRIDGE_TEXT]
 }

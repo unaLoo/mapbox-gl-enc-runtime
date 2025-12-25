@@ -34,7 +34,8 @@ export function createBUAARELayers(colors: ColorTableType) {
 	return {
 		fills: [BUAARE_FILL_0] as FillLayerSpecification[],
 		lines: [] as LineLayerSpecification[],
-		symbols: [BUAARE_SYMBOL_0] as SymbolLayerSpecification[],
+		symbols: [] as SymbolLayerSpecification[],
+		texts: [BUAARE_SYMBOL_0] as SymbolLayerSpecification[],
 	}
 }
 

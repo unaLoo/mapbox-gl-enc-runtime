@@ -32,6 +32,8 @@ const map = new mapboxgl.Map({
     pitch: initialState.pitch,
     zoom: initialState.zoom,
     bearing: initialState.bearing || 0,
+    dragRotate: false,
+    pitchWithRotate: false,
     // style: {
     //     version: 8,
     //     sources: {},
@@ -61,10 +63,19 @@ map.on('render', () => {
     renderStats.update()
 })
 
+// 保存 click handler 引用，避免重复添加
+let mapClickHandler: ((e: mapboxgl.MapMouseEvent) => void) | null = null
+
 function addClickListener(map: mapboxgl.Map) {
+    // 先移除旧的监听器
+    if (mapClickHandler) {
+        map.off('click', mapClickHandler)
+    }
+
     const layers = Object.keys(map.style!._layers)
     console.log('layer count:', layers.length)
-    map.on('click', (e) => {
+
+    mapClickHandler = (e: mapboxgl.MapMouseEvent) => {
         const bbox = [
             [e.point.x - 5, e.point.y - 5],
             [e.point.x + 5, e.point.y + 5],
@@ -76,17 +87,21 @@ function addClickListener(map: mapboxgl.Map) {
                 properties: item.properties,
             })),
         )
-    })
+    }
+
+    map.on('click', mapClickHandler)
 }
 
 // UI Elements
 const zoomEl = document.getElementById('zoom') as HTMLSpanElement
 const centerEl = document.getElementById('center') as HTMLSpanElement
-const bearingEl = document.getElementById('bearing') as HTMLSpanElement
 const cursorPosEl = document.getElementById('cursorPos') as HTMLSpanElement
 const cleanBtn = document.getElementById('cleanBtn') as HTMLButtonElement
 const resetBtn = document.getElementById('resetBtn') as HTMLButtonElement
 const themeSelector = document.getElementById('themeSelector') as HTMLDivElement
+const basemapSelector = document.getElementById('basemapSelector') as HTMLDivElement
+const showLandCheckbox = document.getElementById('showLand') as HTMLInputElement
+const showTextCheckbox = document.getElementById('showText') as HTMLInputElement
 
 // Theme Selection
 themeSelector?.addEventListener('click', (e) => {
@@ -101,6 +116,33 @@ themeSelector?.addEventListener('click', (e) => {
     btn.classList.add('active')
 
     currentConfig.theme = theme as any
+    applyStyleConfig()
+})
+
+// Basemap Selection
+basemapSelector?.addEventListener('click', (e) => {
+    const target = e.target as HTMLElement
+    const btn = target.closest('.theme-btn') as HTMLButtonElement
+    if (!btn) return
+
+    const basemap = btn.dataset.basemap as 'raster' | 'vector'
+    if (!basemap) return
+
+    basemapSelector.querySelectorAll('.theme-btn').forEach(b => b.classList.remove('active'))
+    btn.classList.add('active')
+
+    currentConfig.basemap = basemap
+    applyStyleConfig()
+})
+
+// Display Toggles
+showLandCheckbox?.addEventListener('change', () => {
+    currentConfig.showLand = showLandCheckbox.checked
+    applyStyleConfig()
+})
+
+showTextCheckbox?.addEventListener('change', () => {
+    currentConfig.showText = showTextCheckbox.checked
     applyStyleConfig()
 })
 
@@ -136,7 +178,6 @@ map.on('move', () => {
 
     if (zoomEl) zoomEl.textContent = zoom.toFixed(4)
     if (centerEl) centerEl.textContent = `${center.lng.toFixed(4)}, ${center.lat.toFixed(4)}`
-    if (bearingEl) bearingEl.textContent = `${bearing.toFixed(0)}°`
 
     debouncedSaveMapState(map)
 })

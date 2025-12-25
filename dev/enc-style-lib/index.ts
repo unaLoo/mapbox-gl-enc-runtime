@@ -1,5 +1,5 @@
 import sources from './sources'
-import COMARE, { createACMARELayers } from './ACMARE'
+import acmare, { createACMARELayers } from './ACMARE'
 import { createDEPARELayers } from './DEPARE'
 import { createLNDARELayers } from './LNDARE'
 import { createDRGARELayers } from './DRGARE'
@@ -14,7 +14,7 @@ import { createSOUNDGLayers } from './SOUNDG'
 // Custom
 import LIGHTSLAYER from './LIGHTS'
 
-import { StyleSpecification } from 'mapbox-gl'
+import { LayerSpecification, StyleSpecification } from 'mapbox-gl'
 import { StyleConfig, defaultStyleConfig, getColorTable } from './StyleConfig'
 
 const staticServer = 'http://localhost:8081'
@@ -43,36 +43,62 @@ export function generateStyle(config: StyleConfig = defaultStyleConfig): StyleSp
     const drgare = createDRGARELayers(colors)
     const obstrn = createOBSTRNLayers(colors)
     const soundg = createSOUNDGLayers(colors)
-    const comare = createACMARELayers(colors)
+    const acmare = createACMARELayers(colors)
     const acmlin = createACMLINLayers(colors)
     const pcmtex = createPCMTEXLayers(colors)
     const lcmlin = createLCMLINLayers(colors)
+
+    const layers: LayerSpecification[] = []
+    const landlayers = [...lndare.fills]
+    landlayers.push(acmare.fills.find(item => item.id == 'COMARE_BUAARE_FILL_0')!)
+    if (config.showLand) layers.push(...landlayers)
+
+    const filteredACMAREfills = acmare.fills.filter(item => item.id != 'COMARE_BUAARE_FILL_0')
+    layers.push(
+        ...depare.fills,
+        ...filteredACMAREfills,
+        ...drgare.fills,
+        ...obstrn.fills,
+        ...acmare.lines,
+        ...acmlin.lines,
+        ...lcmlin.lines,
+        ...acmare.symbols,
+        ...ACMMRK.symbols,
+        ...PCMMRK.symbols,
+    )
+    if (config.showText) {
+        layers.push(
+            ...acmare.texts,
+            ...lcmlin.texts,
+            ...soundg.texts,
+            ...ACMMRK.texts,
+            ...pcmtex.texts,
+        )
+    }
+
+    const baseMap = config.basemap == 'raster' ? [
+        {
+            "id": "basemap",
+            "url": 'mapbox://styles/mapbox/satellite-v9',
+        }
+    ] : [
+        {
+            "id": "basemap",
+            "url": "mapbox://styles/mapbox/standard",
+        }
+    ]
 
     return {
         version: 8,
         sources,
         glyphs: staticServer + '/fonts/{fontstack}/{range}.pbf',
         sprite: spriteUrl,
-        layers: [
-            // ...lndare.fills,
-            ...depare.fills,
-            // ...comare.fills,
-            ...drgare.fills,
-            ...obstrn.fills,
-            ...comare.lines,
-            ...acmlin.lines,
-            ...lcmlin.lines,
-            ...comare.symbols,
-            ...lcmlin.symbols,
-            ...ACMMRK.symbols,
-            ...PCMMRK.symbols,
-            ...pcmtex.texts,
-            ...soundg.texts
-        ],
+        layers: layers,
+        imports: baseMap
     }
 }
 
-
+let lightsLayer: LIGHTSLAYER | null = null
 export function updateMapWithStyle(map: mapboxgl.Map, style: mapboxgl.StyleSpecification, config: StyleConfig) {
 
     const colors = getColorTable(config)
@@ -105,18 +131,11 @@ export function updateMapWithStyle(map: mapboxgl.Map, style: mapboxgl.StyleSpeci
     })
     const filteded = ['FOULAR01', 'ACHARE51', 'CTYARE51']
     patterns = patterns.filter((p) => !filteded.includes(p.name))
+    console.log(1, map.getLayer('lights-layer'))
 
-    map.setStyle({
-        ...style,
-        "imports": [
-            {
-                "id": "basemap",
-                // "url": "mapbox://styles/mapbox/standard",
-                "url": 'mapbox://styles/mapbox/satellite-v9',
-                // 'url': 'mapbox://styles/mapbox/streets-v12',
-            }
-        ]
-    })
+    map.setStyle(style)
+
+    console.log(2, map.getLayer('lights-layer'))
 
     map.once('style.load', () => {
         map.getLayer('lights-layer') && map.removeLayer('lights-layer')
@@ -126,8 +145,6 @@ export function updateMapWithStyle(map: mapboxgl.Map, style: mapboxgl.StyleSpeci
 
     return addImgs(map, patterns).then((_) => {
         console.log('all img loaded')
-
-
     })
 }
 
@@ -144,6 +161,15 @@ function addImgs(
     return new Promise((resolve) => {
         let finishCount = 0
         patterns.forEach((pat) => {
+
+            if (map.hasImage(pat.name)) {
+                finishCount++
+                if (finishCount === patterns.length) {
+                    resolve('ok')
+                }
+                return
+            }
+
             map.loadImage(pat.url, (err, image) => {
                 if (err) throw err
 

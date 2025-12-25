@@ -26,6 +26,7 @@ export default class LIGHTSLAYER implements CustomLayerInterface {
     map!: Map
     gl!: WebGL2RenderingContext
     colorTable: ColorTableType
+    visible: boolean = true
 
     ringProgram!: WebGLProgram;
     ringBuffer: WebGLBuffer | null = null;
@@ -608,6 +609,9 @@ export default class LIGHTSLAYER implements CustomLayerInterface {
         gl.linkProgram(this.dashLineProgram);
     }
 
+    setVisibility(state: boolean) {
+        this.visible = state
+    }
 
     onAdd(map: Map, gl: WebGL2RenderingContext): void {
         this.map = map
@@ -621,6 +625,7 @@ export default class LIGHTSLAYER implements CustomLayerInterface {
     }
 
     render(gl: WebGL2RenderingContext, matrix: number[]): void {
+        if (this.visible === false) return
         // this.debug()
 
         // Step 1 : config

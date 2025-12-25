@@ -34,7 +34,8 @@ export function createSBDARELayers(colors: ColorTableType) {
 	return {
 		fills: [SBDARE_FILL_0] as FillLayerSpecification[],
 		lines: [] as LineLayerSpecification[],
-		symbols: [SBDARE_SYMBOL_0] as SymbolLayerSpecification[],
+		symbols: [] as SymbolLayerSpecification[],
+		texts: [SBDARE_SYMBOL_0] as SymbolLayerSpecification[],
 	}
 }
 

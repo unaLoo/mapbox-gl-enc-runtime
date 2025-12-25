@@ -81,6 +81,32 @@
 				color: #fff;
 			}
 
+			.config-section {
+				margin-top: 12px;
+				padding-top: 10px;
+				border-top: 1px solid var(--panel-border);
+			}
+
+			.toggle-group {
+				display: flex;
+				gap: 12px;
+			}
+
+			.toggle-item {
+				display: flex;
+				align-items: center;
+				gap: 4px;
+				font-size: 12px;
+				color: var(--text-secondary);
+				cursor: pointer;
+			}
+
+			.toggle-item input[type='checkbox'] {
+				width: 14px;
+				height: 14px;
+				cursor: pointer;
+			}
+
 			/* 底部状态栏 */
 			.status-bar {
 				position: absolute;
@@ -135,13 +161,35 @@
 	<body>
 		<div id="map"></div>
 
-		<!-- 主题选择 -->
+		<!-- 样式配置面板 -->
 		<div class="theme-panel">
 			<div class="theme-panel-title">Theme</div>
 			<div class="theme-selector" id="themeSelector">
 				<button class="theme-btn active" data-theme="DAY_BRIGHT">Day</button>
 				<button class="theme-btn" data-theme="DAY_WHITEBACK">Dusk</button>
 				<button class="theme-btn" data-theme="DAY_BLACKBACK">Night</button>
+			</div>
+
+			<div class="config-section">
+				<div class="theme-panel-title">Basemap</div>
+				<div class="theme-selector" id="basemapSelector">
+					<button class="theme-btn active" data-basemap="vector">Vector</button>
+					<button class="theme-btn" data-basemap="raster">Raster</button>
+				</div>
+			</div>
+
+			<div class="config-section">
+				<div class="theme-panel-title">Display</div>
+				<div class="toggle-group">
+					<label class="toggle-item">
+						<input type="checkbox" id="showLand" checked />
+						<span>Land</span>
+					</label>
+					<label class="toggle-item">
+						<input type="checkbox" id="showText" checked />
+						<span>Text</span>
+					</label>
+				</div>
 			</div>
 		</div>
 
@@ -155,11 +203,6 @@
 			<div class="status-item">
 				<span class="status-label">Center</span>
 				<span class="status-value" id="center">-122.5122, 47.5220</span>
-			</div>
-			<div class="status-divider"></div>
-			<div class="status-item">
-				<span class="status-label">Bearing</span>
-				<span class="status-value" id="bearing">0°</span>
 			</div>
 			<div class="status-divider"></div>
 			<div class="status-item">

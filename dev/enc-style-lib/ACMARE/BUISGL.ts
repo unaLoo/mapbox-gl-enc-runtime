@@ -34,7 +34,8 @@ export function createBUISGLLayers(colors: ColorTableType) {
 	return {
 		fills: [BUISGL_FILL_0] as FillLayerSpecification[],
 		lines: [] as LineLayerSpecification[],
-		symbols: [BUISGL_SYMBOL_0] as SymbolLayerSpecification[],
+		symbols: [] as SymbolLayerSpecification[],
+		texts: [BUISGL_SYMBOL_0] as SymbolLayerSpecification[],
 	}
 }
 

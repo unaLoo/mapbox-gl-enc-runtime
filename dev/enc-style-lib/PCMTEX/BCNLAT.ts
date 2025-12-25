@@ -8,7 +8,7 @@ export function createBCNLATTexts(colors: ColorTableType) {
         type: 'symbol',
         ...SOURCE_DESC,
         filter: ['==', ['get', 'OBJL'], 7],
-        minzoom: 11,
+        minzoom: 11.5,
         layout: {
             'text-field': ['get', 'OBJNAM'],
             'text-anchor': 'right',

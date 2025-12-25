@@ -34,7 +34,8 @@ export function createLNDRGNLayers(colors: ColorTableType) {
     return {
         fills: [LNDRGN_FILL_0] as FillLayerSpecification[],
         lines: [] as LineLayerSpecification[],
-        symbols: [LNDRGN_SYMBOL_0] as SymbolLayerSpecification[],
+        symbols: [] as SymbolLayerSpecification[],
+        texts: [LNDRGN_SYMBOL_0] as SymbolLayerSpecification[],
     }
 }
 

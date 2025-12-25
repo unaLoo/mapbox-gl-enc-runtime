@@ -22,7 +22,8 @@ export function createSEAARELayers(colors: ColorTableType) {
 	return {
 		fills: [] as FillLayerSpecification[],
 		lines: [] as LineLayerSpecification[],
-		symbols: [SEAARE_SYMBOL_0] as SymbolLayerSpecification[],
+		symbols: [] as SymbolLayerSpecification[],
+		texts: [SEAARE_SYMBOL_0] as SymbolLayerSpecification[],
 	}
 }
 

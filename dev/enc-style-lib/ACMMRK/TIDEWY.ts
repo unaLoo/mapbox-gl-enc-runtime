@@ -18,8 +18,9 @@ const ACMMRK_TIDEWY_TEXT: SymbolLayerSpecification = {
 	},
 }
 
-const symbols: SymbolLayerSpecification[] = [ACMMRK_TIDEWY_TEXT]
+const symbols: SymbolLayerSpecification[] = []
 
 export default {
 	symbols,
+	texts: [ACMMRK_TIDEWY_TEXT]
 }

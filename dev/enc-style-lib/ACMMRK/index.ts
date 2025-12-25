@@ -94,4 +94,8 @@ const symbols: SymbolLayerSpecification[] = [
 
 export default {
 	symbols,
+	texts: [
+		...BRIDGE.texts,
+		...TIDEWY.texts
+	]
 }

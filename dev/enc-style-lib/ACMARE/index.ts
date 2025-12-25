@@ -10,6 +10,7 @@ import { createSBDARELayers } from './SBDARE'
 import { createVEGATNLayers } from './VEGATN'
 import { createUNSARELayers } from './UNSARE'
 import { createBUAARELayers } from './BUAARE'
+import { createBUISGLLayers } from './BUISGL'
 
 export function createACMARELayers(colors: ColorTableType) {
 	// style="color:CHBRN;fill_style:0;"
@@ -95,6 +96,7 @@ export function createACMARELayers(colors: ColorTableType) {
 	const sbdare = createSBDARELayers(colors)
 	const vegatn = createVEGATNLayers(colors)
 	const unsare = createUNSARELayers(colors)
+	const buisgl = createBUISGLLayers(colors)
 
 	const fills: FillLayerSpecification[] = [
 		// CHBRN_FILL_STYLE,
@@ -116,9 +118,15 @@ export function createACMARELayers(colors: ColorTableType) {
 		unsare.fills[0],
 	]
 	const lines: LineLayerSpecification[] = [unsare.lines[0]]
-	const symbols: SymbolLayerSpecification[] = [lndrgn.symbols[0], sbdare.symbols[0]]
+	const symbols: SymbolLayerSpecification[] = []
+	const texts: SymbolLayerSpecification[] = [
+		...buaare.texts,
+		...buisgl.texts,
+		...lndrgn.texts,
+		...sbdare.texts,
+	]
 
-	return { fills, lines, symbols }
+	return { fills, lines, symbols, texts }
 }
 
 export default createACMARELayers(ColorTable)

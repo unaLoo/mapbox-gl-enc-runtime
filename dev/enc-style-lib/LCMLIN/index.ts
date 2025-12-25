@@ -102,12 +102,12 @@ export function createLCMLINLayers(colors: ColorTableType) {
 		...createWATFALLines(colors).lines,
 	]
 
-	const symbols: SymbolLayerSpecification[] = [
+	const texts: SymbolLayerSpecification[] = [
 		...(navlne.symbols || []),
 		...(pipohd.symbols || []),
 	]
 
-	return { lines, symbols }
+	return { lines, texts }
 }
 
 export default createLCMLINLayers(ColorTable)
