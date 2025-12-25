@@ -12,7 +12,7 @@ export function createWRECKSTexts(colors: ColorTableType) {
             'text-field': ['get', 'OBJNAM'],
             'text-anchor': 'center',
             'text-offset': [0, 0.2],
-            'text-allow-overlap': false,
+            'text-allow-overlap': true,
             'text-font': ['Roboto Medium'],
             'text-size': 12,
         },

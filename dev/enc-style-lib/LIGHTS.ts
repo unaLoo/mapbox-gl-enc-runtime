@@ -27,21 +27,22 @@ export default class LIGHTSLAYER implements CustomLayerInterface {
     gl!: WebGL2RenderingContext
     colorTable: ColorTableType
     visible: boolean = true
+    minimumZoom: number = 9 // minzoom
 
     ringProgram!: WebGLProgram;
     ringBuffer: WebGLBuffer | null = null;
     ringInstanceCount: number = 0;
-    ringVao: WebGLVertexArrayObject
+    ringVao!: WebGLVertexArrayObject
 
     dashLineProgram!: WebGLProgram;
     dashCoordsBuffer: WebGLBuffer | null = null;
     dashSec1Buffer: WebGLBuffer | null = null;
     dashSec2Buffer: WebGLBuffer | null = null;
     dashLineInstanceCount: number = 0;
-    dashLineSec1Vao: WebGLVertexArrayObject
-    dashLineSec2Vao: WebGLVertexArrayObject
+    dashLineSec1Vao!: WebGLVertexArrayObject
+    dashLineSec2Vao!: WebGLVertexArrayObject
 
-    debug: Function
+    debug!: Function
     mapUpdateHandler: Function
 
     constructor(colors: ColorTableType) {
@@ -198,7 +199,7 @@ export default class LIGHTSLAYER implements CustomLayerInterface {
         })
 
         return {
-            ...dict[feat.properties.CATEGORY],
+            ...dict[feat.properties.CATEGORY as keyof typeof dict],
             coord: [mercatorCoord.x, mercatorCoord.y],
         }
     }
@@ -626,6 +627,8 @@ export default class LIGHTSLAYER implements CustomLayerInterface {
 
     render(gl: WebGL2RenderingContext, matrix: number[]): void {
         if (this.visible === false) return
+        if (this.map.getZoom() < this.minimumZoom) return
+        if (this.map.getPitch() > 0) return
         // this.debug()
 
         // Step 1 : config

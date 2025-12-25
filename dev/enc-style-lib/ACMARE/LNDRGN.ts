@@ -20,6 +20,7 @@ export function createLNDRGNLayers(colors: ColorTableType) {
         source: 'AREA_COMMON_AREA',
         'source-layer': 'area_common_polygon',
         filter: ['all', ['==', ['get', 'OBJL'], 73], ['==', ['get', 'FillType'], 2]],
+        minzoom: 11,
         layout: {
             'text-field': ['get', 'OBJNAM'],
             'text-allow-overlap': true,

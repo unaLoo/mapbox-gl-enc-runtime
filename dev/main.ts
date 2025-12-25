@@ -32,8 +32,8 @@ const map = new mapboxgl.Map({
     pitch: initialState.pitch,
     zoom: initialState.zoom,
     bearing: initialState.bearing || 0,
-    dragRotate: false,
-    pitchWithRotate: false,
+    // dragRotate: false,
+    // pitchWithRotate: false,
     // style: {
     //     version: 8,
     //     sources: {},
@@ -41,6 +41,7 @@ const map = new mapboxgl.Map({
     //     glyphs: staticServer + '/fonts/{fontstack}/{range}.pbf',
     //     sprite: staticServer + '/sprite/rastersymbols-day',
     // },
+    projection: 'mercator',
     accessToken: 'pk.eyJ1IjoieWNzb2t1IiwiYSI6ImNrenozdWdodDAza3EzY3BtdHh4cm5pangifQ.ZigfygDi2bK4HXY1pWh-wg',
 })
 
@@ -61,6 +62,7 @@ map.on('load', () => {
 
 map.on('render', () => {
     renderStats.update()
+    map.triggerRepaint()
 })
 
 // 保存 click handler 引用，避免重复添加
@@ -80,13 +82,15 @@ function addClickListener(map: mapboxgl.Map) {
             [e.point.x - 5, e.point.y - 5],
             [e.point.x + 5, e.point.y + 5],
         ] as any
-        const selectedFeatures = map.queryRenderedFeatures(bbox, { layers })
-        console.log(
-            selectedFeatures.map((item) => ({
-                layer: item.layer!.id,
-                properties: item.properties,
-            })),
-        )
+        // const selectedFeatures = map.queryRenderedFeatures(bbox, { layers })
+        // console.log(
+        //     selectedFeatures.map((item) => ({
+        //         layer: item.layer!.id,
+        //         properties: item.properties,
+        //     })),
+        // )
+        const selectedFeatures = map.queryRenderedFeatures(bbox)
+        console.log(selectedFeatures)
     }
 
     map.on('click', mapClickHandler)

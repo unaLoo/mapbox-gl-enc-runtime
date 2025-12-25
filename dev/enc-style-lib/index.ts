@@ -31,6 +31,41 @@ function getSpriteUrl(config: StyleConfig) {
     return dict[config.theme]
 }
 
+function generateBasemap(config: StyleConfig = defaultStyleConfig) {
+    if (config.basemap === 'raster')
+        return [
+            {
+                "id": "basemap",
+                "url": 'mapbox://styles/mapbox/satellite-v9',
+            }
+        ]
+    const dict = {
+        'DAY_BRIGHT': [{
+            "id": "basemap",
+            "url": "mapbox://styles/mapbox/streets-v11",
+            "config": {
+                // "lightPreset": 'day'
+            }
+        }],
+        "DAY_WHITEBACK": [{
+            "id": "basemap",
+            "url": "mapbox://styles/mapbox/streets-v11",
+            "config": {
+                "lightPreset": 'dusk'
+            }
+        }],
+        "DAY_BLACKBACK": [{
+            "id": "basemap",
+            "url": "mapbox://styles/mapbox/dark-v11",
+            // "config": {
+            //     "lightPreset": 'night'
+            // }
+        }],
+    }
+
+    return dict[config.theme as keyof typeof dict]
+}
+
 
 // 生成样式的函数
 export function generateStyle(config: StyleConfig = defaultStyleConfig): StyleSpecification {
@@ -75,30 +110,23 @@ export function generateStyle(config: StyleConfig = defaultStyleConfig): StyleSp
             ...pcmtex.texts,
         )
     }
+    // const slotTopLayers = layers.map(item => ({
+    //     ...item,
+    //     'slot': 'top'
+    // }))
 
-    const baseMap = config.basemap == 'raster' ? [
-        {
-            "id": "basemap",
-            "url": 'mapbox://styles/mapbox/satellite-v9',
-        }
-    ] : [
-        {
-            "id": "basemap",
-            "url": "mapbox://styles/mapbox/standard",
-        }
-    ]
-
+    const baseMap = generateBasemap(config)
     return {
         version: 8,
         sources,
         glyphs: staticServer + '/fonts/{fontstack}/{range}.pbf',
         sprite: spriteUrl,
         layers: layers,
+        // layers: slotTopLayers,
         imports: baseMap
     }
 }
 
-let lightsLayer: LIGHTSLAYER | null = null
 export function updateMapWithStyle(map: mapboxgl.Map, style: mapboxgl.StyleSpecification, config: StyleConfig) {
 
     const colors = getColorTable(config)
@@ -116,7 +144,9 @@ export function updateMapWithStyle(map: mapboxgl.Map, style: mapboxgl.StyleSpeci
 
     layers.forEach((l) => {
         let pattern: any = null
+        // @ts-ignore
         if (l.paint!['fill-pattern']) pattern = l.paint!['fill-pattern']
+        // @ts-ignore
         else if (l.paint!['line-pattern']) pattern = l.paint!['line-pattern']
 
         if (pattern == null) return
@@ -135,12 +165,16 @@ export function updateMapWithStyle(map: mapboxgl.Map, style: mapboxgl.StyleSpeci
 
     map.setStyle(style)
 
+
+
     console.log(2, map.getLayer('lights-layer'))
 
     map.once('style.load', () => {
         map.getLayer('lights-layer') && map.removeLayer('lights-layer')
         const lightLayer = new LIGHTSLAYER(colors)
         map.addLayer(lightLayer, 'PCMMRK_LNDMRK_SYMBOL')
+
+
     })
 
     return addImgs(map, patterns).then((_) => {

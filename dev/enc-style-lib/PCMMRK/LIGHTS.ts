@@ -63,6 +63,7 @@ const PCMMRK_LIGHTS_SYMBOL_2: SymbolLayerSpecification = {
         ['==', ['get', 'OBJL'], 75],
         ['match', ['get', 'CATEGORY'],
             [101, 102, 103, 104, 201, 202, 203, 204], true, false]],
+    minzoom: 11,
     layout: {
         'text-field': ['get', 'CATEGORY'],
         'text-size': 50,

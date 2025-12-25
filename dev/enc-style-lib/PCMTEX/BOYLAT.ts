@@ -10,8 +10,9 @@ export function createBOYLATTexts(colors: ColorTableType) {
         filter: ['==', ['get', 'OBJL'], 17],
         layout: {
             'text-field': ['get', 'OBJNAM'],
-            'text-anchor': 'top',
-            'text-offset': [0, -1.5],
+            'text-anchor': 'right',
+            'text-offset': [-1, 0],
+            'text-max-width': 20,
             'text-allow-overlap': true,
             'text-font': ['Roboto Medium'],
             'text-size': 14,
