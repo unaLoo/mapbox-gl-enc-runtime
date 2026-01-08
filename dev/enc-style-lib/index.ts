@@ -116,13 +116,23 @@ export function generateStyle(config: StyleConfig = defaultStyleConfig): StyleSp
     // }))
 
     const baseMap = generateBasemap(config)
+    // Fit to mapboxgl v3 slot api, for the correct render order with 3D-buildings
+    const slotTable = {
+        'fill': 'bottom', // Above polygons (land, landuse, water, etc.)
+        'line': 'middle', // Above lines (roads, etc.) and behind 3D buildings
+        'symbol': 'top' // Above POI labels and behind Place and Transit labels
+    }
+    const slotLayers: LayerSpecification[] = layers.map((l: LayerSpecification) => ({
+        ...l,
+        slot: slotTable[l.type as keyof typeof slotTable]
+    }))
+
     return {
         version: 8,
         sources,
         glyphs: staticServer + '/fonts/{fontstack}/{range}.pbf',
         sprite: spriteUrl,
-        layers: layers,
-        // layers: slotTopLayers,
+        layers: slotLayers,
         imports: baseMap
     }
 }
@@ -144,10 +154,11 @@ export function updateMapWithStyle(map: mapboxgl.Map, style: mapboxgl.StyleSpeci
 
     layers.forEach((l) => {
         let pattern: any = null
-        // @ts-ignore
-        if (l.paint!['fill-pattern']) pattern = l.paint!['fill-pattern']
-        // @ts-ignore
-        else if (l.paint!['line-pattern']) pattern = l.paint!['line-pattern']
+
+        if (l.type === 'fill' && l.paint?.['fill-pattern'])
+            pattern = l.paint['fill-pattern']
+        else if (l.type === 'line' && l.paint?.['line-pattern'])
+            pattern = l.paint['line-pattern']
 
         if (pattern == null) return
         if (typeof pattern !== 'string') return
