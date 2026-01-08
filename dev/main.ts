@@ -7,6 +7,11 @@ import { StyleConfig, defaultStyleConfig } from './enc-style-lib/StyleConfig'
 import Stats from 'three/addons/libs/stats.module.js'
 import style from './enc-style-lib/index'
 
+import { addGLTF } from './3d/addGLTF'
+import { addWater } from './3d/addWater'
+import { ThreeMapLayer } from './3d/ThreeMapLayer'
+import { KeyboardController } from './3d/KeyboardController'
+
 const staticServer = 'http://localhost:8081'
 const renderStats = new Stats()
 
@@ -41,12 +46,26 @@ const map = new mapboxgl.Map({
     //     glyphs: staticServer + '/fonts/{fontstack}/{range}.pbf',
     //     sprite: staticServer + '/sprite/rastersymbols-day',
     // },
+    style: 'mapbox://styles/mapbox/satellite-v9',
     projection: 'mercator',
     accessToken: 'pk.eyJ1IjoieWNzb2t1IiwiYSI6ImNrenozdWdodDAza3EzY3BtdHh4cm5pangifQ.ZigfygDi2bK4HXY1pWh-wg',
 })
 
 let encLayer: EncRuntime | null = null
 let currentConfig: StyleConfig = { ...defaultStyleConfig }
+
+window.addEventListener('keydown', (e) => {
+    if (e.key == 's') {
+        const pannelDom = document.querySelector('.theme-panel') as HTMLDivElement
+        pannelDom.style.display = 'none'
+        renderStats.dom.style.display = 'none'
+    }
+    if (e.key == 'd') {
+        const pannelDom = document.querySelector('.theme-panel') as HTMLDivElement
+        pannelDom.style.display = 'block'
+        renderStats.dom.style.display = 'block'
+    }
+})
 
 map.on('load', () => {
     map.getCanvas().parentElement?.appendChild(renderStats.dom)
@@ -55,9 +74,12 @@ map.on('load', () => {
     renderStats.dom.style.left = 'auto'
     renderStats.dom.style.right = '0px'
 
-    updateMapWithStyle(map, style, currentConfig).then(() => {
-        addClickListener(map)
-    })
+    // updateMapWithStyle(map, style, currentConfig).then(() => {
+    //     addClickListener(map)
+    // })
+
+    test_terrainLayer()
+    test_3DLayer()
 })
 
 map.on('render', () => {
@@ -266,4 +288,43 @@ function saveMapState(map: mapboxgl.Map) {
     } catch (e) {
         console.warn('Failed to update URL:', e)
     }
+}
+
+function test_3DLayer() {
+    // three map layer
+    const threeLayer = new ThreeMapLayer()
+    map.addLayer(threeLayer)
+
+    const anchor = [-122.5122, 47.522] as [number, number]
+    threeLayer.setAnchor(anchor)
+    // new mapboxgl.Popup().setText('scene-anchor').setLngLat(anchor).addTo(map)
+
+    addGLTF(threeLayer, 'bouy-1', staticServer + '/models/NavigationBuoy.glb', [anchor[0] + 0.002, anchor[1]], 0)
+    addGLTF(threeLayer, 'beacon-1', staticServer + '/models/beacon.glb', [anchor[0] + 0.005, anchor[1]], 0)
+    addGLTF(threeLayer, 'trawler-1', staticServer + '/models/trawler.glb', [anchor[0], anchor[1] + 0.01], 0).then(
+        (obj) => {
+            const controller = new KeyboardController(obj, 25, Math.PI / 6)
+            threeLayer.animatedObjects.push(controller)
+        },
+    )
+    // -122.39980, 47.43466
+    const coord = [-122.39980, 47.43466] as [number, number];
+    const elevation = map.queryTerrainElevation(coord);
+    console.log(elevation)
+    addGLTF(threeLayer, 'beacon-1', staticServer + '/models/beacon.glb', coord, -500)
+
+    addWater(threeLayer, anchor)
+    new mapboxgl.Popup().setText('scene-anchor').setLngLat(coord).addTo(map)
+}
+
+
+function test_terrainLayer() {
+    map.addSource('terrain', {
+        type: 'raster-dem',
+        url: 'https://localhost:3000/terrain/1.mbtiles/tilejson.json'
+    })
+    map.setTerrain({
+        source: 'terrain',
+        exaggeration: 5
+    })
 }

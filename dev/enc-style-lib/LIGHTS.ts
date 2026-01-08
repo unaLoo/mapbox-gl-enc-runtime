@@ -628,7 +628,7 @@ export default class LIGHTSLAYER implements CustomLayerInterface {
     render(gl: WebGL2RenderingContext, matrix: number[]): void {
         if (this.visible === false) return
         if (this.map.getZoom() < this.minimumZoom) return
-        if (this.map.getPitch() > 0) return
+        if (Math.abs(this.map.getPitch()) > 5) return
         // this.debug()
 
         // Step 1 : config

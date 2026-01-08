@@ -15,7 +15,7 @@ void main() {
     vec3 pos = position;
     
     // 正弦波波浪
-    float wave = sin(pos.x * 0.005 + uTime) * 5.0 + sin(pos.y * 0.003 + uTime * 0.5) * 5.0;
+    float wave = sin(pos.x * 0.005 + uTime) * 10.0 + sin(pos.y * 0.003 + uTime * 0.5) * 2.0;
     pos.z += wave; 
     
     vec4 worldPosition = modelMatrix * vec4(pos, 1.0);
@@ -98,56 +98,56 @@ void main() {
 // ----------------------------------------------------------------------------
 
 const addWater = (layer: ThreeMapLayer, anchor: [number, number]) => {
-	// 1. texture
-	const loader = new THREE.TextureLoader()
-	const normalMap = loader.load('http://localhost:8081/texture/WaterNormal1.png')
-	normalMap.wrapS = normalMap.wrapT = THREE.MirroredRepeatWrapping
+    // 1. texture
+    const loader = new THREE.TextureLoader()
+    const normalMap = loader.load('http://localhost:8081/texture/WaterNormal1.png')
+    normalMap.wrapS = normalMap.wrapT = THREE.MirroredRepeatWrapping
 
-	// 2. uniform
-	const uniforms = {
-		uTime: { value: 0 },
-		tNormalMap: { value: normalMap },
-		uSunDirection: { value: new THREE.Vector3(-1, 1, 1).normalize() },
-		uSunColor: { value: new THREE.Color(0xffffff) },
-		uWaterColor: { value: new THREE.Color(0x006994) },
-		uCameraPosition: { value: new THREE.Vector3() },
-		uDistortionScale: { value: 0.5 }, // 如果觉得波纹太碎，可以改小，比如 0.5
-		uTextureTiling: { value: 0.001 },
-	}
+    // 2. uniform
+    const uniforms = {
+        uTime: { value: 0 },
+        tNormalMap: { value: normalMap },
+        uSunDirection: { value: new THREE.Vector3(-1, 1, 1).normalize() },
+        uSunColor: { value: new THREE.Color(0xffffff) },
+        uWaterColor: { value: new THREE.Color(0x006994) },
+        uCameraPosition: { value: new THREE.Vector3() },
+        uDistortionScale: { value: 0.5 }, // 如果觉得波纹太碎，可以改小，比如 0.5
+        uTextureTiling: { value: 0.001 },
+    }
 
-	// 3. material
-	const material = new THREE.ShaderMaterial({
-		vertexShader: vertexShader,
-		fragmentShader: fragmentShader,
-		uniforms: uniforms,
-		transparent: true, // 关键：开启透明
-		side: THREE.DoubleSide,
-	})
+    // 3. material
+    const material = new THREE.ShaderMaterial({
+        vertexShader: vertexShader,
+        fragmentShader: fragmentShader,
+        uniforms: uniforms,
+        transparent: true, // 关键：开启透明
+        side: THREE.DoubleSide,
+    })
 
-	// 4. geometry
-	const geometry = new THREE.PlaneGeometry(100000, 100000, 128, 128)
+    // 4. geometry
+    const geometry = new THREE.PlaneGeometry(100000, 100000, 128, 128)
 
-	// 5. mesh
-	const waterMesh = new THREE.Mesh(geometry, material)
+    // 5. mesh
+    const waterMesh = new THREE.Mesh(geometry, material)
 
-	// 6. anchor
-	const pos = layer.projectToScene(anchor, -5)
-	waterMesh.position.copy(pos)
-	waterMesh.rotation.x = -Math.PI / 2 // 躺平
+    // 6. anchor
+    const pos = layer.projectToScene(anchor, -5)
+    waterMesh.position.copy(pos)
+    waterMesh.rotation.x = -Math.PI / 2 // 躺平
 
-	// 7. add to scene
-	layer.addToScene('custom-shader-water', waterMesh)
+    // 7. add to scene
+    layer.addToScene('custom-shader-water', waterMesh)
 
-	// 8. animationObject.tick
-	const update = () => {
-		material.uniforms.uTime.value += 1.0 / 60.0
-		material.uniforms.uCameraPosition.value.copy(layer.camera.position)
-	}
+    // 8. animationObject.tick
+    const update = () => {
+        material.uniforms.uTime.value += 1.0 / 60.0
+        material.uniforms.uCameraPosition.value.copy(layer.camera.position)
+    }
 
-	// 将 update 函数推入 layer 的动画队列
-	layer.animatedObjects.push({
-		tick: update, // 假设你修改了 Layer 支持这种对象，或者直接 push mesh 并在 layer 里判断
-	})
+    // 将 update 函数推入 layer 的动画队列
+    layer.animatedObjects.push({
+        tick: update, // 假设你修改了 Layer 支持这种对象，或者直接 push mesh 并在 layer 里判断
+    })
 }
 
 export { addWater }

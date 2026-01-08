@@ -42,16 +42,16 @@ function generateBasemap(config: StyleConfig = defaultStyleConfig) {
     const dict = {
         'DAY_BRIGHT': [{
             "id": "basemap",
-            "url": "mapbox://styles/mapbox/streets-v11",
+            "url": "mapbox://styles/mapbox/standard",
             "config": {
                 // "lightPreset": 'day'
             }
         }],
         "DAY_WHITEBACK": [{
             "id": "basemap",
-            "url": "mapbox://styles/mapbox/streets-v11",
+            "url": "mapbox://styles/mapbox/standard",
             "config": {
-                "lightPreset": 'dusk'
+                // "lightPreset": 'dusk'
             }
         }],
         "DAY_BLACKBACK": [{
